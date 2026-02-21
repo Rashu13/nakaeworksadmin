@@ -33,6 +33,9 @@ COPY --from=frontend-build /app/dist ./wwwroot
 EXPOSE 8080
 
 ENV ASPNETCORE_HTTP_PORTS=8080
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DEFAULT_PORT=8080
+ENV PORT=8080
 
 # Environment variables for the backend (Set these in Coolify's Environment Variables tab)
 # ENV ConnectionStrings__DefaultConnection="Your Connection String"
