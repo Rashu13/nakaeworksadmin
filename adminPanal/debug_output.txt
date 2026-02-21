@@ -1,0 +1,28 @@
+Registering admin...
+Registration: {"message":"User registered successfully","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwIiwicm9sZSI6ImFkbWluIiwiZW1haWwiOiJkZWJ1ZzE3NzEyNDM5NjUxNjhAbmFrYWV3b3Jrcy5jb20iLCJuYmYiOjE3NzEyNDM5NjYsImV4cCI6MTc3MTg0ODc2NiwiaWF0IjoxNzcxMjQzOTY2fQ.zt-mtsKcLNo6351GJtA-HU8jdmBJZ9U6L6VIJo8sZH4","user":{"id":10,"name":"DebugAdmin","email":"debug1771243965168@nakaeworks.com","role":"admin"}}
+Fetching dashboard stats...
+Dashboard Status: 200
+Dashboard Body: {"success":true,"data":{"statistics":{"totalUsers":10,"totalProviders":1,"totalConsumers":1,"totalServices":59,"totalBookings":0,"todayBookings":0,"pendingBookings":0,"completedBookings":0},"revenue":{"total":0,"monthly":0,"today":0,"platformFees":0},"recentBookings":[],"monthlyTrend":[]}}
+Dashboard Stats RAW: {
+  "success": true,
+  "data": {
+    "statistics": {
+      "totalUsers": 10,
+      "totalProviders": 1,
+      "totalConsumers": 1,
+      "totalServices": 59,
+      "totalBookings": 0,
+      "todayBookings": 0,
+      "pendingBookings": 0,
+      "completedBookings": 0
+    },
+    "revenue": {
+      "total": 0,
+      "monthly": 0,
+      "today": 0,
+      "platformFees": 0
+    },
+    "recentBookings": [],
+    "monthlyTrend": []
+  }
+}

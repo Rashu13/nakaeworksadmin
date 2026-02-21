@@ -1,0 +1,17 @@
+﻿  Determining projects to restore...
+  All projects are up-to-date for restore.
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(41,18): error CS1061: 'IServiceCollection' does not contain a definition for 'AddSwaggerGen' and no accessible extension method 'AddSwaggerGen' accepting a first argument of type 'IServiceCollection' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(58,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwagger' and no accessible extension method 'UseSwagger' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(59,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwaggerUI' and no accessible extension method 'UseSwaggerUI' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Controllers\ServicesController.cs(35,65): warning CS8602: Dereference of a possibly null reference. [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+
+Build FAILED.
+
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Controllers\ServicesController.cs(35,65): warning CS8602: Dereference of a possibly null reference. [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(41,18): error CS1061: 'IServiceCollection' does not contain a definition for 'AddSwaggerGen' and no accessible extension method 'AddSwaggerGen' accepting a first argument of type 'IServiceCollection' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(58,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwagger' and no accessible extension method 'UseSwagger' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\Program.cs(59,9): error CS1061: 'WebApplication' does not contain a definition for 'UseSwaggerUI' and no accessible extension method 'UseSwaggerUI' accepting a first argument of type 'WebApplication' could be found (are you missing a using directive or an assembly reference?) [D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\NakaeWorks.Backend.csproj]
+    1 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:00:01.27

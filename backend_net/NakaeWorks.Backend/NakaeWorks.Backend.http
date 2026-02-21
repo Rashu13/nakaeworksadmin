@@ -1,0 +1,6 @@
+@NakaeWorks.Backend_HostAddress = http://localhost:5071
+
+GET {{NakaeWorks.Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
