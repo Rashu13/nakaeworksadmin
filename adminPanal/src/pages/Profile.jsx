@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { User, Package, Key, Shield, LogOut, Mail, Lock, CheckCircle, AlertCircle, Calendar, MapPin, Loader, Clock, Camera, Plus, Trash2, Edit2, X, Star, LayoutDashboard, FileText, Download } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { authService, bookingService, addressService, uploadService, reviewService } from '../services/api';
+import { authService, bookingService, addressService, uploadService, reviewService, BASE_URL } from '../services/api';
 import ConfirmationModal from '../components/ConfirmationModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Profile = () => {
     const { user: authUser, logout, isAuthenticated } = useAuth();
@@ -283,775 +284,924 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pt-24 pb-12 transition-colors duration-300">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="min-h-screen bg-[#0a0d14] pt-24 pb-12 transition-colors duration-300 relative overflow-hidden">
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/5 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/5 rounded-full blur-[120px]"></div>
+            </div>
 
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12"
+                >
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Profile</h1>
-                        <p className="text-gray-500 dark:text-gray-400 mt-1">Manage your account and bookings</p>
+                        <p className="text-orange-500 text-xs font-black uppercase tracking-[4px] mb-2 px-1">Control Center</p>
+                        <h1 className="text-4xl font-black text-white tracking-tight">
+                            MY ACCOUNT <span className="text-orange-500">PORTAL</span>
+                        </h1>
+                        <p className="text-gray-500 mt-2 font-medium">Manage your professional services and account configurations</p>
                     </div>
                     <button
                         onClick={() => { logout(); navigate('/'); }}
-                        className="flex items-center gap-2 px-4 py-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-50"
+                        className="group flex items-center gap-2 px-8 py-3 bg-white/5 hover:bg-red-500 text-gray-400 hover:text-white border border-white/10 hover:border-red-500 rounded-xl transition-all font-black tracking-widest text-xs backdrop-blur-md"
                     >
-                        <LogOut size={18} />
-                        Logout
+                        <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
+                        TERMINATE SESSION
                     </button>
-                </div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Sidebar / Tabs */}
-                    <div className="bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 p-4 h-fit">
-                        <div className="space-y-1">
-                            <button
-                                onClick={() => setActiveTab('dashboard')}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-colors ${activeTab === 'dashboard' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border-l-4 border-slate-900 dark:border-indigo-500' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900'
-                                    }`}
-                            >
-                                <LayoutDashboard size={20} />
-                                Dashboard
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('profile')}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-colors ${activeTab === 'profile' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border-l-4 border-slate-900 dark:border-indigo-500' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900'
-                                    }`}
-                            >
-                                <User size={20} />
-                                Profile Details
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('bookings')}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-colors ${activeTab === 'bookings' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border-l-4 border-slate-900 dark:border-indigo-500' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900'
-                                    }`}
-                            >
-                                <Package size={20} />
-                                Past Orders
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('addresses')}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-colors ${activeTab === 'addresses' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border-l-4 border-slate-900 dark:border-indigo-500' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900'
-                                    }`}
-                            >
-                                <MapPin size={20} />
-                                Addresses
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('security')}
-                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-medium transition-colors ${activeTab === 'security' ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white border-l-4 border-slate-900 dark:border-indigo-500' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900'
-                                    }`}
-                            >
-                                <Key size={20} />
-                                Security
-                            </button>
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="bg-slate-900/40 rounded-3xl border border-white/5 p-4 h-fit sticky top-28 shadow-2xl backdrop-blur-xl"
+                    >
+                        <div className="space-y-1.5">
+                            {[
+                                { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+                                { id: 'profile', label: 'User Intel', icon: User },
+                                { id: 'bookings', label: 'Service History', icon: Package },
+                                { id: 'addresses', label: 'Coordinates', icon: MapPin },
+                                { id: 'security', label: 'Access Protocol', icon: Key }
+                            ].map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-left font-bold transition-all relative group overflow-hidden ${activeTab === tab.id
+                                        ? 'text-white bg-orange-600 shadow-[0_10px_20px_rgba(234,88,12,0.2)]'
+                                        : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                        }`}
+                                >
+                                    <tab.icon size={20} className={`${activeTab === tab.id ? 'text-white' : 'text-gray-600'} group-hover:scale-110 transition-transform`} />
+                                    <span className="tracking-widest uppercase text-[10px] font-black">{tab.label}</span>
+                                    {activeTab === tab.id && (
+                                        <motion.div
+                                            layoutId="activeTabIndicator"
+                                            className="absolute right-4 w-1.5 h-1.5 bg-white rounded-full"
+                                        />
+                                    )}
+                                </button>
+                            ))}
                         </div>
-                    </div>
+                    </motion.div>
+
 
                     {/* Content Area */}
                     <div className="lg:col-span-3">
-                        {message && (
-                            <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-                                }`}>
-                                {message.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
-                                {message.text}
-                            </div>
-                        )}
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeTab}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {message && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className={`mb-8 p-5 rounded-2xl flex items-center gap-4 backdrop-blur-md ${message.type === 'success'
+                                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                            : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                                            }`}
+                                    >
+                                        <div className={`p-2 rounded-full ${message.type === 'success' ? 'bg-emerald-500/20' : 'bg-red-500/20'}`}>
+                                            {message.type === 'success' ? <CheckCircle size={22} /> : <AlertCircle size={22} />}
+                                        </div>
+                                        <p className="font-bold tracking-wide uppercase text-sm">{message.text}</p>
+                                    </motion.div>
+                                )}
 
-                        {activeTab === 'dashboard' && (
-                            <div className="space-y-8">
-                                {/* Welcome Section */}
-                                <div className="bg-gradient-to-r from-slate-900 to-indigo-900 rounded-2xl p-8 text-white relative overflow-hidden">
-                                    <div className="relative z-10">
-                                        <h2 className="text-3xl font-bold mb-2">Hello, {authUser?.name} 👋</h2>
-                                        <p className="text-indigo-100">Here's what's happening with your service requests.</p>
-                                    </div>
-                                    <div className="absolute right-0 top-0 h-full w-1/3 bg-white/5 skew-x-12 transform translate-x-12"></div>
-                                </div>
 
-                                {/* Stats Grid */}
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
-                                        <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4">
-                                            <Package size={24} />
-                                        </div>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Total Bookings</p>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</h3>
-                                    </div>
-                                    <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
-                                        <div className="w-12 h-12 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center mb-4">
-                                            <Clock size={24} />
-                                        </div>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Pending</p>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{stats.pending}</h3>
-                                    </div>
-                                    <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
-                                        <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mb-4">
-                                            <Loader size={24} />
-                                        </div>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Active</p>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{stats.active}</h3>
-                                    </div>
-                                    <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
-                                        <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mb-4">
-                                            <CheckCircle size={24} />
-                                        </div>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Completed</p>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{stats.completed}</h3>
-                                    </div>
-                                </div>
-
-                                {/* Recent Activity */}
-                                <div>
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Recent Activity</h3>
-                                        <button
-                                            onClick={() => setActiveTab('bookings')}
-                                            className="text-indigo-600 font-medium hover:text-indigo-700"
+                                {activeTab === 'dashboard' && (
+                                    <div className="space-y-8">
+                                        {/* Welcome Section */}
+                                        <motion.div
+                                            initial={{ scale: 0.95 }}
+                                            animate={{ scale: 1 }}
+                                            className="bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-[2.5rem] p-12 text-white relative overflow-hidden border border-white/5 shadow-2xl mb-12 group"
                                         >
-                                            View All
-                                        </button>
-                                    </div>
+                                            <div className="relative z-10">
+                                                <p className="text-orange-500 text-xs font-black uppercase tracking-[5px] mb-4">Account Status: Active</p>
+                                                <h2 className="text-5xl font-black mb-4 tracking-tighter">WELCOME, <span className="text-orange-500">{authUser?.name?.split(' ')[0]?.toUpperCase()}</span></h2>
+                                                <p className="text-gray-400 font-medium max-w-sm text-lg leading-relaxed">Your professional service management terminal is online and fully operational.</p>
+                                            </div>
+                                            <div className="absolute right-0 top-0 h-full w-[60%] bg-orange-600/5 blur-[120px] pointer-events-none group-hover:bg-orange-600/10 transition-all duration-700"></div>
+                                            <LayoutDashboard className="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 group-hover:rotate-12 transition-transform duration-1000" />
+                                        </motion.div>
 
-                                    {loadingBookings ? (
-                                        <div className="flex justify-center py-8">
-                                            <Loader className="animate-spin text-slate-900" size={24} />
-                                        </div>
-                                    ) : bookings.length === 0 ? (
-                                        <div className="bg-white p-8 rounded-2xl text-center border border-gray-100">
-                                            <p className="text-gray-500">No recent activity</p>
-                                        </div>
-                                    ) : (
-                                        <div className="space-y-4">
-                                            {bookings.slice(0, 3).map((booking) => (
-                                                <div key={booking.id} className="bg-white dark:bg-slate-950 p-4 rounded-2xl border border-gray-100 dark:border-slate-800 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleViewDetails(booking)}>
-                                                    <img
-                                                        src={booking.service?.thumbnail}
-                                                        alt={booking.service?.name}
-                                                        className="w-16 h-16 rounded-xl object-cover bg-gray-100 dark:bg-slate-800"
-                                                    />
-                                                    <div className="flex-1">
-                                                        <h4 className="font-bold text-gray-900 dark:text-white">{booking.service?.name}</h4>
-                                                        <p className="text-sm text-gray-500 dark:text-gray-400">{new Date(booking.dateTime).toDateString()}</p>
+                                        {/* Stats Grid */}
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                                            {[
+                                                { label: 'Total Logs', val: stats.total, icon: Package, color: 'text-blue-500', bg: 'bg-blue-500/10' },
+                                                { label: 'Pending', val: stats.pending, icon: Clock, color: 'text-orange-500', bg: 'bg-orange-500/10' },
+                                                { label: 'Processing', val: stats.active, icon: Loader, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+                                                { label: 'Completed', val: stats.completed, icon: CheckCircle, color: 'text-sky-500', bg: 'bg-sky-500/10' }
+                                            ].map((stat, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ delay: i * 0.1 }}
+                                                    className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-xl hover:border-orange-500/30 transition-all group relative overflow-hidden"
+                                                >
+                                                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12 group-hover:bg-orange-500/5 transition-colors"></div>
+                                                    <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10`}>
+                                                        <stat.icon size={26} />
                                                     </div>
-                                                    <div className="text-right">
-                                                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${getStatusColor(booking.bookingStatus)}`}>
-                                                            {booking.bookingStatus?.name}
-                                                        </span>
-                                                        <p className="text-sm font-bold text-gray-900 dark:text-white mt-1">₹{booking.totalAmount}</p>
-                                                    </div>
-                                                </div>
+                                                    <p className="text-gray-500 text-[10px] font-black uppercase tracking-[2px] mb-2 relative z-10">{stat.label}</p>
+                                                    <h3 className="text-4xl font-black text-white relative z-10">{stat.val}</h3>
+                                                </motion.div>
                                             ))}
                                         </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
 
-                        {activeTab === 'profile' && (
-                            <div className="bg-white dark:bg-slate-950 rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 dark:border-slate-800">
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Personal Information</h2>
 
-                                {/* Photo Upload */}
-                                <div className="mb-8 flex flex-col items-center sm:flex-row gap-6">
-                                    <div className="relative">
-                                        <div className="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border-2 border-slate-200">
-                                            {profile.avatar ? (
-                                                <img src={profile.avatar} alt="Profile" className="w-full h-full object-cover" />
+                                        {/* Recent Activity */}
+                                        <div className="pt-4">
+                                            <div className="flex justify-between items-end mb-10">
+                                                <div>
+                                                    <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Operation Logs</p>
+                                                    <h3 className="text-3xl font-black text-white tracking-tight uppercase">RECENT SYSTEM ACTIVITY</h3>
+                                                </div>
+                                                <button
+                                                    onClick={() => setActiveTab('bookings')}
+                                                    className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-black uppercase text-[10px] tracking-widest rounded-xl transition-all flex items-center gap-3 border border-white/10"
+                                                >
+                                                    Access All Logs <ChevronRight size={14} className="text-orange-500" />
+                                                </button>
+                                            </div>
+
+                                            {loadingBookings ? (
+                                                <div className="flex justify-center py-12">
+                                                    <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                                </div>
+                                            ) : bookings.length === 0 ? (
+                                                <div className="bg-slate-900/60 shadow-2xl backdrop-blur-xl p-12 rounded-3xl text-center border border-white/10 border-dashed">
+                                                    <Package size={48} className="mx-auto text-gray-600 mb-4" />
+                                                    <p className="text-gray-500 font-bold tracking-wide uppercase text-sm">No premium activity yet</p>
+                                                </div>
                                             ) : (
-                                                <User size={40} className="text-slate-400" />
+                                                <div className="space-y-4">
+                                                    {bookings.slice(0, 3).map((booking, i) => (
+                                                        <motion.div
+                                                            key={booking.id}
+                                                            initial={{ opacity: 0, x: -20 }}
+                                                            animate={{ opacity: 1, x: 0 }}
+                                                            transition={{ delay: i * 0.1 }}
+                                                            className="bg-slate-900/60 shadow-2xl backdrop-blur-xl p-6 rounded-2xl border border-white/10 flex flex-col sm:flex-row items-center gap-6 hover:bg-white/[0.08] transition-all cursor-pointer group shadow-lg"
+                                                            onClick={() => handleViewDetails(booking)}
+                                                        >
+                                                            <div className="relative shrink-0">
+                                                                <img
+                                                                    src={booking.service?.thumbnail}
+                                                                    alt={booking.service?.name}
+                                                                    className="w-20 h-20 rounded-2xl object-cover border border-white/10 group-hover:scale-105 transition-transform"
+                                                                />
+                                                                {booking.bookingStatus?.slug === 'completed' && (
+                                                                    <div className="absolute -top-2 -right-2 bg-emerald-500 text-white p-1 rounded-full shadow-lg">
+                                                                        <CheckCircle size={14} />
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                            <div className="flex-1 text-center sm:text-left">
+                                                                <h4 className="font-black text-white text-lg tracking-tight uppercase group-hover:text-orange-500 transition-colors">{booking.service?.name}</h4>
+                                                                <div className="flex items-center justify-center sm:justify-start gap-4 mt-2">
+                                                                    <div className="flex items-center gap-1.5 text-gray-400 text-xs font-bold uppercase">
+                                                                        <Calendar size={14} className="text-orange-500" />
+                                                                        {new Date(booking.dateTime).toDateString()}
+                                                                    </div>
+                                                                    <div className="flex items-center gap-1.5 text-gray-400 text-xs font-bold uppercase">
+                                                                        <Clock size={14} className="text-orange-500" />
+                                                                        {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex flex-col items-center sm:items-end gap-3 shrink-0">
+                                                                <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[2px] shadow-sm ${getStatusColor(booking.bookingStatus)}`}>
+                                                                    {booking.bookingStatus?.name}
+                                                                </span>
+                                                                <p className="text-xl font-black text-orange-500 tracking-tighter">₹{booking.totalAmount}</p>
+                                                            </div>
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
                                             )}
                                         </div>
-                                        <label className="absolute bottom-0 right-0 p-1.5 bg-slate-900 text-white rounded-full cursor-pointer hover:bg-slate-800 transition-colors">
-                                            <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
-                                            {uploadingImage ? <Loader size={14} className="animate-spin" /> : <Camera size={14} />}
-                                        </label>
-                                    </div>
-                                    <div className="text-center sm:text-left">
-                                        <h3 className="font-semibold text-gray-900 dark:text-white">Profile Photo</h3>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Update your profile picture.</p>
-                                    </div>
-                                </div>
 
-                                <form onSubmit={handleProfileUpdate} className="space-y-6 max-w-lg">
-                                    {/* Name */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
-                                        <div className="relative">
-                                            <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                                            <input
-                                                type="text"
-                                                value={profile.name}
-                                                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                                                className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                            />
+                                    </div>
+                                )}
+
+                                {activeTab === 'profile' && (
+                                    <div className="bg-slate-900/60 p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-600/5 blur-[100px] pointer-events-none"></div>
+
+                                        {/* Photo Upload Section */}
+                                        <div className="mb-12 flex flex-col items-center sm:flex-row gap-10 p-8 rounded-3xl bg-white/[0.03] border border-white/5 group">
+                                            <div className="relative">
+                                                <div className="w-32 h-32 rounded-[2.5rem] bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-orange-500/30 group-hover:border-orange-500 transition-colors shadow-2xl">
+                                                    {profile.avatar ? (
+                                                        <img src={profile.avatar} alt="Profile" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                    ) : (
+                                                        <User size={50} className="text-gray-600" />
+                                                    )}
+                                                </div>
+                                                <label className="absolute -bottom-3 -right-3 p-3 bg-orange-500 text-slate-900 rounded-2xl cursor-pointer hover:bg-orange-600 transition-all shadow-xl hover:scale-110">
+                                                    <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
+                                                    {uploadingImage ? <Loader size={20} className="animate-spin" /> : <Camera size={20} />}
+                                                </label>
+                                            </div>
+                                            <div className="text-center sm:text-left">
+                                                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">MASTER PORTRAIT</h3>
+                                                <p className="text-gray-400 font-medium max-w-xs">Upload a high-resolution portrait for your premium profile identity.</p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {/* Phone */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
-                                        <input
-                                            type="tel"
-                                            value={profile.phone}
-                                            onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                                            placeholder="+91 98765 43210"
-                                            className="block w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                        />
-                                    </div>
-
-                                    {/* About */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">About Me</label>
-                                        <textarea
-                                            rows="3"
-                                            value={profile.about}
-                                            onChange={(e) => setProfile({ ...profile, about: e.target.value })}
-                                            placeholder="Tell us a bit about yourself..."
-                                            className="block w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500 max-h-32"
-                                        />
-                                    </div>
-
-                                    {/* Email (Read Only) */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-                                        <div className="relative">
-                                            <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                                            <input
-                                                type="email"
-                                                value={profile.email}
-                                                disabled
-                                                className="block w-full pl-10 pr-3 py-2.5 border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900/50 text-gray-500 dark:text-gray-400 rounded-xl cursor-not-allowed"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        disabled={loading}
-                                        className="px-6 py-2.5 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition-colors disabled:opacity-50"
-                                    >
-                                        {loading ? 'Saving...' : 'Save Changes'}
-                                    </button>
-                                </form>
-                            </div>
-                        )}
-
-                        {activeTab === 'bookings' && (
-                            <div className="space-y-6">
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Your Bookings</h2>
-                                {loadingBookings ? (
-                                    <div className="flex justify-center py-12">
-                                        <Loader className="animate-spin text-slate-900" size={32} />
-                                    </div>
-                                ) : bookings.length === 0 ? (
-                                    <div className="bg-white dark:bg-slate-950 rounded-2xl shadow-sm p-8 text-center border border-gray-100 dark:border-slate-800">
-                                        <Package size={48} className="mx-auto text-gray-300 dark:text-slate-700 mb-4" />
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">No bookings yet</h3>
-                                        <p className="text-gray-500 dark:text-gray-400 mb-6">Looks like you haven't booked any services yet.</p>
-                                        <button
-                                            onClick={() => navigate('/services')}
-                                            className="px-6 py-2 bg-slate-900 text-white rounded-xl hover:bg-slate-800"
-                                        >
-                                            Book a Service
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-4">
-                                        {bookings.map((booking) => (
-                                            <div key={booking.id} className="bg-white dark:bg-slate-950 rounded-2xl shadow-sm p-6 flex flex-col md:flex-row gap-6 border border-gray-100 dark:border-slate-800">
-                                                <div className="flex-shrink-0">
-                                                    <img
-                                                        src={booking.service?.thumbnail}
-                                                        alt={booking.service?.name}
-                                                        className="w-20 h-20 rounded-xl object-cover bg-gray-100 dark:bg-slate-800"
+                                        <form onSubmit={handleProfileUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            {/* Name input */}
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Operational Identity (Full Name)</label>
+                                                <div className="relative group">
+                                                    <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors" />
+                                                    <input
+                                                        type="text"
+                                                        value={profile.name}
+                                                        onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all placeholder:text-gray-600 font-bold"
+                                                        placeholder="Enter your full name"
                                                     />
                                                 </div>
-                                                <div className="flex-1">
-                                                    <div className="flex justify-between items-start">
-                                                        <div>
-                                                            <h3 className="font-bold text-gray-900 dark:text-white text-lg">{booking.service?.name}</h3>
-                                                            <p className="text-sm text-gray-500 dark:text-gray-400">Booking #{booking.bookingNumber}</p>
-                                                        </div>
-                                                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${getStatusColor(booking.bookingStatus)}`}>
-                                                            {booking.bookingStatus?.name || 'Pending'}
-                                                        </span>
-                                                    </div>
+                                            </div>
 
-                                                    <div className="grid grid-cols-2 gap-4 mt-4 text-sm text-gray-600 dark:text-gray-400">
-                                                        <div className="flex items-center gap-2">
-                                                            <Calendar size={16} />
-                                                            <span>{new Date(booking.dateTime).toDateString()}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-2">
-                                                            <Clock size={16} />
-                                                            <span>{new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-2 col-span-2">
-                                                            <MapPin size={16} />
-                                                            <span className="truncate">{booking.address?.addressLine1}, {booking.address?.city}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="flex flex-col justify-between items-end border-l pl-6 border-gray-100 dark:border-slate-800">
-                                                    <span className="text-xl font-bold text-gray-900 dark:text-white">₹{booking.totalAmount}</span>
-                                                    <button
-                                                        onClick={() => handleViewDetails(booking)}
-                                                        className="text-slate-900 dark:text-indigo-400 font-medium text-sm hover:underline"
-                                                    >
-                                                        View Details
-                                                    </button>
+                                            {/* Phone input */}
+                                            <div>
+                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Direct Contact (Phone)</label>
+                                                <div className="relative group">
+                                                    <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors" />
+                                                    <input
+                                                        type="tel"
+                                                        value={profile.phone}
+                                                        onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                                                        placeholder="+91 98765 43210"
+                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all font-bold"
+                                                    />
                                                 </div>
                                             </div>
-                                        ))}
+
+                                            {/* Email input (Read Only) */}
+                                            <div>
+                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Verified Intel (Email)</label>
+                                                <div className="relative group">
+                                                    <Mail size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600" />
+                                                    <input
+                                                        type="email"
+                                                        value={profile.email}
+                                                        disabled
+                                                        className="block w-full pl-14 pr-4 py-4 bg-white/[0.02] border border-white/5 text-gray-500 rounded-2xl cursor-not-allowed font-bold"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* About input */}
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Briefing (About Your Profile)</label>
+                                                <textarea
+                                                    rows="4"
+                                                    value={profile.about}
+                                                    onChange={(e) => setProfile({ ...profile, about: e.target.value })}
+                                                    placeholder="Write a brief professional summary..."
+                                                    className="block w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all resize-none font-bold"
+                                                />
+                                            </div>
+
+                                            <div className="md:col-span-2 pt-4">
+                                                <button
+                                                    type="submit"
+                                                    disabled={loading}
+                                                    className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                >
+                                                    {loading ? <Loader className="animate-spin" /> : <Shield size={22} className="group-hover:rotate-12 transition-transform" />}
+                                                    Update Protocol Data
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 )}
-                            </div>
-                        )}
 
-                        {activeTab === 'addresses' && (
-                            <div className="space-y-6">
-                                <div className="flex justify-between items-center">
-                                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Saved Addresses</h2>
+
+                                {activeTab === 'bookings' && (
+                                    <div className="space-y-8">
+                                        <div className="flex justify-between items-center">
+                                            <h2 className="text-3xl font-black text-white tracking-tight uppercase">Order History</h2>
+                                            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-widest">
+                                                <Package size={14} className="text-orange-500" />
+                                                {bookings.length} Total
+                                            </div>
+                                        </div>
+
+                                        {loadingBookings ? (
+                                            <div className="flex justify-center py-20">
+                                                <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                            </div>
+                                        ) : bookings.length === 0 ? (
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                className="bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-white/10 border-dashed"
+                                            >
+                                                <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                                                    <Package size={48} className="text-gray-600" />
+                                                </div>
+                                                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">No services booked</h3>
+                                                <p className="text-gray-500 font-medium mb-10 max-w-xs mx-auto">Explore our elite services and start your journey with us today.</p>
+                                                <button
+                                                    onClick={() => navigate('/services')}
+                                                    className="px-10 py-4 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl hover:shadow-orange-500/20"
+                                                >
+                                                    Browse Services
+                                                </button>
+                                            </motion.div>
+                                        ) : (
+                                            <div className="space-y-6">
+                                                {bookings.map((booking, i) => (
+                                                    <motion.div
+                                                        key={booking.id}
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: i * 0.05 }}
+                                                        className="bg-slate-900/40 rounded-[2.5rem] p-8 flex flex-col lg:flex-row gap-8 border border-white/5 hover:bg-slate-900/60 transition-all group relative overflow-hidden shadow-2xl"
+                                                    >
+                                                        <div className="absolute right-0 top-0 w-32 h-32 bg-orange-600/5 blur-[60px] pointer-events-none group-hover:bg-orange-600/10 transition-all"></div>
+
+                                                        <div className="shrink-0 relative">
+                                                            <img
+                                                                src={booking.service?.thumbnail}
+                                                                alt={booking.service?.name}
+                                                                className="w-32 h-32 rounded-[2rem] object-cover border border-white/10 shadow-xl group-hover:scale-105 transition-transform duration-500"
+                                                            />
+                                                            <div className="absolute -top-2 -left-2 bg-orange-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
+                                                                ID: #{booking.bookingNumber}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex-1">
+                                                            <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
+                                                                <div>
+                                                                    <p className="text-orange-500 text-[10px] font-black uppercase tracking-[2px] mb-1">Operational Task</p>
+                                                                    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 group-hover:text-orange-500 transition-colors">{booking.service?.name}</h3>
+                                                                    <div className="flex flex-wrap gap-4">
+                                                                        <div className="flex items-center gap-2 text-gray-500 text-[10px] font-black uppercase tracking-widest">
+                                                                            <Calendar size={14} className="text-orange-500" />
+                                                                            {new Date(booking.dateTime).toDateString()}
+                                                                        </div>
+                                                                        <div className="flex items-center gap-2 text-gray-500 text-[10px] font-black uppercase tracking-widest">
+                                                                            <Clock size={14} className="text-orange-500" />
+                                                                            {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <span className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-[2px] shadow-sm border border-white/5 ${getStatusColor(booking.bookingStatus)}`}>
+                                                                    {booking.bookingStatus?.name || 'LOGGED'}
+                                                                </span>
+                                                            </div>
+
+                                                            <div className="flex items-center gap-3 text-gray-500 text-xs font-bold p-4 bg-white/[0.03] rounded-2xl border border-white/5">
+                                                                <MapPin size={16} className="text-orange-500 shrink-0" />
+                                                                <span className="truncate uppercase tracking-widest">{booking.address?.addressLine1}, {booking.address?.city}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex flex-col justify-between items-center lg:items-end lg:border-l lg:pl-8 lg:border-white/5 gap-6">
+                                                            <div className="text-center lg:text-right">
+                                                                <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Total Valuation</p>
+                                                                <span className="text-4xl font-black text-white tracking-tighter">₹{booking.totalAmount}</span>
+                                                            </div>
+                                                            <button
+                                                                onClick={() => handleViewDetails(booking)}
+                                                                className="w-full lg:w-auto px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-500/10 group/btn"
+                                                            >
+                                                                ACCESS INTEL
+                                                                <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                                                            </button>
+                                                        </div>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {activeTab === 'addresses' && (
+                                    <div className="space-y-8">
+                                        <div className="flex justify-between items-end">
+                                            <div>
+                                                <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Base Operations</p>
+                                                <h2 className="text-4xl font-black text-white tracking-tight uppercase">Coordinates</h2>
+                                            </div>
+                                            <button
+                                                onClick={() => {
+                                                    setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home' });
+                                                    setEditingAddressId(null);
+                                                    setShowAddressModal(true);
+                                                }}
+                                                className="flex items-center gap-3 px-8 py-4 bg-orange-500 text-white rounded-2xl hover:bg-orange-600 transition-all font-black uppercase tracking-widest shadow-xl shadow-orange-500/20"
+                                            >
+                                                <Plus size={20} /> ESTABLISH NEW
+                                            </button>
+                                        </div>
+
+                                        {loadingAddresses ? (
+                                            <div className="flex justify-center py-20">
+                                                <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                            </div>
+                                        ) : addresses.length === 0 ? (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-white/10 border-dashed"
+                                            >
+                                                <MapPin size={48} className="mx-auto text-gray-600 mb-6" />
+                                                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">No coordinates saved</h3>
+                                                <p className="text-gray-500 font-medium">Add your primary locations for efficient service delivery.</p>
+                                            </motion.div>
+                                        ) : (
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                {addresses.map((addr, i) => (
+                                                    <motion.div
+                                                        key={addr.id}
+                                                        initial={{ opacity: 0, scale: 0.95 }}
+                                                        animate={{ opacity: 1, scale: 1 }}
+                                                        transition={{ delay: i * 0.1 }}
+                                                        className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-2xl relative group hover:border-orange-500/30 transition-all overflow-hidden"
+                                                    >
+                                                        <div className="absolute top-6 right-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                                                            <button
+                                                                onClick={() => handleEditAddress(addr)}
+                                                                className="p-2.5 bg-white/10 text-white hover:bg-orange-500 hover:text-slate-900 rounded-xl transition-all shadow-xl"
+                                                            >
+                                                                <Edit2 size={16} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => confirmDeleteAddress(addr.id)}
+                                                                className="p-2.5 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all shadow-xl"
+                                                            >
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+                                                        <div className="flex items-center gap-3 mb-6">
+                                                            <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[2px] shadow-sm ${addr.type === 'home' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' :
+                                                                addr.type === 'work' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' :
+                                                                    'bg-gray-500/10 text-gray-400 border border-gray-500/20'
+                                                                }`}>
+                                                                {addr.type}
+                                                            </div>
+                                                        </div>
+                                                        <p className="text-white text-xl font-black mb-2 tracking-tight uppercase group-hover:text-orange-500 transition-colors">{addr.addressLine1}</p>
+                                                        <div className="flex items-start gap-2 text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4">
+                                                            <MapPin size={14} className="text-orange-500 shrink-0" />
+                                                            <span>{addr.city}, {addr.state} - {addr.pincode}</span>
+                                                        </div>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {activeTab === 'security' && (
+                                    <div className="bg-slate-900/60 rounded-[2.5rem] border border-white/5 p-10 shadow-2xl relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-[100px] pointer-events-none"></div>
+
+                                        <div className="flex items-center gap-6 mb-12">
+                                            <div className="w-16 h-16 bg-orange-600/10 rounded-2xl flex items-center justify-center border border-orange-600/20 shadow-xl">
+                                                <Key size={30} className="text-orange-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-1">Security Protocol</p>
+                                                <h2 className="text-3xl font-black text-white uppercase tracking-tight">Access Protocol</h2>
+                                            </div>
+                                        </div>
+
+                                        <form onSubmit={handlePasswordChange} className="space-y-8 max-w-xl relative z-10">
+                                            <div className="space-y-6">
+                                                <div>
+                                                    <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Current Authorization</label>
+                                                    <div className="relative group">
+                                                        <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                        <input
+                                                            type="password"
+                                                            value={passwords.current}
+                                                            onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
+                                                            placeholder="Enter current password"
+                                                            className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">New Cipher</label>
+                                                        <div className="relative group">
+                                                            <Key size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                            <input
+                                                                type="password"
+                                                                value={passwords.new}
+                                                                onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
+                                                                placeholder="New password"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Re-verify Cipher</label>
+                                                        <div className="relative group">
+                                                            <Shield size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                            <input
+                                                                type="password"
+                                                                value={passwords.confirm}
+                                                                onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
+                                                                placeholder="Confirm new password"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="pt-4">
+                                                <button
+                                                    type="submit"
+                                                    disabled={loading}
+                                                    className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                >
+                                                    {loading ? <Loader className="animate-spin" /> : <Shield size={22} className="group-hover:rotate-12 transition-transform" />}
+                                                    UPDATE AUTHORIZATION
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+                </div>
+
+                {/* Address Modal */}
+                <AnimatePresence>
+                    {showAddressModal && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setShowAddressModal(false)}
+                                className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                className="relative bg-slate-900/90 rounded-[2.5rem] w-full max-w-md p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-xl overflow-hidden"
+                            >
+                                <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/5 blur-[80px] pointer-events-none"></div>
+
+                                <div className="flex justify-between items-center mb-8 relative z-10">
+                                    <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+                                        {editingAddressId ? 'Edit Coordinates' : 'New Coordinates'}
+                                    </h2>
                                     <button
-                                        onClick={() => {
-                                            setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home' });
-                                            setEditingAddressId(null);
-                                            setShowAddressModal(true);
-                                        }}
-                                        className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl hover:bg-slate-800"
+                                        onClick={() => setShowAddressModal(false)}
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all border border-white/5"
                                     >
-                                        <Plus size={18} /> Add New
+                                        <X size={20} />
                                     </button>
                                 </div>
 
-                                {loadingAddresses ? (
-                                    <div className="flex justify-center py-12">
-                                        <Loader className="animate-spin text-slate-900" size={32} />
+                                <form onSubmit={handleAddressSubmit} className="space-y-6 relative z-10">
+                                    <div>
+                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Address Line 1</label>
+                                        <input
+                                            type="text"
+                                            value={addressForm.addressLine1}
+                                            onChange={(e) => setAddressForm({ ...addressForm, addressLine1: e.target.value })}
+                                            placeholder="Enter street address"
+                                            className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                            required
+                                        />
                                     </div>
-                                ) : addresses.length === 0 ? (
-                                    <div className="text-center py-12 bg-white dark:bg-slate-950 rounded-2xl border border-gray-100 dark:border-slate-800">
-                                        <MapPin size={48} className="mx-auto text-gray-300 dark:text-slate-700 mb-4" />
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">No addresses saved</h3>
-                                        <p className="text-gray-500 dark:text-gray-400">Add an address to make booking easier.</p>
-                                    </div>
-                                ) : (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {addresses.map((addr) => (
-                                            <div key={addr.id} className="bg-white dark:bg-slate-950 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm relative group">
-                                                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    <button
-                                                        onClick={() => handleEditAddress(addr)}
-                                                        className="p-1.5 text-gray-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg"
-                                                    >
-                                                        <Edit2 size={16} />
-                                                    </button>
-                                                    <button
-                                                        onClick={() => confirmDeleteAddress(addr.id)}
-                                                        className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                                                    >
-                                                        <Trash2 size={18} />
-                                                    </button>
-                                                </div>
-                                                <div className="flex items-center gap-2 mb-3">
-                                                    <span className={`px-2.5 py-1 rounded-lg text-xs font-bold uppercase ${addr.type === 'home' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400' :
-                                                        addr.type === 'work' ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400' :
-                                                            'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300'
-                                                        }`}>
-                                                        {addr.type}
-                                                    </span>
-                                                </div>
-                                                <p className="text-gray-900 dark:text-white font-medium mb-1">{addr.addressLine1}</p>
-                                                <p className="text-gray-500 dark:text-gray-400 text-sm">{addr.city}, {addr.state} - {addr.pincode}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        )}
 
-                        {activeTab === 'security' && (
-                            <div className="bg-white dark:bg-slate-950 rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 dark:border-slate-800">
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Change Password</h2>
-                                <form onSubmit={handlePasswordChange} className="space-y-6 max-w-lg">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Current Password</label>
-                                        <div className="relative">
-                                            <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                    <div className="grid grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">City</label>
                                             <input
-                                                type="password"
-                                                value={passwords.current}
-                                                onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
-                                                className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
+                                                type="text"
+                                                value={addressForm.city}
+                                                onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
+                                                placeholder="City"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">State</label>
+                                            <input
+                                                type="text"
+                                                value={addressForm.state}
+                                                onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
+                                                placeholder="State"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
                                                 required
                                             />
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">New Password</label>
-                                        <div className="relative">
-                                            <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+
+                                    <div className="grid grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Pincode</label>
                                             <input
-                                                type="password"
-                                                value={passwords.new}
-                                                onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
-                                                className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
+                                                type="text"
+                                                value={addressForm.pincode}
+                                                onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
+                                                placeholder="123456"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
                                                 required
                                             />
                                         </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm New Password</label>
-                                        <div className="relative">
-                                            <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                                            <input
-                                                type="password"
-                                                value={passwords.confirm}
-                                                onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
-                                                className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                                required
-                                            />
+                                        <div>
+                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Type</label>
+                                            <select
+                                                value={addressForm.type}
+                                                onChange={(e) => setAddressForm({ ...addressForm, type: e.target.value })}
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold appearance-none cursor-pointer"
+                                            >
+                                                <option value="home">Home</option>
+                                                <option value="work">Work</option>
+                                                <option value="other">Other</option>
+                                            </select>
                                         </div>
                                     </div>
+
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="px-6 py-2.5 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition-colors disabled:opacity-50"
+                                        className="w-full py-5 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/10 flex items-center justify-center gap-3 disabled:opacity-50 mt-4"
                                     >
-                                        {loading ? 'Updating...' : 'Update Password'}
+                                        {loading ? <Loader className="animate-spin" /> : <MapPin size={20} />}
+                                        Save Coordinates
                                     </button>
                                 </form>
-                            </div>
-                        )}
-
-                    </div>
-                </div>
-            </div>
-
-            {/* Address Modal */}
-            {showAddressModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowAddressModal(false)}></div>
-                    <div className="relative bg-white dark:bg-slate-900 rounded-2xl w-full max-w-md p-6 shadow-xl border border-gray-100 dark:border-slate-800">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white">{editingAddressId ? 'Edit Address' : 'Add New Address'}</h2>
-                            <button onClick={() => setShowAddressModal(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                                <X size={24} />
-                            </button>
+                            </motion.div>
                         </div>
-                        <form onSubmit={handleAddressSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Address Line 1</label>
-                                <input
-                                    type="text"
-                                    value={addressForm.addressLine1}
-                                    onChange={(e) => setAddressForm({ ...addressForm, addressLine1: e.target.value })}
-                                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                    required
-                                />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City</label>
-                                    <input
-                                        type="text"
-                                        value={addressForm.city}
-                                        onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
-                                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">State</label>
-                                    <input
-                                        type="text"
-                                        value={addressForm.state}
-                                        onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
-                                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pincode</label>
-                                    <input
-                                        type="text"
-                                        value={addressForm.pincode}
-                                        onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
-                                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Type</label>
-                                    <select
-                                        value={addressForm.type}
-                                        onChange={(e) => setAddressForm({ ...addressForm, type: e.target.value })}
-                                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-900 dark:text-white rounded-xl focus:ring-slate-500 focus:border-slate-500"
-                                    >
-                                        <option value="home">Home</option>
-                                        <option value="work">Work</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full py-3 bg-slate-900 dark:bg-indigo-600 text-white font-medium rounded-xl hover:bg-slate-800 dark:hover:bg-indigo-700 transition-colors mt-2"
-                            >
-                                {loading ? 'Saving...' : 'Save Address'}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
-            {/* Booking Details Modal */}
-            {showBookingModal && selectedBooking && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowBookingModal(false)}></div>
-                    <div className="relative bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-800 shadow-xl">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Booking Details</h2>
-                            <button onClick={() => setShowBookingModal(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                                <X size={24} />
-                            </button>
-                        </div>
-
-                        <div className="space-y-6">
-                            {/* Service Header */}
-                            <div className="flex gap-4 p-4 bg-gray-50 dark:bg-slate-800/50 rounded-xl">
-                                <img
-                                    src={selectedBooking.service?.thumbnail}
-                                    alt={selectedBooking.service?.name}
-                                    className="w-16 h-16 rounded-lg object-cover bg-gray-200 dark:bg-slate-700"
-                                />
-                                <div>
-                                    <h3 className="font-bold text-lg text-gray-900 dark:text-white">{selectedBooking.service?.name}</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">Booking ID: #{selectedBooking.bookingNumber}</p>
-                                </div>
-                            </div>
-
-                            {/* Date & Time */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-3 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-1">Date</p>
-                                    <div className="flex items-center gap-2 text-gray-900 dark:text-white font-medium">
-                                        <Calendar size={16} />
-                                        {new Date(selectedBooking.dateTime).toDateString()}
-                                    </div>
-                                </div>
-                                <div className="p-3 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-1">Time</p>
-                                    <div className="flex items-center gap-2 text-gray-900 dark:text-white font-medium">
-                                        <Clock size={16} />
-                                        {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Status & Payment */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-3 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-1">Status</p>
-                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${getStatusColor(selectedBooking.bookingStatus)}`}>
-                                        {selectedBooking.bookingStatus?.name || 'Pending'}
-                                    </span>
-                                </div>
-                                <div className="p-3 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-1">Payment</p>
-                                    <div className="flex items-center gap-2 text-gray-900 dark:text-white font-medium capitalize">
-                                        <CheckCircle size={16} className="text-green-500" />
-                                        {selectedBooking.paymentMethod || 'Online'}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Service Address */}
-                            <div className="p-4 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-2">Service Address</p>
-                                <div className="flex gap-3">
-                                    <MapPin size={18} className="text-gray-400 dark:text-gray-500 mt-0.5" />
-                                    <div className="text-sm text-gray-700 dark:text-gray-300">
-                                        <p className="font-medium text-gray-900 dark:text-white">{selectedBooking.address?.addressLine1}</p>
-                                        <p>{selectedBooking.address?.city}, {selectedBooking.address?.state}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Booking Timeline */}
-                            <div className="p-4 border border-gray-200 dark:border-slate-700 rounded-xl">
-                                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-4">Booking Timeline</p>
-                                {loadingTimeline ? (
-                                    <div className="flex justify-center py-4">
-                                        <Loader className="animate-spin text-indigo-500" size={20} />
-                                    </div>
-                                ) : timeline.length === 0 ? (
-                                    <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-2">No timeline data available</p>
-                                ) : (
-                                    <div className="relative">
-                                        {timeline.map((item, index) => {
-                                            const isLast = index === timeline.length - 1;
-                                            const statusIcon = {
-                                                'Booking Placed': '📋',
-                                                'Confirmed': '✅',
-                                                'In Progress': '🔧',
-                                                'Completed': '🎉',
-                                                'Cancelled': '❌',
-                                                'Rejected': '❌'
-                                            }[item.status] || '📌';
-                                            const statusColor = {
-                                                'Booking Placed': 'bg-blue-500',
-                                                'Confirmed': 'bg-green-500',
-                                                'In Progress': 'bg-yellow-500',
-                                                'Completed': 'bg-emerald-500',
-                                                'Cancelled': 'bg-red-500',
-                                                'Rejected': 'bg-red-500'
-                                            }[item.status] || 'bg-gray-400';
-                                            return (
-                                                <div key={item.id} className="flex gap-3 mb-0">
-                                                    <div className="flex flex-col items-center">
-                                                        <div className={`w-8 h-8 rounded-full ${statusColor} flex items-center justify-center text-white text-sm shadow-md`}>
-                                                            {statusIcon}
-                                                        </div>
-                                                        {!isLast && <div className="w-0.5 h-8 bg-gradient-to-b from-gray-300 to-gray-200 dark:from-slate-600 dark:to-slate-700"></div>}
-                                                    </div>
-                                                    <div className={`pb-4 ${isLast ? '' : ''}`}>
-                                                        <p className="font-semibold text-sm text-gray-900 dark:text-white">{item.status}</p>
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                                                            {new Date(item.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                                                            {' at '}
-                                                            {new Date(item.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                                                        </p>
-                                                        {item.note && <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{item.note}</p>}
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Price Breakup */}
-                            <div className="space-y-2 pt-2 border-t border-gray-200 dark:border-slate-700">
-                                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-2">Price Breakdown</p>
-                                <div className="flex justify-between text-sm">
-                                    <span className="text-gray-600 dark:text-gray-400">Service Price</span>
-                                    <span className="text-gray-900 dark:text-white font-medium">₹{selectedBooking.servicePrice || selectedBooking.service?.price}</span>
-                                </div>
-                                {(selectedBooking.discount > 0 || selectedBooking.discountAmount > 0) && (
-                                    <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
-                                        <span>Discount</span>
-                                        <span>-₹{selectedBooking.discount || selectedBooking.discountAmount}</span>
-                                    </div>
-                                )}
-                                <div className="flex justify-between text-sm">
-                                    <span className="text-gray-600 dark:text-gray-400">Platform Fee</span>
-                                    <span className="text-gray-900 dark:text-white font-medium">₹{selectedBooking.platformFees || 0}</span>
-                                </div>
-                                {selectedBooking.tax > 0 && (
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-gray-600 dark:text-gray-400">Tax (GST)</span>
-                                        <span className="text-gray-900 dark:text-white font-medium">₹{selectedBooking.tax}</span>
-                                    </div>
-                                )}
-                                <div className="flex justify-between text-base font-bold pt-2 border-t border-gray-200 dark:border-slate-700">
-                                    <span className="text-gray-900 dark:text-white">Total Amount</span>
-                                    <span className="text-indigo-600 dark:text-indigo-400">₹{selectedBooking.totalAmount}</span>
-                                </div>
-                            </div>
-
-                            {/* Rate & Review Section */}
-                            {selectedBooking.bookingStatus?.slug === 'completed' && !selectedBooking.isReviewed && (
-                                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold mb-4">Rate your experience</p>
-                                    <div className="flex gap-2 mb-4">
-                                        {[1, 2, 3, 4, 5].map((star) => (
-                                            <button
-                                                key={star}
-                                                onClick={() => setReviewState({ ...reviewState, rating: star })}
-                                                className={`p-1 transition-colors ${reviewState.rating >= star ? 'text-yellow-400' : 'text-gray-200'}`}
-                                            >
-                                                <Star size={32} fill={reviewState.rating >= star ? 'currentColor' : 'none'} />
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <textarea
-                                        placeholder="Share your feedback..."
-                                        className="w-full p-4 bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-700 rounded-xl text-sm outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 h-24 resize-none mb-4"
-                                        value={reviewState.comment}
-                                        onChange={(e) => setReviewState({ ...reviewState, comment: e.target.value })}
-                                    ></textarea>
-                                    <button
-                                        onClick={async () => {
-                                            if (reviewState.loading) return;
-                                            try {
-                                                setReviewState({ ...reviewState, loading: true });
-                                                await reviewService.create({
-                                                    bookingId: selectedBooking.id,
-                                                    rating: reviewState.rating,
-                                                    comment: reviewState.comment
-                                                });
-                                                setMessage({ type: 'success', text: 'Review submitted successfully! 🎉' });
-                                                setShowBookingModal(false);
-                                                fetchBookings(); // Refresh list to update isReviewed status
-                                            } catch (err) {
-                                                setMessage({ type: 'error', text: err.message });
-                                            } finally {
-                                                setReviewState({ ...reviewState, loading: false, comment: '' });
-                                            }
-                                        }}
-                                        disabled={reviewState.loading}
-                                        className="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors shadow-lg disabled:opacity-50"
-                                    >
-                                        {reviewState.loading ? 'Submitting...' : 'Submit Review'}
-                                    </button>
-                                </div>
-                            )}
-
-                            {selectedBooking.bookingStatus?.slug === 'completed' && (
-                                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-slate-700">
-                                    <button
-                                        onClick={() => downloadInvoice(selectedBooking)}
-                                        className="w-full flex items-center justify-center gap-2 py-3 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
-                                    >
-                                        <FileText size={18} />
-                                        Download Invoice
-                                    </button>
-                                </div>
-                            )}
-
-                            {selectedBooking.isReviewed && (
-                                <div className="mt-6 pt-6 border-t text-center">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-full text-sm font-bold">
-                                        <CheckCircle size={16} />
-                                        Review Submitted
-                                    </div>
-                                </div>
-                            )}
-
-                            <button
+                    )}
+                </AnimatePresence>
+                {/* Booking Details Modal */}
+                <AnimatePresence>
+                    {showBookingModal && selectedBooking && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
                                 onClick={() => setShowBookingModal(false)}
-                                className="w-full py-3 bg-slate-900 dark:bg-slate-700 text-white font-medium rounded-xl hover:bg-slate-800 dark:hover:bg-slate-600 transition-colors mt-2"
+                                className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                className="relative bg-slate-900/90 rounded-[2.5rem] w-full max-w-xl p-8 max-h-[90vh] overflow-y-auto border border-white/10 backdrop-blur-xl shadow-2xl custom-scrollbar"
                             >
-                                Close
-                            </button>
+                                <div className="flex justify-between items-center mb-8 sticky top-0 bg-slate-900/10 backdrop-blur-md py-2 z-20">
+                                    <h2 className="text-2xl font-black text-white uppercase tracking-tight">Deployment Intel</h2>
+                                    <button
+                                        onClick={() => setShowBookingModal(false)}
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all border border-white/5"
+                                    >
+                                        <X size={20} />
+                                    </button>
+                                </div>
+
+                                <div className="space-y-8">
+                                    {/* Service Header */}
+                                    <div className="flex gap-6 p-6 bg-white/5 rounded-3xl border border-white/10 relative overflow-hidden group">
+                                        <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/5 blur-[40px] pointer-events-none"></div>
+                                        <img
+                                            src={selectedBooking.service?.thumbnail}
+                                            alt={selectedBooking.service?.name}
+                                            className="w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-lg"
+                                        />
+                                        <div>
+                                            <h3 className="font-black text-xl text-white uppercase tracking-tight mb-1">{selectedBooking.service?.name}</h3>
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 text-orange-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                                                ID: #{selectedBooking.bookingNumber}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Details Grid */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div className="p-5 bg-white/5 border border-white/10 rounded-2xl">
+                                            <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">Schedule</p>
+                                            <div className="flex items-center gap-3 text-white font-bold text-sm">
+                                                <Calendar size={16} className="text-orange-500" />
+                                                {new Date(selectedBooking.dateTime).toDateString()}
+                                            </div>
+                                            <div className="flex items-center gap-3 text-white font-bold text-sm mt-2">
+                                                <Clock size={16} className="text-orange-500" />
+                                                {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                            </div>
+                                        </div>
+                                        <div className="p-5 bg-white/5 border border-white/10 rounded-2xl">
+                                            <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">status & Payment</p>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/10 ${getStatusColor(selectedBooking.bookingStatus)}`}>
+                                                    {selectedBooking.bookingStatus?.name || 'Pending'}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-white font-bold text-sm">
+                                                <CheckCircle size={16} className="text-emerald-400" />
+                                                <span className="capitalize">{selectedBooking.paymentMethod || 'Gold Membership'}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Service Address */}
+                                    <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-3">Target Location</p>
+                                        <div className="flex gap-4">
+                                            <div className="w-10 h-10 bg-orange-500/10 rounded-xl flex items-center justify-center shrink-0">
+                                                <MapPin size={20} className="text-orange-500" />
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-white text-sm mb-1">{selectedBooking.address?.addressLine1}</p>
+                                                <p className="text-gray-400 text-xs font-medium uppercase tracking-wider">{selectedBooking.address?.city}, {selectedBooking.address?.state}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Timeline */}
+                                    <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-6">Execution Log</p>
+                                        {loadingTimeline ? (
+                                            <div className="flex justify-center py-4">
+                                                <Loader className="animate-spin text-orange-500" size={20} />
+                                            </div>
+                                        ) : timeline.length === 0 ? (
+                                            <p className="text-xs text-gray-500 text-center py-2 font-bold uppercase tracking-widest">No log entries found</p>
+                                        ) : (
+                                            <div className="relative space-y-6">
+                                                <div className="absolute left-[15px] top-2 bottom-2 w-0.5 bg-white/10"></div>
+                                                {timeline.map((item, index) => (
+                                                    <div key={item.id} className="flex gap-4 relative z-10">
+                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs shadow-lg border-2 border-slate-900 ${['Completed', 'Confirmed'].includes(item.status) ? 'bg-emerald-500' :
+                                                            ['Cancelled', 'Rejected'].includes(item.status) ? 'bg-red-500' : 'bg-orange-500'
+                                                            }`}>
+                                                            {index + 1}
+                                                        </div>
+                                                        <div className="flex-1">
+                                                            <p className="font-black text-white text-sm uppercase tracking-tight">{item.status}</p>
+                                                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">
+                                                                {new Date(item.createdAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                                                            </p>
+                                                            {item.note && <p className="text-xs text-gray-500 mt-2 p-2 bg-white/5 rounded-lg border border-white/5 italic">"{item.note}"</p>}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Price Breakup */}
+                                    <div className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4">
+                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">Financial Summary</p>
+                                        <div className="space-y-3">
+                                            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+                                                <span>Base Premium</span>
+                                                <span className="text-white">₹{selectedBooking.servicePrice || selectedBooking.service?.price}</span>
+                                            </div>
+                                            {(selectedBooking.discount > 0 || selectedBooking.discountAmount > 0) && (
+                                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-emerald-400">
+                                                    <span>Privilege Discount</span>
+                                                    <span>-₹{selectedBooking.discount || selectedBooking.discountAmount}</span>
+                                                </div>
+                                            )}
+                                            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+                                                <span>Logistics & Platform</span>
+                                                <span className="text-white">₹{selectedBooking.platformFees || 0}</span>
+                                            </div>
+                                            {selectedBooking.tax > 0 && (
+                                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+                                                    <span>Regulatory Tax (GST)</span>
+                                                    <span className="text-white">₹{selectedBooking.tax}</span>
+                                                </div>
+                                            )}
+                                            <div className="flex justify-between items-center pt-4 border-t border-white/10">
+                                                <span className="text-xs font-black uppercase tracking-[2px] text-orange-500">Total Settlement</span>
+                                                <span className="text-2xl font-black text-white tracking-tighter">₹{selectedBooking.totalAmount}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Review Section */}
+                                    {selectedBooking.bookingStatus?.slug === 'completed' && !selectedBooking.isReviewed && (
+                                        <div className="p-6 bg-orange-500/5 border border-orange-500/20 rounded-3xl space-y-6">
+                                            <p className="text-[10px] text-orange-500 uppercase font-black tracking-[3px] text-center">Protocol Evaluation</p>
+                                            <div className="flex justify-center gap-3">
+                                                {[1, 2, 3, 4, 5].map((star) => (
+                                                    <button
+                                                        key={star}
+                                                        onClick={() => setReviewState({ ...reviewState, rating: star })}
+                                                        className={`transition-all transform hover:scale-110 ${reviewState.rating >= star ? 'text-orange-500' : 'text-white/10'}`}
+                                                    >
+                                                        <Star size={36} fill={reviewState.rating >= star ? 'currentColor' : 'none'} strokeWidth={1} />
+                                                    </button>
+                                                ))}
+                                            </div>
+                                            <textarea
+                                                placeholder="Share your experience with the elite protocol..."
+                                                className="w-full p-5 bg-slate-900 border border-white/10 rounded-2xl text-white text-sm font-bold outline-none focus:border-orange-500 transition-all h-28 resize-none"
+                                                value={reviewState.comment}
+                                                onChange={(e) => setReviewState({ ...reviewState, comment: e.target.value })}
+                                            ></textarea>
+                                            <button
+                                                onClick={async () => {
+                                                    if (reviewState.loading) return;
+                                                    try {
+                                                        setReviewState({ ...reviewState, loading: true });
+                                                        await reviewService.create({
+                                                            bookingId: selectedBooking.id,
+                                                            rating: reviewState.rating,
+                                                            comment: reviewState.comment
+                                                        });
+                                                        setMessage({ type: 'success', text: 'Review logged in archives! 🎉' });
+                                                        setShowBookingModal(false);
+                                                        fetchBookings();
+                                                    } catch (err) {
+                                                        setMessage({ type: 'error', text: err.message });
+                                                    } finally {
+                                                        setReviewState({ ...reviewState, loading: false, comment: '' });
+                                                    }
+                                                }}
+                                                disabled={reviewState.loading}
+                                                className="w-full py-4 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                                            >
+                                                {reviewState.loading ? <Loader className="animate-spin" /> : <Star size={18} />}
+                                                Transmit Review
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    {selectedBooking.bookingStatus?.slug === 'completed' && (
+                                        <button
+                                            onClick={() => downloadInvoice(selectedBooking)}
+                                            className="w-full flex items-center justify-center gap-3 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
+                                        >
+                                            <FileText size={18} className="text-orange-500" />
+                                            Acquire Invoice
+                                        </button>
+                                    )}
+
+                                    {selectedBooking.isReviewed && (
+                                        <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center">
+                                            <div className="inline-flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                                                <CheckCircle size={14} />
+                                                Review Successfully Logged
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <button
+                                        onClick={() => setShowBookingModal(false)}
+                                        className="w-full py-4 bg-slate-800 text-white/50 font-black uppercase tracking-widest rounded-2xl hover:bg-slate-700 hover:text-white transition-all border border-white/5"
+                                    >
+                                        Exit Interface
+                                    </button>
+                                </div>
+                            </motion.div>
                         </div>
-                    </div>
-                </div>
-            )}
-            {/* Confirmation Modal */}
-            <ConfirmationModal
-                isOpen={showDeleteModal}
-                onClose={() => setShowDeleteModal(false)}
-                onConfirm={handleDeleteAddress}
-                title="Delete Address?"
-                message="Are you sure you want to delete this address? This action cannot be undone."
-                confirmText="Delete"
-                cancelText="Cancel"
-                icon={<Trash2 size={48} className="text-red-500 mb-4" />}
-            />
+                    )}
+                </AnimatePresence>
+
+                {/* Confirmation Modal */}
+                <ConfirmationModal
+                    isOpen={showDeleteModal}
+                    onClose={() => setShowDeleteModal(false)}
+                    onConfirm={handleDeleteAddress}
+                    title="ERASE COORDINATES?"
+                    message="Are you sure you want to remove this location from the secure archives? This cannot be undone."
+                    confirmText="ERASE"
+                    cancelText="CANCEL"
+                    icon={<Trash2 size={48} className="text-red-500 mb-4" />}
+                />
+            </div>
         </div>
     );
 };
