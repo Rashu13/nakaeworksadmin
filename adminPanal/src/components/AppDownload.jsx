@@ -7,7 +7,7 @@ const AppDownload = () => {
         <section className="py-24 px-4 bg-[#0a0f1c] relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-amber-500 rounded-full mix-blend-screen filter blur-[150px] animate-pulse"></div>
+                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-500 rounded-full mix-blend-screen filter blur-[150px] animate-pulse"></div>
                 <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
             </div>
 
@@ -21,13 +21,13 @@ const AppDownload = () => {
                         className="text-white"
                     >
                         <div className="flex items-center gap-3 mb-6">
-                            <Smartphone className="text-amber-500" size={24} />
-                            <span className="text-amber-500 text-xs font-black uppercase tracking-[0.3em]">Nakae Mobile</span>
+                            <Smartphone className="text-orange-500" size={24} />
+                            <span className="text-orange-500 text-xs font-black uppercase tracking-[0.3em]">Nakae Mobile</span>
                         </div>
 
                         <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tight">
                             The future of home services is
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 block mt-2">in your pocket.</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-200 block mt-2">in your pocket.</span>
                         </h2>
 
                         <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed font-medium">
@@ -37,7 +37,7 @@ const AppDownload = () => {
                         {/* Features */}
                         <div className="grid sm:grid-cols-2 gap-6 mb-12">
                             {[
-                                { icon: Shield, text: "Verified Protection", color: "text-amber-400", bg: "bg-amber-400/10" },
+                                { icon: Shield, text: "Verified Protection", color: "text-orange-400", bg: "bg-orange-400/10" },
                                 { icon: CheckCircle, text: "2-Tap Booking", color: "text-blue-400", bg: "bg-blue-400/10" },
                                 { icon: Star, text: "Exclusive Rewards", color: "text-purple-400", bg: "bg-purple-400/10" },
                                 { icon: QrCode, text: "Instant Service", color: "text-green-400", bg: "bg-green-400/10" }
@@ -56,7 +56,7 @@ const AppDownload = () => {
                             <motion.a
                                 whileHover={{ y: -5 }}
                                 href="#"
-                                className="flex items-center gap-4 px-8 py-4 bg-white text-black rounded-2xl transition-all shadow-[0_10px_30px_rgba(255,255,255,0.1)] hover:bg-amber-400"
+                                className="flex items-center gap-4 px-8 py-4 bg-white text-black rounded-2xl transition-all shadow-[0_10px_30px_rgba(255,255,255,0.1)] hover:bg-orange-400"
                             >
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
@@ -94,7 +94,7 @@ const AppDownload = () => {
                         className="flex justify-center relative"
                     >
                         {/* Glow Behind Phone */}
-                        <div className="absolute inset-0 bg-amber-500/10 blur-[100px] rounded-full scale-125 pointer-events-none" />
+                        <div className="absolute inset-0 bg-orange-500/10 blur-[100px] rounded-full scale-125 pointer-events-none" />
 
                         <div className="relative">
                             {/* Premium Phone Frame */}
@@ -135,7 +135,7 @@ const AppDownload = () => {
                             >
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center gap-1">
-                                        {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} className="fill-amber-500 text-amber-500" />)}
+                                        {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} className="fill-orange-500 text-orange-500" />)}
                                     </div>
                                     <p className="text-xs text-white font-bold italic">"Best service experience!"</p>
                                     <p className="text-[10px] text-gray-400 font-medium">- Rahul S.</p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Package, Key, Shield, LogOut, Mail, Lock, CheckCircle, AlertCircle, Calendar, MapPin, Loader, Clock, Camera, Plus, Trash2, Edit2, X, Star, LayoutDashboard, FileText, Download, ChevronRight } from 'lucide-react';
+import { User, Package, Key, Lock, LogOut, Mail, CheckCircle, AlertCircle, Calendar, MapPin, Loader, Clock, Camera, Plus, Trash2, Edit2, X, Star, LayoutDashboard, FileText, Download, ChevronRight } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authService, bookingService, addressService, uploadService, reviewService, BASE_URL } from '../services/api';
@@ -585,7 +585,7 @@ const Profile = () => {
                                                     disabled={loading}
                                                     className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
-                                                    {loading ? <Loader className="animate-spin" /> : <Shield size={22} className="group-hover:rotate-12 transition-transform" />}
+                                                    {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     Update Protocol Data
                                                 </button>
                                             </div>
@@ -822,7 +822,7 @@ const Profile = () => {
                                                     <div>
                                                         <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Re-verify Cipher</label>
                                                         <div className="relative group">
-                                                            <Shield size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                            <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
                                                             <input
                                                                 type="password"
                                                                 value={passwords.confirm}
@@ -842,7 +842,7 @@ const Profile = () => {
                                                     disabled={loading}
                                                     className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
-                                                    {loading ? <Loader className="animate-spin" /> : <Shield size={22} className="group-hover:rotate-12 transition-transform" />}
+                                                    {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     UPDATE AUTHORIZATION
                                                 </button>
                                             </div>

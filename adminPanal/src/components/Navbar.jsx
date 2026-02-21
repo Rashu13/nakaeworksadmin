@@ -53,8 +53,8 @@ const Navbar = () => {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isTransparent
-                    ? 'bg-transparent py-6'
-                    : 'bg-[#0a0f1c]/80 backdrop-blur-xl py-3 border-b border-white/5 shadow-2xl shadow-black/20'
+                ? 'bg-transparent py-6'
+                : 'bg-[#0a0f1c]/80 backdrop-blur-xl py-3 border-b border-white/5 shadow-2xl shadow-black/20'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ const Navbar = () => {
                                     }`}
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full" />
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-400 transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
                     </div>
@@ -92,10 +92,10 @@ const Navbar = () => {
                     <div className="flex items-center gap-6">
                         {/* Location */}
                         <button className={`hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${isTransparent
-                                ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
-                                : 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/10'
+                            ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                            : 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/10'
                             }`}>
-                            <MapPin size={14} className="text-amber-400" />
+                            <MapPin size={14} className="text-orange-400" />
                             <span className="text-xs font-bold tracking-tight uppercase">{userLocation}</span>
                             <ChevronDown size={12} className="text-gray-400" />
                         </button>
@@ -121,7 +121,7 @@ const Navbar = () => {
                                         className="p-2 text-gray-400 hover:text-white transition-colors relative"
                                     >
                                         <ShoppingBag size={20} />
-                                        <span className="absolute top-1 right-1 w-4 h-4 bg-amber-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
+                                        <span className="absolute top-1 right-1 w-4 h-4 bg-orange-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
                                             2
                                         </span>
                                     </button>
@@ -131,7 +131,7 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={() => setShowUserMenu(!showUserMenu)}
-                                            className="relative flex items-center gap-2 p-0.5 rounded-full border-2 border-amber-500/30"
+                                            className="relative flex items-center gap-2 p-0.5 rounded-full border-2 border-orange-500/30"
                                         >
                                             <img
                                                 src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=FFBF00&color=000`}
@@ -168,7 +168,7 @@ const Navbar = () => {
                                                                     }}
                                                                     className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                                                                 >
-                                                                    <item.icon size={16} className="text-amber-400" />
+                                                                    <item.icon size={16} className="text-orange-400" />
                                                                     {item.label}
                                                                 </button>
                                                             )
@@ -198,7 +198,7 @@ const Navbar = () => {
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="px-6 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
+                                        className="px-6 py-2.5 bg-orange-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
                                     >
                                         Join Now
                                     </Link>
@@ -248,7 +248,7 @@ const Navbar = () => {
                                         </Link>
                                         <Link
                                             to="/register"
-                                            className="w-full py-4 text-center text-[#0a0f1c] bg-amber-400 rounded-2xl font-black uppercase"
+                                            className="w-full py-4 text-center text-[#0a0f1c] bg-orange-400 rounded-2xl font-black uppercase"
                                             onClick={() => setIsOpen(false)}
                                         >
                                             Sign Up
