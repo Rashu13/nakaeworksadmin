@@ -1,5 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.origin + '/api');
 export const BASE_URL = API_BASE_URL.replace(/\/api$/, '');
+import { compressImage } from '../utils/compressor';
 
 // Helper function for API calls
 const apiCall = async (endpoint, options = {}) => {
@@ -330,14 +331,39 @@ export const adminService = {
 
 // Upload Service
 export const uploadService = {
-    uploadImage: async (formData) => {
+    uploadImage: async (input) => {
+        let body = input;
+
+        try {
+            // Handle image compression
+            if (input instanceof File) {
+                // If it's a direct File object
+                body = await compressImage(input);
+            } else if (input instanceof FormData) {
+                // If it's a FormData object, we need to iterate and compress image files
+                const newFormData = new FormData();
+                for (const [key, value] of input.entries()) {
+                    if (value instanceof File && value.type.startsWith('image/')) {
+                        const compressedFile = await compressImage(value);
+                        newFormData.append(key, compressedFile);
+                    } else {
+                        newFormData.append(key, value);
+                    }
+                }
+                body = newFormData;
+            }
+        } catch (error) {
+            console.error('Compression failed, uploading original:', error);
+            // Fallback to original input if compression fails
+        }
+
         const token = localStorage.getItem('token');
         const response = await fetch(`${API_BASE_URL}/upload`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
             },
-            body: formData
+            body: body
         });
 
         const data = await response.json();
@@ -345,6 +371,7 @@ export const uploadService = {
         return { data };
     }
 };
+
 
 // Content Services
 export const contentService = {

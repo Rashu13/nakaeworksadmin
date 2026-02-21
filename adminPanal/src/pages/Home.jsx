@@ -27,13 +27,13 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-950 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+        <div className="min-h-screen bg-[#0a0f1c] text-white">
             {/* New Urban Company Style Hero & Categories */}
             <UrbanStyleHero />
 
             {/* Banner Slider */}
             {!loading && homeData.banners.length > 0 && (
-                <div className="max-w-7xl mx-auto px-4 mt-8">
+                <div className="max-w-7xl mx-auto px-4 py-16">
                     <BannerSlider banners={homeData.banners} />
                 </div>
             )}

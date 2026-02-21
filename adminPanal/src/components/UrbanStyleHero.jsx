@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { serviceService, BASE_URL } from '../services/api';
 
 // Icons using Lucide or similar, mapped like in original
-import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Shield } from 'lucide-react';
+import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Shield, Search } from 'lucide-react';
 
 const iconMap = {
     'cleaning': Sparkles,
@@ -37,89 +38,178 @@ export default function UrbanStyleHero() {
         }
         const slug = category.slug?.toLowerCase() || category.name?.toLowerCase() || 'default';
         const IconComponent = iconMap[slug] || iconMap['default'];
-        return <IconComponent size={26} strokeWidth={1.5} className="text-gray-800 dark:text-gray-200 mx-auto" />;
+        return <IconComponent size={26} strokeWidth={1.5} className="group-hover:text-amber-500 transition-colors duration-300" />;
+    };
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: { opacity: 1, scale: 1 }
     };
 
     return (
-        <div className="w-full bg-white dark:bg-[#0a0f1c] transition-colors duration-200 pt-10 pb-16">
-            <div className="max-w-7xl mx-auto px-4 lg:flex lg:items-center lg:gap-12">
+        <div className="relative w-full bg-[#0a0f1c] pt-28 pb-24 overflow-hidden">
+            {/* Abstract Background Decorations */}
+            <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto px-4 lg:flex lg:items-center lg:gap-16 relative z-10">
 
                 {/* Left Side: Title and Categories Box */}
-                <div className="lg:w-[45%] flex flex-col justify-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-[52px] font-black text-black dark:text-white leading-[1.1] tracking-tight mb-10">
-                        Home services at your<br />doorstep
-                    </h1>
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    className="lg:w-[50%] flex flex-col justify-center"
+                >
+                    <motion.h1
+                        variants={itemVariants}
+                        className="text-5xl md:text-6xl lg:text-[72px] font-extrabold text-white leading-[1.05] tracking-tight mb-8"
+                    >
+                        Expert services,<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">
+                            at your doorstep
+                        </span>
+                    </motion.h1>
 
-                    <div className="bg-white dark:bg-[#111827] rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-gray-100 dark:border-gray-800">
-                        <h2 className="text-xl font-bold text-black dark:text-white mb-6">
-                            What are you looking for?
-                        </h2>
+                    <motion.p
+                        variants={itemVariants}
+                        className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed"
+                    >
+                        Quality home maintenance, cleaning, and wellness services delivered by verified professionals in minutes.
+                    </motion.p>
+
+                    <motion.div
+                        variants={itemVariants}
+                        className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                    >
+                        <div className="flex items-center justify-between mb-8">
+                            <h2 className="text-xl font-semibold text-white">
+                                What can we help you with?
+                            </h2>
+                            <div className="flex items-center gap-2 text-amber-400 text-sm font-medium cursor-pointer hover:underline">
+                                <Search size={16} />
+                                <span>Search services</span>
+                            </div>
+                        </div>
 
                         {isLoading ? (
                             <div className="flex justify-center py-10">
-                                <div className="w-8 h-8 border-4 border-gray-200 border-t-black dark:border-gray-700 dark:border-t-white rounded-full animate-spin"></div>
+                                <div className="w-10 h-10 border-4 border-white/5 border-t-amber-400 rounded-full animate-spin"></div>
                             </div>
                         ) : isError ? (
-                            <div className="text-red-500 py-4">Failed to load categories.</div>
+                            <div className="text-red-400 py-4 text-center bg-red-400/10 rounded-lg border border-red-400/20">
+                                Failed to load categories. Please try again.
+                            </div>
                         ) : (
-                            <div className="grid grid-cols-3 gap-y-6 gap-x-4">
-                                {categories?.slice(0, 9).map((category, index) => (
-                                    <div
+                            <div className="grid grid-cols-3 sm:grid-cols-4 gap-y-8 gap-x-4">
+                                {categories?.slice(0, 8).map((category, index) => (
+                                    <motion.div
                                         key={category.id}
+                                        whileHover={{ y: -5 }}
+                                        whileTap={{ scale: 0.95 }}
                                         className="flex flex-col items-center justify-start cursor-pointer group"
                                         onClick={() => navigate(`/services?category=${category.slug || category.name}`)}
                                     >
-                                        <div className="w-16 h-16 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-gray-700 rounded-lg flex items-center justify-center transition-all duration-200 group-hover:shadow-md mb-2 relative">
-                                            {/* 'New' Badge for first item as a visual similar to screenshot */}
+                                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-amber-500/10 group-hover:border-amber-500/30 mb-3 relative overflow-hidden">
+                                            {/* Glow effect on hover */}
+                                            <div className="absolute inset-0 bg-amber-500/0 group-hover:bg-amber-500/5 transition-colors duration-300" />
+
+                                            {/* 'New' Badge */}
                                             {index === 1 && (
-                                                <span className="absolute -top-2.5 right-0 bg-purple-700 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
-                                                    New
+                                                <span className="absolute top-0 right-0 bg-amber-500 text-black text-[9px] font-black px-1.5 py-0.5 rounded-bl-lg shadow-sm">
+                                                    NEW
                                                 </span>
                                             )}
-                                            {getIcon(category)}
+                                            <div className="text-gray-400 transition-transform duration-300 group-hover:scale-110">
+                                                {getIcon(category)}
+                                            </div>
                                         </div>
-                                        <span className="text-[13px] text-center font-medium text-gray-800 dark:text-gray-300 leading-tight max-w-[90%] mx-auto">
+                                        <span className="text-[13px] text-center font-semibold text-gray-300 group-hover:text-white transition-colors duration-200">
                                             {category.name}
                                         </span>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         )}
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
-                {/* Right Side: Image Grid Layout */}
-                <div className="lg:w-[55%] mt-12 lg:mt-0 hidden md:block">
-                    <div className="grid grid-cols-[1.2fr_1fr] gap-3 h-[500px]">
-                        {/* Tall left image */}
-                        <div className="h-full rounded-xl overflow-hidden shadow-sm">
-                            <img
-                                src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                alt="Salon at home"
-                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                            />
-                        </div>
-                        {/* Two stacked right images */}
-                        <div className="flex flex-col gap-3 h-full">
-                            <div className="flex-1 rounded-xl overflow-hidden shadow-sm">
+                {/* Right Side: Enhanced Image Layout */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="lg:w-[50%] mt-16 lg:mt-0 hidden md:block relative"
+                >
+                    {/* Decorative Ring */}
+                    <div className="absolute -inset-4 border border-white/5 rounded-[40px] pointer-events-none" />
+
+                    <div className="grid grid-cols-2 gap-4 h-[600px]">
+                        <div className="space-y-4 pt-12">
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                className="h-[280px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                            >
                                 <img
-                                    src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Massage service"
-                                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Salon at home"
+                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
                                 />
-                            </div>
-                            <div className="flex-1 rounded-xl overflow-hidden shadow-sm bg-gray-100">
+                            </motion.div>
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                className="h-[240px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                            >
                                 <img
                                     src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                                     alt="AC Repair"
-                                    className="w-full h-full object-cover transition-transform duration-700 mx-auto"
-                                    style={{ objectPosition: 'center' }}
+                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
                                 />
-                            </div>
+                            </motion.div>
+                        </div>
+                        <div className="space-y-4">
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                className="h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                            >
+                                <img
+                                    src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    alt="Massage service"
+                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
+                                />
+                            </motion.div>
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                className="h-[200px] rounded-3xl overflow-hidden bg-amber-500/20 flex items-center justify-center border border-white/10 relative group"
+                            >
+                                <img
+                                    src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    alt="Cleaning service"
+                                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                                />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
+                                    <Sparkles className="mb-2 text-amber-400" size={32} />
+                                    <span className="font-bold text-lg">Verified Help</span>
+                                    <span className="text-xs text-white/70">Top rated pros only</span>
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
 }
+

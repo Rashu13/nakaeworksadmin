@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, User, ShoppingBag, Heart, MapPin, ChevronDown, LogOut, Moon, Sun } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -17,14 +18,8 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const offset = window.scrollY;
-            if (offset > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
+            setScrolled(window.scrollY > 20);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -32,21 +27,15 @@ const Navbar = () => {
     useEffect(() => {
         const saved = localStorage.getItem('user_location');
         if (saved) setUserLocation(saved);
-
-        // Listen for custom event from Hero check (optional, but good for immediate update)
         const handleLocationUpdate = () => {
             const newLoc = localStorage.getItem('user_location');
             if (newLoc) setUserLocation(newLoc);
         };
-
-        window.addEventListener('storage', handleLocationUpdate); // Cross-tab
-        // We can also dispatch a custom window event if we want same-tab sync
-
+        window.addEventListener('storage', handleLocationUpdate);
         return () => window.removeEventListener('storage', handleLocationUpdate);
     }, []);
 
     const isHome = location.pathname === '/';
-    // Use transparent navbar only if on home AND not scrolled
     const isTransparent = isHome && !scrolled;
 
     const handleLogout = () => {
@@ -55,212 +44,225 @@ const Navbar = () => {
         setShowUserMenu(false);
     };
 
+    const navLinks = [
+        { name: 'Services', path: '/services' },
+        { name: 'Providers', path: '/providers' },
+        { name: 'About', path: '/about' },
+    ];
+
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isTransparent ? 'bg-transparent' : 'bg-white dark:bg-slate-900 shadow-sm border-b dark:border-slate-800'
-            }`}>
+        <nav
+            className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isTransparent
+                    ? 'bg-transparent py-6'
+                    : 'bg-[#0a0f1c]/80 backdrop-blur-xl py-3 border-b border-white/5 shadow-2xl shadow-black/20'
+                }`}
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2">
-                        <img
-                            src={isTransparent ? "/logo-white-footer.png" : "/logo.png"}
-                            alt="NakaeWorks"
-                            className="h-10 w-auto object-contain"
-                        />
+                    <Link to="/" className="flex items-center gap-2 group relative z-10">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                            <img
+                                src={isTransparent ? "/logo-white-footer.png" : "/logo-white-footer.png"} // Always using white logo for this premium dark theme
+                                alt="NakaeWorks"
+                                className="h-12 w-auto object-contain"
+                            />
+                        </motion.div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-6">
-                        <Link
-                            to="/services"
-                            className={`font-medium transition-colors ${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'}`}
-                        >
-                            Services
-                        </Link>
-                        <Link
-                            to="/providers"
-                            className={`font-medium transition-colors ${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'}`}
-                        >
-                            Providers
-                        </Link>
-                        <Link
-                            to="/about"
-                            className={`font-medium transition-colors ${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'}`}
-                        >
-                            About
-                        </Link>
+                    <div className="hidden md:flex items-center gap-10">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group ${isTransparent ? 'text-white/80 hover:text-white' : 'text-gray-300 hover:text-white'
+                                    }`}
+                            >
+                                {link.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full" />
+                            </Link>
+                        ))}
                     </div>
 
                     {/* Right Side */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6">
                         {/* Location */}
-                        <button className={`hidden md:flex items-center gap-2 px-3 py-2 rounded-lg ${isTransparent ? 'bg-white/10 text-white' : 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-200'
+                        <button className={`hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${isTransparent
+                                ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                                : 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/10'
                             }`}>
-                            <MapPin size={16} />
-                            <span className="text-sm font-medium">{userLocation}</span>
-                            <ChevronDown size={14} />
+                            <MapPin size={14} className="text-amber-400" />
+                            <span className="text-xs font-bold tracking-tight uppercase">{userLocation}</span>
+                            <ChevronDown size={12} className="text-gray-400" />
                         </button>
 
-                        {/* Theme Toggle */}
-                        <button
-                            onClick={toggleTheme}
-                            className={`p-2 rounded-full transition-all ${isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
-                            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                        >
-                            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
+                        <div className="flex items-center gap-3">
+                            {/* Theme Toggle - Potentially hidden in this specific dark-first premium look, but kept for functionality */}
+                            <button
+                                onClick={toggleTheme}
+                                className={`p-2 rounded-full transition-all duration-300 ${isTransparent ? 'text-white/80 hover:bg-white/10' : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                                    }`}
+                            >
+                                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                            </button>
 
-                        {isAuthenticated ? (
-                            <>
-                                {/* Favorites */}
-                                <button className={`p-2 rounded-full ${isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-600 hover:bg-gray-100'}`}>
-                                    <Heart size={20} />
-                                </button>
-
-                                {/* Cart/Bookings */}
-                                <button
-                                    onClick={() => navigate('/profile', { state: { activeTab: 'bookings' } })}
-                                    className={`p-2 rounded-full relative ${isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-600 hover:bg-gray-100'}`}
-                                >
-                                    <ShoppingBag size={20} />
-                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                                        2
-                                    </span>
-                                </button>
-
-                                {/* User Menu */}
-                                <div className="relative">
-                                    <button
-                                        onClick={() => setShowUserMenu(!showUserMenu)}
-                                        className="flex items-center gap-2"
-                                    >
-                                        <img
-                                            src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name || 'User'}`}
-                                            alt="Profile"
-                                            className="w-9 h-9 rounded-full object-cover border-2 border-slate-900"
-                                        />
+                            {isAuthenticated ? (
+                                <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+                                    <button className="p-2 text-gray-400 hover:text-white transition-colors relative">
+                                        <Heart size={20} />
                                     </button>
 
-                                    {showUserMenu && (
-                                        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl py-2 border border-gray-100 dark:border-slate-700">
-                                            <div className="px-4 py-2 border-b border-gray-100 dark:border-slate-700">
-                                                <p className="font-medium text-gray-800 dark:text-white">{user?.name}</p>
-                                                <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email}</p>
-                                            </div>
-                                            {user?.role === 'admin' && (
-                                                <Link
-                                                    to="/admin"
-                                                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 text-slate-800 dark:text-gray-200 font-medium"
-                                                    onClick={() => setShowUserMenu(false)}
+                                    <button
+                                        onClick={() => navigate('/profile', { state: { activeTab: 'bookings' } })}
+                                        className="p-2 text-gray-400 hover:text-white transition-colors relative"
+                                    >
+                                        <ShoppingBag size={20} />
+                                        <span className="absolute top-1 right-1 w-4 h-4 bg-amber-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
+                                            2
+                                        </span>
+                                    </button>
+
+                                    <div className="relative">
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => setShowUserMenu(!showUserMenu)}
+                                            className="relative flex items-center gap-2 p-0.5 rounded-full border-2 border-amber-500/30"
+                                        >
+                                            <img
+                                                src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=FFBF00&color=000`}
+                                                alt="Profile"
+                                                className="w-8 h-8 rounded-full object-cover"
+                                            />
+                                        </motion.button>
+
+                                        <AnimatePresence>
+                                            {showUserMenu && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    className="absolute right-0 mt-4 w-56 bg-[#161b22] border border-white/10 rounded-2xl shadow-2xl py-3 overflow-hidden"
                                                 >
-                                                    <User size={16} />
-                                                    Admin Panel
-                                                </Link>
+                                                    <div className="px-5 py-3 border-b border-white/5 mb-2">
+                                                        <p className="font-bold text-white text-sm">{user?.name}</p>
+                                                        <p className="text-[11px] text-gray-400 font-medium truncate">{user?.email}</p>
+                                                    </div>
+
+                                                    <div className="px-2 space-y-1">
+                                                        {[
+                                                            { label: 'Profile', icon: User, path: '/profile', action: null },
+                                                            { label: 'My Bookings', icon: ShoppingBag, path: '/profile', state: { activeTab: 'bookings' } },
+                                                            { label: 'Admin Panel', icon: Shield, path: '/admin', condition: user?.role === 'admin' }
+                                                        ].map((item, idx) => (
+                                                            (!item.hasOwnProperty('condition') || item.condition) && (
+                                                                <button
+                                                                    key={idx}
+                                                                    onClick={() => {
+                                                                        navigate(item.path, { state: item.state });
+                                                                        setShowUserMenu(false);
+                                                                    }}
+                                                                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                                                                >
+                                                                    <item.icon size={16} className="text-amber-400" />
+                                                                    {item.label}
+                                                                </button>
+                                                            )
+                                                        ))}
+
+                                                        <button
+                                                            onClick={handleLogout}
+                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-400/10 rounded-xl transition-all mt-2 pt-2 border-t border-white/5"
+                                                        >
+                                                            <LogOut size={16} />
+                                                            Logout
+                                                        </button>
+                                                    </div>
+                                                </motion.div>
                                             )}
-                                            <Link
-                                                to="/profile"
-                                                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200"
-                                                onClick={() => setShowUserMenu(false)}
-                                            >
-                                                <User size={16} />
-                                                Profile
-                                            </Link>
-                                            <Link
-                                                to="/profile"
-                                                state={{ activeTab: 'bookings' }}
-                                                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200"
-                                                onClick={() => setShowUserMenu(false)}
-                                            >
-                                                <ShoppingBag size={16} />
-                                                My Bookings
-                                            </Link>
-                                            <button
-                                                onClick={handleLogout}
-                                                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-700 text-red-600 w-full"
-                                            >
-                                                <LogOut size={16} />
-                                                Logout
-                                            </button>
-                                        </div>
-                                    )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
-                            </>
-                        ) : (
-                            <div className="flex items-center gap-3">
-                                <Link
-                                    to="/login"
-                                    className={`font-medium ${isTransparent ? 'text-white' : 'text-gray-700'}`}
-                                >
-                                    Login
-                                </Link>
-                                <Link
-                                    to="/register"
-                                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg transition-all shadow-lg hover:shadow-xl"
-                                >
-                                    Sign Up
-                                </Link>
-                            </div>
-                        )}
-
-                        {/* Mobile Menu Button */}
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className={`md:hidden p-2 ${isTransparent ? 'text-white' : 'text-gray-700'}`}
-                        >
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Menu */}
-                {isOpen && (
-                    <div className="md:hidden bg-white rounded-2xl shadow-xl mt-2 p-4 border border-gray-100">
-                        <div className="flex flex-col gap-2">
-                            <Link
-                                to="/services"
-                                className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Services
-                            </Link>
-                            <Link
-                                to="/providers"
-                                className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Providers
-                            </Link>
-                            <Link
-                                to="/about"
-                                className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                About
-                            </Link>
-                            {!isAuthenticated && (
-                                <div className="flex gap-2 mt-2 pt-2 border-t border-gray-100">
+                            ) : (
+                                <div className="flex items-center gap-4 pl-4 border-l border-white/10">
                                     <Link
                                         to="/login"
-                                        className="flex-1 py-3 text-center text-gray-700 border border-gray-200 rounded-lg"
-                                        onClick={() => setIsOpen(false)}
+                                        className={`text-sm font-bold tracking-tight uppercase transition-colors ${isTransparent ? 'text-white/80 hover:text-white' : 'text-gray-300 hover:text-white'
+                                            }`}
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="flex-1 py-3 text-center text-white bg-indigo-600 rounded-lg"
-                                        onClick={() => setIsOpen(false)}
+                                        className="px-6 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
                                     >
-                                        Sign Up
+                                        Join Now
                                     </Link>
                                 </div>
                             )}
+
+                            {/* Mobile Menu Button */}
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className={`md:hidden p-2 rounded-xl transition-colors ${isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-300 hover:bg-white/5'
+                                    }`}
+                            >
+                                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                            </button>
                         </div>
                     </div>
-                )}
+                </div>
+
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="md:hidden overflow-hidden bg-[#161b22] rounded-3xl mt-4 border border-white/10 shadow-2xl"
+                        >
+                            <div className="flex flex-col p-4 gap-2">
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        to={link.path}
+                                        className="px-6 py-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-2xl transition-all"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                                {!isAuthenticated && (
+                                    <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/5">
+                                        <Link
+                                            to="/login"
+                                            className="w-full py-4 text-center text-white border border-white/10 rounded-2xl font-bold"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Login
+                                        </Link>
+                                        <Link
+                                            to="/register"
+                                            className="w-full py-4 text-center text-[#0a0f1c] bg-amber-400 rounded-2xl font-black uppercase"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Sign Up
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </nav>
     );
 };
 
 export default Navbar;
+
