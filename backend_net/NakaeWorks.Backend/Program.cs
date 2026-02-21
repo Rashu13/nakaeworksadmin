@@ -289,6 +289,7 @@ app.UseHttpsRedirection();
 
 // Serve static files from 'wwwroot/uploads' and map to '/uploads' if needed, 
 // OR just use default UseStaticFiles if we put them in wwwroot/uploads and want to access via host/uploads
+app.UseDefaultFiles(); // Added to serve index.html by default
 app.UseStaticFiles(); 
 
 app.UseCors("AllowClient");
@@ -298,5 +299,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<NakaeWorks.Backend.Hubs.NotificationHub>("/notificationHub");
+
+app.MapFallbackToFile("index.html"); // Added to serve SPA routing
 
 app.Run();

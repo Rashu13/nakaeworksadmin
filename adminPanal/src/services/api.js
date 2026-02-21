@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.origin + '/api');
 
 // Helper function for API calls
 const apiCall = async (endpoint, options = {}) => {
@@ -372,7 +372,7 @@ export default {
     upload: uploadService,
     content: contentService,
     settings: {
-        getAll: () => handleResponse(axios.get(`${BASE_URL}/settings`)),
-        update: (key, data) => handleResponse(axios.put(`${BASE_URL}/settings/${key}`, data))
+        getAll: () => handleResponse(axios.get(`${API_BASE_URL.replace('/api', '')}/settings`)),
+        update: (key, data) => handleResponse(axios.put(`${API_BASE_URL.replace('/api', '')}/settings/${key}`, data))
     }
 };
