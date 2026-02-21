@@ -29,11 +29,10 @@ COPY --from=backend-build /app/publish .
 # Copy frontend build into wwwroot so ASP.NET can serve it
 COPY --from=frontend-build /app/dist ./wwwroot
 
-# Expose ports that Coolify will detect
-EXPOSE 80
+# Expose port that Coolify will detect
 EXPOSE 8080
 
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_HTTP_PORTS=8080
 
 # Environment variables for the backend (Set these in Coolify's Environment Variables tab)
 # ENV ConnectionStrings__DefaultConnection="Your Connection String"

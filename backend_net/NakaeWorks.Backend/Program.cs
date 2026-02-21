@@ -16,7 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 // 2. Authentication (JWT)
-var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key is missing");
+var jwtKey = builder.Configuration["Jwt:Key"];
+if (string.IsNullOrEmpty(jwtKey))
+{
+    Console.WriteLine("WARNING: Jwt:Key is missing from configuration! Using a temporary fallback key. PLEASE SET THIS IN ENVIRONMENT VARIABLES.");
+    jwtKey = "ThisIsADummyFallbackKeyForTestingPurposesOnlyReplaceItInProduction1234567890!";
+}
 var key = Encoding.ASCII.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>
