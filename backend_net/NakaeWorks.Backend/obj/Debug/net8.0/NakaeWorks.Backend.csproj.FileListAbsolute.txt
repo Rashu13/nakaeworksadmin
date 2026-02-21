@@ -118,3 +118,4 @@ D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\bin\Debug\net8.0\N
 D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\bin\Debug\net8.0\services_debug.json
 D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\bin\Debug\net8.0\services_debug_v2.json
+D:\Node Js Projects\nakaeworks\backend_net\NakaeWorks.Backend\obj\Debug\net8.0\NakaeWorks.Backend.sourcelink.json

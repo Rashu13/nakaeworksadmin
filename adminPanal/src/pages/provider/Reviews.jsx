@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Loader, User, Calendar, MessageSquare } from 'lucide-react';
-import { providerService } from '../../services/api';
+import { providerService, BASE_URL } from '../../services/api';
 
 const Reviews = () => {
     const [loading, setLoading] = useState(true);
@@ -122,7 +122,7 @@ const Reviews = () => {
                                     src={review.consumer?.avatar
                                         ? (review.consumer.avatar.startsWith('http')
                                             ? review.consumer.avatar
-                                            : `https://service.pathostar.in${review.consumer.avatar}`)
+                                            : `${BASE_URL}${review.consumer.avatar}`)
                                         : `https://ui-avatars.com/api/?name=${review.consumer?.name}&background=10b981&color=fff`
                                     }
                                     alt={review.consumer?.name}

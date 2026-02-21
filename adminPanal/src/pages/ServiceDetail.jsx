@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { serviceService, reviewService } from '../services/api';
+import { serviceService, reviewService, BASE_URL } from '../services/api';
 import { Star, Shield, Clock, Heart, ChevronRight, ChevronDown, ChevronUp, Minus, Plus, AlertCircle } from 'lucide-react';
 import ConfirmationModal from '../components/ConfirmationModal';
 
@@ -72,6 +72,8 @@ const ServiceDetail = () => {
     const providerAvatar = service.provider?.avatar || service.Provider?.avatar;
     const providerRating = service.provider?.rating || service.Provider?.rating || 4.5;
     const providerServed = service.provider?.served || service.Provider?.served || 0;
+    const fullThumbnail = service.thumbnail ? (service.thumbnail.startsWith('http') ? service.thumbnail : `${BASE_URL}${service.thumbnail}`) : null;
+    const fullProviderAvatar = providerAvatar ? (providerAvatar.startsWith('http') ? providerAvatar : `${BASE_URL}${providerAvatar}`) : `https://ui-avatars.com/api/?name=${providerName}`;
 
     // Calculate Pricing
     const price = Number(service.price) || 0;
@@ -139,16 +141,16 @@ const ServiceDetail = () => {
                                 {/* Image / Thumbnail */}
                                 <div className="w-full md:w-1/3 flex-shrink-0">
                                     <div className="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
-                                        {service.thumbnail ? (
+                                        {fullThumbnail ? (
                                             <img
-                                                src={service.thumbnail}
+                                                src={fullThumbnail}
                                                 alt={service.name}
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : null}
 
                                         <div
-                                            className={`absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800 ${service.thumbnail ? 'hidden' : 'flex'}`}
+                                            className={`absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800 ${fullThumbnail ? 'hidden' : 'flex'}`}
                                         >
                                             <Shield size={24} className="text-gray-300 dark:text-gray-600" />
                                         </div>
@@ -255,7 +257,7 @@ const ServiceDetail = () => {
                                             <div className="flex justify-between items-start mb-4">
                                                 <div className="flex items-center gap-3">
                                                     <img
-                                                        src={review.consumer?.avatar || `https://ui-avatars.com/api/?name=${review.consumer?.name}`}
+                                                        src={review.consumer?.avatar ? (review.consumer.avatar.startsWith('http') ? review.consumer.avatar : `${BASE_URL}${review.consumer.avatar}`) : `https://ui-avatars.com/api/?name=${review.consumer?.name}`}
                                                         alt={review.consumer?.name}
                                                         className="w-10 h-10 rounded-full object-cover"
                                                     />
@@ -286,7 +288,7 @@ const ServiceDetail = () => {
                         <div className="flex items-center justify-between py-4 border-t border-gray-200 dark:border-gray-800">
                             <div className="flex items-center gap-4">
                                 <img
-                                    src={providerAvatar || `https://ui-avatars.com/api/?name=${providerName}`}
+                                    src={fullProviderAvatar}
                                     alt={providerName}
                                     className="w-12 h-12 rounded-full object-cover border border-gray-100 dark:border-gray-700"
                                 />

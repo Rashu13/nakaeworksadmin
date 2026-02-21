@@ -3,7 +3,7 @@ import {
     Calendar, Clock, MapPin, Phone, User, CheckCircle, XCircle,
     Play, Loader, ChevronDown, Search, Filter, AlertTriangle
 } from 'lucide-react';
-import { providerService } from '../../services/api';
+import { providerService, BASE_URL } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 const statusTabs = [
@@ -256,7 +256,7 @@ const Bookings = () => {
                                             src={booking.consumer?.avatar
                                                 ? (booking.consumer.avatar.startsWith('http')
                                                     ? booking.consumer.avatar
-                                                    : `https://service.pathostar.in${booking.consumer.avatar}`)
+                                                    : `${BASE_URL}${booking.consumer.avatar}`)
                                                 : `https://ui-avatars.com/api/?name=${booking.consumer?.name}&background=10b981&color=fff`
                                             }
                                             alt={booking.consumer?.name}

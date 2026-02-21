@@ -3,7 +3,7 @@ import {
     Plus, Edit2, Trash2, Loader, Search, X, Image as ImageIcon,
     Clock, IndianRupee, Tag
 } from 'lucide-react';
-import { providerService, categoryService } from '../../services/api';
+import { providerService, categoryService, BASE_URL } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 const Services = () => {
@@ -192,7 +192,7 @@ const Services = () => {
                                     src={service.thumbnail
                                         ? (service.thumbnail.startsWith('http')
                                             ? service.thumbnail
-                                            : `https://service.pathostar.in${service.thumbnail}`)
+                                            : `${BASE_URL}${service.thumbnail}`)
                                         : 'https://via.placeholder.com/300x200?text=No+Image'
                                     }
                                     alt={service.name}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, Camera, Lock, Loader, CheckCircle, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { authService, uploadService } from '../../services/api';
+import { authService, uploadService, BASE_URL } from '../../services/api';
 
 const Profile = () => {
     const { user, setUser } = useAuth();
@@ -130,7 +130,7 @@ const Profile = () => {
                                 src={user?.avatar
                                     ? (user.avatar.startsWith('http')
                                         ? user.avatar
-                                        : `https://service.pathostar.in${user.avatar}`)
+                                        : `${BASE_URL}${user.avatar}`)
                                     : `https://ui-avatars.com/api/?name=${user?.name || 'Provider'}&background=10b981&color=fff&size=200`
                                 }
                                 alt={user?.name}

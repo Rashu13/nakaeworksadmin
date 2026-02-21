@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../services/api';
 
 const BannerSlider = ({ banners }) => {
     const [current, setCurrent] = useState(0);
@@ -29,7 +30,7 @@ const BannerSlider = ({ banners }) => {
                 {banners.map((banner, index) => (
                     <div key={banner.id} className="min-w-full h-full relative">
                         <img
-                            src={banner.imageUrl}
+                            src={banner.imageUrl ? (banner.imageUrl.startsWith('http') ? banner.imageUrl : `${BASE_URL}${banner.imageUrl}`) : ''}
                             alt={banner.title}
                             className="w-full h-full object-cover"
                         />

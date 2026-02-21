@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2, X, Search, Check, AlertCircle, Upload } from 'lucide-react';
-import { adminService } from '../../services/api';
+import { adminService, uploadService } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 const Categories = () => {
@@ -312,30 +312,14 @@ const Categories = () => {
 
                                                 try {
                                                     setUploading(true);
-                                                    // Direct fetch call to upload endpoint
-                                                    const response = await fetch('https://service.pathostar.in/api/upload', {
-                                                        method: 'POST',
-                                                        body: uploadData
-                                                    });
-
-                                                    const data = await response.json();
-
-                                                    if (response.ok) {
-                                                        setFormData(prev => ({ ...prev, icon: data.imageUrl }));
-                                                    } else {
-                                                        setAlertConfig({
-                                                            isOpen: true,
-                                                            title: 'Upload Failed',
-                                                            message: data.message || 'Unknown error',
-                                                            type: 'danger'
-                                                        });
-                                                    }
+                                                    const { data } = await uploadService.uploadImage(uploadData);
+                                                    setFormData(prev => ({ ...prev, icon: data.imageUrl }));
                                                 } catch (err) {
                                                     console.error(err);
                                                     setAlertConfig({
                                                         isOpen: true,
                                                         title: 'Error',
-                                                        message: 'Error uploading image',
+                                                        message: err.message || 'Error uploading image',
                                                         type: 'danger'
                                                     });
                                                 } finally {

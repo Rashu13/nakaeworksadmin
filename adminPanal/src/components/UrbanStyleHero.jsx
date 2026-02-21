@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { serviceService } from '../services/api';
+import { serviceService, BASE_URL } from '../services/api';
 
 // Icons using Lucide or similar, mapped like in original
 import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Shield } from 'lucide-react';
@@ -32,7 +32,8 @@ export default function UrbanStyleHero() {
 
     const getIcon = (category) => {
         if (category.icon && (category.icon.startsWith('http') || category.icon.startsWith('/'))) {
-            return <img src={category.icon} alt={category.name} className="w-8 h-8 object-contain mx-auto" />;
+            const iconUrl = category.icon.startsWith('http') ? category.icon : `${BASE_URL}${category.icon}`;
+            return <img src={iconUrl} alt={category.name} className="w-8 h-8 object-contain mx-auto" />;
         }
         const slug = category.slug?.toLowerCase() || category.name?.toLowerCase() || 'default';
         const IconComponent = iconMap[slug] || iconMap['default'];

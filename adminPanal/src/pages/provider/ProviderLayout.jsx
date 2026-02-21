@@ -5,6 +5,7 @@ import {
     Settings, LogOut, Menu, X, ChevronDown, Bell, User, Star, Home
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { BASE_URL } from '../../services/api';
 
 const menuItems = [
     { name: 'Dashboard', path: '/provider', icon: LayoutDashboard },
@@ -114,7 +115,7 @@ const ProviderLayout = () => {
                             >
                                 {user?.avatar ? (
                                     <img
-                                        src={user.avatar.startsWith('http') ? user.avatar : `https://service.pathostar.in${user.avatar}`}
+                                        src={user.avatar.startsWith('http') ? user.avatar : `${BASE_URL}${user.avatar}`}
                                         alt={user?.name}
                                         className="w-8 h-8 rounded-full object-cover border-2 border-emerald-500"
                                     />

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-import { providerService } from '../services/api';
+import { providerService, BASE_URL } from '../services/api';
 
 const ProviderCard = ({ provider }) => {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ const ProviderCard = ({ provider }) => {
             <div className="flex items-start gap-4 mb-4">
                 <div className="relative">
                     <img
-                        src={provider.avatar || `https://ui-avatars.com/api/?name=${provider.name}`}
+                        src={provider.avatar ? (provider.avatar.startsWith('http') ? provider.avatar : `${BASE_URL}${provider.avatar}`) : `https://ui-avatars.com/api/?name=${provider.name}`}
                         alt={provider.name}
                         className="w-16 h-16 rounded-xl object-cover ring-2 ring-gray-50 dark:ring-slate-800"
                     />

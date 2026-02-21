@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.origin + '/api');
+export const BASE_URL = API_BASE_URL.replace(/\/api$/, '');
 
 // Helper function for API calls
 const apiCall = async (endpoint, options = {}) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Star, Clock, MapPin, User, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../services/api';
 
 const ServiceCard = ({ service, viewMode }) => {
     const navigate = useNavigate();
@@ -25,6 +26,8 @@ const ServiceCard = ({ service, viewMode }) => {
     const category = _category || Category;
 
     const discountedPrice = discount ? price - (price * discount / 100) : price;
+    const fullThumbnail = thumbnail ? (thumbnail.startsWith('http') ? thumbnail : `${BASE_URL}${thumbnail}`) : `https://images.unsplash.com/photo-1581578731117-104f8a746950?w=400`;
+    const fullAvatar = provider?.avatar ? (provider.avatar.startsWith('http') ? provider.avatar : `${BASE_URL}${provider.avatar}`) : `https://ui-avatars.com/api/?name=${provider?.name || 'User'}`;
 
     // LIST VIEW
     if (viewMode === 'list') {
@@ -33,7 +36,7 @@ const ServiceCard = ({ service, viewMode }) => {
                 {/* Image Container */}
                 <div className="relative w-full sm:w-72 h-48 sm:h-full flex-shrink-0 p-3">
                     <img
-                        src={thumbnail || `https://images.unsplash.com/photo-1581578731117-104f8a746950?w=400`}
+                        src={fullThumbnail}
                         alt={name}
                         className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
                     />
@@ -99,7 +102,7 @@ const ServiceCard = ({ service, viewMode }) => {
                         {provider ? (
                             <div className="flex items-center gap-2.5">
                                 <img
-                                    src={provider.avatar || `https://ui-avatars.com/api/?name=${provider.name}`}
+                                    src={fullAvatar}
                                     alt={provider.name}
                                     className="w-8 h-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-800 shadow-sm"
                                 />
@@ -135,7 +138,7 @@ const ServiceCard = ({ service, viewMode }) => {
             {/* Image Container */}
             <div className="relative aspect-[4/3] overflow-hidden p-3">
                 <img
-                    src={thumbnail || `https://images.unsplash.com/photo-1581578731117-104f8a746950?w=400`}
+                    src={fullThumbnail}
                     alt={name}
                     className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
                 />
@@ -213,7 +216,7 @@ const ServiceCard = ({ service, viewMode }) => {
                     {provider ? (
                         <div className="flex items-center gap-2">
                             <img
-                                src={provider.avatar || `https://ui-avatars.com/api/?name=${provider.name}`}
+                                src={fullAvatar}
                                 alt={provider.name}
                                 className="w-8 h-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-800 shadow-sm"
                             />
