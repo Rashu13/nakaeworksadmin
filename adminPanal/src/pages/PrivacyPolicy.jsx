@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Lock, Eye, FileText, Mail } from 'lucide-react';
+import { Lock, Eye, FileText, Mail } from 'lucide-react';
 
 const PrivacyPolicy = () => {
     return (
@@ -77,7 +77,7 @@ const PrivacyPolicy = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                                    <Shield size={24} />
+                                    <Lock size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">3. Disclosure of Your Information</h2>
                             </div>

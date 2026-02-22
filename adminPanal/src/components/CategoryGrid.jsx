@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Shield, ChevronRight } from 'lucide-react';
+import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Lock, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { serviceService } from '../services/api';
 
@@ -11,7 +11,7 @@ const iconMap = {
     'painting': Paintbrush,
     'salon': Scissors,
     'automotive': Car,
-    'security': Shield,
+    'security': Lock,
     'default': User
 };
 

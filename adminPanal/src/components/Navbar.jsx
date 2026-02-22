@@ -157,7 +157,7 @@ const Navbar = () => {
                                                         {[
                                                             { label: 'Profile', icon: User, path: '/profile', action: null },
                                                             { label: 'My Bookings', icon: ShoppingBag, path: '/profile', state: { activeTab: 'bookings' } },
-                                                            { label: 'Admin Panel', icon: Shield, path: '/admin', condition: user?.role === 'admin' }
+                                                            { label: 'Admin Panel', icon: Lock, path: '/admin', condition: user?.role === 'admin' }
                                                         ].map((item, idx) => (
                                                             (!item.hasOwnProperty('condition') || item.condition) && (
                                                                 <button

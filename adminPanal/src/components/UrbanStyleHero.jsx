@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { serviceService, BASE_URL } from '../services/api';
 
 // Icons using Lucide or similar, mapped like in original
-import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Shield, Search } from 'lucide-react';
+import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Lock, Search } from 'lucide-react';
 
 const iconMap = {
     'cleaning': Sparkles,
@@ -15,7 +15,7 @@ const iconMap = {
     'painting': Paintbrush,
     'salon': Scissors,
     'automotive': Car,
-    'security': Shield,
+    'security': Lock,
     'default': User
 };
 
@@ -85,10 +85,31 @@ export default function UrbanStyleHero() {
 
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed"
+                        className="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed"
                     >
                         Quality home maintenance, cleaning, and wellness services delivered by verified professionals in minutes.
                     </motion.p>
+
+                    {/* Prominent Search Bar */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="relative max-w-xl mb-12 group"
+                    >
+                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                        <div className="relative flex items-center bg-[#161b22] border border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl">
+                            <div className="pl-6 text-gray-500">
+                                <Search size={22} className="group-focus-within:text-orange-500 transition-colors" />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search for 'AC Repair', 'Cleaning'..."
+                                className="w-full bg-transparent border-none focus:ring-0 text-white py-4 px-4 font-medium placeholder:text-gray-600"
+                            />
+                            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-orange-500/20 active:scale-95">
+                                Search
+                            </button>
+                        </div>
+                    </motion.div>
 
                     <motion.div
                         variants={itemVariants}
@@ -96,12 +117,8 @@ export default function UrbanStyleHero() {
                     >
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-xl font-semibold text-white">
-                                What can we help you with?
+                                Popular Categories
                             </h2>
-                            <div className="flex items-center gap-2 text-orange-400 text-sm font-medium cursor-pointer hover:underline">
-                                <Search size={16} />
-                                <span>Search services</span>
-                            </div>
                         </div>
 
                         {isLoading ? (

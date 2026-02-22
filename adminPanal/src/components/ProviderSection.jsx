@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MapPin, CheckCircle, ChevronRight, Award, ShieldCheck } from 'lucide-react';
+import { Star, MapPin, CheckCircle, ChevronRight, Award, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { providerService, BASE_URL } from '../services/api';
@@ -31,7 +31,7 @@ const ProviderCard = ({ provider, index }) => {
                         />
                         {provider.isVerified && (
                             <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center border-4 border-[#0a0f1c] z-20">
-                                <ShieldCheck size={16} className="text-black" />
+                                <Lock size={16} className="text-black" />
                             </div>
                         )}
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Pencil, Trash2, X, Search, Check, AlertCircle, Eye, Shield, Upload, Camera } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Search, Check, AlertCircle, Eye, Lock, Upload, Camera } from 'lucide-react';
 import { adminService, uploadService } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
@@ -227,7 +227,7 @@ const UsersAdmin = () => {
                                                     <div className="flex items-center gap-1">
                                                         <p className="font-medium text-gray-900 dark:text-white">{user.name}</p>
                                                         {user.isVerified && (
-                                                            <Shield size={14} className="text-green-500" />
+                                                            <Lock size={14} className="text-green-500" />
                                                         )}
                                                     </div>
                                                     <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>

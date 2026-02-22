@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, CheckCircle, Star, Shield, Smartphone, QrCode } from 'lucide-react';
+import { Download, CheckCircle, Star, Lock, Smartphone, QrCode } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AppDownload = () => {
@@ -37,7 +37,7 @@ const AppDownload = () => {
                         {/* Features */}
                         <div className="grid sm:grid-cols-2 gap-6 mb-12">
                             {[
-                                { icon: Shield, text: "Verified Protection", color: "text-orange-400", bg: "bg-orange-400/10" },
+                                { icon: Lock, text: "Verified Protection", color: "text-orange-400", bg: "bg-orange-400/10" },
                                 { icon: CheckCircle, text: "2-Tap Booking", color: "text-blue-400", bg: "bg-blue-400/10" },
                                 { icon: Star, text: "Exclusive Rewards", color: "text-purple-400", bg: "bg-purple-400/10" },
                                 { icon: QrCode, text: "Instant Service", color: "text-green-400", bg: "bg-green-400/10" }

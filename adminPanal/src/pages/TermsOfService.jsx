@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, AlertTriangle, Scale, ShieldCheck, Mail } from 'lucide-react';
+import { FileText, AlertTriangle, Scale, Lock, Mail } from 'lucide-react';
 
 const TermsOfService = () => {
     return (
@@ -44,7 +44,7 @@ const TermsOfService = () => {
                         <section>
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                                    <ShieldCheck size={24} />
+                                    <Lock size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">2. User Accounts</h2>
                             </div>

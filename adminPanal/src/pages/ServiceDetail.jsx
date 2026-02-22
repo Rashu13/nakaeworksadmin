@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { serviceService, reviewService, BASE_URL } from '../services/api';
-import { Star, Shield, Clock, Heart, ChevronRight, ChevronDown, ChevronUp, Minus, Plus, AlertCircle } from 'lucide-react';
+import { Star, Lock, Clock, Heart, ChevronRight, ChevronDown, ChevronUp, Minus, Plus, AlertCircle } from 'lucide-react';
 import ConfirmationModal from '../components/ConfirmationModal';
 
 const ServiceDetail = () => {
@@ -152,7 +152,7 @@ const ServiceDetail = () => {
                                         <div
                                             className={`absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800 ${fullThumbnail ? 'hidden' : 'flex'}`}
                                         >
-                                            <Shield size={24} className="text-gray-300 dark:text-gray-600" />
+                                            <Lock size={24} className="text-gray-300 dark:text-gray-600" />
                                         </div>
 
                                         {discount > 0 && (
@@ -295,7 +295,7 @@ const ServiceDetail = () => {
                                 <div>
                                     <div className="flex items-center gap-2">
                                         <h3 className="font-bold text-gray-900 dark:text-white">{providerName}</h3>
-                                        <Shield size={14} className="text-blue-600 fill-blue-50 dark:fill-blue-900/30" />
+                                        <Lock size={14} className="text-blue-600 fill-blue-50 dark:fill-blue-900/30" />
                                     </div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{providerServed}+ jobs completed</p>
                                 </div>
@@ -388,7 +388,7 @@ const ServiceDetail = () => {
                             {/* Trust Markers */}
                             <div className="bg-gray-50 dark:bg-gray-700/30 rounded p-4 mb-6">
                                 <div className="flex items-start gap-3">
-                                    <Shield size={18} className="text-gray-900 dark:text-white mt-0.5 flex-shrink-0" />
+                                    <Lock size={18} className="text-gray-900 dark:text-white mt-0.5 flex-shrink-0" />
                                     <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                                         <span className="font-bold text-gray-900 dark:text-white block mb-0.5">Our Promise</span>
                                         Verified professionals, secure payment & insurance.

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MapPin, Clock, Calendar, CreditCard, Wallet, CheckCircle, Plus, ChevronRight, Shield, ArrowLeft, AlertCircle } from 'lucide-react';
+import { MapPin, Clock, Calendar, CreditCard, Wallet, CheckCircle, Plus, ChevronRight, Lock, ArrowLeft, AlertCircle } from 'lucide-react';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { useAuth } from '../context/AuthContext';
 import { bookingService, addressService, couponService } from '../services/api';
@@ -339,7 +339,7 @@ const BookingConfirm = () => {
 
                             {/* Trust */}
                             <div className="flex items-center gap-2 mt-4 text-xs text-gray-500 dark:text-gray-400 justify-center">
-                                <Shield size={14} className="text-green-500" />
+                                <Lock size={14} className="text-green-500" />
                                 <span>100% Secure & Safe Payments</span>
                             </div>
                         </div>
