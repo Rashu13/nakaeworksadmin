@@ -177,34 +177,34 @@ export default function UrbanStyleHero() {
                         <div className="space-y-4 pt-12">
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[280px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                                className="h-[280px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                                    alt="Salon at home"
-                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
+                                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+                                    alt="AC Gas Refill & Service"
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                 />
                             </motion.div>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[240px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                                className="h-[240px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="AC Repair"
-                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
+                                    src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80"
+                                    alt="Ceiling Fan Repair"
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                 />
                             </motion.div>
                         </div>
                         <div className="space-y-4">
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                                className="h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Massage service"
-                                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
+                                    src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=600&q=80"
+                                    alt="Tubelight & Electrical Installation"
+                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                 />
                             </motion.div>
                             <motion.div
@@ -212,12 +212,12 @@ export default function UrbanStyleHero() {
                                 className="h-[200px] rounded-3xl overflow-hidden bg-orange-500/20 flex items-center justify-center border border-white/10 relative group"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Cleaning service"
+                                    src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&w=600&q=80"
+                                    alt="Home Cleaning"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                                 />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
-                                    <Sparkles className="mb-2 text-orange-400" size={32} />
+                                    <Sparkles className="mb-2 text-orange-400 group-hover:rotate-12 transition-transform duration-300" size={32} />
                                     <span className="font-bold text-lg">Verified Help</span>
                                     <span className="text-xs text-white/70">Top rated pros only</span>
                                 </div>
