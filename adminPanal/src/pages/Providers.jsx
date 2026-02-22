@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, MapPin, Lock, CheckCircle, ChevronRight, Award, Lock } from 'lucide-react';
+import { Search, Star, MapPin, Lock, CheckCircle, ChevronRight, Award } from 'lucide-react';
 import { providerService, BASE_URL } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 
