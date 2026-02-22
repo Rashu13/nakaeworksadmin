@@ -137,6 +137,7 @@ function AppRoutes() {
         <Route path="content" element={<AdminContent />} />
         <Route path="settings" element={<SystemSettings />} />
         <Route path="reviews" element={<AdminReviews />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
 
       {/* Provider Routes */}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, User, ShoppingBag, Heart, MapPin, ChevronDown, LogOut, Moon, Sun } from 'lucide-react';
+import { Menu, X, User, ShoppingBag, Heart, MapPin, ChevronDown, LogOut, Moon, Sun, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';

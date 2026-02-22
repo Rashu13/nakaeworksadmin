@@ -111,7 +111,7 @@ const Categories = () => {
 
     const iconOptions = [
         'sparkles', 'zap', 'droplet', 'hammer', 'paintbrush', 'scissors',
-        'car', 'shield', 'home', 'wrench', 'thermometer', 'wind'
+        'car', 'Lock', 'home', 'wrench', 'thermometer', 'wind'
     ];
 
     return (
