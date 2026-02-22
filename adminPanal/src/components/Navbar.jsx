@@ -15,6 +15,7 @@ const Navbar = () => {
     const location = useLocation();
 
     const [scrolled, setScrolled] = useState(false);
+    const [searchNavbar, setSearchNavbar] = useState('');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -47,7 +48,6 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Services', path: '/services' },
         { name: 'Providers', path: '/providers' },
-        { name: 'About', path: '/about' },
     ];
 
     return (
@@ -86,6 +86,28 @@ const Navbar = () => {
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-400 transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
+
+                        {/* Search Bar */}
+                        <div className="relative group ml-2">
+                            <div className="absolute inset-0 bg-orange-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className={`relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-white/5 border-white/10 w-48' : 'bg-gray-800/20 border-white/5 w-60'
+                                } group-focus-within:w-72 group-focus-within:border-orange-500/50 group-focus-within:bg-white/10 backdrop-blur-md`}>
+                                <Search size={14} className="text-orange-400 shrink-0" />
+                                <input
+                                    type="text"
+                                    placeholder="Search services..."
+                                    value={searchNavbar}
+                                    onChange={(e) => setSearchNavbar(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            navigate(`/services?q=${searchNavbar}`);
+                                            setSearchNavbar('');
+                                        }
+                                    }}
+                                    className="bg-transparent border-none focus:ring-0 text-[11px] font-bold text-white placeholder:text-gray-500 w-full tracking-wider uppercase"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right Side */}
