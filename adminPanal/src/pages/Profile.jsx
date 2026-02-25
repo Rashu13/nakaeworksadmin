@@ -280,9 +280,9 @@ const Profile = () => {
 
     const stats = {
         total: bookings.length,
-        pending: bookings.filter(b => b.status?.slug === 'pending').length,
-        completed: bookings.filter(b => b.status?.slug === 'completed').length,
-        active: bookings.filter(b => ['confirmed', 'in_progress', 'assigned'].includes(b.status?.slug)).length
+        pending: bookings.filter(b => b.bookingStatus?.slug === 'pending').length,
+        completed: bookings.filter(b => b.bookingStatus?.slug === 'completed').length,
+        active: bookings.filter(b => ['confirmed', 'in_progress', 'assigned'].includes(b.bookingStatus?.slug)).length
     };
 
     return (
