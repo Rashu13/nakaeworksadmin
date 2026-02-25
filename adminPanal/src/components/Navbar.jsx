@@ -224,7 +224,7 @@ const Navbar = () => {
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="px-6 py-2.5 bg-primary-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
+                                        className="px-6 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
                                     >
                                         Join Now
                                     </Link>
@@ -274,7 +274,7 @@ const Navbar = () => {
                                         </Link>
                                         <Link
                                             to="/register"
-                                            className="w-full py-4 text-center text-[#0a0f1c] bg-primary-400 rounded-2xl font-black uppercase"
+                                            className="w-full py-4 text-center text-[#0a0f1c] bg-amber-400 hover:bg-amber-300 rounded-2xl font-black uppercase transition-colors"
                                             onClick={() => setIsOpen(false)}
                                         >
                                             Sign Up
