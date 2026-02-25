@@ -270,6 +270,19 @@ const Bookings = () => {
                                                 </span>
                                             </div>
                                             <p className="text-emerald-600 font-medium">{booking.service?.name}</p>
+                                            {/* Show all items if multi-item booking */}
+                                            {booking.items && booking.items.length > 1 && (
+                                                <div className="mt-2 space-y-1">
+                                                    {booking.items.map((item, idx) => (
+                                                        <div key={item.id || idx} className="flex items-center justify-between text-sm bg-gray-50 px-3 py-1.5 rounded-lg">
+                                                            <span className="text-gray-700">{item.serviceName}</span>
+                                                            <span className="text-gray-500">
+                                                                {item.quantity > 1 && `x${item.quantity} · `}₹{parseFloat(item.total || item.price).toLocaleString()}
+                                                            </span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                             <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
                                                 <span className="flex items-center gap-1">
                                                     <Phone className="w-4 h-4" />

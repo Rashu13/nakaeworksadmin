@@ -1,10 +1,24 @@
-import React from 'react';
-import { Star, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, ChevronRight, ShoppingCart, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 
 const CollectionSection = ({ title, services }) => {
+    const { addToCart } = useCart();
+    const [addedIds, setAddedIds] = useState([]);
+
     if (!services || services.length === 0) return null;
+
+    const handleAddToCart = (e, service) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addToCart(service);
+        setAddedIds(prev => [...prev, service.id]);
+        setTimeout(() => {
+            setAddedIds(prev => prev.filter(id => id !== service.id));
+        }, 1500);
+    };
 
     return (
         <section className="py-20 bg-[#0a0f1c] overflow-hidden transition-colors duration-300">
@@ -73,13 +87,26 @@ const CollectionSection = ({ title, services }) => {
                                                 <span className="text-xs text-white/30 line-through">₹{service.price}</span>
                                             )}
                                         </div>
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            className="px-6 py-2.5 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-amber-400 transition-colors shadow-lg"
-                                        >
-                                            Book Now
-                                        </motion.button>
+                                        <div className="flex items-center gap-2">
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                onClick={(e) => handleAddToCart(e, service)}
+                                                className={`p-2.5 rounded-full border transition-all duration-300 shadow-lg ${addedIds.includes(service.id)
+                                                        ? 'bg-emerald-500 border-emerald-400 text-white'
+                                                        : 'bg-white/10 border-white/20 text-white hover:bg-amber-500/20 hover:border-amber-500/40'
+                                                    }`}
+                                            >
+                                                {addedIds.includes(service.id) ? <Check size={16} /> : <ShoppingCart size={16} />}
+                                            </motion.button>
+                                            <motion.button
+                                                whileHover={{ scale: 1.05 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="px-6 py-2.5 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-amber-400 transition-colors shadow-lg"
+                                            >
+                                                Book Now
+                                            </motion.button>
+                                        </div>
                                     </div>
                                 </div>
                             </Link>

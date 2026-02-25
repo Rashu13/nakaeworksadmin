@@ -30,3 +30,25 @@ public class RegisterDto
     // Optional role for registration, default to consumer if not provided
     public string Role { get; set; } = "consumer";
 }
+
+public class SendOtpDto
+{
+    [Required]
+    [Phone]
+    public string Phone { get; set; } = string.Empty;
+}
+
+public class VerifyOtpDto
+{
+    [Required]
+    [Phone]
+    public string Phone { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(6, MinimumLength = 6)]
+    public string Otp { get; set; } = string.Empty;
+
+    // Optional: for new user registration via OTP
+    public string? Name { get; set; }
+}
+

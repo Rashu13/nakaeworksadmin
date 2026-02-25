@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { authService, uploadService, BASE_URL } from '../../services/api';
 
 const Profile = () => {
-    const { user, setUser } = useAuth();
+    const { user, updateUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
     const [activeTab, setActiveTab] = useState('profile');
@@ -41,12 +41,11 @@ const Profile = () => {
 
         try {
             const response = await authService.updateProfile(profileData);
-            if (response.data) {
-                setUser({ ...user, ...response.data });
-                setMessage({ type: 'success', text: 'Profile updated successfully!' });
-            }
+            const updatedData = response.data || response;
+            updateUser({ ...user, ...updatedData, ...profileData });
+            setMessage({ type: 'success', text: 'Profile updated successfully!' });
         } catch (error) {
-            setMessage({ type: 'error', text: error.response?.data?.message || 'Failed to update profile' });
+            setMessage({ type: 'error', text: error.message || 'Failed to update profile' });
         } finally {
             setLoading(false);
         }
@@ -94,7 +93,7 @@ const Profile = () => {
 
             if (response.imageUrl) {
                 await authService.updateProfile({ avatar: response.imageUrl });
-                setUser({ ...user, avatar: response.imageUrl });
+                updateUser({ ...user, avatar: response.imageUrl });
                 setMessage({ type: 'success', text: 'Profile picture updated!' });
             }
         } catch (error) {

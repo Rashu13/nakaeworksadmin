@@ -56,6 +56,8 @@ builder.Services.AddSignalR();
 // Register application services
 builder.Services.AddScoped<NakaeWorks.Backend.Services.BookingService>();
 builder.Services.AddScoped<NakaeWorks.Backend.Services.ProviderService>();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<NakaeWorks.Backend.Services.SmsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

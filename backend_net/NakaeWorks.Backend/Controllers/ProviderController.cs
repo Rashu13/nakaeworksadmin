@@ -154,6 +154,7 @@ public class ProviderController : ControllerBase
             .Include(b => b.Service)
             .Include(b => b.BookingStatus)
             .Include(b => b.Address)
+            .Include(b => b.Items).ThenInclude(i => i.Service)
             .AsQueryable();
 
         // Filter by status if provided
@@ -185,6 +186,15 @@ public class ProviderController : ControllerBase
                 Service = new { b.Service!.Id, b.Service.Name, b.Service.Thumbnail, b.Service.Duration },
                 Status = new { b.BookingStatus!.Id, b.BookingStatus.Name, b.BookingStatus.Slug },
                 Address = new { b.Address!.Id, AddressLine1 = b.Address.AddressLine, address = b.Address.AddressLine, b.Address.City, b.Address.State, b.Address.Pincode, b.Address.Country },
+                Items = b.Items.Select(i => new
+                {
+                    i.Id,
+                    i.ServiceId,
+                    ServiceName = i.Service != null ? i.Service.Name : "Service",
+                    i.Quantity,
+                    i.Price,
+                    i.Total
+                }).ToList(),
                 b.DateTime,
                 b.TotalAmount,
                 b.PaymentMethod,

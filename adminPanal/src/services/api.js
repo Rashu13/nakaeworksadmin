@@ -48,6 +48,17 @@ const apiCall = async (endpoint, options = {}) => {
     }
 
     if (!response.ok) {
+        // Auto-logout on 401 (unauthorized / token expired)
+        if (response.status === 401 && !endpoint.includes('/auth/login') && !endpoint.includes('/auth/verify-otp')) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            localStorage.removeItem('tokenExpiry');
+            // Redirect to login if not already there
+            if (window.location.pathname !== '/login') {
+                window.location.href = '/login';
+            }
+        }
         throw new Error(data.message || data.error || 'Something went wrong');
     }
 
@@ -85,8 +96,18 @@ export const authService = {
     }),
 
     logout: () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            // Fire and forget backend logout
+            fetch(`${API_BASE_URL}/auth/logout`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+            }).catch(() => { });
+        }
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
+        localStorage.removeItem('tokenExpiry');
     },
 
     getCurrentUser: () => {
@@ -95,6 +116,20 @@ export const authService = {
     },
 
     isAuthenticated: () => !!localStorage.getItem('token'),
+
+    sendOtp: (phone) => apiCall('/auth/send-otp', {
+        method: 'POST',
+        body: JSON.stringify({ phone }),
+    }),
+
+    verifyOtp: (phone, otp, name) => apiCall('/auth/verify-otp', {
+        method: 'POST',
+        body: JSON.stringify({ phone, otp, name }),
+    }),
+
+    refreshToken: () => apiCall('/auth/refresh-token', {
+        method: 'POST',
+    }),
 };
 
 // Service Services
