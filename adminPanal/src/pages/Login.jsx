@@ -8,7 +8,7 @@ const Login = () => {
     const [authMode, setAuthMode] = useState('otp'); // 'email' or 'otp'
     const [selectedRole, setSelectedRole] = useState('consumer');
     const [email, setEmail] = useState('user@test.com');
-    const [password, setPassword] = useState('password123');
+    const [password, setPassword] = useState('Password123@');
     const [showPassword, setShowPassword] = useState(false);
 
     // OTP login state
@@ -99,13 +99,13 @@ const Login = () => {
         setSelectedRole(role);
         if (role === 'admin') {
             setEmail('admin@test.com');
-            setPassword('password123');
+            setPassword('Password123@');
         } else if (role === 'provider') {
             setEmail('provider@test.com');
-            setPassword('password123');
+            setPassword('Password123@');
         } else {
             setEmail('user@test.com');
-            setPassword('password123');
+            setPassword('Password123@');
         }
     };
 

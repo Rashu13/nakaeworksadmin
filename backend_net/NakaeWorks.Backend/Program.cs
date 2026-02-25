@@ -167,9 +167,9 @@ using (var scope = app.Services.CreateScope())
         {
             var users = new List<User>
             {
-                new User { Name = "Admin Test", Email = "admin@test.com", Password = "password123", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "User Test", Email = "user@test.com", Password = "password123", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "Provider Test", Email = "provider@test.com", Password = "password123", Phone = "7777777777", Role = "provider", Status = true, CreatedAt = DateTime.UtcNow }
+                new User { Name = "Admin Test", Email = "admin@test.com", Password = "Password123@", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "User Test", Email = "user@test.com", Password = "Password123@", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "Provider Test", Email = "provider@test.com", Password = "Password123@", Phone = "7777777777", Role = "provider", Status = true, CreatedAt = DateTime.UtcNow }
             };
 
              foreach (var u in users)
