@@ -3,11 +3,11 @@ import { Users, Briefcase, ShoppingBag, TrendingUp, DollarSign, UserCheck, Arrow
 import { adminService } from '../../services/api';
 
 const StatCard = ({ title, value, icon: Icon, color, trend, trendValue }) => (
-    <div className="bg-white rounded-2xl p-6 shadow-sm">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-transparent dark:border-white/5 transition-colors">
         <div className="flex items-start justify-between">
             <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">{title}</p>
-                <h3 className="text-3xl font-bold text-gray-900 mt-2">{value}</h3>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{value}</h3>
                 {trend && (
                     <div className={`flex items-center gap-1 mt-2 text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
                         {trend === 'up' ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
@@ -16,7 +16,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend, trendValue }) => (
                 )}
             </div>
             <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center`}>
-                <Icon size={24} className="text-slate-900 dark:text-white" />
+                <Icon size={24} className="text-white" />
             </div>
         </div>
     </div>

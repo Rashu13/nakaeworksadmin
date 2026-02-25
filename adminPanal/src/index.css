@@ -5,6 +5,10 @@ body {
   height: 100%;
 }
 
+body.dark {
+  background-color: #0a0f1c;
+}
+
 #root {
   height: 100%;
 }

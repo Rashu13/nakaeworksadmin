@@ -362,7 +362,7 @@ const ServiceDetail = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-900 dark:text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
+                                    {/* <label className="block text-xs font-bold text-gray-900 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
                                     <div className="grid grid-cols-3 gap-2">
                                         {timeSlots.map(t => {
                                             const isToday = selectedDate === new Date().toISOString().split('T')[0];
@@ -385,9 +385,9 @@ const ServiceDetail = () => {
                                                     disabled={isDisabled}
                                                     onClick={() => setSelectedTime(t)}
                                                     className={`py-2 px-1 text-xs font-medium border rounded-md transition-all ${selectedTime === t
-                                                        ? 'bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white border-slate-900 dark:border-primary-600 shadow-sm'
+                                                        ? 'bg-slate-900 dark:bg-primary-600 text-white border-slate-900 dark:border-primary-600 shadow-sm'
                                                         : isDisabled
-                                                            ? 'bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-700 cursor-not-allowed'
+                                                            ? 'bg-gray-50 dark:bg-gray-800/50 text-gray-400 dark:text-gray-600 border-gray-100 dark:border-gray-700 cursor-not-allowed'
                                                             : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-200 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-600'
                                                         }`}
                                                 >
@@ -398,7 +398,7 @@ const ServiceDetail = () => {
                                     </div>
                                     {!selectedTime && (
                                         <p className="text-[10px] text-red-500 mt-1.5">* Please select a time slot</p>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
 
@@ -428,7 +428,7 @@ const ServiceDetail = () => {
                                     </button>
                                     <button
                                         onClick={handleBooking}
-                                        className="py-4 bg-black dark:bg-primary-600 text-slate-900 dark:text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
+                                        className="py-4 bg-black dark:bg-primary-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
                                     >
                                         Buy Now
                                     </button>

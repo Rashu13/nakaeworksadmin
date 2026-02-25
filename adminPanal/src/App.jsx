@@ -180,9 +180,11 @@ function AppRoutes() {
 }
 
 function App() {
+  const { isDarkMode } = useAuth(); // Let's try getting it from hook or just use the class
+
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+      <div className="min-h-screen transition-colors duration-300">
         <ScrollToTop />
         <AppRoutes />
       </div>

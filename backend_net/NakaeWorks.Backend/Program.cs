@@ -81,7 +81,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ApplicationDbContext>();
     try
     {
-        context.Database.Migrate();
+        // context.Database.Migrate();
 
         // -2. Seed Content (Banners & Collections)
         if (!context.Banners.Any())
@@ -162,25 +162,39 @@ using (var scope = app.Services.CreateScope())
             context.SaveChanges();
         }
 
-        // 2. Seed Users if low
-        if (context.Users.Count() < 5)
+        // 2. Ensure Test Users exist with hashed password Password123@
+        var testUsers = new List<(string Name, string Email, string Role, string Phone)>
         {
-            var users = new List<User>
-            {
-                new User { Name = "Admin Test", Email = "admin@test.com", Password = "Password123@", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "User Test", Email = "user@test.com", Password = "Password123@", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "Provider Test", Email = "provider@test.com", Password = "Password123@", Phone = "7777777777", Role = "provider", Status = true, CreatedAt = DateTime.UtcNow }
-            };
+            ("Admin Test", "admin@test.com", "admin", "9999999999"),
+            ("User Test", "user@test.com", "consumer", "8888888888"),
+            ("Provider Test", "provider@test.com", "provider", "7777777777")
+        };
 
-             foreach (var u in users)
-             {
-                 if (!context.Users.Any(dbU => dbU.Email == u.Email))
-                 {
-                     context.Users.Add(u);
-                 }
-             }
-            context.SaveChanges();
+        foreach (var tu in testUsers)
+        {
+            var existingUser = context.Users.FirstOrDefault(u => u.Email == tu.Email);
+            if (existingUser != null)
+            {
+                // Always update to the new hashed password to be sure
+                existingUser.Password = BCrypt.Net.BCrypt.HashPassword("Password123@");
+                existingUser.Name = tu.Name;
+                existingUser.Role = tu.Role;
+            }
+            else
+            {
+                context.Users.Add(new User 
+                { 
+                    Name = tu.Name, 
+                    Email = tu.Email, 
+                    Password = BCrypt.Net.BCrypt.HashPassword("Password123@"), 
+                    Phone = tu.Phone, 
+                    Role = tu.Role, 
+                    Status = true, 
+                    CreatedAt = DateTime.UtcNow 
+                });
+            }
         }
+        context.SaveChanges();
 
         // 3. Seed Services if empty or low populated
         var provider = context.Users.FirstOrDefault(u => u.Role == "provider");
