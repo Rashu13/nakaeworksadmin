@@ -136,7 +136,7 @@ const Profile = () => {
                                 className="w-28 h-28 rounded-2xl object-cover border-4 border-white shadow-lg"
                                 onError={handleImageError}
                             />
-                            <label className="absolute bottom-0 right-0 p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl cursor-pointer shadow-lg transition-colors">
+                            <label className="absolute bottom-0 right-0 p-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white rounded-xl cursor-pointer shadow-lg transition-colors">
                                 {uploading ? (
                                     <Loader className="w-5 h-5 animate-spin" />
                                 ) : (
@@ -163,7 +163,7 @@ const Profile = () => {
                 <button
                     onClick={() => setActiveTab('profile')}
                     className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'profile'
-                        ? 'bg-emerald-500 text-white'
+                        ? 'bg-emerald-500 text-slate-900 dark:text-white'
                         : 'text-gray-600 hover:bg-gray-100'
                         }`}
                 >
@@ -173,7 +173,7 @@ const Profile = () => {
                 <button
                     onClick={() => setActiveTab('password')}
                     className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === 'password'
-                        ? 'bg-emerald-500 text-white'
+                        ? 'bg-emerald-500 text-slate-900 dark:text-white'
                         : 'text-gray-600 hover:bg-gray-100'
                         }`}
                 >
@@ -203,7 +203,7 @@ const Profile = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                         <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="text"
                                 value={profileData.name}
@@ -216,21 +216,21 @@ const Profile = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="email"
                                 value={profileData.email}
                                 disabled
-                                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-500 dark:text-gray-400"
                             />
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Email cannot be changed</p>
                     </div>
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                         <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="tel"
                                 value={profileData.phone}
@@ -255,7 +255,7 @@ const Profile = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white py-3 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                         {loading && <Loader className="w-5 h-5 animate-spin" />}
                         Save Changes
@@ -269,7 +269,7 @@ const Profile = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="password"
                                 value={passwordData.currentPassword}
@@ -283,7 +283,7 @@ const Profile = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="password"
                                 value={passwordData.newPassword}
@@ -297,7 +297,7 @@ const Profile = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 dark:text-gray-400" />
                             <input
                                 type="password"
                                 value={passwordData.confirmPassword}
@@ -311,7 +311,7 @@ const Profile = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white py-3 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                         {loading && <Loader className="w-5 h-5 animate-spin" />}
                         Change Password

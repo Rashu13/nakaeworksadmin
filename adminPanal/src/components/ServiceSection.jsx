@@ -33,22 +33,22 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
     }, []);
 
     return (
-        <section className="py-16 px-4 bg-white dark:bg-slate-950 transition-colors duration-300">
+        <section className="py-10 px-4 bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <div className="flex items-center justify-between mb-10">
                     <div className="flex items-center gap-3">
                         {showTrending && (
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-red-500 flex items-center justify-center">
-                                <TrendingUp size={20} className="text-white" />
+                                <TrendingUp size={20} className="text-slate-900 dark:text-white" />
                             </div>
                         )}
                         <div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">
                                 {title || 'Popular Services'}
                             </h2>
                             {subtitle && (
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">{subtitle}</p>
+                                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-1">{subtitle}</p>
                             )}
                         </div>
                     </div>

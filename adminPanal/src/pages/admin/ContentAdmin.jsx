@@ -141,11 +141,11 @@ const ContentAdmin = () => {
             <div className="flex justify-between items-center mb-8">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Content Management</h1>
-                    <p className="text-gray-500">Manage home page banners and collections</p>
+                    <p className="text-gray-500 dark:text-gray-400">Manage home page banners and collections</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-slate-900 dark:text-white rounded-lg hover:bg-gray-100 dark:bg-slate-800"
                 >
                     <Plus size={18} />
                     Add {activeTab === 'banners' ? 'Banner' : 'Collection'}
@@ -156,7 +156,7 @@ const ContentAdmin = () => {
             <div className="flex gap-4 mb-6 border-b border-gray-200">
                 <button
                     onClick={() => setActiveTab('banners')}
-                    className={`pb-3 px-4 font-medium transition-colors relative ${activeTab === 'banners' ? 'text-slate-900' : 'text-gray-500 hover:text-gray-700'
+                    className={`pb-3 px-4 font-medium transition-colors relative ${activeTab === 'banners' ? 'text-slate-900' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'
                         }`}
                 >
                     <div className="flex items-center gap-2">
@@ -166,7 +166,7 @@ const ContentAdmin = () => {
                 </button>
                 <button
                     onClick={() => setActiveTab('collections')}
-                    className={`pb-3 px-4 font-medium transition-colors relative ${activeTab === 'collections' ? 'text-slate-900' : 'text-gray-500 hover:text-gray-700'
+                    className={`pb-3 px-4 font-medium transition-colors relative ${activeTab === 'collections' ? 'text-slate-900' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'
                         }`}
                 >
                     <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ const ContentAdmin = () => {
                                 </div>
                                 {!banner.isActive && (
                                     <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-                                        <span className="px-3 py-1 bg-gray-800 text-white rounded-full text-xs font-bold flex items-center gap-1">
+                                        <span className="px-3 py-1 bg-gray-800 text-slate-900 dark:text-white rounded-full text-xs font-bold flex items-center gap-1">
                                             <EyeOff size={12} /> Hidden
                                         </span>
                                     </div>
@@ -207,16 +207,16 @@ const ContentAdmin = () => {
                             </div>
                             <div className="p-4">
                                 <h3 className="font-bold text-gray-900">{banner.title}</h3>
-                                <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
+                                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-1">
                                     <Link size={14} />
                                     <span className="truncate">{banner.link}</span>
                                 </div>
                                 <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-50">
-                                    <span className="text-xs text-gray-400">Position: {banner.position}</span>
+                                    <span className="text-xs text-gray-600 dark:text-gray-400">Position: {banner.position}</span>
                                     {banner.isActive ? (
                                         <span className="text-xs font-bold text-green-600 flex items-center gap-1"><Eye size={12} /> Active</span>
                                     ) : (
-                                        <span className="text-xs font-bold text-gray-400">Inactive</span>
+                                        <span className="text-xs font-bold text-gray-600 dark:text-gray-400">Inactive</span>
                                     )}
                                 </div>
                             </div>
@@ -242,15 +242,15 @@ const ContentAdmin = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <span className={`flex items-center gap-1 text-sm font-bold ${col.isActive ? 'text-green-600' : 'text-gray-400'}`}>
+                                <span className={`flex items-center gap-1 text-sm font-bold ${col.isActive ? 'text-green-600' : 'text-gray-600 dark:text-gray-400'}`}>
                                     {col.isActive ? <Eye size={14} /> : <EyeOff size={14} />}
                                     {col.isActive ? 'Active' : 'Hidden'}
                                 </span>
                                 <div className="flex gap-2">
-                                    <button onClick={() => openModal(col)} className="p-2 text-gray-400 hover:text-slate-900 hover:bg-gray-50 rounded-lg">
+                                    <button onClick={() => openModal(col)} className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 hover:bg-gray-50 rounded-lg">
                                         <Edit2 size={18} />
                                     </button>
-                                    <button onClick={() => confirmDelete(col.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
+                                    <button onClick={() => confirmDelete(col.id)} className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
                                         <Trash2 size={18} />
                                     </button>
                                 </div>
@@ -269,7 +269,7 @@ const ContentAdmin = () => {
                             <h2 className="text-xl font-bold text-gray-900">
                                 {editingItem ? 'Edit' : 'Add'} {activeTab === 'banners' ? 'Banner' : 'Collection'}
                             </h2>
-                            <button onClick={() => setShowModal(false)} className="text-gray-400 hover:text-gray-600">
+                            <button onClick={() => setShowModal(false)} className="text-gray-600 dark:text-gray-400 hover:text-gray-600">
                                 <X size={24} />
                             </button>
                         </div>
@@ -353,10 +353,10 @@ const ContentAdmin = () => {
                                                         </label>
                                                     ))
                                                 ) : (
-                                                    <div className="text-sm text-gray-500 p-2">No services available</div>
+                                                    <div className="text-sm text-gray-500 dark:text-gray-400 p-2">No services available</div>
                                                 )}
                                             </div>
-                                            <p className="text-xs text-gray-500 mt-1">Selected services will appear in this collection</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Selected services will appear in this collection</p>
                                         </div>
                                     )}
                                 </>
@@ -385,7 +385,7 @@ const ContentAdmin = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="w-full py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">
+                            <button type="submit" className="w-full py-3 bg-slate-900 text-slate-900 dark:text-white font-bold rounded-lg hover:bg-gray-100 dark:bg-slate-800">
                                 <Save size={18} className="inline mr-2" /> Save Changes
                             </button>
                         </form>

@@ -155,12 +155,12 @@ const CouponsAdmin = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Coupons</h1>
-                    <p className="text-gray-500 dark:text-gray-400">Manage discounts and offers</p>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Coupons</h1>
+                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Manage discounts and offers</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Create Coupon
@@ -182,31 +182,31 @@ const CouponsAdmin = () => {
             )}
 
             {/* Search */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm mb-6 p-4 border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm mb-6 p-4 border border-gray-100 dark:border-slate-700">
                 <div className="relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                     <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search coupons..."
-                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                     />
                 </div>
             </div>
 
             {/* Table */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm overflow-hidden border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm overflow-hidden border border-gray-100 dark:border-slate-700">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead className="bg-gray-50 dark:bg-slate-700/50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Code</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Type</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Value</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Usage</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Code</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Type</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Value</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Usage</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Status</th>
+                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
@@ -218,7 +218,7 @@ const CouponsAdmin = () => {
                                 </tr>
                             ) : filteredCoupons.length === 0 ? (
                                 <tr>
-                                    <td colSpan="6" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
+                                    <td colSpan="6" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                                         No coupons found
                                     </td>
                                 </tr>
@@ -231,27 +231,27 @@ const CouponsAdmin = () => {
                                                     <Ticket size={20} />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900 dark:text-white">{coupon.code}</p>
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                    <p className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">{coupon.code}</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                                                         Min order: ₹{coupon.minOrderValue}
                                                     </p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className="capitalize text-gray-700 dark:text-gray-300">
+                                            <span className="capitalize text-gray-700 dark:text-gray-700 dark:text-gray-300">
                                                 {(coupon.discountType || '').replace(/_/g, ' ')}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        <td className="px-6 py-4 font-medium text-gray-900 dark:text-slate-900 dark:text-white">
                                             {coupon.discountType === 'percentage' ? `${coupon.discountValue}%` :
                                                 coupon.discountType === 'free_service_charge' ? 'Free Svc' :
                                                     `₹${coupon.discountValue}`}
                                         </td>
-                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300 text-sm">
+                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-700 dark:text-gray-300 text-sm">
                                             <div className="flex flex-col">
                                                 <span>{coupon.usedCount} used</span>
-                                                <span className="text-xs text-gray-400 dark:text-gray-500">
+                                                <span className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400">
                                                     Limit: {coupon.usageLimit || '∞'}
                                                 </span>
                                             </div>
@@ -259,7 +259,7 @@ const CouponsAdmin = () => {
                                         <td className="px-6 py-4">
                                             <button
                                                 onClick={() => toggleStatus(coupon.id, coupon.status)}
-                                                className={`px-2 py-1 text-xs font-medium rounded-full ${coupon.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+                                                className={`px-2 py-1 text-xs font-medium rounded-full ${coupon.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-700 dark:text-gray-300'
                                                     }`}
                                             >
                                                 {coupon.status === true ? 'Active' : 'Inactive'}
@@ -269,13 +269,13 @@ const CouponsAdmin = () => {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => openModal(coupon)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => confirmDelete(coupon.id)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -293,36 +293,36 @@ const CouponsAdmin = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeModal}></div>
-                    <div className="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
+                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-900 dark:text-white">
                                 {editingCoupon ? 'Edit Coupon' : 'Create Coupon'}
                             </h2>
-                            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <button onClick={closeModal} className="text-gray-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-700 dark:text-gray-300">
                                 <X size={24} />
                             </button>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Coupon Code</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Coupon Code</label>
                                 <input
                                     type="text"
                                     value={formData.code}
                                     onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
                                     placeholder="e.g. SAVE20"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Type</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Type</label>
                                     <select
                                         value={formData.discountType}
                                         onChange={(e) => setFormData({ ...formData, discountType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="fixed">Fixed Amount</option>
                                         <option value="percentage">Percentage (%)</option>
@@ -332,13 +332,13 @@ const CouponsAdmin = () => {
 
                                 {formData.discountType !== 'free_service_charge' && (
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Value</label>
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Value</label>
                                         <input
                                             type="number"
                                             value={formData.discountValue}
                                             onChange={(e) => setFormData({ ...formData, discountValue: e.target.value })}
                                             placeholder={formData.discountType === 'percentage' ? "20" : "500"}
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                             required={formData.discountType !== 'free_service_charge'}
                                         />
                                     </div>
@@ -347,25 +347,25 @@ const CouponsAdmin = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Min Order Value</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Min Order Value</label>
                                     <input
                                         type="number"
                                         value={formData.minOrderValue}
                                         onChange={(e) => setFormData({ ...formData, minOrderValue: e.target.value })}
                                         placeholder="0"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
 
                                 {formData.discountType === 'percentage' && (
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Max Discount</label>
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Max Discount</label>
                                         <input
                                             type="number"
                                             value={formData.maxDiscount}
                                             onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                                             placeholder="Optional"
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                         />
                                     </div>
                                 )}
@@ -373,21 +373,21 @@ const CouponsAdmin = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Usage Limit (Per User)</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Usage Limit (Per User)</label>
                                     <input
                                         type="number"
                                         value={formData.usageLimitPerUser}
                                         onChange={(e) => setFormData({ ...formData, usageLimitPerUser: e.target.value })}
                                         placeholder="1"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Customer Type</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Customer Type</label>
                                     <select
                                         value={formData.customerType}
                                         onChange={(e) => setFormData({ ...formData, customerType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="all">All Customers</option>
                                         <option value="new">New Customers Only (0 orders)</option>
@@ -397,45 +397,45 @@ const CouponsAdmin = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Max Past Orders </label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Max Past Orders </label>
                                     <input
                                         type="number"
                                         value={formData.maxPastOrders}
                                         onChange={(e) => setFormData({ ...formData, maxPastOrders: e.target.value })}
                                         placeholder="e.g. 0 (First order only), 4 (First 5)"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Leave empty for no history check</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-1">Leave empty for no history check</p>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Total Global Usage Limit</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Total Global Usage Limit</label>
                                     <input
                                         type="number"
                                         value={formData.usageLimit}
                                         onChange={(e) => setFormData({ ...formData, usageLimit: e.target.value })}
                                         placeholder="Unlimited"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Start Date</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Start Date</label>
                                     <input
                                         type="datetime-local"
                                         value={formData.startDate}
                                         onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Expiry Date</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Expiry Date</label>
                                     <input
                                         type="datetime-local"
                                         value={formData.expiresAt}
                                         onChange={(e) => setFormData({ ...formData, expiresAt: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                             </div>
@@ -444,13 +444,13 @@ const CouponsAdmin = () => {
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
+                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-xl"
                                 >
                                     {editingCoupon ? 'Update Coupon' : 'Create Coupon'}
                                 </button>

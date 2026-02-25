@@ -14,7 +14,7 @@ const ProviderCard = ({ provider, index }) => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
             onClick={() => navigate(`/provider/${provider.id}`)}
-            className="group relative bg-white/5 backdrop-blur-md rounded-[32px] p-8 border border-white/10 text-white cursor-pointer hover:bg-white/10 hover:border-amber-500/30 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/40"
+            className="group relative bg-gray-100 dark:bg-white/5 backdrop-blur-md rounded-[32px] p-8 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white cursor-pointer hover:bg-gray-200 dark:bg-white/10 hover:border-amber-500/30 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/40"
         >
             {/* Background Glow */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl group-hover:bg-amber-500/10 transition-colors" />
@@ -27,7 +27,7 @@ const ProviderCard = ({ provider, index }) => {
                         <img
                             src={provider.avatar ? (provider.avatar.startsWith('http') ? provider.avatar : `${BASE_URL}${provider.avatar}`) : `https://ui-avatars.com/api/?name=${provider.name}&background=1f2937&color=fff`}
                             alt={provider.name}
-                            className="w-20 h-20 rounded-2xl object-cover border border-white/10 relative z-10"
+                            className="w-20 h-20 rounded-2xl object-cover border border-gray-200 dark:border-white/10 relative z-10"
                         />
                         {provider.isVerified && (
                             <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center border-4 border-[#0a0f1c] z-20">
@@ -44,20 +44,20 @@ const ProviderCard = ({ provider, index }) => {
                                 <Star size={12} className="fill-amber-500 text-amber-500" />
                                 <span className="text-amber-500 text-xs font-black">{parseFloat(provider.rating || 4.5).toFixed(1)}</span>
                             </div>
-                            <span className="text-gray-500 text-xs font-medium">({provider.reviewsCount || 0} reviews)</span>
+                            <span className="text-gray-500 dark:text-gray-400 text-xs font-medium">({provider.reviewsCount || 0} reviews)</span>
                         </div>
                     </div>
                 </div>
 
                 {/* Location & Tags */}
                 <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-2 text-gray-400">
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                         <MapPin size={16} className="text-amber-500" />
                         <span className="text-sm font-semibold tracking-wide">{provider.location || 'New Delhi'}</span>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                        <span className="px-3 py-1 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-full">
+                        <span className="px-3 py-1 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white text-[10px] font-black uppercase tracking-widest rounded-full">
                             {provider.isVerified ? 'Top Verification' : 'Professional'}
                         </span>
                         <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-widest rounded-full">
@@ -67,10 +67,10 @@ const ProviderCard = ({ provider, index }) => {
                 </div>
 
                 {/* Stats & Footer */}
-                <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/5">
                     <div className="flex flex-col">
-                        <span className="text-2xl font-black text-white">{provider.served || 0}+</span>
-                        <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Tasks Done</span>
+                        <span className="text-2xl font-black text-slate-900 dark:text-white">{provider.served || 0}+</span>
+                        <span className="text-[10px] text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest">Tasks Done</span>
                     </div>
                     <motion.button
                         whileHover={{ scale: 1.1 }}
@@ -106,7 +106,7 @@ const ProviderSection = () => {
     }, []);
 
     return (
-        <section className="py-24 px-4 bg-[#0a0f1c] relative overflow-hidden">
+        <section className="py-10 px-4 bg-gray-50 dark:bg-[#0a0f1c] relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -122,15 +122,15 @@ const ProviderSection = () => {
                             <Award className="text-amber-500" size={24} />
                             <span className="text-amber-500 text-xs font-black uppercase tracking-[0.3em]">Excellence</span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
                             Meet Our Masters
                         </h2>
-                        <p className="text-gray-400 mt-4 text-lg font-medium max-w-xl leading-relaxed">Top-tier experts vetted for quality, reliability, and exceptional craftsmanship.</p>
+                        <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg font-medium max-w-xl leading-relaxed">Top-tier experts vetted for quality, reliability, and exceptional craftsmanship.</p>
                     </motion.div>
 
                     <button
                         onClick={() => navigate('/providers')}
-                        className="group flex items-center gap-3 text-white font-bold text-sm tracking-widest uppercase hover:text-amber-400 transition-colors"
+                        className="group flex items-center gap-3 text-slate-900 dark:text-white font-bold text-sm tracking-widest uppercase hover:text-amber-400 transition-colors"
                     >
                         View All Masters <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -138,9 +138,9 @@ const ProviderSection = () => {
 
                 {/* Providers Grid */}
                 {loading ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-white">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-slate-900 dark:text-white">
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="bg-white/5 border border-white/10 rounded-[32px] h-[380px] animate-pulse"></div>
+                            <div key={i} className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-[32px] h-[380px] animate-pulse"></div>
                         ))}
                     </div>
                 ) : (

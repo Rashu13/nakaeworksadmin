@@ -149,20 +149,20 @@ const BookingConfirm = () => {
                 {/* Back Button */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6 transition-colors"
+                    className="flex items-center gap-2 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-slate-900 dark:text-white mb-6 transition-colors"
                 >
                     <ArrowLeft size={20} />
                     <span>Back</span>
                 </button>
 
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Confirm Your Booking</h1>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-8">Confirm Your Booking</h1>
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {/* Left - Forms */}
                     <div className="md:col-span-2 space-y-6">
                         {/* Service Summary */}
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">
                                 {isCartFlow ? `${cartItems.length} Services Selected` : 'Service Details'}
                             </h2>
                             <div className="space-y-4">
@@ -174,9 +174,9 @@ const BookingConfirm = () => {
                                             className="w-20 h-20 rounded-xl object-cover bg-gray-100 dark:bg-gray-700"
                                         />
                                         <div className="flex-1">
-                                            <h3 className="font-medium text-gray-900 dark:text-white">{item.name}</h3>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400">{item.category?.name || 'Service'}</p>
-                                            <div className="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                            <h3 className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">{item.name}</h3>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{item.category?.name || 'Service'}</p>
+                                            <div className="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-600 dark:text-gray-400">
                                                 <div className="flex items-center gap-1">
                                                     <Calendar size={14} />
                                                     <span>{isCartFlow ? effectiveDate : singleDate}</span>
@@ -188,10 +188,10 @@ const BookingConfirm = () => {
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="font-semibold text-gray-900 dark:text-white">
+                                            <span className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">
                                                 ₹{(Number(item.price) - Number(item.discount || 0)) * (isCartFlow ? item.quantity : quantity)}
                                             </span>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {isCartFlow ? item.quantity : quantity}</p>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Qty: {isCartFlow ? item.quantity : quantity}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -201,7 +201,7 @@ const BookingConfirm = () => {
                         {/* Address Selection */}
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Service Address</h2>
+                                <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white">Service Address</h2>
                                 <button
                                     onClick={() => setShowAddAddress(true)}
                                     className="flex items-center gap-1 text-slate-900 dark:text-primary-400 text-sm font-medium hover:text-blue-600 dark:hover:text-primary-300"
@@ -228,14 +228,14 @@ const BookingConfirm = () => {
                                         />
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2">
-                                                <span className="font-medium text-gray-900 dark:text-white capitalize">{addr.type}</span>
+                                                <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white capitalize">{addr.type}</span>
                                                 {addr.isPrimary && (
                                                     <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full">
                                                         Primary
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                                            <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 text-sm mt-1">
                                                 {addr.addressLine1}, {addr.city}, {addr.state}
                                             </p>
                                         </div>
@@ -246,7 +246,7 @@ const BookingConfirm = () => {
 
                         {/* Payment Method */}
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Payment Method</h2>
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Payment Method</h2>
                             <div className="space-y-3">
                                 <label
                                     className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'cod'
@@ -260,10 +260,10 @@ const BookingConfirm = () => {
                                         checked={paymentMethod === 'cod'}
                                         onChange={() => setPaymentMethod('cod')}
                                     />
-                                    <Wallet size={20} className="text-gray-600 dark:text-gray-400" />
+                                    <Wallet size={20} className="text-gray-600 dark:text-gray-600 dark:text-gray-400" />
                                     <div className="flex-1">
-                                        <span className="font-medium text-gray-900 dark:text-white">Cash on Delivery</span>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">Pay after service completion</p>
+                                        <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">Cash on Delivery</span>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Pay after service completion</p>
                                     </div>
                                 </label>
 
@@ -279,10 +279,10 @@ const BookingConfirm = () => {
                                         checked={paymentMethod === 'online'}
                                         onChange={() => setPaymentMethod('online')}
                                     />
-                                    <CreditCard size={20} className="text-gray-600 dark:text-gray-400" />
+                                    <CreditCard size={20} className="text-gray-600 dark:text-gray-600 dark:text-gray-400" />
                                     <div className="flex-1">
-                                        <span className="font-medium text-gray-900 dark:text-white">Pay Online</span>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">UPI, Cards, Net Banking</p>
+                                        <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">Pay Online</span>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">UPI, Cards, Net Banking</p>
                                     </div>
                                 </label>
                             </div>
@@ -292,7 +292,7 @@ const BookingConfirm = () => {
                     {/* Right - Price Summary */}
                     <div className="md:col-span-1">
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg sticky top-24 border border-gray-100 dark:border-gray-700">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Price Details</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-8">Price Details</h2>
 
                             {/* Coupon */}
                             <div className="relative mb-8">
@@ -301,21 +301,21 @@ const BookingConfirm = () => {
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                     placeholder="Enter Coupon Code"
-                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-xl text-sm focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-xl text-sm focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                                 />
                                 <button
                                     onClick={applyCoupon}
-                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
+                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white rounded-lg text-xs font-bold hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
                                 >
                                     Apply
                                 </button>
                             </div>
 
                             {/* Price Breakdown */}
-                            <div className="space-y-4 text-base text-gray-600 dark:text-gray-300">
+                            <div className="space-y-4 text-base text-gray-600 dark:text-gray-700 dark:text-gray-300">
                                 <div className="flex justify-between">
                                     <span>{isCartFlow ? 'Items Subtotal' : 'Service Price'}</span>
-                                    <span className="text-gray-900 dark:text-white font-medium">₹{effectiveTotalPrice}</span>
+                                    <span className="text-gray-900 dark:text-slate-900 dark:text-white font-medium">₹{effectiveTotalPrice}</span>
                                 </div>
                                 {discountAmt > 0 && (
                                     <div className="flex justify-between text-green-600 dark:text-green-400 font-medium">
@@ -324,16 +324,16 @@ const BookingConfirm = () => {
                                     </div>
                                 )}
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600 dark:text-gray-400">Platform Fee</span>
-                                    <span className="text-gray-900 dark:text-white">₹{platformFee}</span>
+                                    <span className="text-gray-600 dark:text-gray-600 dark:text-gray-400">Platform Fee</span>
+                                    <span className="text-gray-900 dark:text-slate-900 dark:text-white">₹{platformFee}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600 dark:text-gray-400">Tax (18% GST)</span>
-                                    <span className="text-gray-900 dark:text-white">₹{tax}</span>
+                                    <span className="text-gray-600 dark:text-gray-600 dark:text-gray-400">Tax (18% GST)</span>
+                                    <span className="text-gray-900 dark:text-slate-900 dark:text-white">₹{tax}</span>
                                 </div>
                                 <div className="flex justify-between pt-3 border-t border-gray-200 dark:border-gray-700 text-base font-semibold">
-                                    <span className="text-gray-900 dark:text-white">Total Amount</span>
-                                    <span className="text-gray-900 dark:text-white">₹{finalAmount}</span>
+                                    <span className="text-gray-900 dark:text-slate-900 dark:text-white">Total Amount</span>
+                                    <span className="text-gray-900 dark:text-slate-900 dark:text-white">₹{finalAmount}</span>
                                 </div>
                             </div>
 
@@ -341,7 +341,7 @@ const BookingConfirm = () => {
                             <button
                                 onClick={handleBooking}
                                 disabled={loading}
-                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 text-slate-900 dark:text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -354,7 +354,7 @@ const BookingConfirm = () => {
                             </button>
 
                             {/* Trust */}
-                            <div className="flex items-center gap-2 mt-4 text-xs text-gray-500 dark:text-gray-400 justify-center">
+                            <div className="flex items-center gap-2 mt-4 text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 justify-center">
                                 <Lock size={14} className="text-green-500" />
                                 <span>100% Secure & Safe Payments</span>
                             </div>
@@ -366,7 +366,7 @@ const BookingConfirm = () => {
             {showAddAddress && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                     <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 border border-gray-100 dark:border-gray-700 shadow-xl">
-                        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Add New Address</h2>
+                        <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Add New Address</h2>
                         <form onSubmit={async (e) => {
                             e.preventDefault();
                             const formData = new FormData(e.target);
@@ -389,20 +389,20 @@ const BookingConfirm = () => {
                             }
                         }}>
                             <div className="space-y-4">
-                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 <div className="grid grid-cols-2 gap-4">
-                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
-                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 </div>
-                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
-                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors appearance-none">
+                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors appearance-none">
                                     <option value="home">Home</option>
                                     <option value="work">Work</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <div className="flex gap-3 pt-2">
-                                    <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
-                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-white font-medium rounded-xl hover:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
+                                    <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
+                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white font-medium rounded-xl hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
                                 </div>
                             </div>
                         </form>

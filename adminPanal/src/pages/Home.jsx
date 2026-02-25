@@ -5,6 +5,7 @@ import ProviderSection from '../components/ProviderSection';
 import AppDownload from '../components/AppDownload';
 import BannerSlider from '../components/BannerSlider';
 import CollectionSection from '../components/CollectionSection';
+import BrandsSection from '../components/BrandsSection';
 import { contentService } from '../services/api';
 
 const Home = () => {
@@ -27,13 +28,13 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0f1c] text-white">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] text-slate-900 dark:text-white">
             {/* New Urban Company Style Hero & Categories */}
             <UrbanStyleHero />
 
             {/* Banner Slider */}
             {!loading && homeData.banners.length > 0 && (
-                <div className="max-w-7xl mx-auto px-4 py-16">
+                <div className="max-w-7xl mx-auto px-4 py-8">
                     <BannerSlider banners={homeData.banners} />
                 </div>
             )}
@@ -61,6 +62,9 @@ const Home = () => {
 
             {/* App Download Section */}
             <AppDownload />
+
+            {/* Brands we service */}
+            <BrandsSection />
         </div>
     );
 };

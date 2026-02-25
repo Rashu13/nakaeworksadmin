@@ -96,7 +96,7 @@ const Earnings = () => {
                             key={option.key}
                             onClick={() => setPeriod(option.key)}
                             className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${period === option.key
-                                    ? 'bg-emerald-500 text-white'
+                                    ? 'bg-emerald-500 text-slate-900 dark:text-white'
                                     : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
                                 }`}
                         >
@@ -108,7 +108,7 @@ const Earnings = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-white">
+                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-slate-900 dark:text-white">
                     <div className="flex items-center justify-between mb-2">
                         <span className="text-emerald-100">Total Earnings</span>
                         <Wallet className="w-6 h-6 opacity-80" />
@@ -122,7 +122,7 @@ const Earnings = () => {
 
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-500">{periodOptions.find(p => p.key === period)?.label} Earnings</span>
+                        <span className="text-gray-500 dark:text-gray-400">{periodOptions.find(p => p.key === period)?.label} Earnings</span>
                         <div className="p-2 bg-blue-100 rounded-xl">
                             <TrendingUp className="w-5 h-5 text-blue-600" />
                         </div>
@@ -132,13 +132,13 @@ const Earnings = () => {
 
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-gray-500">Pending Earnings</span>
+                        <span className="text-gray-500 dark:text-gray-400">Pending Earnings</span>
                         <div className="p-2 bg-yellow-100 rounded-xl">
                             <CreditCard className="w-5 h-5 text-yellow-600" />
                         </div>
                     </div>
                     <p className="text-3xl font-bold text-gray-900">₹{(earnings?.pendingEarnings || 0).toLocaleString()}</p>
-                    <p className="text-sm text-gray-500 mt-1">Awaiting payment</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Awaiting payment</p>
                 </div>
             </div>
 
@@ -154,7 +154,7 @@ const Earnings = () => {
                                     style={{ height: `${item.height}%` }}
                                 />
                             </div>
-                            <span className="text-xs text-gray-500">{item.month}</span>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">{item.month}</span>
                         </div>
                     ))}
                 </div>
@@ -172,8 +172,8 @@ const Earnings = () => {
                     </div>
                 ) : transactions.length === 0 ? (
                     <div className="p-12 text-center">
-                        <CreditCard className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                        <p className="text-gray-500">No transactions yet</p>
+                        <CreditCard className="w-12 h-12 text-gray-700 dark:text-gray-300 mx-auto mb-4" />
+                        <p className="text-gray-500 dark:text-gray-400">No transactions yet</p>
                     </div>
                 ) : (
                     <div className="divide-y divide-gray-100">
@@ -192,14 +192,14 @@ const Earnings = () => {
                                         </div>
                                         <div>
                                             <p className="font-medium text-gray-900">{transaction.Service?.name}</p>
-                                            <p className="text-sm text-gray-500">
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">
                                                 {transaction.consumer?.name} • #{transaction.bookingNumber}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="text-right">
                                         <p className="font-semibold text-gray-900">₹{parseFloat(transaction.totalAmount).toLocaleString()}</p>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">
                                             {new Date(transaction.createdAt).toLocaleDateString('en-IN', {
                                                 day: 'numeric',
                                                 month: 'short',

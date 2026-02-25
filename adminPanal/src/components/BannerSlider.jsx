@@ -35,14 +35,14 @@ const BannerSlider = ({ banners }) => {
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
-                            <div className="max-w-md text-white">
+                            <div className="max-w-md text-slate-900 dark:text-white">
                                 <h2 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">
                                     {banner.title}
                                 </h2>
                                 {banner.link && (
                                     <Link
                                         to={banner.link}
-                                        className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-blue-500/25"
+                                        className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-slate-900 dark:text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-blue-500/25"
                                     >
                                         Book Now
                                     </Link>
@@ -57,13 +57,13 @@ const BannerSlider = ({ banners }) => {
                 <>
                     <button
                         onClick={prev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gray-200 dark:bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-slate-900 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                         <ChevronLeft size={24} />
                     </button>
                     <button
                         onClick={next}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gray-200 dark:bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-slate-900 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                         <ChevronRight size={24} />
                     </button>

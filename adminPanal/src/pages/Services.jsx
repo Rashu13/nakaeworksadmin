@@ -123,13 +123,13 @@ const Services = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                         {/* Search */}
                         <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400" size={20} />
                             <input
                                 type="text"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                             />
                         </div>
 
@@ -140,8 +140,8 @@ const Services = () => {
                                     key={cat}
                                     onClick={() => setFilters({ ...filters, category: cat })}
                                     className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${filters.category === cat
-                                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-200 dark:shadow-primary-900/20'
-                                        : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'
+                                        ? 'bg-primary-600 text-slate-900 dark:text-white shadow-lg shadow-primary-200 dark:shadow-primary-900/20'
+                                        : 'bg-gray-100 dark:bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'
                                         }`}
                                 >
                                     {cat}
@@ -153,7 +153,7 @@ const Services = () => {
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
-                                className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-300"
+                                className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 transition-colors bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-700 dark:text-gray-300"
                             >
                                 <SlidersHorizontal size={18} />
                                 <span className="hidden sm:inline">Filters</span>
@@ -161,13 +161,13 @@ const Services = () => {
                             <div className="flex border border-gray-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
                                 <button
                                     onClick={() => setViewMode('grid')}
-                                    className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
+                                    className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800'}`}
                                 >
                                     <Grid size={18} />
                                 </button>
                                 <button
                                     onClick={() => setViewMode('list')}
-                                    className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
+                                    className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800'}`}
                                 >
                                     <List size={18} />
                                 </button>
@@ -183,12 +183,12 @@ const Services = () => {
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowFilters(false)}></div>
                     <div className="absolute right-0 top-0 bottom-0 w-80 bg-white dark:bg-slate-900 shadow-2xl p-6 overflow-y-auto border-l border-gray-200 dark:border-slate-800">
                         <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Filters</h3>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Filters</h3>
                             <button
                                 onClick={() => setShowFilters(false)}
-                                className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors"
                             >
-                                <X size={24} className="text-gray-500 dark:text-gray-400" />
+                                <X size={24} className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400" />
                             </button>
                         </div>
 
@@ -201,7 +201,7 @@ const Services = () => {
                             <select
                                 value={filters.sort}
                                 onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
-                                className="w-full p-3 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-primary-500"
+                                className="w-full p-3 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-primary-500"
                             >
                                 {sortOptions.map((opt) => (
                                     <option key={opt.value} value={opt.value} className="bg-white dark:bg-slate-900">{opt.label}</option>
@@ -222,7 +222,7 @@ const Services = () => {
                                         onClick={() => setFilters({ ...filters, rating: r })}
                                         className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border transition-all ${filters.rating === r
                                             ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
-                                            : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-500'
+                                            : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-500'
                                             }`}
                                     >
                                         {r > 0 ? (
@@ -238,7 +238,7 @@ const Services = () => {
 
                         <button
                             onClick={() => setShowFilters(false)}
-                            className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold shadow-lg shadow-primary-200 dark:shadow-none transition-all"
+                            className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-bold shadow-lg shadow-primary-200 dark:shadow-none transition-all"
                         >
                             Apply Filters
                         </button>
@@ -250,8 +250,8 @@ const Services = () => {
             <div className="max-w-7xl mx-auto px-4 py-8">
                 {/* Results Count */}
                 <div className="flex items-center justify-between mb-8">
-                    <p className="text-gray-600 dark:text-gray-400">
-                        Showing <span className="font-bold text-gray-900 dark:text-white">{filteredServices.length}</span> services
+                    <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400">
+                        Showing <span className="font-bold text-gray-900 dark:text-slate-900 dark:text-white">{filteredServices.length}</span> services
                         {filters.category !== 'All' && (
                             <> in <span className="text-primary-600 dark:text-primary-400 font-medium">{filters.category}</span></>
                         )}
@@ -285,17 +285,17 @@ const Services = () => {
                     </div>
                 ) : (
                     <div className="text-center py-24 bg-white dark:bg-slate-900 rounded-[3rem] border border-gray-100 dark:border-slate-800 shadow-sm">
-                        <div className="w-24 h-24 bg-gray-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Search size={40} className="text-gray-400 dark:text-gray-500" />
+                        <div className="w-24 h-24 bg-gray-50 dark:bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Search size={40} className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No services found</h3>
-                        <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-xs mx-auto">We couldn't find any services matching your current filters. Try adjusting them!</p>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-2">No services found</h3>
+                        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mb-8 max-w-xs mx-auto">We couldn't find any services matching your current filters. Try adjusting them!</p>
                         <button
                             onClick={() => {
                                 setSearchTerm('');
                                 setFilters({ ...filters, category: 'All', search: '', rating: 0 });
                             }}
-                            className="px-6 py-3 bg-primary-600 text-white rounded-xl font-medium"
+                            className="px-6 py-3 bg-primary-600 text-slate-900 dark:text-white rounded-xl font-medium"
                         >
                             Clear Filters
                         </button>

@@ -187,12 +187,12 @@ const ServicesAdmin = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Services</h1>
-                    <p className="text-gray-500 dark:text-gray-400">Manage your services</p>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Services</h1>
+                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Manage your services</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add Service
@@ -214,17 +214,17 @@ const ServicesAdmin = () => {
             )}
 
             {/* Table */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
                 <div className="p-4 border-b border-gray-100 dark:border-slate-700">
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="relative flex-1">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                             />
                         </div>
 
@@ -232,7 +232,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={categoryFilter}
                                 onChange={(e) => setCategoryFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[150px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[150px]"
                             >
                                 <option value="all">All Categories</option>
                                 {categories.map(cat => (
@@ -243,7 +243,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[120px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[120px]"
                             >
                                 <option value="all">All Status</option>
                                 <option value="active">Active</option>
@@ -257,12 +257,12 @@ const ServicesAdmin = () => {
                     <table className="w-full relative">
                         <thead className="bg-gray-50 dark:bg-slate-700/50 sticky top-0 z-10">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Service</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Category</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Price</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Duration</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Service</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Category</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Price</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Duration</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Status</th>
+                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
@@ -274,7 +274,7 @@ const ServicesAdmin = () => {
                                 </tr>
                             ) : filteredServices.length === 0 ? (
                                 <tr>
-                                    <td colSpan="6" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
+                                    <td colSpan="6" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                                         No services found
                                     </td>
                                 </tr>
@@ -289,43 +289,43 @@ const ServicesAdmin = () => {
                                                     className="w-12 h-12 rounded-lg object-cover bg-gray-100 dark:bg-slate-700"
                                                 />
                                                 <div>
-                                                    <p className="font-medium text-gray-900 dark:text-white">{service.name}</p>
-                                                    <p className="text-sm text-gray-500 dark:text-gray-400">{service.provider?.name || 'N/A'}</p>
+                                                    <p className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">{service.name}</p>
+                                                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{service.provider?.name || 'N/A'}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
+                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-700 dark:text-gray-300">
                                             {service.category?.name || 'N/A'}
                                         </td>
                                         <td className="px-6 py-4">
                                             <div>
-                                                <span className="font-medium text-gray-900 dark:text-white">₹{service.price}</span>
+                                                <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">₹{service.price}</span>
                                                 {service.discount > 0 && (
                                                     <span className="text-xs text-green-600 dark:text-green-400 ml-1">-{service.discount}%</span>
                                                 )}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{service.duration} min</td>
+                                        <td className="px-6 py-4 text-gray-600 dark:text-gray-700 dark:text-gray-300">{service.duration} min</td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${service.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${service.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-700 dark:text-gray-300'
                                                 }`}>
                                                 {service.status === true ? 'Active' : 'Inactive'}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center justify-end gap-2">
-                                                <button className="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
+                                                <button className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors">
                                                     <Eye size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => openModal(service)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => confirmDelete(service.id)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -340,8 +340,8 @@ const ServicesAdmin = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="p-4 border-t border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white dark:bg-slate-800 rounded-b-2xl">
-                    <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <div className="p-4 border-t border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-b-2xl">
+                    <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                         <div className="flex items-center gap-2">
                             <span>Rows per page:</span>
                             <select
@@ -351,7 +351,7 @@ const ServicesAdmin = () => {
                                     setItemsPerPage(val === 'all' ? 'all' : Number(val));
                                     setCurrentPage(1);
                                 }}
-                                className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-white"
+                                className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-slate-900 dark:text-white"
                             >
                                 <option value={10}>10</option>
                                 <option value={20}>20</option>
@@ -370,17 +370,17 @@ const ServicesAdmin = () => {
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1 || itemsPerPage === 'all'}
-                            className="p-2 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-300"
+                            className="p-2 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-700 dark:text-gray-300"
                         >
                             <ChevronLeft size={20} />
                         </button>
-                        <span className="text-sm font-medium text-gray-900 dark:text-white min-w-[80px] text-center">
+                        <span className="text-sm font-medium text-gray-900 dark:text-slate-900 dark:text-white min-w-[80px] text-center">
                             Page {currentPage} of {itemsPerPage === 'all' ? 1 : totalPages || 1}
                         </span>
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages || itemsPerPage === 'all' || totalPages === 0}
-                            className="p-2 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-300"
+                            className="p-2 border border-gray-200 dark:border-slate-600 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-700 dark:text-gray-300"
                         >
                             <ChevronRight size={20} />
                         </button>
@@ -392,16 +392,16 @@ const ServicesAdmin = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeModal}></div>
-                    <div className="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-5xl shadow-2xl transform transition-all flex flex-col max-h-[90vh] border border-gray-100 dark:border-slate-700">
+                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-5xl shadow-2xl transform transition-all flex flex-col max-h-[90vh] border border-gray-100 dark:border-slate-700">
                         {/* Header */}
                         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 flex-none">
                             <div>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">
                                     {editingService ? 'Edit Service' : 'Add New Service'}
                                 </h2>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Fill in the details below</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-1">Fill in the details below</p>
                             </div>
-                            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-colors">
+                            <button onClick={closeModal} className="text-gray-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-700 dark:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-colors">
                                 <X size={24} />
                             </button>
                         </div>
@@ -412,29 +412,29 @@ const ServicesAdmin = () => {
                             <div className="flex-1 overflow-y-auto p-6 space-y-8">
                                 {/* Section 1: Basic Information */}
                                 <div className="space-y-4">
-                                    <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                                    <h3 className="text-sm font-bold text-gray-900 dark:text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                                         <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Basic Information
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="md:col-span-2">
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Service Name *</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Service Name *</label>
                                             <input
                                                 type="text"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                 placeholder="e.g., Full Home Deep Cleaning"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                                 required
                                             />
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Category *</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Category *</label>
                                             <select
                                                 value={formData.categoryId}
                                                 onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                                 required
                                             >
                                                 <option value="">Select Category</option>
@@ -445,11 +445,11 @@ const ServicesAdmin = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Provider</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Provider</label>
                                             <select
                                                 value={formData.providerId}
                                                 onChange={(e) => setFormData({ ...formData, providerId: e.target.value })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                             >
                                                 <option value="">Select Provider (Optional)</option>
                                                 {providers.map(p => (
@@ -462,28 +462,28 @@ const ServicesAdmin = () => {
 
                                 {/* Section 2: Pricing & Details */}
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
-                                    <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                                    <h3 className="text-sm font-bold text-gray-900 dark:text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                                         <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Pricing & Details
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Price (₹) *</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Price (₹) *</label>
                                             <div className="relative">
-                                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 font-medium">₹</span>
+                                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-medium">₹</span>
                                                 <input
                                                     type="number"
                                                     value={formData.price}
                                                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                                                     placeholder="0.00"
-                                                    className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                    className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                                     required
                                                 />
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Discount (%)</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Discount (%)</label>
                                             <input
                                                 type="number"
                                                 value={formData.discount}
@@ -491,27 +491,27 @@ const ServicesAdmin = () => {
                                                 placeholder="0"
                                                 min="0"
                                                 max="100"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Duration (mins)</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Duration (mins)</label>
                                             <input
                                                 type="number"
                                                 value={formData.duration}
                                                 onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                                                 placeholder="60"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Status</label>
                                             <select
                                                 value={formData.status}
                                                 onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                             >
                                                 <option value={true}>Active</option>
                                                 <option value={false}>Inactive</option>
@@ -522,13 +522,13 @@ const ServicesAdmin = () => {
 
                                 {/* Section 3: Media & Description */}
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
-                                    <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                                    <h3 className="text-sm font-bold text-gray-900 dark:text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                                         <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Media & Description
                                     </h3>
                                     <div className="space-y-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Service Thumbnail</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Service Thumbnail</label>
                                             <div className="flex items-start gap-4">
                                                 {/* Preview */}
                                                 {formData.thumbnail && (
@@ -541,17 +541,17 @@ const ServicesAdmin = () => {
                                                                 onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                                                             />
                                                         ) : (
-                                                            <div className="w-24 h-24 flex items-center justify-center bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl text-gray-400">
+                                                            <div className="w-24 h-24 flex items-center justify-center bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl text-gray-600 dark:text-gray-400">
                                                                 <AlertCircle size={32} />
                                                             </div>
                                                         )}
-                                                        <div className="hidden w-24 h-24 items-center justify-center bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl text-gray-400">
+                                                        <div className="hidden w-24 h-24 items-center justify-center bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl text-gray-600 dark:text-gray-400">
                                                             <AlertCircle size={32} />
                                                         </div>
                                                         <button
                                                             type="button"
                                                             onClick={() => setFormData({ ...formData, thumbnail: '' })}
-                                                            className="absolute -top-2 -right-2 p-1 bg-white dark:bg-slate-700 text-gray-400 hover:text-red-500 rounded-full shadow-md border border-gray-100 dark:border-slate-600 transition-colors"
+                                                            className="absolute -top-2 -right-2 p-1 bg-white dark:bg-slate-700 text-gray-600 dark:text-gray-400 hover:text-red-500 rounded-full shadow-md border border-gray-100 dark:border-slate-600 transition-colors"
                                                         >
                                                             <X size={16} />
                                                         </button>
@@ -593,8 +593,8 @@ const ServicesAdmin = () => {
                                                         <label
                                                             htmlFor="thumbnail-upload"
                                                             className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-all ${uploading
-                                                                ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-400 cursor-not-allowed'
-                                                                : 'border-gray-200 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50/30 dark:hover:bg-primary-900/20 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
+                                                                ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 cursor-not-allowed'
+                                                                : 'border-gray-200 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50/30 dark:hover:bg-primary-900/20 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
                                                                 }`}
                                                         >
                                                             {uploading ? (
@@ -608,10 +608,10 @@ const ServicesAdmin = () => {
                                                                         <Upload size={24} className="group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
                                                                     </div>
                                                                     <div className="text-center">
-                                                                        <span className="text-sm font-semibold text-gray-900 dark:text-white">Click to upload</span>
-                                                                        <span className="text-sm text-gray-500 dark:text-gray-400"> or drag and drop</span>
+                                                                        <span className="text-sm font-semibold text-gray-900 dark:text-slate-900 dark:text-white">Click to upload</span>
+                                                                        <span className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400"> or drag and drop</span>
                                                                     </div>
-                                                                    <span className="text-xs text-gray-400">PNG, JPG, GIF up to 5MB</span>
+                                                                    <span className="text-xs text-gray-600 dark:text-gray-400">PNG, JPG, GIF up to 5MB</span>
                                                                 </div>
                                                             )}
                                                         </label>
@@ -621,13 +621,13 @@ const ServicesAdmin = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Description</label>
+                                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">Description</label>
                                             <textarea
                                                 value={formData.description}
                                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                                 placeholder="Write a detailed description of the service..."
                                                 rows={4}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow resize-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow resize-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
                                     </div>
@@ -636,7 +636,7 @@ const ServicesAdmin = () => {
                                 {/* Section 4: FAQs */}
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
                                     <div className="flex items-center justify-between">
-                                        <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                                        <h3 className="text-sm font-bold text-gray-900 dark:text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                                             <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                             Frequently Asked Questions
                                         </h3>
@@ -662,7 +662,7 @@ const ServicesAdmin = () => {
                                                         ...formData,
                                                         faqs: formData.faqs.filter((_, i) => i !== index)
                                                     })}
-                                                    className="absolute top-2 right-2 p-1.5 text-gray-400 hover:text-red-500 hover:bg-white dark:hover:bg-slate-600 rounded-lg opacity-0 group-hover:opacity-100 transition-all shadow-sm"
+                                                    className="absolute top-2 right-2 p-1.5 text-gray-600 dark:text-gray-400 hover:text-red-500 hover:bg-white dark:hover:bg-slate-600 rounded-lg opacity-0 group-hover:opacity-100 transition-all shadow-sm"
                                                 >
                                                     <X size={16} />
                                                 </button>
@@ -676,7 +676,7 @@ const ServicesAdmin = () => {
                                                             newFaqs[index].question = e.target.value;
                                                             setFormData({ ...formData, faqs: newFaqs });
                                                         }}
-                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm font-medium focus:border-primary-500 outline-none text-gray-900 dark:text-white placeholder-gray-400"
+                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm font-medium focus:border-primary-500 outline-none text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                                     />
                                                     <textarea
                                                         placeholder="Answer"
@@ -687,7 +687,7 @@ const ServicesAdmin = () => {
                                                             setFormData({ ...formData, faqs: newFaqs });
                                                         }}
                                                         rows={2}
-                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300 focus:border-primary-500 outline-none resize-none placeholder-gray-400"
+                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-700 dark:text-gray-300 focus:border-primary-500 outline-none resize-none placeholder-gray-400"
                                                     />
                                                 </div>
                                             </div>
@@ -695,8 +695,8 @@ const ServicesAdmin = () => {
 
                                         {formData.faqs.length === 0 && (
                                             <div className="text-center py-8 bg-gray-50 dark:bg-slate-700/30 rounded-xl border border-dashed border-gray-200 dark:border-slate-600">
-                                                <p className="text-sm text-gray-500 dark:text-gray-400">No FAQs added yet.</p>
-                                                <p className="text-xs text-gray-400 mt-1">Add common questions to help customers understand the service.</p>
+                                                <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">No FAQs added yet.</p>
+                                                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Add common questions to help customers understand the service.</p>
                                             </div>
                                         )}
                                     </div>
@@ -704,17 +704,17 @@ const ServicesAdmin = () => {
                             </div>
 
                             {/* Footer Buttons */}
-                            <div className="flex gap-4 p-6 border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 flex-none">
+                            <div className="flex gap-4 p-6 border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-gray-100 dark:bg-slate-800 flex-none">
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="flex-1 py-3.5 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-gray-300 transition-all"
+                                    className="flex-1 py-3.5 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700 hover:border-gray-300 transition-all"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-lg shadow-primary-200 dark:shadow-none hover:shadow-xl transition-all"
+                                    className="flex-1 py-3.5 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-semibold rounded-xl shadow-lg shadow-primary-200 dark:shadow-none hover:shadow-xl transition-all"
                                 >
                                     {editingService ? 'Update Service' : 'Create Service'}
                                 </button>

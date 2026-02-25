@@ -29,7 +29,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="bg-gray-900 text-gray-300">
+        <footer className="bg-[#0a0f1c] text-gray-400 border-t border-white/5">
             {/* Main Footer */}
             <div className="max-w-7xl mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -38,21 +38,21 @@ const Footer = () => {
                         <Link to="/" className="flex items-center gap-2 mb-6">
                             <img src="/logo-white-footer.png" alt="NakaeWorks" className="h-12 w-auto object-contain" />
                         </Link>
-                        <p className="text-gray-400 mb-6">
+                        <p className="text-gray-400 mb-6 font-medium leading-relaxed">
                             Your trusted platform for all home services. Book professional help for cleaning,
                             repair, beauty, and more.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors">
+                            <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors text-white hover:text-black">
                                 <Facebook size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors">
+                            <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors text-white hover:text-black">
                                 <Twitter size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors">
+                            <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors text-white hover:text-black">
                                 <Instagram size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors">
+                            <a href="#" className="w-10 h-10 bg-white/5 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors text-white hover:text-black">
                                 <Linkedin size={18} />
                             </a>
                         </div>
@@ -60,8 +60,8 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-white font-semibold mb-6">Quick Links</h3>
-                        <ul className="space-y-3">
+                        <h3 className="text-white font-semibold mb-6 tracking-wide">Quick Links</h3>
+                        <ul className="space-y-3 font-medium">
                             <li><Link to="/services" className="hover:text-primary-400 transition-colors">All Services</Link></li>
                             <li><Link to="/providers" className="hover:text-primary-400 transition-colors">Our Providers</Link></li>
                             <li><Link to="/about" className="hover:text-primary-400 transition-colors">About Us</Link></li>
@@ -72,8 +72,8 @@ const Footer = () => {
 
                     {/* Popular Services */}
                     <div>
-                        <h3 className="text-white font-semibold mb-6">Popular Services</h3>
-                        <ul className="space-y-3">
+                        <h3 className="text-white font-semibold mb-6 tracking-wide">Popular Services</h3>
+                        <ul className="space-y-3 font-medium">
                             <li><Link to="/services?category=cleaning" className="hover:text-primary-400 transition-colors">Home Cleaning</Link></li>
                             <li><Link to="/services?category=electrician" className="hover:text-primary-400 transition-colors">AC Repair</Link></li>
                             <li><Link to="/services?category=salon" className="hover:text-primary-400 transition-colors">Salon at Home</Link></li>
@@ -84,19 +84,19 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h3 className="text-white font-semibold mb-6">Contact Us</h3>
-                        <ul className="space-y-4">
+                        <h3 className="text-white font-semibold mb-6 tracking-wide">Contact Us</h3>
+                        <ul className="space-y-4 font-medium">
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-primary-400 mt-1 flex-shrink-0" />
-                                <span>Hisar Road, Sirsa, Haryana - 125055</span>
+                                <span className="text-gray-300">Hisar Road, Sirsa, Haryana - 125055</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={18} className="text-primary-400 flex-shrink-0" />
-                                <span>{settings.support_phone}</span>
+                                <span className="text-gray-300">{settings.support_phone}</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={18} className="text-primary-400 flex-shrink-0" />
-                                <span className="break-all">{settings.support_email}</span>
+                                <span className="break-all text-gray-300">{settings.support_email}</span>
                             </li>
                         </ul>
                     </div>
@@ -104,12 +104,12 @@ const Footer = () => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="border-t border-gray-800">
+            <div className="border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 font-medium">
                         © 2024 NakaeWorks. All rights reserved.
                     </p>
-                    <div className="flex gap-6 text-sm">
+                    <div className="flex gap-6 text-sm font-semibold">
                         <Link to="/privacy" className="hover:text-primary-400 transition-colors">Privacy Policy</Link>
                         <Link to="/terms" className="hover:text-primary-400 transition-colors">Terms of Service</Link>
                         <Link to="/refund" className="hover:text-primary-400 transition-colors">Refund Policy</Link>

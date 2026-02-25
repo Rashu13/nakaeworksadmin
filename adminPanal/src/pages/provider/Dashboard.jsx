@@ -95,10 +95,10 @@ const Dashboard = () => {
                         <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                             <div className="flex items-start justify-between">
                                 <div>
-                                    <p className="text-gray-500 text-sm font-medium">{stat.title}</p>
+                                    <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">{stat.title}</p>
                                     <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
                                     {stat.subtitle && (
-                                        <p className="text-gray-400 text-sm mt-1">{stat.subtitle}</p>
+                                        <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{stat.subtitle}</p>
                                     )}
                                     {stat.trend && (
                                         <div className="flex items-center gap-1 mt-2 text-emerald-600">
@@ -108,7 +108,7 @@ const Dashboard = () => {
                                     )}
                                 </div>
                                 <div className={`${stat.color} p-3 rounded-xl`}>
-                                    <Icon className="w-6 h-6 text-white" />
+                                    <Icon className="w-6 h-6 text-slate-900 dark:text-white" />
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ const Dashboard = () => {
 
             {/* Monthly Earnings Card */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-white">
+                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-slate-900 dark:text-white">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold opacity-90">This Month's Earnings</h3>
                         <TrendingUp className="w-6 h-6 opacity-80" />
@@ -171,8 +171,8 @@ const Dashboard = () => {
 
                 {recentBookings.length === 0 ? (
                     <div className="p-12 text-center">
-                        <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                        <p className="text-gray-500">No bookings yet</p>
+                        <Calendar className="w-12 h-12 text-gray-700 dark:text-gray-300 mx-auto mb-4" />
+                        <p className="text-gray-500 dark:text-gray-400">No bookings yet</p>
                     </div>
                 ) : (
                     <div className="divide-y divide-gray-100">
@@ -192,14 +192,14 @@ const Dashboard = () => {
                                         />
                                         <div>
                                             <p className="font-medium text-gray-900">{booking.consumer?.name}</p>
-                                            <p className="text-sm text-gray-500">{booking.service?.name}</p>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">{booking.service?.name}</p>
                                         </div>
                                     </div>
                                     <div className="text-right">
                                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(booking.status?.slug)}`}>
                                             {booking.status?.name}
                                         </span>
-                                        <p className="text-sm text-gray-500 mt-1">
+                                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                                             {new Date(booking.dateTime).toLocaleDateString('en-IN', {
                                                 day: 'numeric',
                                                 month: 'short',

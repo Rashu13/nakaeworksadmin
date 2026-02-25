@@ -35,13 +35,13 @@ const ProviderLayout = () => {
                 <div className="h-16 flex items-center justify-between px-4 border-b border-emerald-700">
                     <Link to="/provider" className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
-                            <span className="text-white font-bold text-xl">N</span>
+                            <span className="text-slate-900 dark:text-white font-bold text-xl">N</span>
                         </div>
-                        {sidebarOpen && <span className="text-white font-bold text-lg">Provider Panel</span>}
+                        {sidebarOpen && <span className="text-slate-900 dark:text-white font-bold text-lg">Provider Panel</span>}
                     </Link>
                     <button
                         onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className="text-emerald-300 hover:text-white lg:hidden"
+                        className="text-emerald-300 hover:text-slate-900 dark:text-white lg:hidden"
                     >
                         {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
@@ -58,8 +58,8 @@ const ProviderLayout = () => {
                                 key={item.path}
                                 to={item.path}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                    ? 'bg-emerald-600 text-white shadow-lg'
-                                    : 'text-emerald-200 hover:bg-emerald-700/50 hover:text-white'
+                                    ? 'bg-emerald-600 text-slate-900 dark:text-white shadow-lg'
+                                    : 'text-emerald-200 hover:bg-emerald-700/50 hover:text-slate-900 dark:text-white'
                                     }`}
                             >
                                 <Icon size={20} />
@@ -73,7 +73,7 @@ const ProviderLayout = () => {
                 <div className="absolute bottom-4 left-4 right-4 space-y-2">
                     <Link
                         to="/"
-                        className="flex items-center gap-3 px-4 py-3 w-full text-emerald-200 hover:text-white hover:bg-emerald-700/50 rounded-xl transition-all"
+                        className="flex items-center gap-3 px-4 py-3 w-full text-emerald-200 hover:text-slate-900 dark:text-white hover:bg-emerald-700/50 rounded-xl transition-all"
                     >
                         <Home size={20} />
                         {sidebarOpen && <span className="font-medium">Back to Home</span>}
@@ -129,7 +129,7 @@ const ProviderLayout = () => {
                                     <span className="font-medium text-gray-700 block">{user?.name || 'Provider'}</span>
                                     <span className="text-xs text-emerald-600">Service Provider</span>
                                 </div>
-                                <ChevronDown size={16} className="text-gray-400" />
+                                <ChevronDown size={16} className="text-gray-600 dark:text-gray-400" />
                             </button>
 
                             {showUserMenu && (

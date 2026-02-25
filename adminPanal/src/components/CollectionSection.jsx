@@ -21,7 +21,7 @@ const CollectionSection = ({ title, services }) => {
     };
 
     return (
-        <section className="py-20 bg-[#0a0f1c] overflow-hidden transition-colors duration-300">
+        <section className="py-10 bg-gray-50 dark:bg-[#0a0f1c] overflow-hidden transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex items-end justify-between mb-12">
                     <motion.div
@@ -29,7 +29,7 @@ const CollectionSection = ({ title, services }) => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">{title}</h2>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">{title}</h2>
                         <div className="h-1.5 w-12 bg-amber-500 rounded-full mt-4"></div>
                     </motion.div>
                     <Link to="/services" className="group flex items-center gap-2 text-amber-500 font-bold text-sm tracking-widest uppercase hover:text-amber-400 transition-colors">
@@ -49,7 +49,7 @@ const CollectionSection = ({ title, services }) => {
                         >
                             <Link
                                 to={`/service/${service.slug || service.id}`}
-                                className="block min-w-[300px] md:min-w-[360px] bg-white/5 backdrop-blur-sm rounded-[32px] border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-500 group shadow-2xl shadow-black/40"
+                                className="block min-w-[300px] md:min-w-[360px] bg-gray-100 dark:bg-white/5 backdrop-blur-sm rounded-[32px] border border-gray-200 dark:border-white/10 overflow-hidden hover:bg-gray-200 dark:bg-white/10 hover:border-white/20 transition-all duration-500 group shadow-2xl shadow-black/40"
                             >
                                 <div className="relative h-56 overflow-hidden">
                                     <img
@@ -65,26 +65,26 @@ const CollectionSection = ({ title, services }) => {
                                         </div>
                                     )}
 
-                                    <div className="absolute bottom-6 left-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10">
+                                    <div className="absolute bottom-6 left-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full border border-gray-200 dark:border-white/10">
                                         <Star size={12} className="fill-amber-500 text-amber-500" />
                                         <span className="text-white text-xs font-bold">{service.rating}</span>
-                                        <span className="text-white/60 text-[10px] font-medium">({service.reviewCount})</span>
+                                        <span className="text-white/80 text-[10px] font-medium">({service.reviewCount})</span>
                                     </div>
                                 </div>
 
                                 <div className="p-8">
-                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors line-clamp-1 italic tracking-tight">
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors line-clamp-1 italic tracking-tight">
                                         {service.name}
                                     </h3>
-                                    <p className="text-gray-400 text-sm mb-6 line-clamp-2 font-medium">
+                                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-2 font-medium">
                                         Professional {service.categoryName || 'home service'} tailored for your needs.
                                     </p>
 
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <span className="text-2xl font-black text-white">₹{service.price - (service.discount || 0)}</span>
+                                            <span className="text-2xl font-black text-slate-900 dark:text-white">₹{service.price - (service.discount || 0)}</span>
                                             {service.discount > 0 && (
-                                                <span className="text-xs text-white/30 line-through">₹{service.price}</span>
+                                                <span className="text-xs text-slate-900 dark:text-white/30 line-through">₹{service.price}</span>
                                             )}
                                         </div>
                                         <div className="flex items-center gap-2">
@@ -93,8 +93,8 @@ const CollectionSection = ({ title, services }) => {
                                                 whileTap={{ scale: 0.95 }}
                                                 onClick={(e) => handleAddToCart(e, service)}
                                                 className={`p-2.5 rounded-full border transition-all duration-300 shadow-lg ${addedIds.includes(service.id)
-                                                        ? 'bg-emerald-500 border-emerald-400 text-white'
-                                                        : 'bg-white/10 border-white/20 text-white hover:bg-amber-500/20 hover:border-amber-500/40'
+                                                    ? 'bg-emerald-500 border-emerald-400 text-slate-900 dark:text-white'
+                                                    : 'bg-gray-200 dark:bg-white/10 border-white/20 text-slate-900 dark:text-white hover:bg-amber-500/20 hover:border-amber-500/40'
                                                     }`}
                                             >
                                                 {addedIds.includes(service.id) ? <Check size={16} /> : <ShoppingCart size={16} />}

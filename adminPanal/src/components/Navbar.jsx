@@ -56,7 +56,7 @@ const Navbar = () => {
         <nav
             className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${isTransparent
                 ? 'bg-transparent py-6'
-                : 'bg-[#0a0f1c]/80 backdrop-blur-xl py-3 border-b border-white/5 shadow-2xl shadow-black/20'
+                : 'bg-gray-50 dark:bg-[#0a0f1c]/80 backdrop-blur-xl py-3 border-b border-gray-200 dark:border-white/5 shadow-2xl shadow-black/20'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +68,7 @@ const Navbar = () => {
                             transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         >
                             <img
-                                src={isTransparent ? "/logo-white-footer.png" : "/logo-white-footer.png"} // Always using white logo for this premium dark theme
+                                src={isDarkMode ? "/logo-white-footer.png" : "/logo.png"}
                                 alt="NakaeWorks"
                                 className="h-12 w-auto object-contain"
                             />
@@ -81,7 +81,7 @@ const Navbar = () => {
                             <Link
                                 key={link.name}
                                 to={link.path}
-                                className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group ${isTransparent ? 'text-white/80 hover:text-white' : 'text-gray-300 hover:text-white'
+                                className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group ${isTransparent ? 'text-slate-900 dark:text-white/80 hover:text-slate-900 dark:text-white' : 'text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white'
                                     }`}
                             >
                                 {link.name}
@@ -92,8 +92,8 @@ const Navbar = () => {
                         {/* Search Bar */}
                         <div className="relative group ml-2">
                             <div className="absolute inset-0 bg-primary-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className={`relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-white/5 border-white/10 w-48' : 'bg-gray-800/20 border-white/5 w-60'
-                                } group-focus-within:w-72 group-focus-within:border-primary-500/50 group-focus-within:bg-white/10 backdrop-blur-md`}>
+                            <div className={`relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 w-48' : 'bg-gray-800/20 border-gray-200 dark:border-white/5 w-60'
+                                } group-focus-within:w-72 group-focus-within:border-primary-500/50 group-focus-within:bg-gray-200 dark:bg-white/10 backdrop-blur-md`}>
                                 <Search size={14} className="text-primary-400 shrink-0" />
                                 <input
                                     type="text"
@@ -106,7 +106,7 @@ const Navbar = () => {
                                             setSearchNavbar('');
                                         }
                                     }}
-                                    className="bg-transparent border-none focus:ring-0 text-[11px] font-bold text-white placeholder:text-gray-500 w-full tracking-wider uppercase"
+                                    className="bg-transparent border-none focus:ring-0 text-[11px] font-bold text-slate-900 dark:text-white placeholder:text-gray-500 dark:text-gray-400 w-full tracking-wider uppercase"
                                 />
                             </div>
                         </div>
@@ -116,33 +116,33 @@ const Navbar = () => {
                     <div className="flex items-center gap-6">
                         {/* Location */}
                         <button className={`hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${isTransparent
-                            ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
-                            : 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/10'
+                            ? 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white hover:bg-gray-200 dark:bg-white/10'
+                            : 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-800 dark:text-gray-200 hover:bg-gray-200 dark:bg-white/10'
                             }`}>
                             <MapPin size={14} className="text-primary-400" />
                             <span className="text-xs font-bold tracking-tight uppercase">{userLocation}</span>
-                            <ChevronDown size={12} className="text-gray-400" />
+                            <ChevronDown size={12} className="text-gray-600 dark:text-gray-400" />
                         </button>
 
                         <div className="flex items-center gap-3">
                             {/* Theme Toggle - Potentially hidden in this specific dark-first premium look, but kept for functionality */}
                             <button
                                 onClick={toggleTheme}
-                                className={`p-2 rounded-full transition-all duration-300 ${isTransparent ? 'text-white/80 hover:bg-white/10' : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                                className={`p-2 rounded-full transition-all duration-300 ${isTransparent ? 'text-slate-900 dark:text-white/80 hover:bg-gray-200 dark:bg-white/10' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-white/5 hover:text-slate-900 dark:text-white'
                                     }`}
                             >
                                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                             </button>
 
                             {isAuthenticated ? (
-                                <div className="flex items-center gap-4 pl-4 border-l border-white/10">
-                                    <button className="p-2 text-gray-400 hover:text-white transition-colors relative">
+                                <div className="flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-white/10">
+                                    <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors relative">
                                         <Heart size={20} />
                                     </button>
 
                                     <button
                                         onClick={() => navigate('/cart')}
-                                        className="p-2 text-gray-400 hover:text-white transition-colors relative"
+                                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors relative"
                                     >
                                         <ShoppingBag size={20} />
                                         {totalItems > 0 && (
@@ -172,11 +172,11 @@ const Navbar = () => {
                                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                    className="absolute right-0 mt-4 w-56 bg-[#161b22] border border-white/10 rounded-2xl shadow-2xl py-3 overflow-hidden"
+                                                    className="absolute right-0 mt-4 w-56 bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/10 rounded-2xl shadow-2xl py-3 overflow-hidden"
                                                 >
-                                                    <div className="px-5 py-3 border-b border-white/5 mb-2">
-                                                        <p className="font-bold text-white text-sm">{user?.name}</p>
-                                                        <p className="text-[11px] text-gray-400 font-medium truncate">{user?.email}</p>
+                                                    <div className="px-5 py-3 border-b border-gray-200 dark:border-white/5 mb-2">
+                                                        <p className="font-bold text-slate-900 dark:text-white text-sm">{user?.name}</p>
+                                                        <p className="text-[11px] text-gray-600 dark:text-gray-400 font-medium truncate">{user?.email}</p>
                                                     </div>
 
                                                     <div className="px-2 space-y-1">
@@ -192,7 +192,7 @@ const Navbar = () => {
                                                                         navigate(item.path, { state: item.state });
                                                                         setShowUserMenu(false);
                                                                     }}
-                                                                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                                                                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white hover:bg-gray-100 dark:bg-white/5 rounded-xl transition-all"
                                                                 >
                                                                     <item.icon size={16} className="text-primary-400" />
                                                                     {item.label}
@@ -202,7 +202,7 @@ const Navbar = () => {
 
                                                         <button
                                                             onClick={handleLogout}
-                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-400/10 rounded-xl transition-all mt-2 pt-2 border-t border-white/5"
+                                                            className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-400/10 rounded-xl transition-all mt-2 pt-2 border-t border-gray-200 dark:border-white/5"
                                                         >
                                                             <LogOut size={16} />
                                                             Logout
@@ -214,10 +214,10 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+                                <div className="flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-white/10">
                                     <Link
                                         to="/login"
-                                        className={`text-sm font-bold tracking-tight uppercase transition-colors ${isTransparent ? 'text-white/80 hover:text-white' : 'text-gray-300 hover:text-white'
+                                        className={`text-sm font-bold tracking-tight uppercase transition-colors ${isTransparent ? 'text-slate-900 dark:text-white/80 hover:text-slate-900 dark:text-white' : 'text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white'
                                             }`}
                                     >
                                         Login
@@ -234,7 +234,7 @@ const Navbar = () => {
                             {/* Mobile Menu Button */}
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className={`md:hidden p-2 rounded-xl transition-colors ${isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-300 hover:bg-white/5'
+                                className={`md:hidden p-2 rounded-xl transition-colors ${isTransparent ? 'text-slate-900 dark:text-white hover:bg-gray-200 dark:bg-white/10' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-white/5'
                                     }`}
                             >
                                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -250,24 +250,24 @@ const Navbar = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="md:hidden overflow-hidden bg-[#161b22] rounded-3xl mt-4 border border-white/10 shadow-2xl"
+                            className="md:hidden overflow-hidden bg-white dark:bg-[#161b22] rounded-3xl mt-4 border border-gray-200 dark:border-white/10 shadow-2xl"
                         >
                             <div className="flex flex-col p-4 gap-2">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link.name}
                                         to={link.path}
-                                        className="px-6 py-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-2xl transition-all"
+                                        className="px-6 py-4 text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white hover:bg-gray-100 dark:bg-white/5 rounded-2xl transition-all"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {link.name}
                                     </Link>
                                 ))}
                                 {!isAuthenticated && (
-                                    <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/5">
+                                    <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200 dark:border-white/5">
                                         <Link
                                             to="/login"
-                                            className="w-full py-4 text-center text-white border border-white/10 rounded-2xl font-bold"
+                                            className="w-full py-4 text-center text-slate-900 dark:text-white border border-gray-200 dark:border-white/10 rounded-2xl font-bold"
                                             onClick={() => setIsOpen(false)}
                                         >
                                             Login

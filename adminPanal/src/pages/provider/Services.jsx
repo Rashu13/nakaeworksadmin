@@ -158,7 +158,7 @@ const Services = () => {
                 </div>
                 <button
                     onClick={() => { resetForm(); setEditingService(null); setShowModal(true); }}
-                    className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white px-4 py-2 rounded-xl font-medium transition-colors"
                 >
                     <Plus className="w-5 h-5" />
                     Add Service
@@ -172,12 +172,12 @@ const Services = () => {
                 </div>
             ) : services.length === 0 ? (
                 <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
-                    <ImageIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <ImageIcon className="w-16 h-16 text-gray-700 dark:text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">No services yet</h3>
-                    <p className="text-gray-500 mb-4">Add your first service to start receiving bookings</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">Add your first service to start receiving bookings</p>
                     <button
                         onClick={() => setShowModal(true)}
-                        className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-xl font-medium transition-colors"
+                        className="bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white px-6 py-2 rounded-xl font-medium transition-colors"
                     >
                         Add Your First Service
                     </button>
@@ -201,11 +201,11 @@ const Services = () => {
                                 />
                                 {!service.status && (
                                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                        <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">Inactive</span>
+                                        <span className="bg-red-500 text-slate-900 dark:text-white px-3 py-1 rounded-full text-sm font-medium">Inactive</span>
                                     </div>
                                 )}
                                 {service.discount > 0 && (
-                                    <span className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded-lg text-xs font-medium">
+                                    <span className="absolute top-3 left-3 bg-red-500 text-slate-900 dark:text-white px-2 py-1 rounded-lg text-xs font-medium">
                                         {Math.round((service.discount / service.price) * 100)}% OFF
                                     </span>
                                 )}
@@ -220,7 +220,7 @@ const Services = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
                                     <span className="flex items-center gap-1">
                                         <Clock className="w-4 h-4" />
                                         {service.duration}min
@@ -236,7 +236,7 @@ const Services = () => {
                                         {service.discount > 0 ? (
                                             <div className="flex items-center gap-2">
                                                 <span className="text-lg font-bold text-gray-900">₹{(service.price - service.discount).toLocaleString()}</span>
-                                                <span className="text-sm text-gray-400 line-through">₹{parseFloat(service.price).toLocaleString()}</span>
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 line-through">₹{parseFloat(service.price).toLocaleString()}</span>
                                             </div>
                                         ) : (
                                             <span className="text-lg font-bold text-gray-900">₹{parseFloat(service.price).toLocaleString()}</span>
@@ -245,13 +245,13 @@ const Services = () => {
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => handleEdit(service)}
-                                            className="p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                                            className="p-2 text-gray-500 dark:text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                                         >
                                             <Edit2 className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => confirmDelete(service.id)}
-                                            className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                            className="p-2 text-gray-500 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </button>
@@ -400,7 +400,7 @@ const Services = () => {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                                    className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white px-4 py-2 rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                                 >
                                     {saving && <Loader className="w-4 h-4 animate-spin" />}
                                     {editingService ? 'Update' : 'Add Service'}

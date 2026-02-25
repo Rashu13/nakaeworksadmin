@@ -30,7 +30,7 @@ const Reviews = () => {
         return Array.from({ length: 5 }, (_, i) => (
             <Star
                 key={i}
-                className={`w-4 h-4 ${i < rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`}
+                className={`w-4 h-4 ${i < rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-700 dark:text-gray-300'}`}
             />
         ));
     };
@@ -81,7 +81,7 @@ const Reviews = () => {
                         <div className="flex items-center justify-center md:justify-start gap-1 mt-2">
                             {renderStars(Math.round(getAverageRating()))}
                         </div>
-                        <p className="text-gray-500 mt-2">Based on {pagination.total} reviews</p>
+                        <p className="text-gray-500 dark:text-gray-400 mt-2">Based on {pagination.total} reviews</p>
                     </div>
 
                     {/* Rating Distribution */}
@@ -98,7 +98,7 @@ const Reviews = () => {
                                             style={{ width: `${percentage}%` }}
                                         />
                                     </div>
-                                    <span className="text-sm text-gray-500 w-8">{count}</span>
+                                    <span className="text-sm text-gray-500 dark:text-gray-400 w-8">{count}</span>
                                 </div>
                             );
                         })}
@@ -109,9 +109,9 @@ const Reviews = () => {
             {/* Reviews List */}
             {reviews.length === 0 ? (
                 <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
-                    <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <MessageSquare className="w-16 h-16 text-gray-700 dark:text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">No reviews yet</h3>
-                    <p className="text-gray-500">Reviews will appear here after customers rate your services</p>
+                    <p className="text-gray-500 dark:text-gray-400">Reviews will appear here after customers rate your services</p>
                 </div>
             ) : (
                 <div className="space-y-4">
@@ -139,7 +139,7 @@ const Reviews = () => {
                                             <div className="flex items-center gap-1">
                                                 {renderStars(review.rating)}
                                             </div>
-                                            <p className="text-xs text-gray-500 mt-1">
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                                 {new Date(review.createdAt).toLocaleDateString('en-IN', {
                                                     day: 'numeric',
                                                     month: 'short',
@@ -166,7 +166,7 @@ const Reviews = () => {
                             key={i + 1}
                             onClick={() => fetchReviews(i + 1)}
                             className={`px-4 py-2 rounded-lg font-medium transition-colors ${pagination.page === i + 1
-                                ? 'bg-emerald-500 text-white'
+                                ? 'bg-emerald-500 text-slate-900 dark:text-white'
                                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                         >

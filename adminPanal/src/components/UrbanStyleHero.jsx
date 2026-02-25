@@ -59,7 +59,7 @@ export default function UrbanStyleHero() {
     };
 
     return (
-        <div className="relative w-full bg-[#0a0f1c] pt-28 pb-24 overflow-hidden">
+        <div className="relative w-full bg-gray-50 dark:bg-[#0a0f1c] pt-28 pb-10 overflow-hidden">
             {/* Abstract Background Decorations */}
             <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
@@ -75,7 +75,7 @@ export default function UrbanStyleHero() {
                 >
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl md:text-6xl lg:text-[72px] font-extrabold text-white leading-[1.05] tracking-tight mb-8"
+                        className="text-5xl md:text-6xl lg:text-[72px] font-extrabold text-slate-900 dark:text-white leading-[1.05] tracking-tight mb-8"
                     >
                         Expert services,<br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-200">
@@ -85,7 +85,7 @@ export default function UrbanStyleHero() {
 
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed"
+                        className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed"
                     >
                         Quality home maintenance, cleaning, and wellness services delivered by verified professionals in minutes.
                     </motion.p>
@@ -104,20 +104,20 @@ export default function UrbanStyleHero() {
                                     navigate(`/services?search=${encodeURIComponent(query)}`);
                                 }
                             }}
-                            className="relative flex items-center bg-[#161b22] border border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl"
+                            className="relative flex items-center bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl"
                         >
-                            <div className="pl-6 text-gray-500">
+                            <div className="pl-6 text-gray-500 dark:text-gray-400">
                                 <Search size={22} className="group-focus-within:text-primary-500 transition-colors" />
                             </div>
                             <input
                                 name="search"
                                 type="text"
                                 placeholder="Search for 'AC Repair', 'Cleaning'..."
-                                className="w-full bg-transparent border-none focus:ring-0 text-white py-4 px-4 font-medium placeholder:text-gray-600 outline-none"
+                                className="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white py-4 px-4 font-medium placeholder:text-gray-600 outline-none"
                             />
                             <button
                                 type="submit"
-                                className="bg-primary-500 hover:bg-primary-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+                                className="bg-primary-500 hover:bg-primary-600 text-slate-900 dark:text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95"
                             >
                                 Search
                             </button>
@@ -126,17 +126,17 @@ export default function UrbanStyleHero() {
 
                     <motion.div
                         variants={itemVariants}
-                        className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                        className="bg-gray-100 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                     >
                         <div className="flex items-center justify-between mb-8">
-                            <h2 className="text-xl font-semibold text-white">
+                            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
                                 Popular Categories
                             </h2>
                         </div>
 
                         {isLoading ? (
                             <div className="flex justify-center py-10">
-                                <div className="w-10 h-10 border-4 border-white/5 border-t-primary-400 rounded-full animate-spin"></div>
+                                <div className="w-10 h-10 border-4 border-gray-200 dark:border-white/5 border-t-primary-400 rounded-full animate-spin"></div>
                             </div>
                         ) : isError ? (
                             <div className="text-red-400 py-4 text-center bg-red-400/10 rounded-lg border border-red-400/20">
@@ -152,7 +152,7 @@ export default function UrbanStyleHero() {
                                         className="flex flex-col items-center justify-start cursor-pointer group"
                                         onClick={() => navigate(`/services?category=${category.slug || category.name}`)}
                                     >
-                                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-primary-500/10 group-hover:border-primary-500/30 mb-3 relative overflow-hidden">
+                                        <div className="w-16 h-16 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-primary-500/10 group-hover:border-primary-500/30 mb-3 relative overflow-hidden">
                                             {/* Glow effect on hover */}
                                             <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/5 transition-colors duration-300" />
 
@@ -162,11 +162,11 @@ export default function UrbanStyleHero() {
                                                     NEW
                                                 </span>
                                             )}
-                                            <div className="text-gray-400 transition-transform duration-300 group-hover:scale-110">
+                                            <div className="text-gray-600 dark:text-gray-400 transition-transform duration-300 group-hover:scale-110">
                                                 {getIcon(category)}
                                             </div>
                                         </div>
-                                        <span className="text-[13px] text-center font-semibold text-gray-300 group-hover:text-white transition-colors duration-200">
+                                        <span className="text-[13px] text-center font-semibold text-gray-700 dark:text-gray-300 group-hover:text-slate-900 dark:text-white transition-colors duration-200">
                                             {category.name}
                                         </span>
                                     </motion.div>
@@ -184,13 +184,13 @@ export default function UrbanStyleHero() {
                     className="lg:w-[50%] mt-16 lg:mt-0 hidden md:block relative"
                 >
                     {/* Decorative Ring */}
-                    <div className="absolute -inset-4 border border-white/5 rounded-[40px] pointer-events-none" />
+                    <div className="absolute -inset-4 border border-gray-200 dark:border-white/5 rounded-[40px] pointer-events-none" />
 
                     <div className="grid grid-cols-2 gap-4 h-[600px]">
                         <div className="space-y-4 pt-12">
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[280px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
+                                className="h-[280px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-white/10 group"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
@@ -200,7 +200,7 @@ export default function UrbanStyleHero() {
                             </motion.div>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[240px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
+                                className="h-[240px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-white/10 group"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80"
@@ -212,7 +212,7 @@ export default function UrbanStyleHero() {
                         <div className="space-y-4">
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
+                                className="h-[320px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-white/10 group"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=600&q=80"
@@ -222,17 +222,17 @@ export default function UrbanStyleHero() {
                             </motion.div>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[200px] rounded-3xl overflow-hidden bg-primary-500/20 flex items-center justify-center border border-white/10 relative group"
+                                className="h-[200px] rounded-3xl overflow-hidden bg-primary-500/20 flex items-center justify-center border border-gray-200 dark:border-white/10 relative group"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&w=600&q=80"
                                     alt="Home Cleaning"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                                 />
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
+                                <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-900 dark:text-white p-4">
                                     <Sparkles className="mb-2 text-primary-400 group-hover:rotate-12 transition-transform duration-300" size={32} />
                                     <span className="font-bold text-lg">Verified Help</span>
-                                    <span className="text-xs text-white/70">Top rated pros only</span>
+                                    <span className="text-xs text-slate-900 dark:text-white/70">Top rated pros only</span>
                                 </div>
                             </motion.div>
                         </div>

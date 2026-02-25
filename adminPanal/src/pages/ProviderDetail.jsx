@@ -39,7 +39,7 @@ const ProviderDetail = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0a0f1c] pt-32 flex justify-center items-center">
+            <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] pt-32 flex justify-center items-center">
                 <Loader className="w-10 h-10 animate-spin text-primary-500" />
             </div>
         );
@@ -47,8 +47,8 @@ const ProviderDetail = () => {
 
     if (!provider) {
         return (
-            <div className="min-h-screen bg-[#0a0f1c] pt-32 flex flex-col justify-center items-center text-gray-500">
-                <h2 className="text-2xl font-bold text-white mb-4">Master not found</h2>
+            <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] pt-32 flex flex-col justify-center items-center text-gray-500 dark:text-gray-400">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Master not found</h2>
                 <button
                     onClick={() => navigate('/providers')}
                     className="text-primary-500 hover:text-primary-400 font-bold uppercase tracking-widest text-sm"
@@ -62,7 +62,7 @@ const ProviderDetail = () => {
     const fullAvatar = provider.avatar ? (provider.avatar.startsWith('http') ? provider.avatar : `${BASE_URL}${provider.avatar}`) : `https://ui-avatars.com/api/?name=${provider.name}&background=1f2937&color=fff`;
 
     return (
-        <div className="min-h-screen bg-[#0a0f1c] pt-32 pb-24 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] pt-32 pb-24 relative overflow-hidden">
             {/* Background Glows */}
             <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-500/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -81,7 +81,7 @@ const ProviderDetail = () => {
                                 <img
                                     src={fullAvatar}
                                     alt={provider.name}
-                                    className="w-40 h-40 rounded-[2.5rem] object-cover border-2 border-white/10 relative z-10"
+                                    className="w-40 h-40 rounded-[2.5rem] object-cover border-2 border-gray-200 dark:border-white/10 relative z-10"
                                 />
                                 {provider.isVerified && (
                                     <div className="absolute -bottom-2 -right-2 bg-primary-500 p-2 rounded-full border-4 border-[#0a0f1c] z-20 shadow-xl">
@@ -92,9 +92,9 @@ const ProviderDetail = () => {
 
                             <div className="text-center md:text-left pt-2">
                                 <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                                    <h1 className="text-4xl font-black text-white tracking-tight">{provider.name}</h1>
+                                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{provider.name}</h1>
                                 </div>
-                                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-gray-400 text-sm font-bold uppercase tracking-widest mb-6">
+                                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-gray-600 dark:text-gray-400 text-sm font-bold uppercase tracking-widest mb-6">
                                     <div className="flex items-center gap-1.5 bg-primary-500/10 px-3 py-1 rounded-full border border-primary-500/20">
                                         <Star size={14} className="fill-primary-500 text-primary-500" />
                                         <span className="text-primary-500">{parseFloat(provider.rating || 4.5).toFixed(1)} Rating</span>
@@ -108,14 +108,14 @@ const ProviderDetail = () => {
                                         <span>Verified Professional</span>
                                     </div>
                                 </div>
-                                <p className="text-gray-400 font-medium leading-relaxed max-w-xl">
+                                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-xl">
                                     {provider.about || "This master professional provides exceptional home services with a focus on quality, reliability, and precision. Vetted for excellence in their respective craft."}
                                 </p>
                             </div>
                         </motion.div>
 
                         {/* Tabs */}
-                        <div className="flex gap-8 border-b border-white/5 pb-4 overflow-x-auto">
+                        <div className="flex gap-8 border-b border-gray-200 dark:border-white/5 pb-4 overflow-x-auto">
                             {[
                                 { id: 'services', label: 'Offerings', icon: Award },
                                 { id: 'reviews', label: 'User Feedback', icon: MessageSquare }
@@ -123,7 +123,7 @@ const ProviderDetail = () => {
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`flex items-center gap-2 font-black uppercase tracking-[0.2em] text-[10px] pb-4 relative transition-colors ${activeTab === tab.id ? 'text-primary-500' : 'text-gray-500 hover:text-white'
+                                    className={`flex items-center gap-2 font-black uppercase tracking-[0.2em] text-[10px] pb-4 relative transition-colors ${activeTab === tab.id ? 'text-primary-500' : 'text-gray-500 dark:text-gray-400 hover:text-slate-900 dark:text-white'
                                         }`}
                                 >
                                     <tab.icon size={16} />
@@ -152,15 +152,15 @@ const ProviderDetail = () => {
                                             <Link
                                                 key={service.id}
                                                 to={`/service/${service.id}`}
-                                                className="group bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/[0.08] hover:border-primary-500/30 transition-all flex items-center gap-4"
+                                                className="group bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 hover:bg-white/[0.08] hover:border-primary-500/30 transition-all flex items-center gap-4"
                                             >
                                                 <img
                                                     src={service.thumbnail ? (service.thumbnail.startsWith('http') ? service.thumbnail : `${BASE_URL}${service.thumbnail}`) : `https://ui-avatars.com/api/?name=${service.name}`}
-                                                    className="w-16 h-16 rounded-2xl object-cover border border-white/10"
+                                                    className="w-16 h-16 rounded-2xl object-cover border border-gray-200 dark:border-white/10"
                                                     alt={service.name}
                                                 />
                                                 <div className="flex-1">
-                                                    <h4 className="text-white font-bold group-hover:text-primary-400 transition-colors">{service.name}</h4>
+                                                    <h4 className="text-slate-900 dark:text-white font-bold group-hover:text-primary-400 transition-colors">{service.name}</h4>
                                                     <div className="flex items-center justify-between mt-1">
                                                         <span className="text-primary-500 font-black tracking-tighter text-lg">₹{service.price}</span>
                                                         <ChevronRight size={16} className="text-gray-600 group-hover:text-primary-500 group-hover:translate-x-1 transition-all" />
@@ -169,7 +169,7 @@ const ProviderDetail = () => {
                                             </Link>
                                         ))
                                     ) : (
-                                        <div className="col-span-full py-12 text-center text-gray-600 font-bold uppercase tracking-widest text-xs border-2 border-dashed border-white/5 rounded-[2rem]">
+                                        <div className="col-span-full py-12 text-center text-gray-600 font-bold uppercase tracking-widest text-xs border-2 border-dashed border-gray-200 dark:border-white/5 rounded-[2rem]">
                                             No explicit services listed under this master.
                                         </div>
                                     )}
@@ -178,16 +178,16 @@ const ProviderDetail = () => {
                                 <div className="space-y-6">
                                     {reviews.length > 0 ? (
                                         reviews.map((review) => (
-                                            <div key={review.id} className="bg-white/5 border border-white/10 rounded-[2rem] p-8">
+                                            <div key={review.id} className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-[2rem] p-8">
                                                 <div className="flex justify-between items-start mb-6">
                                                     <div className="flex items-center gap-4">
                                                         <img
                                                             src={review.consumer?.avatar ? (review.consumer.avatar.startsWith('http') ? review.consumer.avatar : `${BASE_URL}${review.consumer.avatar}`) : `https://ui-avatars.com/api/?name=${review.consumer?.name}`}
                                                             alt={review.consumer?.name}
-                                                            className="w-12 h-12 rounded-xl object-cover border border-white/10"
+                                                            className="w-12 h-12 rounded-xl object-cover border border-gray-200 dark:border-white/10"
                                                         />
                                                         <div>
-                                                            <p className="font-black text-white uppercase tracking-tight">{review.consumer?.name}</p>
+                                                            <p className="font-black text-slate-900 dark:text-white uppercase tracking-tight">{review.consumer?.name}</p>
                                                             <p className="text-[10px] text-primary-500 font-black tracking-widest uppercase">Verified Order</p>
                                                         </div>
                                                     </div>
@@ -196,21 +196,21 @@ const ProviderDetail = () => {
                                                         <span className="text-primary-500 text-xs font-black">{parseFloat(review.rating).toFixed(1)}</span>
                                                     </div>
                                                 </div>
-                                                <p className="text-gray-400 font-medium leading-relaxed italic">"{review.comment}"</p>
-                                                <div className="mt-6 pt-6 border-t border-white/5 flex justify-between items-center">
+                                                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed italic">"{review.comment}"</p>
+                                                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-white/5 flex justify-between items-center">
                                                     <span className="text-[10px] text-gray-600 font-black uppercase tracking-widest">
                                                         {new Date(review.createdAt).toLocaleDateString()}
                                                     </span>
-                                                    <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">
+                                                    <span className="text-[10px] text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full">
                                                         {review.service?.name || "Premium Service"}
                                                     </span>
                                                 </div>
                                             </div>
                                         ))
                                     ) : (
-                                        <div className="py-20 text-center bg-white/5 rounded-[2.5rem] border-2 border-dashed border-white/10">
+                                        <div className="py-20 text-center bg-gray-100 dark:bg-white/5 rounded-[2.5rem] border-2 border-dashed border-gray-200 dark:border-white/10">
                                             <MessageSquare size={40} className="text-gray-700 mx-auto mb-4" />
-                                            <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">No user feedback archives found.</p>
+                                            <p className="text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest text-xs">No user feedback archives found.</p>
                                         </div>
                                     )}
                                 </div>
@@ -220,32 +220,32 @@ const ProviderDetail = () => {
 
                     {/* Right: Master Stats & Contact */}
                     <div className="space-y-6">
-                        <div className="bg-gradient-to-br from-[#1c2230] to-[#0a0f1c] border border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
+                        <div className="bg-gradient-to-br from-[#1c2230] to-[#0a0f1c] border border-gray-200 dark:border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 blur-3xl rounded-full" />
 
-                            <h3 className="text-xl font-black text-white uppercase tracking-tight mb-8">Performance Archives</h3>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Performance Archives</h3>
 
                             <div className="space-y-6">
-                                <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
                                     <div className="flex items-center gap-3">
                                         <Award className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Total Served</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Total Served</span>
                                     </div>
-                                    <span className="text-white font-black text-lg">{provider.served || 0}+</span>
+                                    <span className="text-slate-900 dark:text-white font-black text-lg">{provider.served || 0}+</span>
                                 </div>
-                                <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
                                     <div className="flex items-center gap-3">
                                         <Clock className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Response Matrix</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Response Matrix</span>
                                     </div>
-                                    <span className="text-white font-black text-lg">98% Efficient</span>
+                                    <span className="text-slate-900 dark:text-white font-black text-lg">98% Efficient</span>
                                 </div>
-                                <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
                                     <div className="flex items-center gap-3">
                                         <Shield className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Quality Lock</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Quality Lock</span>
                                     </div>
-                                    <span className="text-white font-black text-lg">Guaranteed</span>
+                                    <span className="text-slate-900 dark:text-white font-black text-lg">Guaranteed</span>
                                 </div>
                             </div>
 
@@ -255,7 +255,7 @@ const ProviderDetail = () => {
                         </div>
 
                         {/* Badges */}
-                        <div className="bg-white/5 border border-white/5 rounded-3xl p-6">
+                        <div className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-3xl p-6">
                             <h4 className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-4">Elite Endorsements</h4>
                             <div className="flex flex-wrap gap-3">
                                 <div className="bg-primary-500/10 border border-primary-500/20 px-3 py-1.5 rounded-xl text-[10px] font-black text-primary-500 uppercase tracking-widest">Top Rated</div>

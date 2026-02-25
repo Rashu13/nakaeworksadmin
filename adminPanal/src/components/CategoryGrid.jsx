@@ -56,7 +56,7 @@ const CategoryGrid = () => {
         }
         const slug = category.slug?.toLowerCase() || category.name?.toLowerCase() || 'default';
         const IconComponent = iconMap[slug] || iconMap['default'];
-        return <IconComponent size={32} className="text-white" />;
+        return <IconComponent size={32} className="text-slate-900 dark:text-white" />;
     };
 
     const getGradient = (category) => {
@@ -70,10 +70,10 @@ const CategoryGrid = () => {
                 {/* Section Header */}
                 <div className="flex items-center justify-between mb-10">
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-2">
                             What are you looking for?
                         </h2>
-                        <p className="text-gray-500 dark:text-gray-400">Browse from our popular categories</p>
+                        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Browse from our popular categories</p>
                     </div>
                     <button
                         onClick={() => navigate('/services')}
@@ -120,7 +120,7 @@ const CategoryGrid = () => {
                                     </div>
                                 ) : (
                                     <div className={`
-                                        w-full h-full rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-110
+                                        w-full h-full rounded-2xl flex items-center justify-center text-slate-900 dark:text-white transition-transform duration-500 group-hover:scale-110
                                         bg-gradient-to-br ${getGradient(category)} shadow-lg shadow-primary-500/10
                                     `}>
                                         {getIcon(category)}
@@ -133,7 +133,7 @@ const CategoryGrid = () => {
                                 <h3 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300 uppercase tracking-widest px-2">
                                     {category.name}
                                 </h3>
-                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors duration-300">
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-600 dark:text-gray-400 transition-colors duration-300">
                                     {category.servicesCount || 0} services
                                 </p>
                             </div>

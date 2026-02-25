@@ -58,7 +58,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-[500px] bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white overflow-hidden">
+        <section className="relative min-h-[500px] bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-slate-900 dark:text-white overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
@@ -93,16 +93,16 @@ const Hero = () => {
                             </svg>
                         </span>
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-light">
+                    <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-10 font-light">
                         Book trusted professionals for all your home service needs.
                         Expert care, just a tap away.
                     </p>
 
                     {/* Search Box */}
-                    <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-3 max-w-3xl mx-auto border border-white/20 shadow-2xl">
+                    <div className="bg-gray-200 dark:bg-white/10 backdrop-blur-xl rounded-2xl p-3 max-w-3xl mx-auto border border-white/20 shadow-2xl">
                         <div className="flex flex-col md:flex-row items-stretch gap-3">
                             {/* Location Selector */}
-                            <div className="flex items-center gap-3 px-4 py-3 bg-white/10 rounded-xl md:w-56 relative group">
+                            <div className="flex items-center gap-3 px-4 py-3 bg-gray-200 dark:bg-white/10 rounded-xl md:w-56 relative group">
                                 <MapPin className="text-yellow-400 flex-shrink-0" size={20} />
                                 <div className="flex-1 min-w-0">
                                     <select
@@ -115,7 +115,7 @@ const Hero = () => {
                                                 localStorage.setItem('user_location', e.target.value);
                                             }
                                         }}
-                                        className="bg-transparent outline-none font-medium w-full cursor-pointer text-white appearance-none"
+                                        className="bg-transparent outline-none font-medium w-full cursor-pointer text-slate-900 dark:text-white appearance-none"
                                     >
                                         {/* Show current location if detected and not in standard list */}
                                         {location && !['New Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Hyderabad'].includes(location) && (
@@ -138,7 +138,7 @@ const Hero = () => {
 
                             {/* Search Input */}
                             <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-white rounded-xl">
-                                <Search className="text-gray-400 flex-shrink-0" size={20} />
+                                <Search className="text-gray-600 dark:text-gray-400 flex-shrink-0" size={20} />
                                 <input
                                     type="text"
                                     value={searchQuery}
@@ -166,19 +166,19 @@ const Hero = () => {
                             <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
                                 <span className="text-green-400">✓</span>
                             </div>
-                            <span className="text-gray-300">50k+ Services Done</span>
+                            <span className="text-gray-700 dark:text-gray-300">50k+ Services Done</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
                                 <span className="text-yellow-400">★</span>
                             </div>
-                            <span className="text-gray-300">4.8 Average Rating</span>
+                            <span className="text-gray-700 dark:text-gray-300">4.8 Average Rating</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
                                 <span className="text-blue-400">👤</span>
                             </div>
-                            <span className="text-gray-300">5k+ Expert Providers</span>
+                            <span className="text-gray-700 dark:text-gray-300">5k+ Expert Providers</span>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend, trendValue }) => (
     <div className="bg-white rounded-2xl p-6 shadow-sm">
         <div className="flex items-start justify-between">
             <div>
-                <p className="text-gray-500 text-sm font-medium">{title}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">{title}</p>
                 <h3 className="text-3xl font-bold text-gray-900 mt-2">{value}</h3>
                 {trend && (
                     <div className={`flex items-center gap-1 mt-2 text-sm ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
@@ -16,7 +16,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend, trendValue }) => (
                 )}
             </div>
             <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center`}>
-                <Icon size={24} className="text-white" />
+                <Icon size={24} className="text-slate-900 dark:text-white" />
             </div>
         </div>
     </div>
@@ -81,8 +81,8 @@ const AdminDashboard = () => {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-                <p className="text-gray-500 dark:text-gray-400">Welcome back! Here's what's happening.</p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Dashboard</h1>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Welcome back! Here's what's happening.</p>
             </div>
 
             {/* Stats Grid */}
@@ -121,7 +121,7 @@ const AdminDashboard = () => {
 
             {/* Revenue & Pending */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-primary-600 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
+                <div className="bg-gradient-to-br from-primary-600 to-purple-600 rounded-2xl p-6 text-slate-900 dark:text-white shadow-lg">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-medium opacity-90">Total Revenue</h3>
                         <DollarSign size={24} className="opacity-70" />
@@ -130,37 +130,37 @@ const AdminDashboard = () => {
                     <p className="text-sm opacity-70 mt-2">This month: ₹45,000</p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Stats</h3>
+                <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Quick Stats</h3>
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Monthly Bookings</span>
-                            <span className="font-semibold text-gray-900 dark:text-white">{stats.monthlyBookings}</span>
+                            <span className="text-gray-600 dark:text-gray-600 dark:text-gray-400">Monthly Bookings</span>
+                            <span className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">{stats.monthlyBookings}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Pending Bookings</span>
+                            <span className="text-gray-600 dark:text-gray-600 dark:text-gray-400">Pending Bookings</span>
                             <span className="font-semibold text-primary-600 dark:text-primary-400">{stats.pendingBookings}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">Avg. Order Value</span>
-                            <span className="font-semibold text-gray-900 dark:text-white">₹{Math.round(stats.totalRevenue / stats.totalBookings || 0)}</span>
+                            <span className="text-gray-600 dark:text-gray-600 dark:text-gray-400">Avg. Order Value</span>
+                            <span className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">₹{Math.round(stats.totalRevenue / stats.totalBookings || 0)}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Bookings</h3>
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Recent Bookings</h3>
                 {!stats.recentBookings || stats.recentBookings.length === 0 ? (
-                    <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                    <div className="text-center py-8 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                         <ShoppingBag size={48} className="mx-auto mb-4 opacity-30" />
                         <p>No recent bookings to show</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase border-b border-gray-100 dark:border-slate-700">
+                            <thead className="text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase border-b border-gray-100 dark:border-slate-700">
                                 <tr>
                                     <th className="pb-3 pl-2">Booking ID</th>
                                     <th className="pb-3 text-center">Service</th>
@@ -174,10 +174,10 @@ const AdminDashboard = () => {
                                 {stats.recentBookings.map((booking) => (
                                     <tr key={booking.id} className="text-sm">
                                         <td className="py-3 pl-2 font-medium text-primary-600 dark:text-primary-400">{booking.bookingNumber}</td>
-                                        <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.service?.name}</td>
-                                        <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.consumer?.name}</td>
-                                        <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.provider?.name || <span className="text-gray-400 italic">Unassigned</span>}</td>
-                                        <td className="py-3 text-right pr-2 font-medium text-gray-900 dark:text-white">₹{booking.totalAmount}</td>
+                                        <td className="py-3 text-center text-gray-600 dark:text-gray-700 dark:text-gray-300">{booking.service?.name}</td>
+                                        <td className="py-3 text-center text-gray-600 dark:text-gray-700 dark:text-gray-300">{booking.consumer?.name}</td>
+                                        <td className="py-3 text-center text-gray-600 dark:text-gray-700 dark:text-gray-300">{booking.provider?.name || <span className="text-gray-600 dark:text-gray-400 italic">Unassigned</span>}</td>
+                                        <td className="py-3 text-right pr-2 font-medium text-gray-900 dark:text-slate-900 dark:text-white">₹{booking.totalAmount}</td>
                                         <td className="py-3 text-right pr-2">
                                             <span className={`px-2 py-1 text-xs rounded-full capitalize 
                                                 ${booking.status?.slug === 'completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :

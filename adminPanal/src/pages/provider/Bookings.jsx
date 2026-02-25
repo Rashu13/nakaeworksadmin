@@ -163,7 +163,7 @@ const Bookings = () => {
                     <button
                         onClick={() => handleAccept(booking.id)}
                         disabled={isLoading}
-                        className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-slate-900 dark:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
                     >
                         {isLoading ? <Loader className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                         Accept
@@ -171,7 +171,7 @@ const Bookings = () => {
                     <button
                         onClick={() => confirmReject(booking.id)}
                         disabled={isLoading}
-                        className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-slate-900 dark:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
                     >
                         <XCircle className="w-4 h-4" />
                         Reject
@@ -185,7 +185,7 @@ const Bookings = () => {
                 <button
                     onClick={() => handleStart(booking.id)}
                     disabled={isLoading}
-                    className="flex items-center gap-1 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1 bg-purple-500 hover:bg-purple-600 text-slate-900 dark:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
                 >
                     {isLoading ? <Loader className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
                     Start Service
@@ -198,7 +198,7 @@ const Bookings = () => {
                 <button
                     onClick={() => confirmComplete(booking.id)}
                     disabled={isLoading}
-                    className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-slate-900 dark:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
                 >
                     {isLoading ? <Loader className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                     Complete
@@ -224,7 +224,7 @@ const Bookings = () => {
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key)}
                         className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === tab.key
-                            ? 'bg-emerald-500 text-white'
+                            ? 'bg-emerald-500 text-slate-900 dark:text-white'
                             : 'text-gray-600 hover:bg-gray-100'
                             }`}
                     >
@@ -241,9 +241,9 @@ const Bookings = () => {
                     </div>
                 ) : bookings.length === 0 ? (
                     <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
-                        <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                        <Calendar className="w-16 h-16 text-gray-700 dark:text-gray-300 mx-auto mb-4" />
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">No bookings found</h3>
-                        <p className="text-gray-500">Bookings will appear here when customers book your services</p>
+                        <p className="text-gray-500 dark:text-gray-400">Bookings will appear here when customers book your services</p>
                     </div>
                 ) : (
                     bookings.map((booking) => (
@@ -276,14 +276,14 @@ const Bookings = () => {
                                                     {booking.items.map((item, idx) => (
                                                         <div key={item.id || idx} className="flex items-center justify-between text-sm bg-gray-50 px-3 py-1.5 rounded-lg">
                                                             <span className="text-gray-700">{item.serviceName}</span>
-                                                            <span className="text-gray-500">
+                                                            <span className="text-gray-500 dark:text-gray-400">
                                                                 {item.quantity > 1 && `x${item.quantity} · `}₹{parseFloat(item.total || item.price).toLocaleString()}
                                                             </span>
                                                         </div>
                                                     ))}
                                                 </div>
                                             )}
-                                            <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
+                                            <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
                                                 <span className="flex items-center gap-1">
                                                     <Phone className="w-4 h-4" />
                                                     {booking.consumer?.phone || 'Not provided'}
@@ -341,7 +341,7 @@ const Bookings = () => {
                             key={i + 1}
                             onClick={() => fetchBookings(i + 1)}
                             className={`px-4 py-2 rounded-lg font-medium transition-colors ${pagination.page === i + 1
-                                ? 'bg-emerald-500 text-white'
+                                ? 'bg-emerald-500 text-slate-900 dark:text-white'
                                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                         >
@@ -373,7 +373,7 @@ const Bookings = () => {
                                 <AlertTriangle size={24} />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900">Reject Booking?</h3>
-                            <p className="text-gray-500 mt-2">
+                            <p className="text-gray-500 dark:text-gray-400 mt-2">
                                 Please provide a reason for rejecting this booking. This will be visible to the customer.
                             </p>
                         </div>
@@ -398,7 +398,7 @@ const Bookings = () => {
                             </button>
                             <button
                                 onClick={handleReject}
-                                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-colors shadow-sm shadow-red-200"
+                                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-slate-900 dark:text-white font-medium rounded-xl transition-colors shadow-sm shadow-red-200"
                             >
                                 Reject Booking
                             </button>

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const AppDownload = () => {
     return (
-        <section className="py-24 px-4 bg-[#0a0f1c] relative overflow-hidden">
+        <section className="py-10 px-4 bg-gray-50 dark:bg-[#0a0f1c] relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary-500 rounded-full mix-blend-screen filter blur-[150px] animate-pulse"></div>
@@ -18,7 +18,7 @@ const AppDownload = () => {
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="text-white"
+                        className="text-slate-900 dark:text-white"
                     >
                         <div className="flex items-center gap-3 mb-6">
                             <Smartphone className="text-primary-500" size={24} />
@@ -30,7 +30,7 @@ const AppDownload = () => {
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-200 block mt-2">in your pocket.</span>
                         </h2>
 
-                        <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                        <p className="text-gray-600 dark:text-gray-400 text-lg mb-10 max-w-lg leading-relaxed font-medium">
                             Book instantly, track pros in real-time, and manage everything from the simplest app ever built for home maintenance.
                         </p>
 
@@ -46,7 +46,7 @@ const AppDownload = () => {
                                     <div className={`w-12 h-12 rounded-2xl ${feature.bg} flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>
                                         <feature.icon size={20} className={feature.color} />
                                     </div>
-                                    <span className="text-gray-200 font-bold tracking-tight">{feature.text}</span>
+                                    <span className="text-gray-700 dark:text-gray-200 font-bold tracking-tight">{feature.text}</span>
                                 </div>
                             ))}
                         </div>
@@ -71,7 +71,7 @@ const AppDownload = () => {
                             <motion.a
                                 whileHover={{ y: -5 }}
                                 href="#"
-                                className="flex items-center gap-4 px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl transition-all hover:bg-white/10"
+                                className="flex items-center gap-4 px-8 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl transition-all hover:bg-gray-200 dark:bg-white/10"
                             >
                                 <img
                                     src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"
@@ -98,8 +98,8 @@ const AppDownload = () => {
 
                         <div className="relative">
                             {/* Premium Phone Frame */}
-                            <div className="w-[300px] h-[600px] bg-black rounded-[50px] p-4 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border-4 border-white/10 relative z-10 overflow-hidden">
-                                <div className="w-full h-full bg-[#161b22] rounded-[38px] overflow-hidden relative border border-white/5">
+                            <div className="w-[300px] h-[600px] bg-black rounded-[50px] p-4 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border-4 border-gray-200 dark:border-white/10 relative z-10 overflow-hidden">
+                                <div className="w-full h-full bg-white dark:bg-[#161b22] rounded-[38px] overflow-hidden relative border border-gray-200 dark:border-white/5">
                                     {/* App UI Simulation */}
                                     <img
                                         src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=800&fit=crop"
@@ -115,15 +115,15 @@ const AppDownload = () => {
                             <motion.div
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -left-20 top-24 bg-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-white/10 z-20"
+                                className="absolute -left-20 top-24 bg-white/90 dark:bg-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-gray-200 dark:border-white/10 z-20"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-green-500 rounded-2xl flex items-center justify-center">
                                         <CheckCircle size={20} className="text-black" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Status</p>
-                                        <p className="text-sm font-black text-white">Pro on the way!</p>
+                                        <p className="text-[10px] text-gray-600 dark:text-gray-400 font-bold uppercase tracking-wider">Status</p>
+                                        <p className="text-sm font-black text-slate-800 dark:text-white">Pro on the way!</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -131,14 +131,14 @@ const AppDownload = () => {
                             <motion.div
                                 animate={{ y: [0, 10, 0] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -right-16 bottom-40 bg-white/10 backdrop-blur-xl rounded-3xl p-5 shadow-2xl border border-white/10 z-20"
+                                className="absolute -right-16 bottom-40 bg-white/90 dark:bg-white/10 backdrop-blur-xl rounded-3xl p-5 shadow-2xl border border-gray-200 dark:border-white/10 z-20"
                             >
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center gap-1">
                                         {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} className="fill-primary-500 text-primary-500" />)}
                                     </div>
-                                    <p className="text-xs text-white font-bold italic">"Best service experience!"</p>
-                                    <p className="text-[10px] text-gray-400 font-medium">- Rahul S.</p>
+                                    <p className="text-xs text-slate-800 dark:text-white font-bold italic">"Best service experience!"</p>
+                                    <p className="text-[10px] text-gray-600 dark:text-gray-400 font-medium">- Rahul S.</p>
                                 </div>
                             </motion.div>
                         </div>

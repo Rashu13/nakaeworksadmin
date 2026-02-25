@@ -52,12 +52,12 @@ const ServiceCard = ({ service, viewMode }) => {
                     />
 
                     {/* Discount Badge */}
-                    <div className="absolute top-5 left-5 px-2.5 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-bold rounded-lg shadow-sm">
+                    <div className="absolute top-5 left-5 px-3 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-black rounded-lg shadow-sm">
                         {Math.round((discount / price) * 100)}% OFF
                     </div>
 
                     {/* Category Tag */}
-                    <div className="absolute bottom-5 left-5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium rounded-lg">
+                    <div className="absolute bottom-5 left-5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-900 dark:text-white text-[10px] font-medium rounded-lg">
                         {category?.name || 'Service'}
                     </div>
                 </div>
@@ -75,7 +75,7 @@ const ServiceCard = ({ service, viewMode }) => {
                             <div className="flex items-center gap-2 text-sm">
                                 <span className="font-bold text-slate-800 dark:text-primary-300 text-lg">₹{discountedPrice}</span>
                                 {discount > 0 && (
-                                    <span className="text-gray-400 dark:text-gray-500 line-through text-xs">₹{price}</span>
+                                    <span className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 line-through text-xs">₹{price}</span>
                                 )}
                             </div>
                         </div>
@@ -85,23 +85,23 @@ const ServiceCard = ({ service, viewMode }) => {
                                 e.stopPropagation();
                                 setIsFavorite(!isFavorite);
                             }}
-                            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isFavorite ? 'bg-red-50 dark:bg-red-900/20 text-red-500' : 'bg-gray-50 dark:bg-slate-800 text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isFavorite ? 'bg-red-50 dark:bg-red-900/20 text-red-500' : 'bg-gray-50 dark:bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-600 dark:hover:text-gray-200'}`}
                         >
                             <Heart size={16} className={isFavorite ? 'fill-current' : ''} />
                         </button>
                     </div>
 
-                    <div className="flex items-center gap-3 mt-3 mb-4 text-xs text-gray-500 font-medium">
+                    <div className="flex items-center gap-3 mt-3 mb-4 text-xs text-gray-500 dark:text-gray-400 font-medium">
                         {duration && (
-                            <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">
-                                <Clock size={14} className="text-gray-400" />
+                            <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-gray-100 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">
+                                <Clock size={14} className="text-gray-600 dark:text-gray-400" />
                                 <span>{duration} min</span>
                             </div>
                         )}
-                        <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">
+                        <div className="flex items-center gap-1.5 bg-gray-50 dark:bg-gray-100 dark:bg-slate-800/50 px-2.5 py-1 rounded-md">
                             <Star size={14} className="fill-amber-400 text-amber-400" />
-                            <span className="text-gray-700 dark:text-gray-300">{rating || '4.8'}</span>
-                            <span className="text-gray-400">({reviewsCount || 120})</span>
+                            <span className="text-gray-700 dark:text-gray-700 dark:text-gray-300">{rating || '4.8'}</span>
+                            <span className="text-gray-600 dark:text-gray-400">({reviewsCount || 120})</span>
                         </div>
                     </div>
 
@@ -115,12 +115,12 @@ const ServiceCard = ({ service, viewMode }) => {
                                     className="w-8 h-8 rounded-full object-cover ring-2 ring-white dark:ring-slate-800 shadow-sm"
                                 />
                                 <div className="flex flex-col">
-                                    <span className="text-xs font-semibold text-gray-900 dark:text-white">{provider.name}</span>
-                                    <span className="text-[10px] text-gray-500">{provider.role || 'Service Provider'}</span>
+                                    <span className="text-xs font-semibold text-gray-900 dark:text-slate-900 dark:text-white">{provider.name}</span>
+                                    <span className="text-[10px] text-gray-500 dark:text-gray-400">{provider.role || 'Service Provider'}</span>
                                 </div>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                                 <User size={14} />
                                 <span>Multiple Providers</span>
                             </div>
@@ -129,14 +129,14 @@ const ServiceCard = ({ service, viewMode }) => {
                         <div className="flex gap-2">
                             <button
                                 onClick={handleAddToCart}
-                                className={`p-2 border rounded-lg transition-all flex items-center gap-2 ${added ? 'bg-green-500 border-green-500 text-white' : 'border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
+                                className={`p-2 border rounded-lg transition-all flex items-center gap-2 ${added ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-slate-800 dark:border-white/10 dark:text-gray-300 dark:hover:bg-slate-700'}`}
                             >
                                 <ShoppingCart size={18} />
                                 <span className="text-xs font-bold">{added ? 'Added!' : 'Add'}</span>
                             </button>
                             <button
                                 onClick={() => navigate(`/service/${service.slug || id}`)}
-                                className="px-5 py-2 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+                                className="px-5 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-colors shadow-sm"
                             >
                                 Book
                             </button>
@@ -162,7 +162,7 @@ const ServiceCard = ({ service, viewMode }) => {
 
                 {/* Discount Badge */}
                 {discount > 0 && (
-                    <div className="absolute top-5 left-5 px-2.5 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-bold rounded-lg shadow-sm">
+                    <div className="absolute top-5 left-5 px-3 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-black rounded-lg shadow-sm z-10">
                         {Math.round((discount / price) * 100)}% OFF
                     </div>
                 )}
@@ -177,12 +177,12 @@ const ServiceCard = ({ service, viewMode }) => {
                 >
                     <Heart
                         size={18}
-                        className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-500 dark:text-gray-400'}
+                        className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400'}
                     />
                 </button>
 
                 {/* Category Tag */}
-                <div className="absolute bottom-5 left-5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium rounded-lg">
+                <div className="absolute bottom-5 left-5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-900 dark:text-white text-[10px] font-medium rounded-lg">
                     {category?.name || 'Service'}
                 </div>
             </div>
@@ -193,13 +193,13 @@ const ServiceCard = ({ service, viewMode }) => {
                 <div className="flex items-start justify-between gap-2 mb-3">
                     <h3
                         onClick={() => navigate(`/service/${service.slug || id}`)}
-                        className="font-semibold text-gray-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer line-clamp-2 flex-1 transition-colors"
+                        className="font-semibold text-gray-800 dark:text-slate-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer line-clamp-2 flex-1 transition-colors"
                     >
                         {name}
                     </h3>
                     <div className="text-right flex-shrink-0">
                         {discount > 0 && (
-                            <span className="text-xs text-gray-400 dark:text-gray-500 line-through block">
+                            <span className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 line-through block">
                                 ₹{price}
                             </span>
                         )}
@@ -210,7 +210,7 @@ const ServiceCard = ({ service, viewMode }) => {
                 </div>
 
                 {/* Meta Info */}
-                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mb-4">
                     {duration && (
                         <div className="flex items-center gap-1">
                             <Clock size={14} />
@@ -222,7 +222,7 @@ const ServiceCard = ({ service, viewMode }) => {
                             <Star size={14} className="fill-yellow-400 text-yellow-400" />
                             <span>{rating}</span>
                             {reviewsCount && (
-                                <span className="text-gray-400 dark:text-gray-500">({reviewsCount})</span>
+                                <span className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400">({reviewsCount})</span>
                             )}
                         </div>
                     )}
@@ -241,14 +241,14 @@ const ServiceCard = ({ service, viewMode }) => {
                                 <p className="text-sm font-medium text-gray-700 dark:text-gray-200 line-clamp-1">
                                     {provider.name}
                                 </p>
-                                <div className="flex items-center gap-1 text-xs text-gray-400">
+                                <div className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
                                     <Star size={10} className="fill-yellow-400 text-yellow-400" />
                                     <span>{provider.rating || '4.5'}</span>
                                 </div>
                             </div>
                         </div>
                     ) : (
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                             <User size={16} />
                             <span>Multiple Providers</span>
                         </div>
@@ -257,14 +257,14 @@ const ServiceCard = ({ service, viewMode }) => {
                     <div className="flex gap-2">
                         <button
                             onClick={handleAddToCart}
-                            className={`p-2 border rounded-lg transition-all flex items-center justify-center ${added ? 'bg-green-500 border-green-500 text-white' : 'border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
+                            className={`p-2 border rounded-lg transition-all flex items-center justify-center ${added ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-slate-800 dark:border-white/10 dark:text-gray-300 dark:hover:bg-slate-700'}`}
                             title="Add to Cart"
                         >
                             <ShoppingCart size={18} />
                         </button>
                         <button
                             onClick={() => navigate(`/service/${service.slug || id}`)}
-                            className="px-4 py-2 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-500 text-white text-sm font-medium rounded-lg transition-all"
+                            className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-colors shadow-sm"
                         >
                             Book
                         </button>

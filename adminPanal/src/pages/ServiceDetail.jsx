@@ -55,8 +55,8 @@ const ServiceDetail = () => {
 
     if (!service) {
         return (
-            <div className="min-h-screen bg-gray-50 pt-20 flex flex-col justify-center items-center text-gray-500">
-                <AlertCircle size={48} className="mb-4 text-gray-400" />
+            <div className="min-h-screen bg-gray-50 pt-20 flex flex-col justify-center items-center text-gray-500 dark:text-gray-400">
+                <AlertCircle size={48} className="mb-4 text-gray-600 dark:text-gray-400" />
                 <h2 className="text-xl font-semibold">Service not found</h2>
                 <button
                     onClick={() => navigate('/services')}
@@ -137,7 +137,7 @@ const ServiceDetail = () => {
                 {/* Breadcrumb / Back Navigation */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="mb-6 flex items-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium text-sm"
+                    className="mb-6 flex items-center text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-slate-900 dark:text-white transition-colors font-medium text-sm"
                 >
                     <ChevronRight className="rotate-180 mr-1" size={18} />
                     Back
@@ -166,11 +166,11 @@ const ServiceDetail = () => {
                                         <div
                                             className={`absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800 ${fullThumbnail ? 'hidden' : 'flex'}`}
                                         >
-                                            <Lock size={24} className="text-gray-300 dark:text-gray-600" />
+                                            <Lock size={24} className="text-gray-700 dark:text-gray-300 dark:text-gray-600" />
                                         </div>
 
                                         {discount > 0 && (
-                                            <div className="absolute top-2 left-2 px-2 py-0.5 bg-green-600 text-white text-[10px] uppercase font-bold tracking-wide rounded-sm">
+                                            <div className="absolute top-2 left-2 px-2 py-0.5 bg-green-600 text-slate-900 dark:text-white text-[10px] uppercase font-bold tracking-wide rounded-sm">
                                                 {Math.round((discount / service.price) * 100)}% OFF
                                             </div>
                                         )}
@@ -181,18 +181,18 @@ const ServiceDetail = () => {
                                 <div className="flex-1 pt-1">
                                     <div className="flex justify-between items-start">
                                         <div>
-                                            <span className="text-xs font-bold tracking-wider text-gray-500 dark:text-gray-400 uppercase mb-1 block">
+                                            <span className="text-xs font-bold tracking-wider text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase mb-1 block">
                                                 {categoryName}
                                             </span>
-                                            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
+                                            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-3 tracking-tight">
                                                 {service.name}
                                             </h1>
 
-                                            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+                                            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mb-6">
                                                 <div className="flex items-center gap-1.5">
                                                     <Star size={16} className="fill-black text-black dark:fill-yellow-400 dark:text-yellow-400" />
-                                                    <span className="font-semibold text-gray-900 dark:text-white">{parseFloat(service.rating || 0).toFixed(1)}</span>
-                                                    <span className="text-gray-400 dark:text-gray-500">({service.reviewCount || 0})</span>
+                                                    <span className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">{parseFloat(service.rating || 0).toFixed(1)}</span>
+                                                    <span className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400">({service.reviewCount || 0})</span>
                                                 </div>
                                                 <div className="w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
                                                 <div className="flex items-center gap-1.5">
@@ -207,15 +207,15 @@ const ServiceDetail = () => {
                                                 onClick={() => setIsFavorite(!isFavorite)}
                                                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-full"
                                             >
-                                                <Heart size={22} className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400 dark:text-gray-500'} />
+                                                <Heart size={22} className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400'} />
                                             </button>
                                         </div>
                                     </div>
 
                                     <div className="flex items-center gap-3 mt-2">
-                                        <span className="text-2xl font-bold text-gray-900 dark:text-white">₹{Math.round(discountedPrice)}</span>
+                                        <span className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">₹{Math.round(discountedPrice)}</span>
                                         {discount > 0 && (
-                                            <span className="text-base text-gray-400 dark:text-gray-500 line-through">₹{Math.round(price)}</span>
+                                            <span className="text-base text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400 line-through">₹{Math.round(price)}</span>
                                         )}
                                     </div>
                                 </div>
@@ -224,8 +224,8 @@ const ServiceDetail = () => {
 
                         {/* 2. Description & Details */}
                         <div className="border-b border-gray-200 dark:border-gray-800 pb-8">
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">About the Service</h2>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line text-base">
+                            <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-4">About the Service</h2>
+                            <p className="text-gray-600 dark:text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line text-base">
                                 {service.description || "No description available for this service."}
                             </p>
                         </div>
@@ -233,7 +233,7 @@ const ServiceDetail = () => {
                         {/* FAQs Section */}
                         {service.faqs && service.faqs.length > 0 && (
                             <div className="border-b border-gray-200 dark:border-gray-800 pb-8">
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
+                                <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-6">Frequently Asked Questions</h2>
                                 <div className="space-y-4">
                                     {service.faqs.map((faq, index) => (
                                         <div key={index} className="border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
@@ -241,11 +241,11 @@ const ServiceDetail = () => {
                                                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
                                                 className="w-full flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors text-left"
                                             >
-                                                <span className="font-semibold text-gray-900 dark:text-white">{faq.question}</span>
-                                                {openFaq === index ? <ChevronUp size={20} className="text-gray-500" /> : <ChevronDown size={20} className="text-gray-500" />}
+                                                <span className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white">{faq.question}</span>
+                                                {openFaq === index ? <ChevronUp size={20} className="text-gray-500 dark:text-gray-400" /> : <ChevronDown size={20} className="text-gray-500 dark:text-gray-400" />}
                                             </button>
                                             {openFaq === index && (
-                                                <div className="p-4 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700">
+                                                <div className="p-4 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-700 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700">
                                                     {faq.answer}
                                                 </div>
                                             )}
@@ -257,9 +257,9 @@ const ServiceDetail = () => {
 
                         {/* Reviews Section */}
                         <div className="pb-8">
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                            <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                                 Reviews & Ratings
-                                <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400 font-normal">
+                                <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-600 dark:text-gray-400 font-normal">
                                     {reviews.length} reviews
                                 </span>
                             </h2>
@@ -276,16 +276,16 @@ const ServiceDetail = () => {
                                                         className="w-10 h-10 rounded-full object-cover"
                                                     />
                                                     <div>
-                                                        <p className="font-bold text-gray-900 dark:text-white">{review.consumer?.name}</p>
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400">{new Date(review.createdAt).toLocaleDateString()}</p>
+                                                        <p className="font-bold text-gray-900 dark:text-slate-900 dark:text-white">{review.consumer?.name}</p>
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{new Date(review.createdAt).toLocaleDateString()}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-1 bg-white dark:bg-gray-700 px-2 py-1 rounded-lg border border-gray-100 dark:border-gray-600">
                                                     <Star size={14} className="fill-yellow-400 text-yellow-400" />
-                                                    <span className="text-sm font-bold text-gray-900 dark:text-white">{parseFloat(review.rating).toFixed(1)}</span>
+                                                    <span className="text-sm font-bold text-gray-900 dark:text-slate-900 dark:text-white">{parseFloat(review.rating).toFixed(1)}</span>
                                                 </div>
                                             </div>
-                                            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                                            <p className="text-gray-600 dark:text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                                                 {review.comment}
                                             </p>
                                         </div>
@@ -293,7 +293,7 @@ const ServiceDetail = () => {
                                 </div>
                             ) : (
                                 <div className="text-center py-10 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700">
-                                    <p className="text-gray-500 dark:text-gray-400">No reviews yet for this service.</p>
+                                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">No reviews yet for this service.</p>
                                 </div>
                             )}
                         </div>
@@ -308,10 +308,10 @@ const ServiceDetail = () => {
                                 />
                                 <div>
                                     <div className="flex items-center gap-2">
-                                        <h3 className="font-bold text-gray-900 dark:text-white">{providerName}</h3>
+                                        <h3 className="font-bold text-gray-900 dark:text-slate-900 dark:text-white">{providerName}</h3>
                                         <Lock size={14} className="text-blue-600 fill-blue-50 dark:fill-blue-900/30" />
                                     </div>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">{providerServed}+ jobs completed</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{providerServed}+ jobs completed</p>
                                 </div>
                             </div>
                             <Link
@@ -327,22 +327,22 @@ const ServiceDetail = () => {
                     {/* RIGHT COLUMN: Sticky Booking Card (4 cols) */}
                     <div className="lg:col-span-4 pl-0 lg:pl-4">
                         <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 sticky top-28 bg-white dark:bg-gray-800 shadow-sm dark:shadow-none">
-                            <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-6">Booking Summary</h3>
+                            <h3 className="font-bold text-gray-900 dark:text-slate-900 dark:text-white text-lg mb-6">Booking Summary</h3>
 
                             {/* Quantity */}
                             <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
-                                <span className="text-gray-600 dark:text-gray-300 font-medium">Quantity</span>
+                                <span className="text-gray-600 dark:text-gray-700 dark:text-gray-300 font-medium">Quantity</span>
                                 <div className="flex items-center gap-3">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="w-8 h-8 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-300"
+                                        className="w-8 h-8 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-700 dark:text-gray-300"
                                     >
                                         <Minus size={14} />
                                     </button>
-                                    <span className="text-lg font-semibold w-6 text-center text-gray-900 dark:text-white">{quantity}</span>
+                                    <span className="text-lg font-semibold w-6 text-center text-gray-900 dark:text-slate-900 dark:text-white">{quantity}</span>
                                     <button
                                         onClick={() => setQuantity(quantity + 1)}
-                                        className="w-8 h-8 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-300"
+                                        className="w-8 h-8 rounded border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-700 dark:text-gray-300"
                                     >
                                         <Plus size={14} />
                                     </button>
@@ -352,17 +352,17 @@ const ServiceDetail = () => {
                             {/* Date & Time */}
                             <div className="space-y-6 mb-8">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-900 dark:text-gray-300 uppercase tracking-wider mb-3">Date</label>
+                                    <label className="block text-xs font-bold text-gray-900 dark:text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-3">Date</label>
                                     <input
                                         type="date"
                                         value={selectedDate}
                                         onChange={(e) => setSelectedDate(e.target.value)}
                                         min={new Date().toISOString().split('T')[0]}
-                                        className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors"
+                                        className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-slate-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-900 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
+                                    <label className="block text-xs font-bold text-gray-900 dark:text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
                                     <div className="grid grid-cols-3 gap-2">
                                         {timeSlots.map(t => {
                                             const isToday = selectedDate === new Date().toISOString().split('T')[0];
@@ -385,9 +385,9 @@ const ServiceDetail = () => {
                                                     disabled={isDisabled}
                                                     onClick={() => setSelectedTime(t)}
                                                     className={`py-2 px-1 text-xs font-medium border rounded-md transition-all ${selectedTime === t
-                                                        ? 'bg-slate-900 dark:bg-primary-600 text-white border-slate-900 dark:border-primary-600 shadow-sm'
+                                                        ? 'bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white border-slate-900 dark:border-primary-600 shadow-sm'
                                                         : isDisabled
-                                                            ? 'bg-gray-50 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-700 cursor-not-allowed'
+                                                            ? 'bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-700 cursor-not-allowed'
                                                             : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-200 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-600'
                                                         }`}
                                                 >
@@ -405,9 +405,9 @@ const ServiceDetail = () => {
                             {/* Trust Markers */}
                             <div className="bg-gray-50 dark:bg-gray-700/30 rounded p-4 mb-6">
                                 <div className="flex items-start gap-3">
-                                    <Lock size={18} className="text-gray-900 dark:text-white mt-0.5 flex-shrink-0" />
-                                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        <span className="font-bold text-gray-900 dark:text-white block mb-0.5">Our Promise</span>
+                                    <Lock size={18} className="text-gray-900 dark:text-slate-900 dark:text-white mt-0.5 flex-shrink-0" />
+                                    <p className="text-xs text-gray-600 dark:text-gray-600 dark:text-gray-400 leading-relaxed">
+                                        <span className="font-bold text-gray-900 dark:text-slate-900 dark:text-white block mb-0.5">Our Promise</span>
                                         Verified professionals, secure payment & insurance.
                                     </p>
                                 </div>
@@ -415,20 +415,20 @@ const ServiceDetail = () => {
 
                             {/* Total & Action */}
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center text-gray-900 dark:text-white font-bold text-xl">
+                                <div className="flex justify-between items-center text-gray-900 dark:text-slate-900 dark:text-white font-bold text-xl">
                                     <span>₹{Math.round(totalPrice)}</span>
                                 </div>
                                 <div className="grid grid-cols-2 gap-3">
                                     <button
                                         onClick={handleAddToCart}
-                                        className="py-4 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+                                        className="py-4 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-slate-900 dark:text-white font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
                                     >
                                         <ShoppingCart size={18} />
                                         Cart
                                     </button>
                                     <button
                                         onClick={handleBooking}
-                                        className="py-4 bg-black dark:bg-primary-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
+                                        className="py-4 bg-black dark:bg-primary-600 text-slate-900 dark:text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
                                     >
                                         Buy Now
                                     </button>

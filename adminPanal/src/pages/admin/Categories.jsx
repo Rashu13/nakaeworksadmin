@@ -119,12 +119,12 @@ const Categories = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Categories</h1>
-                    <p className="text-gray-500 dark:text-gray-400">Manage service categories</p>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Categories</h1>
+                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Manage service categories</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add Category
@@ -146,16 +146,16 @@ const Categories = () => {
             )}
 
             {/* Search */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
                 <div className="p-4 border-b border-gray-100 dark:border-slate-700">
                     <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search categories..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                 </div>
@@ -165,11 +165,11 @@ const Categories = () => {
                     <table className="w-full">
                         <thead className="bg-gray-50 dark:bg-slate-700/50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Name</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Slug</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Icon</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Name</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Slug</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Icon</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Status</th>
+                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
@@ -181,7 +181,7 @@ const Categories = () => {
                                 </tr>
                             ) : filteredCategories.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
+                                    <td colSpan="5" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
                                         No categories found
                                     </td>
                                 </tr>
@@ -189,14 +189,14 @@ const Categories = () => {
                                 filteredCategories.map((category) => (
                                     <tr key={category.id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <span className="font-medium text-gray-900 dark:text-white">{category.name}</span>
+                                            <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">{category.name}</span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{category.slug}</td>
-                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{category.icon || '-'}</td>
+                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{category.slug}</td>
+                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{category.icon || '-'}</td>
                                         <td className="px-6 py-4">
                                             <span className={`px-2 py-1 text-xs font-medium rounded-full ${category.status === true
                                                 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-                                                : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                                                : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-700 dark:text-gray-300'
                                                 }`}>
                                                 {category.status === true ? 'Active' : 'Inactive'}
                                             </span>
@@ -205,13 +205,13 @@ const Categories = () => {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => openModal(category)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => confirmDelete(category.id)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -229,19 +229,19 @@ const Categories = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeModal}></div>
-                    <div className="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 border border-gray-100 dark:border-slate-700 shadow-xl">
+                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 border border-gray-100 dark:border-slate-700 shadow-xl">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-900 dark:text-white">
                                 {editingCategory ? 'Edit Category' : 'Add Category'}
                             </h2>
-                            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <button onClick={closeModal} className="text-gray-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-700 dark:text-gray-300">
                                 <X size={24} />
                             </button>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
                                     Category Name *
                                 </label>
                                 <input
@@ -249,13 +249,13 @@ const Categories = () => {
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="e.g., Home Cleaning"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
                                     Category Icon / Image
                                 </label>
 
@@ -277,19 +277,19 @@ const Categories = () => {
                                                 </div>
                                             )}
                                             {/* Fallback hidden img */}
-                                            <div className="hidden w-12 h-12 items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-400">
+                                            <div className="hidden w-12 h-12 items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-600 dark:text-gray-400">
                                                 <AlertCircle size={20} />
                                             </div>
 
                                             <div className="flex-1 overflow-hidden">
-                                                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{formData.icon.split('/').pop()}</p>
+                                                <p className="text-sm font-medium text-gray-900 dark:text-slate-900 dark:text-white truncate">{formData.icon.split('/').pop()}</p>
                                                 <p className="text-xs text-green-600 dark:text-green-400">Image successfully linked</p>
                                             </div>
 
                                             <button
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, icon: '' })}
-                                                className="p-1 hover:bg-red-50 dark:hover:bg-red-900/30 text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full transition-colors"
+                                                className="p-1 hover:bg-red-50 dark:hover:bg-red-900/30 text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full transition-colors"
                                             >
                                                 <X size={18} />
                                             </button>
@@ -330,8 +330,8 @@ const Categories = () => {
                                         <label
                                             htmlFor="icon-upload"
                                             className={`flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${uploading
-                                                ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-400 cursor-not-allowed'
-                                                : 'border-gray-300 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
+                                                ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 cursor-not-allowed'
+                                                : 'border-gray-300 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
                                                 }`}
                                         >
                                             {uploading ? (
@@ -347,12 +347,12 @@ const Categories = () => {
                                             )}
                                         </label>
                                     </div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">Supported: JPG, PNG, GIF (Max 5MB)</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Supported: JPG, PNG, GIF (Max 5MB)</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
                                     Description
                                 </label>
                                 <textarea
@@ -360,18 +360,18 @@ const Categories = () => {
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     placeholder="Brief description of the category"
                                     rows={3}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
                                     Status
                                 </label>
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 >
                                     <option value={true}>Active</option>
                                     <option value={false}>Inactive</option>
@@ -382,13 +382,13 @@ const Categories = () => {
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
+                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-xl"
                                 >
                                     {editingCategory ? 'Update' : 'Create'}
                                 </button>

@@ -71,7 +71,7 @@ const ReviewsAdmin = () => {
 
     const renderStars = (rating) => {
         return [...Array(5)].map((_, i) => (
-            <Star key={i} size={14} className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'} />
+            <Star key={i} size={14} className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-700 dark:text-gray-300'} />
         ));
     };
 
@@ -80,14 +80,14 @@ const ReviewsAdmin = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Reviews & Testimonials</h1>
-                    <p className="text-gray-500">Manage user feedback and ratings</p>
+                    <p className="text-gray-500 dark:text-gray-400">Manage user feedback and ratings</p>
                 </div>
             </div>
 
             {/* Filters */}
             <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div className="relative w-full md:w-96">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                     <input
                         type="text"
                         placeholder="Search reviews, users, or services..."
@@ -98,7 +98,7 @@ const ReviewsAdmin = () => {
                 </div>
 
                 <div className="flex items-center gap-2 w-full md:w-auto">
-                    <Filter size={20} className="text-gray-400" />
+                    <Filter size={20} className="text-gray-600 dark:text-gray-400" />
                     <select
                         value={filterRating}
                         onChange={(e) => setFilterRating(e.target.value)}
@@ -126,7 +126,7 @@ const ReviewsAdmin = () => {
                             <div key={review.id} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-6">
                                 {/* User Info */}
                                 <div className="flex items-start gap-4 w-full md:w-64 flex-shrink-0">
-                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 overflow-hidden">
+                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-400 overflow-hidden">
                                         {review.user?.avatar ? (
                                             <img src={review.user.avatar} alt={review.user.name} className="w-full h-full object-cover" />
                                         ) : (
@@ -135,7 +135,7 @@ const ReviewsAdmin = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-gray-900">{review.user?.name || 'Anonymous User'}</h3>
-                                        <div className="text-xs text-gray-500 mt-1">
+                                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                             {new Date(review.createdAt).toLocaleDateString()}
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@ const ReviewsAdmin = () => {
                                 <div className="flex items-center md:flex-col justify-end gap-2">
                                     <button
                                         onClick={() => confirmDelete(review.id)}
-                                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                         title="Delete Review"
                                     >
                                         <Trash2 size={18} />
@@ -168,9 +168,9 @@ const ReviewsAdmin = () => {
                         ))
                     ) : (
                         <div className="text-center py-12 bg-white rounded-xl border border-dashed border-gray-200">
-                            <MessageSquare className="mx-auto h-12 w-12 text-gray-300 mb-3" />
+                            <MessageSquare className="mx-auto h-12 w-12 text-gray-700 dark:text-gray-300 mb-3" />
                             <h3 className="text-lg font-medium text-gray-900">No reviews found</h3>
-                            <p className="text-gray-500">Try adjusting your filters or search terms.</p>
+                            <p className="text-gray-500 dark:text-gray-400">Try adjusting your filters or search terms.</p>
                         </div>
                     )}
                 </div>

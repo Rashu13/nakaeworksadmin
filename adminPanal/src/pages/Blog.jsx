@@ -68,21 +68,21 @@ const Blog = () => {
     ];
 
     return (
-        <div className="bg-gray-50 dark:bg-[#0a0d14] min-h-screen pt-32 pb-12 transition-colors duration-300">
+        <div className="bg-gray-50 dark:bg-gray-50 dark:bg-[#0a0d14] min-h-screen pt-32 pb-12 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-slate-900 dark:text-white mb-6">
                         NakaeWorks <span className="text-primary-500">Blog</span>
                     </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 dark:text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Insights, tips, and expert advice on home maintenance, lifestyle improvements, and modern living solutions.
                     </p>
                 </div>
 
                 {/* Featured Post */}
                 <div className="mb-16">
-                    <div className="bg-white dark:bg-slate-900/40 rounded-[2.5rem] border border-gray-100 dark:border-white/5 shadow-2xl overflow-hidden group flex flex-col lg:flex-row relative">
+                    <div className="bg-white dark:bg-white dark:bg-slate-900/40 rounded-[2.5rem] border border-gray-100 dark:border-gray-200 dark:border-white/5 shadow-2xl overflow-hidden group flex flex-col lg:flex-row relative">
                         <div className="absolute right-0 top-0 w-64 h-64 bg-primary-600/5 blur-[100px] pointer-events-none"></div>
                         <div className="lg:w-1/2 overflow-hidden">
                             <img
@@ -95,13 +95,13 @@ const Blog = () => {
                             <span className="inline-block px-4 py-1.5 bg-primary-100 dark:bg-primary-500/10 text-primary-600 dark:text-primary-500 text-xs font-black uppercase tracking-widest rounded-full mb-6 max-w-fit">
                                 Featured • {blogPosts[0].category}
                             </span>
-                            <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4 group-hover:text-primary-500 transition-colors">
+                            <h2 className="text-3xl font-black text-gray-900 dark:text-slate-900 dark:text-white mb-4 group-hover:text-primary-500 transition-colors">
                                 {blogPosts[0].title}
                             </h2>
-                            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                            <p className="text-lg text-gray-600 dark:text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
                                 {blogPosts[0].excerpt}
                             </p>
-                            <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 font-medium mb-8">
+                            <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-medium mb-8">
                                 <span className="flex items-center gap-2"><User size={16} /> {blogPosts[0].author}</span>
                                 <span className="flex items-center gap-2"><Calendar size={16} /> {blogPosts[0].date}</span>
                                 <span className="flex items-center gap-2"><Clock size={16} /> {blogPosts[0].readTime}</span>
@@ -116,25 +116,25 @@ const Blog = () => {
                 {/* Grid Layout for other posts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogPosts.slice(1).map((post) => (
-                        <div key={post.id} className="bg-white dark:bg-slate-900/40 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-2 transition-transform duration-300 group flex flex-col overflow-hidden">
+                        <div key={post.id} className="bg-white dark:bg-white dark:bg-slate-900/40 rounded-3xl border border-gray-100 dark:border-gray-200 dark:border-white/5 shadow-xl hover:-translate-y-2 transition-transform duration-300 group flex flex-col overflow-hidden">
                             <div className="relative h-56 overflow-hidden">
                                 <img
                                     src={post.thumbnail}
                                     alt={post.title}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
-                                <div className="absolute top-4 left-4 bg-white/90 dark:bg-black/60 backdrop-blur-md text-gray-900 dark:text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                                <div className="absolute top-4 left-4 bg-white/90 dark:bg-black/60 backdrop-blur-md text-gray-900 dark:text-slate-900 dark:text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
                                     {post.category}
                                 </div>
                             </div>
                             <div className="p-8 flex flex-col flex-grow">
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-500 transition-colors line-clamp-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-3 group-hover:text-primary-500 transition-colors line-clamp-2">
                                     {post.title}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
+                                <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
                                     {post.excerpt}
                                 </p>
-                                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 font-medium pt-6 border-t border-gray-100 dark:border-white/10">
+                                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-medium pt-6 border-t border-gray-100 dark:border-gray-200 dark:border-white/10">
                                     <span className="flex items-center gap-1.5"><Calendar size={14} /> {post.date}</span>
                                     <span className="flex items-center gap-1.5"><Clock size={14} /> {post.readTime}</span>
                                 </div>

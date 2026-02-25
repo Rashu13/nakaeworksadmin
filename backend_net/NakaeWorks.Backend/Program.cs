@@ -162,23 +162,25 @@ using (var scope = app.Services.CreateScope())
             context.SaveChanges();
         }
 
-        // 2. Seed Providers if low
-        if (context.Users.Count(u => u.Role == "provider") < 5)
+        // 2. Seed Users if low
+        if (context.Users.Count() < 7)
         {
-            var providers = new List<User>
+            var users = new List<User>
             {
-                new User { Name = "Rahul Sharma", Email = "rahul@nakae.com", Password = "Password123!", Phone = "9876543210", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/32.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Priya Singh", Email = "priya@nakae.com", Password = "Password123!", Phone = "9876543211", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/44.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Amit Verma", Email = "amit@nakae.com", Password = "Password123!", Phone = "9876543212", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/45.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Sneha Gupta", Email = "sneha@nakae.com", Password = "Password123!", Phone = "9876543213", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/68.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Vikram Malhotra", Email = "vikram@nakae.com", Password = "Password123!", Phone = "9876543214", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/22.jpg", CreatedAt = DateTime.UtcNow }
+                new User { Name = "Admin User", Email = "admin@nakae.com", Password = "password123", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "Test User", Email = "user@nakae.com", Password = "password123", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "Rahul Sharma", Email = "rahul@nakae.com", Password = "password123", Phone = "9876543210", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/32.jpg", CreatedAt = DateTime.UtcNow },
+                new User { Name = "Priya Singh", Email = "priya@nakae.com", Password = "password123", Phone = "9876543211", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/44.jpg", CreatedAt = DateTime.UtcNow },
+                new User { Name = "Amit Verma", Email = "amit@nakae.com", Password = "password123", Phone = "9876543212", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/45.jpg", CreatedAt = DateTime.UtcNow },
+                new User { Name = "Sneha Gupta", Email = "sneha@nakae.com", Password = "password123", Phone = "9876543213", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/68.jpg", CreatedAt = DateTime.UtcNow },
+                new User { Name = "Vikram Malhotra", Email = "vikram@nakae.com", Password = "password123", Phone = "9876543214", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/22.jpg", CreatedAt = DateTime.UtcNow }
             };
 
-             foreach (var p in providers)
+             foreach (var u in users)
              {
-                 if (!context.Users.Any(u => u.Email == p.Email))
+                 if (!context.Users.Any(dbU => dbU.Email == u.Email))
                  {
-                     context.Users.Add(p);
+                     context.Users.Add(u);
                  }
              }
              context.SaveChanges();
