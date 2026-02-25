@@ -152,7 +152,7 @@ public class SmsService
             var username = "Starnext";
             var apiKey = "EB98B-9C93C";
             var senderId = "ROHIAL";
-            var templateId = "1702171048223539853";
+            var templateId = "1507165087189012738";
             var route = "DND";
             
             var message = $"{otp} is your OTP, Please enter this code to confirm your Registration. : SMS Sent Via ROHAIL";
