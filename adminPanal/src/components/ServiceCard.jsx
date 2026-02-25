@@ -35,7 +35,7 @@ const ServiceCard = ({ service, viewMode }) => {
     const provider = _provider || Provider;
     const category = _category || Category;
 
-    const discountedPrice = discount ? price - (price * discount / 100) : price;
+    const discountedPrice = price - (discount || 0);
     const fullThumbnail = thumbnail ? (thumbnail.startsWith('http') ? thumbnail : `${BASE_URL}${thumbnail}`) : `https://images.unsplash.com/photo-1581578731117-104f8a746950?w=400`;
     const fullAvatar = provider?.avatar ? (provider.avatar.startsWith('http') ? provider.avatar : `${BASE_URL}${provider.avatar}`) : `https://ui-avatars.com/api/?name=${provider?.name || 'User'}`;
 
@@ -52,11 +52,9 @@ const ServiceCard = ({ service, viewMode }) => {
                     />
 
                     {/* Discount Badge */}
-                    {discount > 0 && (
-                        <div className="absolute top-5 left-5 px-2.5 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-bold rounded-lg shadow-sm">
-                            {discount}% OFF
-                        </div>
-                    )}
+                    <div className="absolute top-5 left-5 px-2.5 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-bold rounded-lg shadow-sm">
+                        {Math.round((discount / price) * 100)}% OFF
+                    </div>
 
                     {/* Category Tag */}
                     <div className="absolute bottom-5 left-5 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium rounded-lg">
@@ -69,7 +67,7 @@ const ServiceCard = ({ service, viewMode }) => {
                     <div className="flex justify-between items-start gap-4">
                         <div>
                             <h3
-                                onClick={() => navigate(`/service/${id}`)}
+                                onClick={() => navigate(`/service/${service.slug || id}`)}
                                 className="text-lg font-bold text-gray-900 hover:text-blue-600 cursor-pointer line-clamp-1 mb-1"
                             >
                                 {name}
@@ -137,7 +135,7 @@ const ServiceCard = ({ service, viewMode }) => {
                                 <span className="text-xs font-bold">{added ? 'Added!' : 'Add'}</span>
                             </button>
                             <button
-                                onClick={() => navigate(`/service/${id}`)}
+                                onClick={() => navigate(`/service/${service.slug || id}`)}
                                 className="px-5 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
                             >
                                 Book
@@ -165,7 +163,7 @@ const ServiceCard = ({ service, viewMode }) => {
                 {/* Discount Badge */}
                 {discount > 0 && (
                     <div className="absolute top-5 left-5 px-2.5 py-1 bg-gradient-to-r from-red-600 to-pink-600 text-white text-[10px] font-bold rounded-lg shadow-sm">
-                        {discount}% OFF
+                        {Math.round((discount / price) * 100)}% OFF
                     </div>
                 )}
 
@@ -194,7 +192,7 @@ const ServiceCard = ({ service, viewMode }) => {
                 {/* Title & Price */}
                 <div className="flex items-start justify-between gap-2 mb-3">
                     <h3
-                        onClick={() => navigate(`/service/${id}`)}
+                        onClick={() => navigate(`/service/${service.slug || id}`)}
                         className="font-semibold text-gray-800 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer line-clamp-2 flex-1 transition-colors"
                     >
                         {name}
@@ -265,7 +263,7 @@ const ServiceCard = ({ service, viewMode }) => {
                             <ShoppingCart size={18} />
                         </button>
                         <button
-                            onClick={() => navigate(`/service/${id}`)}
+                            onClick={() => navigate(`/service/${service.slug || id}`)}
                             className="px-4 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-all"
                         >
                             Book

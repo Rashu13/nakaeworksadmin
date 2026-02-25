@@ -142,7 +142,7 @@ public class AdminController : ControllerBase
         // Search
         if (!string.IsNullOrEmpty(search))
         {
-            query = query.Where(u => u.Name.Contains(search) || u.Email.Contains(search) || u.Phone.Contains(search));
+            query = query.Where(u => u.Name.Contains(search) || u.Email.Contains(search) || (u.Phone != null && u.Phone.Contains(search)));
         }
 
         var totalCount = await query.CountAsync();
@@ -219,6 +219,57 @@ public class AdminController : ControllerBase
                 }
             }
         });
+    }
+
+    [HttpPost("users")]
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
+    {
+        if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            return BadRequest(new { success = false, message = "Email already registered" });
+
+        var user = new User
+        {
+            Name = dto.Name,
+            Email = dto.Email,
+            Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            Phone = dto.Phone,
+            Role = dto.Role.ToLower(),
+            Status = dto.Status,
+            Avatar = dto.Avatar,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { success = true, message = "User created successfully" });
+    }
+
+    [HttpPut("users/{id}")]
+    public async Task<IActionResult> UpdateUser(long id, [FromBody] UpdateUserDto dto)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+            return NotFound(new { success = false, message = "User not found" });
+
+        if (dto.Name != null) user.Name = dto.Name;
+        if (dto.Email != null) user.Email = dto.Email;
+        if (dto.Phone != null) user.Phone = dto.Phone;
+        if (dto.Role != null) user.Role = dto.Role.ToLower();
+        if (dto.Status.HasValue) user.Status = dto.Status.Value;
+        if (dto.Avatar != null) user.Avatar = dto.Avatar;
+        
+        if (!string.IsNullOrEmpty(dto.Password))
+        {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+        }
+
+        user.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new { success = true, message = "User updated successfully" });
     }
 
     [HttpPut("users/{id}/status")]

@@ -43,3 +43,24 @@ public class UpdateCategoryDto
     public string? Icon { get; set; }
     public bool? Status { get; set; }
 }
+public class CreateUserDto
+{
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+    public string? Phone { get; set; }
+    public string Role { get; set; } = "consumer";
+    public bool Status { get; set; } = true;
+    public string? Avatar { get; set; }
+}
+
+public class UpdateUserDto
+{
+    public string? Name { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Password { get; set; }
+    public string? Role { get; set; }
+    public bool? Status { get; set; }
+    public string? Avatar { get; set; }
+}

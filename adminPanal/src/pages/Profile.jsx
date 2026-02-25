@@ -1003,19 +1003,44 @@ const Profile = () => {
                                 </div>
 
                                 <div className="space-y-8">
-                                    {/* Service Header */}
-                                    <div className="flex gap-6 p-6 bg-white/5 rounded-3xl border border-white/10 relative overflow-hidden group">
-                                        <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/5 blur-[40px] pointer-events-none"></div>
-                                        <img
-                                            src={selectedBooking.service?.thumbnail}
-                                            alt={selectedBooking.service?.name}
-                                            className="w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-lg"
-                                        />
-                                        <div>
-                                            <h3 className="font-black text-xl text-white uppercase tracking-tight mb-1">{selectedBooking.service?.name}</h3>
-                                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 text-orange-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
-                                                ID: #{selectedBooking.bookingNumber}
-                                            </div>
+                                    {/* Service Header / Items List */}
+                                    <div className="space-y-4">
+                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest px-1">Booked Services</p>
+                                        <div className="space-y-3">
+                                            {selectedBooking.items && selectedBooking.items.length > 0 ? (
+                                                selectedBooking.items.map((item, idx) => (
+                                                    <div key={idx} className="flex gap-4 p-4 bg-white/5 rounded-2xl border border-white/10 group">
+                                                        <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-white/10 overflow-hidden">
+                                                            <FileText size={20} className="text-gray-500" />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="font-black text-sm text-white uppercase truncate">{item.serviceName || item.service?.name}</h3>
+                                                            <div className="flex items-center gap-3 mt-1">
+                                                                <span className="text-[10px] text-gray-500 font-bold uppercase">Qty: {item.quantity}</span>
+                                                                <span className="text-[10px] text-orange-500 font-bold tracking-wider">₹{item.price} each</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-right shrink-0">
+                                                            <p className="text-sm font-black text-white">₹{item.total}</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="flex gap-6 p-6 bg-white/5 rounded-3xl border border-white/10 relative overflow-hidden group">
+                                                    <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/5 blur-[40px] pointer-events-none"></div>
+                                                    <img
+                                                        src={selectedBooking.service?.thumbnail}
+                                                        alt={selectedBooking.service?.name}
+                                                        className="w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-lg"
+                                                    />
+                                                    <div>
+                                                        <h3 className="font-black text-xl text-white uppercase tracking-tight mb-1">{selectedBooking.service?.name}</h3>
+                                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 text-orange-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                                                            ID: #{selectedBooking.bookingNumber}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 

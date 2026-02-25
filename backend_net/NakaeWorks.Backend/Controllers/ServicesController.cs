@@ -65,36 +65,46 @@ public class ServicesController : ControllerBase
         return Ok(services);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetServiceById(long id)
+    [HttpGet("{idOrSlug}")]
+    public async Task<IActionResult> GetServiceById(string idOrSlug)
     {
-        var service = await _context.Services
+        var query = _context.Services
             .Include(s => s.Category)
             .Include(s => s.Provider)
-            .Where(s => s.Id == id)
-            .Select(s => new ServiceDto
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Slug = s.Slug,
-                Price = s.Price,
-                Discount = s.Discount,
-                Duration = s.Duration,
-                Thumbnail = s.Thumbnail,
-                Description = s.Description,
-                IsFeatured = s.IsFeatured,
-                CategoryId = s.CategoryId,
-                CategoryName = s.Category != null ? s.Category.Name : "",
-                CategorySlug = s.Category != null ? s.Category.Slug : "",
-                ProviderId = s.ProviderId,
-                ProviderName = s.Provider != null ? s.Provider.Name : "",
-                ProviderAvatar = s.Provider != null ? s.Provider.Avatar : ""
-            })
-            .FirstOrDefaultAsync();
+            .AsQueryable();
 
-        if (service == null) return NotFound();
+        Service? serviceEntity;
+        if (long.TryParse(idOrSlug, out long id))
+        {
+            serviceEntity = await query.FirstOrDefaultAsync(s => s.Id == id);
+        }
+        else
+        {
+            serviceEntity = await query.FirstOrDefaultAsync(s => s.Slug == idOrSlug);
+        }
 
-        return Ok(service);
+        if (serviceEntity == null) return NotFound();
+
+        var serviceDto = new ServiceDto
+        {
+            Id = serviceEntity.Id,
+            Name = serviceEntity.Name,
+            Slug = serviceEntity.Slug,
+            Price = serviceEntity.Price,
+            Discount = serviceEntity.Discount,
+            Duration = serviceEntity.Duration,
+            Thumbnail = serviceEntity.Thumbnail,
+            Description = serviceEntity.Description,
+            IsFeatured = serviceEntity.IsFeatured,
+            CategoryId = serviceEntity.CategoryId,
+            CategoryName = serviceEntity.Category != null ? serviceEntity.Category.Name : "",
+            CategorySlug = serviceEntity.Category != null ? serviceEntity.Category.Slug : "",
+            ProviderId = serviceEntity.ProviderId,
+            ProviderName = serviceEntity.Provider != null ? serviceEntity.Provider.Name : "",
+            ProviderAvatar = serviceEntity.Provider != null ? serviceEntity.Provider.Avatar : ""
+        };
+
+        return Ok(serviceDto);
     }
     
     [HttpGet("categories")]

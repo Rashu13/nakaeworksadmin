@@ -37,13 +37,25 @@ const BookingSuccess = () => {
 
                     {/* Booking Details */}
                     <div className="text-left space-y-4 mb-8">
-                        <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900/30 rounded-xl border border-gray-100 dark:border-gray-700">
-                            <div className="w-10 h-10 bg-slate-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                                <FileText size={20} className="text-slate-900 dark:text-white" />
-                            </div>
-                            <div>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Service</span>
-                                <p className="font-medium text-gray-900 dark:text-white">{service?.name}</p>
+                        <div className="flex flex-col gap-3 p-3 bg-gray-50 dark:bg-gray-900/30 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-slate-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                                    <FileText size={20} className="text-slate-900 dark:text-white" />
+                                </div>
+                                <div className="flex-1">
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                        {location.state?.services?.length > 1 ? 'Services Booked' : 'Service'}
+                                    </span>
+                                    {location.state?.services?.length > 1 ? (
+                                        <div className="mt-1 space-y-1">
+                                            {location.state.services.map((s, idx) => (
+                                                <p key={idx} className="font-medium text-gray-900 dark:text-white text-sm">• {s.name}</p>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="font-medium text-gray-900 dark:text-white">{service?.name}</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

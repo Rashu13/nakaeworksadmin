@@ -171,7 +171,7 @@ const ServiceDetail = () => {
 
                                         {discount > 0 && (
                                             <div className="absolute top-2 left-2 px-2 py-0.5 bg-green-600 text-white text-[10px] uppercase font-bold tracking-wide rounded-sm">
-                                                {discount}% OFF
+                                                {Math.round((discount / service.price) * 100)}% OFF
                                             </div>
                                         )}
                                     </div>
@@ -361,7 +361,6 @@ const ServiceDetail = () => {
                                         className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors"
                                     />
                                 </div>
-                                {/* 
                                 <div>
                                     <label className="block text-xs font-bold text-gray-900 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
                                     <div className="grid grid-cols-3 gap-2">
@@ -401,7 +400,6 @@ const ServiceDetail = () => {
                                         <p className="text-[10px] text-red-500 mt-1.5">* Please select a time slot</p>
                                     )}
                                 </div>
-                                */}
                             </div>
 
                             {/* Trust Markers */}

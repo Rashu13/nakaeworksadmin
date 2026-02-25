@@ -125,6 +125,7 @@ const BookingConfirm = () => {
                 state: {
                     bookingNumber: response.bookingNumber,
                     service: isCartFlow ? cartItems[0] : service,
+                    services: isCartFlow ? cartItems : null,
                     date: effectiveDate,
                     time: effectiveTime,
                     amount: response.totalAmount,
@@ -180,12 +181,10 @@ const BookingConfirm = () => {
                                                     <Calendar size={14} />
                                                     <span>{isCartFlow ? effectiveDate : singleDate}</span>
                                                 </div>
-                                                {/* 
                                                 <div className="flex items-center gap-1">
                                                     <Clock size={14} />
                                                     <span>{isCartFlow ? effectiveTime : singleTime}</span>
                                                 </div>
-                                                */}
                                             </div>
                                         </div>
                                         <div className="text-right">

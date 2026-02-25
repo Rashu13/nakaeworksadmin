@@ -153,11 +153,10 @@ export const addressService = {
     }),
 };
 
-// Coupon Services
 export const couponService = {
-    validate: (code, amount) => apiCall('/coupons/validate', {
+    validate: (code, orderValue) => apiCall('/coupons/validate', {
         method: 'POST',
-        body: JSON.stringify({ code, amount }),
+        body: JSON.stringify({ code, orderValue }),
     }),
 };
 

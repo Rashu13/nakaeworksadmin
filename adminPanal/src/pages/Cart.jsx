@@ -57,7 +57,12 @@ const Cart = () => {
                                     />
                                 </div>
                                 <div className="flex-1 text-center sm:text-left">
-                                    <h3 className="text-lg font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight">{item.name}</h3>
+                                    <h3
+                                        onClick={() => navigate(`/service/${item.slug || item.id}`)}
+                                        className="text-lg font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight hover:text-orange-500 cursor-pointer transition-colors"
+                                    >
+                                        {item.name}
+                                    </h3>
                                     <p className="text-xs text-orange-500 font-black uppercase tracking-widest mb-3">{item.category?.name || 'Service'}</p>
                                     <div className="flex items-center justify-center sm:justify-start gap-4">
                                         <div className="flex items-center gap-2 bg-gray-50 dark:bg-white/5 p-1.5 rounded-xl border border-gray-200/50 dark:border-white/5">
