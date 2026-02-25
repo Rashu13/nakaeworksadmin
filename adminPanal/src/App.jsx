@@ -22,6 +22,9 @@ import Providers from './pages/Providers';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import RefundPolicy from './pages/RefundPolicy';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Blog from './pages/Blog';
 import ProviderDetail from './pages/ProviderDetail';
 
 // Admin Pages
@@ -97,6 +100,9 @@ function AppRoutes() {
       <Route path="/privacy" element={<PublicLayout><PrivacyPolicy /></PublicLayout>} />
       <Route path="/terms" element={<PublicLayout><TermsOfService /></PublicLayout>} />
       <Route path="/refund" element={<PublicLayout><RefundPolicy /></PublicLayout>} />
+      <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+      <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+      <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
       <Route path="/provider-detail/:id" element={<PublicLayout><ProviderDetail /></PublicLayout>} />
 
       {/* Admin Login (Public) */}
