@@ -18,7 +18,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllServices([FromQuery] long? categoryId, [FromQuery] string? search)
+    public async Task<IActionResult> GetAllServices([FromQuery] long? categoryId, [FromQuery] string? category, [FromQuery] string? search)
     {
         var query = _context.Services
             .Include(s => s.Category)
@@ -28,6 +28,11 @@ public class ServicesController : ControllerBase
         if (categoryId.HasValue)
         {
             query = query.Where(s => s.CategoryId == categoryId.Value);
+        }
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            query = query.Where(s => (s.Category != null && (s.Category.Name.ToLower() == category.ToLower() || s.Category.Slug.ToLower() == category.ToLower())));
         }
 
         if (!string.IsNullOrEmpty(search))

@@ -38,6 +38,11 @@ public class UpdateCouponDto
     public int? UsageLimit { get; set; }
 }
 
+public class UpdateStatusDto
+{
+    public bool Status { get; set; }
+}
+
 public class CouponResponseDto
 {
     public long Id { get; set; }

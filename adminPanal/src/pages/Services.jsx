@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Search, Filter, Grid, List, ChevronDown, Star, Clock, MapPin, SlidersHorizontal, X } from 'lucide-react';
 import ServiceCard from '../components/ServiceCard';
@@ -15,16 +15,15 @@ const sortOptions = [
 const Services = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [allServices, setAllServices] = useState([]); // Store all fetched services
-    const [services, setServices] = useState([]); // Displayed services (filtered)
     const [categories, setCategories] = useState([]); // To store categories for filter pills
     const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState('grid');
     const [showFilters, setShowFilters] = useState(false);
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
     const [filters, setFilters] = useState({
         category: searchParams.get('category') || 'All',
         search: searchParams.get('search') || '',
         sort: 'popular',
-        priceRange: [0, 5000],
         rating: 0
     });
 
@@ -32,77 +31,74 @@ const Services = () => {
 
     // Fetch Services and Categories
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCategories = async () => {
             try {
-                setLoading(true);
-                const [servicesData, categoriesData] = await Promise.all([
-                    serviceService.getAll(),
-                    serviceService.getCategories()
-                ]);
-
-                if (servicesData) {
-                    setAllServices(servicesData);
-                }
+                const categoriesData = await serviceService.getCategories();
                 if (categoriesData) {
                     setCategories(['All', ...categoriesData.map(c => c.name)]);
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+    // Fetch Services whenever filters change (memory efficient - fetch only what's needed)
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                setLoading(true);
+                const params = {};
+                if (filters.category !== 'All') params.category = filters.category;
+                if (filters.search) params.search = filters.search;
+
+                const data = await serviceService.getAll(params);
+                setAllServices(data || []);
+            } catch (error) {
+                console.error('Error fetching services:', error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchData();
-    }, []);
+        fetchServices();
+    }, [filters.category, filters.search]);
 
-    // Filter & Sort
+    // Debounce search input
     useEffect(() => {
-        let filtered = [...allServices];
+        const handler = setTimeout(() => {
+            setFilters(prev => ({ ...prev, search: searchTerm }));
+        }, 300);
 
-        // Category Filter
-        if (filters.category !== 'All') {
-            filtered = filtered.filter(s => {
-                const categoryName = (s.categoryName || s.CategoryName)?.toLowerCase();
-                const categorySlug = (s.categorySlug || s.CategorySlug)?.toLowerCase();
-                const filterValue = filters.category.toLowerCase();
+        return () => clearTimeout(handler);
+    }, [searchTerm]);
 
-                return categoryName === filterValue || categorySlug === filterValue;
-            });
-        }
+    // Sorting - Memory Efficient using useMemo on the fetched subset
+    const filteredServices = useMemo(() => {
+        let sorted = [...allServices];
 
-        // Search Filter
-        if (filters.search) {
-            filtered = filtered.filter(s =>
-                s.name.toLowerCase().includes(filters.search.toLowerCase())
-            );
-        }
-
-        // Rating Filter
+        // Rating Filter (Client-side secondary filter if needed, or already handled by backend)
         if (filters.rating > 0) {
-            // Use s.rating if available, else s.provider.rating (if backend sends it) or 0
-            // Note: Backend might not send service rating yet, maybe provider rating
-            // Assuming service has rating or 0
-            filtered = filtered.filter(s => (s.rating || 0) >= filters.rating);
+            sorted = sorted.filter(s => (s.rating || 0) >= filters.rating);
         }
 
         // Sort
         switch (filters.sort) {
             case 'rating':
-                filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+                sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
                 break;
             case 'price_low':
-                filtered.sort((a, b) => a.price - b.price);
+                sorted.sort((a, b) => a.price - b.price);
                 break;
             case 'price_high':
-                filtered.sort((a, b) => b.price - a.price);
+                sorted.sort((a, b) => b.price - a.price);
                 break;
             default:
-                // Sort by ID or creation if reviewsCount missing
-                filtered.sort((a, b) => (b.reviewsCount || 0) - (a.reviewsCount || 0));
+                sorted.sort((a, b) => (b.reviewsCount || 0) - (a.reviewsCount || 0));
         }
 
-        setServices(filtered);
-    }, [filters, allServices]);
+        return sorted;
+    }, [allServices, filters.sort, filters.rating]);
 
     // Sync searchParams with filters when navigating directly
     useEffect(() => {
@@ -115,6 +111,7 @@ const Services = () => {
                 category: category || 'All',
                 search: search || ''
             }));
+            if (search) setSearchTerm(search);
         }
     }, [searchParams]);
 
@@ -129,8 +126,8 @@ const Services = () => {
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
                             <input
                                 type="text"
-                                value={filters.search}
-                                onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Search services..."
                                 className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                             />
@@ -254,7 +251,7 @@ const Services = () => {
                 {/* Results Count */}
                 <div className="flex items-center justify-between mb-8">
                     <p className="text-gray-600 dark:text-gray-400">
-                        Showing <span className="font-bold text-gray-900 dark:text-white">{services.length}</span> services
+                        Showing <span className="font-bold text-gray-900 dark:text-white">{filteredServices.length}</span> services
                         {filters.category !== 'All' && (
                             <> in <span className="text-indigo-600 dark:text-indigo-400 font-medium">{filters.category}</span></>
                         )}
@@ -277,12 +274,12 @@ const Services = () => {
                             <div key={i} className="bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-2xl h-80 animate-pulse"></div>
                         ))}
                     </div>
-                ) : services.length > 0 ? (
+                ) : filteredServices.length > 0 ? (
                     <div className={`grid gap-6 ${viewMode === 'grid'
                         ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
                         : 'grid-cols-1'
                         }`}>
-                        {services.map((service) => (
+                        {filteredServices.map((service) => (
                             <ServiceCard key={service.id} service={service} viewMode={viewMode} />
                         ))}
                     </div>
@@ -294,7 +291,10 @@ const Services = () => {
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No services found</h3>
                         <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-xs mx-auto">We couldn't find any services matching your current filters. Try adjusting them!</p>
                         <button
-                            onClick={() => setFilters({ ...filters, category: 'All', search: '', rating: 0 })}
+                            onClick={() => {
+                                setSearchTerm('');
+                                setFilters({ ...filters, category: 'All', search: '', rating: 0 });
+                            }}
                             className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium"
                         >
                             Clear Filters

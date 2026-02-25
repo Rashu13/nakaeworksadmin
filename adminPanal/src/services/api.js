@@ -99,7 +99,10 @@ export const authService = {
 
 // Service Services
 export const serviceService = {
-    getAll: (category) => apiCall(`/services${category ? `?category=${category}` : ''}`),
+    getAll: (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiCall(`/services${query ? `?${query}` : ''}`);
+    },
     getCategories: () => apiCall('/services/categories'),
     getById: (id) => apiCall(`/services/${id}`),
     create: (serviceData) => apiCall('/services', {

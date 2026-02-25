@@ -96,19 +96,32 @@ export default function UrbanStyleHero() {
                         className="relative max-w-xl mb-12 group"
                     >
                         <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                        <div className="relative flex items-center bg-[#161b22] border border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                const query = e.target.search.value;
+                                if (query.trim()) {
+                                    navigate(`/services?search=${encodeURIComponent(query)}`);
+                                }
+                            }}
+                            className="relative flex items-center bg-[#161b22] border border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl"
+                        >
                             <div className="pl-6 text-gray-500">
                                 <Search size={22} className="group-focus-within:text-orange-500 transition-colors" />
                             </div>
                             <input
+                                name="search"
                                 type="text"
                                 placeholder="Search for 'AC Repair', 'Cleaning'..."
-                                className="w-full bg-transparent border-none focus:ring-0 text-white py-4 px-4 font-medium placeholder:text-gray-600"
+                                className="w-full bg-transparent border-none focus:ring-0 text-white py-4 px-4 font-medium placeholder:text-gray-600 outline-none"
                             />
-                            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-orange-500/20 active:scale-95">
+                            <button
+                                type="submit"
+                                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-orange-500/20 active:scale-95"
+                            >
                                 Search
                             </button>
-                        </div>
+                        </form>
                     </motion.div>
 
                     <motion.div

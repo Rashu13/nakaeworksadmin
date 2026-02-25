@@ -53,11 +53,14 @@ const CouponsAdmin = () => {
         try {
             const payload = {
                 ...formData,
-                discountValue: formData.discountType === 'free_service_charge' ? 0 : formData.discountValue,
-                usageLimit: formData.usageLimit || null,
-                maxDiscount: formData.maxDiscount || null,
+                discountValue: formData.discountType === 'free_service_charge' ? 0 : (Number(formData.discountValue) || 0),
+                minOrderValue: Number(formData.minOrderValue) || 0,
+                usageLimit: formData.usageLimit ? Number(formData.usageLimit) : null,
+                maxDiscount: formData.maxDiscount ? Number(formData.maxDiscount) : null,
                 expiresAt: formData.expiresAt || null,
-                startDate: formData.startDate || new Date(),
+                startDate: formData.startDate || new Date().toISOString(),
+                maxPastOrders: (formData.maxPastOrders === '' || formData.maxPastOrders === null) ? null : Number(formData.maxPastOrders),
+                usageLimitPerUser: Number(formData.usageLimitPerUser) || 1,
             };
 
             if (editingCoupon) {

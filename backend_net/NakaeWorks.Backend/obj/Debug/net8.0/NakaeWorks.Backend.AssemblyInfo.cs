@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NakaeWorks.Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b58c5f8558784e86d2a1a60957ada86e61765880")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+175257af32dc852c98e969ffa35bac589a849b78")]
 [assembly: System.Reflection.AssemblyProductAttribute("NakaeWorks.Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NakaeWorks.Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

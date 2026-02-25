@@ -99,8 +99,8 @@ public class CouponsController : ControllerBase
             DiscountValue = dto.DiscountValue,
             MinOrderValue = dto.MinOrderValue,
             MaxDiscount = dto.MaxDiscount,
-            StartDate = dto.StartDate ?? DateTime.UtcNow,
-            ExpiresAt = dto.ExpiresAt,
+            StartDate = dto.StartDate?.ToUniversalTime() ?? DateTime.UtcNow,
+            ExpiresAt = dto.ExpiresAt?.ToUniversalTime(),
             Status = true,
             UsageLimit = dto.UsageLimit,
             UsageLimitPerUser = dto.UsageLimitPerUser,
@@ -126,7 +126,7 @@ public class CouponsController : ControllerBase
         if (coupon == null) return NotFound(new { message = "Coupon not found" });
 
         if (dto.Status.HasValue) coupon.Status = dto.Status.Value;
-        if (dto.ExpiresAt.HasValue) coupon.ExpiresAt = dto.ExpiresAt.Value;
+        if (dto.ExpiresAt.HasValue) coupon.ExpiresAt = dto.ExpiresAt.Value.ToUniversalTime();
         if (dto.UsageLimit.HasValue) coupon.UsageLimit = dto.UsageLimit.Value;
 
         coupon.UpdatedAt = DateTime.UtcNow;
@@ -135,6 +135,23 @@ public class CouponsController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok(new { message = "Coupon updated" });
+    }
+
+    // PATCH: api/coupons/{id}/status (Admin only)
+    [HttpPatch("{id}/status")]
+    [Authorize(Roles = "admin")]
+    public async Task<IActionResult> ToggleStatus(long id, [FromBody] UpdateStatusDto dto)
+    {
+        var coupon = await _context.Coupons.FindAsync(id);
+        if (coupon == null) return NotFound(new { message = "Coupon not found" });
+
+        coupon.Status = dto.Status;
+        coupon.UpdatedAt = DateTime.UtcNow;
+
+        _context.Coupons.Update(coupon);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Coupon status updated" });
     }
 
     // DELETE: api/coupons/{id} (Admin only)
