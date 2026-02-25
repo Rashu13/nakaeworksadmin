@@ -4,8 +4,10 @@ import { Menu, X, User, ShoppingBag, Heart, MapPin, ChevronDown, LogOut, Moon, S
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
+    const { totalItems } = useCart();
     const [isOpen, setIsOpen] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [userLocation, setUserLocation] = useState('New Delhi');
@@ -139,13 +141,15 @@ const Navbar = () => {
                                     </button>
 
                                     <button
-                                        onClick={() => navigate('/profile', { state: { activeTab: 'bookings' } })}
+                                        onClick={() => navigate('/cart')}
                                         className="p-2 text-gray-400 hover:text-white transition-colors relative"
                                     >
                                         <ShoppingBag size={20} />
-                                        <span className="absolute top-1 right-1 w-4 h-4 bg-orange-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
-                                            2
-                                        </span>
+                                        {totalItems > 0 && (
+                                            <span className="absolute top-1 right-1 w-4 h-4 bg-orange-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
+                                                {totalItems}
+                                            </span>
+                                        )}
                                     </button>
 
                                     <div className="relative">

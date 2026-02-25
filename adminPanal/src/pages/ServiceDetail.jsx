@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { serviceService, reviewService, BASE_URL } from '../services/api';
-import { Star, Lock, Clock, Heart, ChevronRight, ChevronDown, ChevronUp, Minus, Plus, AlertCircle } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { Star, Lock, Clock, Heart, ChevronRight, ChevronDown, ChevronUp, Minus, Plus, AlertCircle, ShoppingCart } from 'lucide-react';
 import ConfirmationModal from '../components/ConfirmationModal';
 
 const ServiceDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
+    const { addToCart } = useCart();
 
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -88,6 +90,16 @@ const ServiceDetail = () => {
         '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
         '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'
     ];
+
+    const handleAddToCart = () => {
+        addToCart(service, quantity);
+        setAlertConfig({
+            isOpen: true,
+            title: 'Added to Cart',
+            message: `${service.name} has been added to your cart successfully.`,
+            type: 'success'
+        });
+    };
 
     const handleBooking = () => {
         if (!isAuthenticated) {
@@ -401,12 +413,21 @@ const ServiceDetail = () => {
                                 <div className="flex justify-between items-center text-gray-900 dark:text-white font-bold text-xl">
                                     <span>₹{Math.round(totalPrice)}</span>
                                 </div>
-                                <button
-                                    onClick={handleBooking}
-                                    className="w-full py-4 bg-black dark:bg-indigo-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200"
-                                >
-                                    Proceed to Checkout
-                                </button>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <button
+                                        onClick={handleAddToCart}
+                                        className="py-4 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <ShoppingCart size={18} />
+                                        Cart
+                                    </button>
+                                    <button
+                                        onClick={handleBooking}
+                                        className="py-4 bg-black dark:bg-indigo-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-indigo-700 transition-colors shadow-lg"
+                                    >
+                                        Buy Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

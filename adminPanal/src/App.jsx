@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
+import Cart from './pages/Cart';
 import BookingConfirm from './pages/BookingConfirm';
 import BookingSuccess from './pages/BookingSuccess';
 import Profile from './pages/Profile';
@@ -91,6 +92,7 @@ function AppRoutes() {
       <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
       <Route path="/providers" element={<PublicLayout><Providers /></PublicLayout>} />
       <Route path="/service/:id" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
+      <Route path="/cart" element={<PublicLayout><Cart /></PublicLayout>} />
       <Route path="/privacy" element={<PublicLayout><PrivacyPolicy /></PublicLayout>} />
       <Route path="/terms" element={<PublicLayout><TermsOfService /></PublicLayout>} />
       <Route path="/refund" element={<PublicLayout><RefundPolicy /></PublicLayout>} />

@@ -9,8 +9,14 @@ const BookingConfirm = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { user, isAuthenticated } = useAuth();
+    const { cartItems, cartTotal, clearCart } = useCart();
 
-    const { service, quantity, date, time, totalPrice } = location.state || {};
+    // Support both single service and cart flow
+    const state = location.state || {};
+    const isCartFlow = state.cartFlow;
+
+    // Fallback for single service
+    const { service, quantity, date: singleDate, time: singleTime, totalPrice: singleTotalPrice } = state;
 
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
@@ -21,26 +27,21 @@ const BookingConfirm = () => {
     const [discountAmt, setDiscountAmt] = useState(0);
     const [alertConfig, setAlertConfig] = useState({ isOpen: false, title: '', message: '', type: 'info' });
 
-    const showAlert = (title, message, type = 'info') => {
-        setAlertConfig({
-            isOpen: true,
-            title,
-            message,
-            type,
-            onConfirm: () => setAlertConfig(prev => ({ ...prev, isOpen: false }))
-        });
-    };
+    // Effective values
+    const effectiveTotalPrice = isCartFlow ? cartTotal : (singleTotalPrice || 0);
+    const effectiveDate = isCartFlow ? new Date().toISOString().split('T')[0] : (singleDate || new Date().toISOString().split('T')[0]); // Default to today for cart
+    const effectiveTime = isCartFlow ? "10:00 AM" : (singleTime || "10:00 AM"); // Default for cart
 
     const platformFee = 49;
-    const tax = Math.round(((totalPrice || 0) + platformFee) * 0.18);
-    const finalAmount = (totalPrice || 0) + platformFee + tax - discountAmt;
+    const tax = Math.round(((effectiveTotalPrice || 0) + platformFee) * 0.18);
+    const finalAmount = (effectiveTotalPrice || 0) + platformFee + tax - discountAmt;
 
     const applyCoupon = async () => {
         if (!couponCode) return;
 
         try {
             setLoading(true);
-            const response = await couponService.validate(couponCode, totalPrice);
+            const response = await couponService.validate(couponCode, effectiveTotalPrice);
 
             if (response.valid) {
                 setDiscountAmt(parseFloat(response.calculatedDiscount));
@@ -75,6 +76,16 @@ const BookingConfirm = () => {
         }
     }, [isAuthenticated]);
 
+    const showAlert = (title, message, type = 'info') => {
+        setAlertConfig({
+            isOpen: true,
+            title,
+            message,
+            type,
+            onConfirm: () => setAlertConfig(prev => ({ ...prev, isOpen: false }))
+        });
+    };
+
     const handleBooking = async () => {
         if (!selectedAddress) {
             showAlert('Address Required', 'Please select or add an address to proceed.', 'warning');
@@ -84,45 +95,39 @@ const BookingConfirm = () => {
         setLoading(true);
 
         try {
-            // Parse time (e.g., "09:00 AM") to 24-hour format
-            const [timePart, modifier] = time.split(' ');
+            // Parse time to 24-hour format
+            const [timePart, modifier] = effectiveTime.split(' ');
             let [hours, minutes] = timePart.split(':');
             hours = parseInt(hours, 10);
-            if (hours === 12 && modifier === 'AM') {
-                hours = 0;
-            }
-            if (modifier === 'PM' && hours < 12) {
-                hours += 12;
-            }
+            if (hours === 12 && modifier === 'AM') hours = 0;
+            if (modifier === 'PM' && hours < 12) hours += 12;
 
-            // Construct ISO DateTime string (YYYY-MM-DDTHH:mm:ss)
-            const formattedDateTime = `${date}T${hours.toString().padStart(2, '0')}:${minutes}:00`;
-
-            const providerId = service.providerId || service.ProviderId || service.provider?.id || service.Provider?.id;
-
-            if (!providerId) {
-                throw new Error("Provider information is missing for this service.");
-            }
+            const formattedDateTime = `${effectiveDate}T${hours.toString().padStart(2, '0')}:${minutes}:00`;
 
             const bookingData = {
-                serviceId: service.id,
                 addressId: selectedAddress,
-                providerId: providerId,
+                providerId: isCartFlow ? cartItems[0]?.providerId : service.providerId, // In legacy, it takes from one
                 dateTime: formattedDateTime,
                 description: '',
                 paymentMethod,
-                couponCode: discountAmt > 0 ? couponCode : null // Send coupon if applied
+                couponCode: discountAmt > 0 ? couponCode : null,
+                items: isCartFlow
+                    ? cartItems.map(i => ({ serviceId: i.id, quantity: i.quantity }))
+                    : [{ serviceId: service.id, quantity: quantity }]
             };
 
             const response = await bookingService.create(bookingData);
 
+            if (isCartFlow) clearCart();
+
             navigate('/booking/success', {
                 state: {
                     bookingNumber: response.bookingNumber,
-                    service,
-                    date,
-                    time,
-                    amount: response.totalAmount
+                    service: isCartFlow ? cartItems[0] : service,
+                    date: effectiveDate,
+                    time: effectiveTime,
+                    amount: response.totalAmount,
+                    isMultiItem: isCartFlow && cartItems.length > 1
                 }
             });
         } catch (error) {
@@ -133,7 +138,8 @@ const BookingConfirm = () => {
         }
     };
 
-    if (!service) return null;
+    if (!isCartFlow && !service) return null;
+    if (isCartFlow && cartItems.length === 0) return null;
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 transition-colors duration-200">
@@ -154,31 +160,39 @@ const BookingConfirm = () => {
                     <div className="md:col-span-2 space-y-6">
                         {/* Service Summary */}
                         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Service Details</h2>
-                            <div className="flex gap-4">
-                                <img
-                                    src={service.thumbnail}
-                                    alt={service.name}
-                                    className="w-24 h-20 rounded-xl object-cover bg-gray-100 dark:bg-gray-700"
-                                />
-                                <div className="flex-1">
-                                    <h3 className="font-medium text-gray-900 dark:text-white">{service.name}</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">{service.category?.name}</p>
-                                    <div className="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar size={14} />
-                                            <span>{date}</span>
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                                {isCartFlow ? `${cartItems.length} Services Selected` : 'Service Details'}
+                            </h2>
+                            <div className="space-y-4">
+                                {(isCartFlow ? cartItems : [service]).map((item, idx) => (
+                                    <div key={item.id || idx} className="flex gap-4 pb-4 border-b border-gray-50 dark:border-gray-700 last:border-0 last:pb-0">
+                                        <img
+                                            src={item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${BASE_URL}${item.thumbnail}`) : `https://ui-avatars.com/api/?name=${item.name}`}
+                                            alt={item.name}
+                                            className="w-20 h-20 rounded-xl object-cover bg-gray-100 dark:bg-gray-700"
+                                        />
+                                        <div className="flex-1">
+                                            <h3 className="font-medium text-gray-900 dark:text-white">{item.name}</h3>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">{item.category?.name || 'Service'}</p>
+                                            <div className="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                                <div className="flex items-center gap-1">
+                                                    <Calendar size={14} />
+                                                    <span>{isCartFlow ? effectiveDate : singleDate}</span>
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <Clock size={14} />
+                                                    <span>{isCartFlow ? effectiveTime : singleTime}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-1">
-                                            <Clock size={14} />
-                                            <span>{time}</span>
+                                        <div className="text-right">
+                                            <span className="font-semibold text-gray-900 dark:text-white">
+                                                ₹{(Number(item.price) - Number(item.discount || 0)) * (isCartFlow ? item.quantity : quantity)}
+                                            </span>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {isCartFlow ? item.quantity : quantity}</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="text-right">
-                                    <span className="font-semibold text-gray-900 dark:text-white">₹{totalPrice}</span>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">Qty: {quantity}</p>
-                                </div>
+                                ))}
                             </div>
                         </div>
 
@@ -298,8 +312,8 @@ const BookingConfirm = () => {
                             {/* Price Breakdown */}
                             <div className="space-y-4 text-base text-gray-600 dark:text-gray-300">
                                 <div className="flex justify-between">
-                                    <span>Service Price</span>
-                                    <span className="text-gray-900 dark:text-white font-medium">₹{totalPrice}</span>
+                                    <span>{isCartFlow ? 'Items Subtotal' : 'Service Price'}</span>
+                                    <span className="text-gray-900 dark:text-white font-medium">₹{effectiveTotalPrice}</span>
                                 </div>
                                 {discountAmt > 0 && (
                                     <div className="flex justify-between text-green-600 dark:text-green-400 font-medium">
