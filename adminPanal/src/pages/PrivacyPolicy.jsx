@@ -3,7 +3,7 @@ import { Lock, Eye, FileText, Mail } from 'lucide-react';
 
 const PrivacyPolicy = () => {
     return (
-        <div className="bg-gray-50 min-h-screen py-12">
+        <div className="bg-gray-50 min-h-screen pt-32 pb-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">

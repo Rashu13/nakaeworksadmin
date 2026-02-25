@@ -3,7 +3,7 @@ import { Users, Target, Shield, Zap } from 'lucide-react';
 
 const About = () => {
     return (
-        <div className="bg-gray-50 dark:bg-[#0a0d14] min-h-screen py-12 transition-colors duration-300">
+        <div className="bg-gray-50 dark:bg-[#0a0d14] min-h-screen pt-32 pb-12 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="text-center mb-16">
