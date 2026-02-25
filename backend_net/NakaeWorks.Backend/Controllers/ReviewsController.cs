@@ -52,16 +52,24 @@ public class ReviewsController : ControllerBase
         if (userIdStr == null) return Unauthorized();
         long userId = long.Parse(userIdStr);
 
+        var booking = await _context.Bookings
+            .FirstOrDefaultAsync(b => b.Id == dto.BookingId && b.ConsumerId == userId);
+
+        if (booking == null) return NotFound("Booking not found");
+        if (booking.IsReviewed) return BadRequest("This booking has already been reviewed");
+
         var review = new Review
         {
             BookingId = dto.BookingId,
             ConsumerId = userId,
-            ProviderId = dto.ProviderId,
-            ServiceId = dto.ServiceId,
+            ProviderId = booking.ProviderId ?? 0,
+            ServiceId = booking.ServiceId,
             Rating = dto.Rating,
             Comment = dto.Comment,
             CreatedAt = DateTime.UtcNow
         };
+
+        booking.IsReviewed = true;
 
         _context.Reviews.Add(review);
         await _context.SaveChangesAsync();

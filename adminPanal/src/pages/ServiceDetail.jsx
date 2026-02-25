@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { serviceService, reviewService, BASE_URL } from '../services/api';
 import { useCart } from '../context/CartContext';
@@ -107,22 +107,24 @@ const ServiceDetail = () => {
             return;
         }
 
-        if (!selectedDate || !selectedTime) {
+        if (!selectedDate) {
             setAlertConfig({
                 isOpen: true,
                 title: 'Selection Required',
-                message: 'Please select both a date and a time slot to proceed.',
+                message: 'Please select a date to proceed.',
                 type: 'warning'
             });
             return;
         }
+
+        const bookingTime = selectedTime || "10:00 AM"; // Default time
 
         navigate('/booking/confirm', {
             state: {
                 service,
                 quantity,
                 date: selectedDate,
-                time: selectedTime,
+                time: bookingTime,
                 totalPrice
             }
         });
@@ -312,9 +314,12 @@ const ServiceDetail = () => {
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{providerServed}+ jobs completed</p>
                                 </div>
                             </div>
-                            <button className="text-black dark:text-indigo-400 font-semibold text-sm hover:underline">
+                            <Link
+                                to={`/provider-detail/${service.providerId || service.ProviderId || service.provider?.id || service.Provider?.id}`}
+                                className="text-black dark:text-indigo-400 font-semibold text-sm hover:underline"
+                            >
                                 View Profile
-                            </button>
+                            </Link>
                         </div>
 
                     </div>
@@ -356,6 +361,7 @@ const ServiceDetail = () => {
                                         className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white outline-none transition-colors"
                                     />
                                 </div>
+                                {/* 
                                 <div>
                                     <label className="block text-xs font-bold text-gray-900 dark:text-gray-300 uppercase tracking-wider mb-3">Time Slot</label>
                                     <div className="grid grid-cols-3 gap-2">
@@ -395,6 +401,7 @@ const ServiceDetail = () => {
                                         <p className="text-[10px] text-red-500 mt-1.5">* Please select a time slot</p>
                                     )}
                                 </div>
+                                */}
                             </div>
 
                             {/* Trust Markers */}

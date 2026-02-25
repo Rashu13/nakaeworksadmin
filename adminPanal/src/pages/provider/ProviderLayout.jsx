@@ -10,7 +10,6 @@ import { BASE_URL } from '../../services/api';
 const menuItems = [
     { name: 'Dashboard', path: '/provider', icon: LayoutDashboard },
     { name: 'Bookings', path: '/provider/bookings', icon: Calendar },
-    { name: 'My Services', path: '/provider/services', icon: Briefcase },
     { name: 'Earnings', path: '/provider/earnings', icon: Wallet },
     { name: 'Reviews', path: '/provider/reviews', icon: Star },
     { name: 'Profile', path: '/provider/profile', icon: User },

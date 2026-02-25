@@ -1,11 +1,21 @@
 import React from 'react';
-import { Star, Clock, MapPin, User, Heart } from 'lucide-react';
+import { Star, Clock, MapPin, User, Heart, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import { BASE_URL } from '../services/api';
 
 const ServiceCard = ({ service, viewMode }) => {
     const navigate = useNavigate();
+    const { addToCart } = useCart();
     const [isFavorite, setIsFavorite] = React.useState(false);
+    const [added, setAdded] = React.useState(false);
+
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
+        addToCart(service);
+        setAdded(true);
+        setTimeout(() => setAdded(false), 2000);
+    };
 
     const {
         id,
@@ -118,12 +128,21 @@ const ServiceCard = ({ service, viewMode }) => {
                             </div>
                         )}
 
-                        <button
-                            onClick={() => navigate(`/service/${id}`)}
-                            className="px-5 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-blue-600 dark:hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
-                        >
-                            Book Now
-                        </button>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={handleAddToCart}
+                                className={`p-2 border rounded-lg transition-all flex items-center gap-2 ${added ? 'bg-green-500 border-green-500 text-white' : 'border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
+                            >
+                                <ShoppingCart size={18} />
+                                <span className="text-xs font-bold">{added ? 'Added!' : 'Add'}</span>
+                            </button>
+                            <button
+                                onClick={() => navigate(`/service/${id}`)}
+                                className="px-5 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+                            >
+                                Book
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -237,12 +256,21 @@ const ServiceCard = ({ service, viewMode }) => {
                         </div>
                     )}
 
-                    <button
-                        onClick={() => navigate(`/service/${id}`)}
-                        className="px-4 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-all transform hover:scale-105"
-                    >
-                        Book Now
-                    </button>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleAddToCart}
+                            className={`p-2 border rounded-lg transition-all flex items-center justify-center ${added ? 'bg-green-500 border-green-500 text-white' : 'border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
+                            title="Add to Cart"
+                        >
+                            <ShoppingCart size={18} />
+                        </button>
+                        <button
+                            onClick={() => navigate(`/service/${id}`)}
+                            className="px-4 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-all"
+                        >
+                            Book
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -80,6 +80,50 @@ public class ProviderController : ControllerBase
         return Ok(provider);
     }
 
+    [HttpGet("{id}/reviews")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProviderReviews(long id, [FromQuery] int page = 1, [FromQuery] int limit = 10)
+    {
+        var offset = (page - 1) * limit;
+
+        var query = _context.Reviews
+            .Where(r => r.ProviderId == id)
+            .Include(r => r.Consumer)
+            .Include(r => r.Service);
+
+        var totalCount = await query.CountAsync();
+
+        var reviews = await query
+            .OrderByDescending(r => r.CreatedAt)
+            .Skip(offset)
+            .Take(limit)
+            .Select(r => new
+            {
+                r.Id,
+                Consumer = new { r.Consumer!.Id, r.Consumer.Name, r.Consumer.Avatar },
+                Service = new { r.Service!.Id, r.Service.Name },
+                r.Rating,
+                r.Comment,
+                r.CreatedAt
+            })
+            .ToListAsync();
+
+        return Ok(new
+        {
+            Success = true,
+            Data = new
+            {
+                Reviews = reviews,
+                Pagination = new
+                {
+                    Total = totalCount,
+                    Page = page,
+                    Pages = (int)Math.Ceiling(totalCount / (double)limit)
+                }
+            }
+        });
+    }
+
     // ============================================
     // PROVIDER PANEL APIs
     // ============================================
@@ -271,105 +315,7 @@ public class ProviderController : ControllerBase
         return Ok(new { success = true, message = "Booking completed", data = booking });
     }
 
-    // GET: api/providers/services
-    [HttpGet("services")]
-    public async Task<IActionResult> GetServices()
-    {
-        var userIdStr = User.FindFirst("id")?.Value;
-        if (userIdStr == null) return Unauthorized();
-        long providerId = long.Parse(userIdStr);
-
-        var services = await _context.Services
-            .Where(s => s.ProviderId == providerId)
-            .Include(s => s.Category)
-            .OrderByDescending(s => s.CreatedAt)
-            .ToListAsync();
-
-        return Ok(new { success = true, data = services });
-    }
-
-    // POST: api/providers/services
-    [HttpPost("services")]
-    public async Task<IActionResult> AddService([FromBody] CreateServiceDto dto)
-    {
-        var userIdStr = User.FindFirst("id")?.Value;
-        if (userIdStr == null) return Unauthorized();
-        long providerId = long.Parse(userIdStr);
-
-        var slug = dto.Name.ToLower().Replace(" ", "-").Replace("[^a-z0-9-]", "") + "-" + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-
-        var service = new Service
-        {
-            ProviderId = providerId,
-            CategoryId = dto.CategoryId,
-            Name = dto.Name,
-            Slug = slug,
-            Description = dto.Description,
-            Price = dto.Price,
-            Discount = dto.Discount ?? 0,
-            Duration = dto.Duration ?? 60,
-            Type = dto.Type ?? "fixed",
-            Thumbnail = dto.Thumbnail,
-            Status = true,
-            IsFeatured = false,
-            Rating = 0,
-            ReviewCount = 0,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
-        };
-
-        _context.Services.Add(service);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetServices), new { id = service.Id }, new { success = true, message = "Service added", data = service });
-    }
-
-    // PUT: api/providers/services/{id}
-    [HttpPut("services/{id}")]
-    public async Task<IActionResult> UpdateService(long id, [FromBody] UpdateServiceDto dto)
-    {
-        var userIdStr = User.FindFirst("id")?.Value;
-        if (userIdStr == null) return Unauthorized();
-        long providerId = long.Parse(userIdStr);
-
-        var service = await _context.Services.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
-        if (service == null)
-            return NotFound(new { success = false, message = "Service not found" });
-
-        if (dto.Name != null) service.Name = dto.Name;
-        if (dto.CategoryId.HasValue) service.CategoryId = dto.CategoryId.Value;
-        if (dto.Description != null) service.Description = dto.Description;
-        if (dto.Price.HasValue) service.Price = dto.Price.Value;
-        if (dto.Discount.HasValue) service.Discount = dto.Discount.Value;
-        if (dto.Duration.HasValue) service.Duration = dto.Duration.Value;
-        if (dto.Type != null) service.Type = dto.Type;
-        if (dto.Thumbnail != null) service.Thumbnail = dto.Thumbnail;
-        if (dto.Status.HasValue) service.Status = dto.Status.Value;
-
-        service.UpdatedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
-
-        return Ok(new { success = true, message = "Service updated", data = service });
-    }
-
-    // DELETE: api/providers/services/{id}
-    [HttpDelete("services/{id}")]
-    public async Task<IActionResult> DeleteService(long id)
-    {
-        var userIdStr = User.FindFirst("id")?.Value;
-        if (userIdStr == null) return Unauthorized();
-        long providerId = long.Parse(userIdStr);
-
-        var service = await _context.Services.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
-        if (service == null)
-            return NotFound(new { success = false, message = "Service not found" });
-
-        service.Status = false; // Soft delete
-        service.UpdatedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
-
-        return Ok(new { success = true, message = "Service deleted" });
-    }
+    // Services are now strictly managed by Admin. Providers no longer have service management endpoints here.
 
     // GET: api/providers/earnings
     [HttpGet("earnings")]

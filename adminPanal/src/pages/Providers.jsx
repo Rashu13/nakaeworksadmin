@@ -172,13 +172,12 @@ const Providers = () => {
                                             <span className="text-2xl font-black text-white">{provider.served || 0}+</span>
                                             <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Jobs Done</span>
                                         </div>
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
+                                        <Link
+                                            to={`/provider-detail/${provider.id}`}
                                             className="px-6 py-3 bg-white hover:bg-orange-500 text-black hover:text-white rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center gap-2"
                                         >
                                             Profile <ChevronRight size={14} />
-                                        </motion.button>
+                                        </Link>
                                     </div>
                                 </div>
                             </motion.div>

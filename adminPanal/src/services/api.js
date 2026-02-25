@@ -2,6 +2,20 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.origi
 export const BASE_URL = API_BASE_URL.replace(/\/api$/, '');
 import { compressImage } from '../utils/compressor';
 
+// Helper to normalize keys from PascalCase to camelCase
+const normalizeKeys = (obj) => {
+    if (Array.isArray(obj)) {
+        return obj.map(v => normalizeKeys(v));
+    } else if (obj !== null && obj.constructor === Object) {
+        return Object.keys(obj).reduce((result, key) => {
+            const camelKey = key.charAt(0).toLowerCase() + key.slice(1);
+            result[camelKey] = normalizeKeys(obj[key]);
+            return result;
+        }, {});
+    }
+    return obj;
+};
+
 // Helper function for API calls
 const apiCall = async (endpoint, options = {}) => {
     const token = localStorage.getItem('token');
@@ -36,20 +50,6 @@ const apiCall = async (endpoint, options = {}) => {
     if (!response.ok) {
         throw new Error(data.message || data.error || 'Something went wrong');
     }
-
-    // Helper to normalize keys from PascalCase to camelCase
-    const normalizeKeys = (obj) => {
-        if (Array.isArray(obj)) {
-            return obj.map(v => normalizeKeys(v));
-        } else if (obj !== null && obj.constructor === Object) {
-            return Object.keys(obj).reduce((result, key) => {
-                const camelKey = key.charAt(0).toLowerCase() + key.slice(1);
-                result[camelKey] = normalizeKeys(obj[key]);
-                return result;
-            }, {});
-        }
-        return obj;
-    };
 
     // Handle .NET Backend response wrapper (Success, Data/data)
     let result = data;
@@ -168,6 +168,10 @@ export const reviewService = {
         body: JSON.stringify(reviewData),
     }),
     getByServiceId: (serviceId) => apiCall(`/reviews/service/${serviceId}`),
+    getByProviderId: (id, params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiCall(`/providers/${id}/reviews${query ? `?${query}` : ''}`);
+    },
     // Admin
     getAll: (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -204,23 +208,7 @@ export const providerService = {
 
     completeBooking: (id) => apiCall(`/providers/bookings/${id}/complete`, { method: 'PUT' }),
 
-    // Services
-    getServices: async () => {
-        const data = await apiCall('/providers/services');
-        return { data };
-    },
-
-    addService: (data) => apiCall('/providers/services', {
-        method: 'POST',
-        body: JSON.stringify(data)
-    }),
-
-    updateService: (id, data) => apiCall(`/providers/services/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data)
-    }),
-
-    deleteService: (id) => apiCall(`/providers/services/${id}`, { method: 'DELETE' }),
+    // Services (Admin only now - these might be unused here but keeping for auth context if needed)
 
     // Earnings
     getEarnings: async (period = 'month') => {
@@ -335,29 +323,33 @@ export const adminService = {
 // Upload Service
 export const uploadService = {
     uploadImage: async (input) => {
-        let body = input;
+        let finalFormData = new FormData();
 
         try {
-            // Handle image compression
             if (input instanceof File) {
-                // If it's a direct File object
-                body = await compressImage(input);
+                // If it's a direct File object, wrap it in FormData with key 'image'
+                const compressedFile = await compressImage(input);
+                finalFormData.append('image', compressedFile);
             } else if (input instanceof FormData) {
-                // If it's a FormData object, we need to iterate and compress image files
-                const newFormData = new FormData();
+                // If it's already FormData, iterate and compress images if needed
                 for (const [key, value] of input.entries()) {
                     if (value instanceof File && value.type.startsWith('image/')) {
                         const compressedFile = await compressImage(value);
-                        newFormData.append(key, compressedFile);
+                        finalFormData.append(key, compressedFile);
                     } else {
-                        newFormData.append(key, value);
+                        finalFormData.append(key, value);
                     }
                 }
-                body = newFormData;
+            } else {
+                finalFormData.append('image', input);
             }
         } catch (error) {
-            console.error('Compression failed, uploading original:', error);
-            // Fallback to original input if compression fails
+            console.error('Compression failed, using original input:', error);
+            if (input instanceof File) {
+                finalFormData.append('image', input);
+            } else {
+                finalFormData = input;
+            }
         }
 
         const token = localStorage.getItem('token');
@@ -365,13 +357,25 @@ export const uploadService = {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
+                // Note: Don't set Content-Type here; fetch sets it automatically with the boundary for FormData
             },
-            body: body
+            body: finalFormData
         });
 
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.message || 'Upload failed');
-        return { data };
+        const text = await response.text();
+        let data;
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch (e) {
+            throw new Error('Invalid response format from server');
+        }
+
+        if (!response.ok) {
+            throw new Error(data.message || data.error || 'Upload failed');
+        }
+
+        // Normalize keys and return to match frontend expectations
+        return normalizeKeys(data);
     }
 };
 
@@ -391,6 +395,14 @@ export const contentService = {
     deleteCollection: (id) => apiCall(`/content/collections/${id}`, { method: 'DELETE' }),
 };
 
+export const settingService = {
+    getAll: () => apiCall('/settings'),
+    update: (key, data) => apiCall(`/settings/${key}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+    }),
+};
+
 export default {
     auth: authService,
     services: serviceService,
@@ -402,8 +414,5 @@ export default {
     admin: adminService,
     upload: uploadService,
     content: contentService,
-    settings: {
-        getAll: () => handleResponse(axios.get(`${API_BASE_URL.replace('/api', '')}/settings`)),
-        update: (key, data) => handleResponse(axios.put(`${API_BASE_URL.replace('/api', '')}/settings/${key}`, data))
-    }
+    settings: settingService
 };

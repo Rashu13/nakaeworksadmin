@@ -92,9 +92,9 @@ const Profile = () => {
             formData.append('image', file);
             const response = await uploadService.uploadImage(formData);
 
-            if (response.data?.imageUrl) {
-                await authService.updateProfile({ avatar: response.data.imageUrl });
-                setUser({ ...user, avatar: response.data.imageUrl });
+            if (response.imageUrl) {
+                await authService.updateProfile({ avatar: response.imageUrl });
+                setUser({ ...user, avatar: response.imageUrl });
                 setMessage({ type: 'success', text: 'Profile picture updated!' });
             }
         } catch (error) {
@@ -209,7 +209,7 @@ const Profile = () => {
                                 type="text"
                                 value={profileData.name}
                                 onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                             />
                         </div>
                     </div>
@@ -236,7 +236,7 @@ const Profile = () => {
                                 type="tel"
                                 value={profileData.phone}
                                 onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                                 placeholder="+91 98765 43210"
                             />
                         </div>
@@ -248,7 +248,7 @@ const Profile = () => {
                             value={profileData.about}
                             onChange={(e) => setProfileData({ ...profileData, about: e.target.value })}
                             rows={4}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                             placeholder="Tell customers about yourself and your services..."
                         />
                     </div>
@@ -276,7 +276,7 @@ const Profile = () => {
                                 value={passwordData.currentPassword}
                                 onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                             />
                         </div>
                     </div>
@@ -290,7 +290,7 @@ const Profile = () => {
                                 value={passwordData.newPassword}
                                 onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                             />
                         </div>
                     </div>
@@ -304,7 +304,7 @@ const Profile = () => {
                                 value={passwordData.confirmPassword}
                                 onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 font-medium"
                             />
                         </div>
                     </div>

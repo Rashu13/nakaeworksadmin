@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { MapPin, Clock, Calendar, CreditCard, Wallet, CheckCircle, Plus, ChevronRight, Lock, ArrowLeft, AlertCircle } from 'lucide-react';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import { bookingService, addressService, couponService } from '../services/api';
 
 const BookingConfirm = () => {
@@ -179,10 +180,12 @@ const BookingConfirm = () => {
                                                     <Calendar size={14} />
                                                     <span>{isCartFlow ? effectiveDate : singleDate}</span>
                                                 </div>
+                                                {/* 
                                                 <div className="flex items-center gap-1">
                                                     <Clock size={14} />
                                                     <span>{isCartFlow ? effectiveTime : singleTime}</span>
                                                 </div>
+                                                */}
                                             </div>
                                         </div>
                                         <div className="text-right">

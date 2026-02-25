@@ -87,6 +87,45 @@ public class AddressesController : ControllerBase
         return CreatedAtAction(nameof(GetUserAddresses), new { id = address.Id }, new { message = "Address added", addressId = address.Id });
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAddress(long id, [FromBody] CreateAddressDto dto)
+    {
+        var userIdStr = User.FindFirst("id")?.Value;
+        if (userIdStr == null) return Unauthorized();
+        long userId = long.Parse(userIdStr);
+
+        var address = await _context.Addresses.FirstOrDefaultAsync(a => a.Id == id && a.UserId == userId);
+        if (address == null) return NotFound();
+
+        address.AddressLine = dto.AddressLine1;
+        address.City = dto.City;
+        address.State = dto.State;
+        address.Pincode = dto.Pincode;
+        address.Country = dto.Country;
+        address.Latitude = dto.Latitude;
+        address.Longitude = dto.Longitude;
+        address.Type = dto.Type;
+        address.IsPrimary = dto.IsPrimary;
+        address.UpdatedAt = DateTime.UtcNow;
+
+        if (dto.IsPrimary)
+        {
+            // Reset other primary addresses
+            var primaries = await _context.Addresses
+                .Where(a => a.UserId == userId && a.IsPrimary && a.Id != id)
+                .ToListAsync();
+
+            foreach (var p in primaries)
+            {
+                p.IsPrimary = false;
+            }
+        }
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Address updated" });
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAddress(long id)
     {

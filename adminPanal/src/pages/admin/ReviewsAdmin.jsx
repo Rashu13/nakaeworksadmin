@@ -22,7 +22,12 @@ const ReviewsAdmin = () => {
             // For now, if the endpoint doesn't exist, we might need to mock or handle it
             // Assuming reviewService.getAll is implemented and returns a list
             const data = await reviewService.getAll();
-            setReviews(data);
+            // The API returns { reviews: [], pagination: {} }
+            if (data && data.reviews) {
+                setReviews(data.reviews);
+            } else {
+                setReviews(Array.isArray(data) ? data : []);
+            }
         } catch (error) {
             console.error('Failed to fetch reviews:', error);
             // Fallback mock data if API fails (for demonstration)
@@ -56,7 +61,7 @@ const ReviewsAdmin = () => {
         }
     };
 
-    const filteredReviews = reviews.filter(review => {
+    const filteredReviews = (Array.isArray(reviews) ? reviews : []).filter(review => {
         const matchesSearch = (review.user?.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
             (review.service?.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
             (review.comment || '').toLowerCase().includes(searchTerm.toLowerCase());

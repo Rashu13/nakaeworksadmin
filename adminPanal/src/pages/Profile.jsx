@@ -41,7 +41,8 @@ const Profile = () => {
         city: '',
         state: '',
         pincode: '',
-        type: 'home'
+        type: 'home',
+        isPrimary: false
     });
     const [editingAddressId, setEditingAddressId] = useState(null);
     const [showBookingModal, setShowBookingModal] = useState(false);
@@ -185,7 +186,7 @@ const Profile = () => {
             }
             setShowAddressModal(false);
             fetchAddresses();
-            setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home' });
+            setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home', isPrimary: false });
             setEditingAddressId(null);
         } catch (error) {
             setMessage({ type: 'error', text: error.message });
@@ -200,7 +201,8 @@ const Profile = () => {
             city: addr.city,
             state: addr.state,
             pincode: addr.pincode,
-            type: addr.type
+            type: addr.type,
+            isPrimary: addr.isPrimary
         });
         setEditingAddressId(addr.id);
         setShowAddressModal(true);
@@ -705,7 +707,7 @@ const Profile = () => {
                                             </div>
                                             <button
                                                 onClick={() => {
-                                                    setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home' });
+                                                    setAddressForm({ addressLine1: '', city: '', state: '', pincode: '', type: 'home', isPrimary: false });
                                                     setEditingAddressId(null);
                                                     setShowAddressModal(true);
                                                 }}
@@ -947,6 +949,17 @@ const Profile = () => {
                                                 <option value="other">Other</option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl mb-4">
+                                        <input
+                                            type="checkbox"
+                                            id="isPrimary"
+                                            checked={addressForm.isPrimary}
+                                            onChange={(e) => setAddressForm({ ...addressForm, isPrimary: e.target.checked })}
+                                            className="w-5 h-5 accent-orange-500 cursor-pointer"
+                                        />
+                                        <label htmlFor="isPrimary" className="text-xs font-bold text-gray-400 uppercase tracking-widest cursor-pointer">Set as primary address</label>
                                     </div>
 
                                     <button
