@@ -163,17 +163,13 @@ using (var scope = app.Services.CreateScope())
         }
 
         // 2. Seed Users if low
-        if (context.Users.Count() < 7)
+        if (context.Users.Count() < 5)
         {
             var users = new List<User>
             {
-                new User { Name = "Admin User", Email = "admin@nakae.com", Password = "password123", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "Test User", Email = "user@nakae.com", Password = "password123", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
-                new User { Name = "Rahul Sharma", Email = "rahul@nakae.com", Password = "password123", Phone = "9876543210", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/32.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Priya Singh", Email = "priya@nakae.com", Password = "password123", Phone = "9876543211", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/44.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Amit Verma", Email = "amit@nakae.com", Password = "password123", Phone = "9876543212", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/45.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Sneha Gupta", Email = "sneha@nakae.com", Password = "password123", Phone = "9876543213", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/women/68.jpg", CreatedAt = DateTime.UtcNow },
-                new User { Name = "Vikram Malhotra", Email = "vikram@nakae.com", Password = "password123", Phone = "9876543214", Role = "provider", Status = true, Avatar = "https://randomuser.me/api/portraits/men/22.jpg", CreatedAt = DateTime.UtcNow }
+                new User { Name = "Admin Test", Email = "admin@test.com", Password = "password123", Phone = "9999999999", Role = "admin", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "User Test", Email = "user@test.com", Password = "password123", Phone = "8888888888", Role = "consumer", Status = true, CreatedAt = DateTime.UtcNow },
+                new User { Name = "Provider Test", Email = "provider@test.com", Password = "password123", Phone = "7777777777", Role = "provider", Status = true, CreatedAt = DateTime.UtcNow }
             };
 
              foreach (var u in users)
@@ -183,7 +179,7 @@ using (var scope = app.Services.CreateScope())
                      context.Users.Add(u);
                  }
              }
-             context.SaveChanges();
+            context.SaveChanges();
         }
 
         // 3. Seed Services if empty or low populated

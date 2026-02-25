@@ -7,7 +7,7 @@ import { authService } from '../services/api';
 const Login = () => {
     const [authMode, setAuthMode] = useState('otp'); // 'email' or 'otp'
     const [selectedRole, setSelectedRole] = useState('consumer');
-    const [email, setEmail] = useState('user@nakae.com');
+    const [email, setEmail] = useState('user@test.com');
     const [password, setPassword] = useState('password123');
     const [showPassword, setShowPassword] = useState(false);
 
@@ -98,13 +98,13 @@ const Login = () => {
     const handleRoleSelect = (role) => {
         setSelectedRole(role);
         if (role === 'admin') {
-            setEmail('admin@nakae.com');
+            setEmail('admin@test.com');
             setPassword('password123');
         } else if (role === 'provider') {
-            setEmail('rahul@nakae.com');
+            setEmail('provider@test.com');
             setPassword('password123');
         } else {
-            setEmail('user@nakae.com');
+            setEmail('user@test.com');
             setPassword('password123');
         }
     };
