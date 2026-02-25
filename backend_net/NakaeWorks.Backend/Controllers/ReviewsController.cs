@@ -19,9 +19,17 @@ public class ReviewsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("service/{serviceId}")]
-    public async Task<IActionResult> GetServiceReviews(long serviceId)
+    [HttpGet("service/{idOrSlug}")]
+    public async Task<IActionResult> GetServiceReviews(string idOrSlug)
     {
+        long serviceId;
+        if (!long.TryParse(idOrSlug, out serviceId))
+        {
+            var service = await _context.Services.FirstOrDefaultAsync(s => s.Slug == idOrSlug);
+            if (service == null) return NotFound(new List<ReviewDto>());
+            serviceId = service.Id;
+        }
+
         var reviews = await _context.Reviews
             .Include(r => r.Consumer)
             .Where(r => r.ServiceId == serviceId)
