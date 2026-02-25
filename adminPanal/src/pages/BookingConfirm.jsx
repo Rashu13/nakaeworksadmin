@@ -305,7 +305,7 @@ const BookingConfirm = () => {
                                 />
                                 <button
                                     onClick={applyCoupon}
-                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white rounded-lg text-xs font-bold hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
+                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
                                 >
                                     Apply
                                 </button>
@@ -341,7 +341,7 @@ const BookingConfirm = () => {
                             <button
                                 onClick={handleBooking}
                                 disabled={loading}
-                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 text-slate-900 dark:text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-800 dark:hover:bg-primary-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -402,7 +402,7 @@ const BookingConfirm = () => {
                                 </select>
                                 <div className="flex gap-3 pt-2">
                                     <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
-                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-slate-900 dark:text-white font-medium rounded-xl hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
+                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-white font-medium rounded-xl hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
                                 </div>
                             </div>
                         </form>

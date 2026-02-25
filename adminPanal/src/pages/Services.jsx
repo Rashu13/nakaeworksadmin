@@ -105,15 +105,21 @@ const Services = () => {
         const category = searchParams.get('category');
         const search = searchParams.get('search');
 
-        if (category || search) {
-            setFilters(prev => ({
-                ...prev,
-                category: category || 'All',
-                search: search || ''
-            }));
-            if (search) setSearchTerm(search);
-        }
+        setFilters(prev => ({
+            ...prev,
+            category: category || 'All',
+            search: search || ''
+        }));
+        if (search !== null) setSearchTerm(search);
     }, [searchParams]);
+
+    // Update URL when filters change
+    useEffect(() => {
+        const params = {};
+        if (filters.category !== 'All') params.category = filters.category;
+        if (filters.search) params.search = filters.search;
+        setSearchParams(params, { replace: true });
+    }, [filters.category, filters.search]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-slate-950 pt-20 transition-colors duration-300">
@@ -128,8 +134,13 @@ const Services = () => {
                                 type="text"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        setFilters(prev => ({ ...prev, search: searchTerm }));
+                                    }
+                                }}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                             />
                         </div>
 
@@ -250,8 +261,8 @@ const Services = () => {
             <div className="max-w-7xl mx-auto px-4 py-8">
                 {/* Results Count */}
                 <div className="flex items-center justify-between mb-8">
-                    <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400">
-                        Showing <span className="font-bold text-gray-900 dark:text-slate-900 dark:text-white">{filteredServices.length}</span> services
+                    <p className="text-gray-600 dark:text-gray-400">
+                        Showing <span className="font-bold text-gray-900 dark:text-white">{filteredServices.length}</span> services
                         {filters.category !== 'All' && (
                             <> in <span className="text-primary-600 dark:text-primary-400 font-medium">{filters.category}</span></>
                         )}
@@ -288,7 +299,7 @@ const Services = () => {
                         <div className="w-24 h-24 bg-gray-50 dark:bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Search size={40} className="text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-2">No services found</h3>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No services found</h3>
                         <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mb-8 max-w-xs mx-auto">We couldn't find any services matching your current filters. Try adjusting them!</p>
                         <button
                             onClick={() => {

@@ -37,7 +37,8 @@ public class ServicesController : ControllerBase
 
         if (!string.IsNullOrEmpty(search))
         {
-            query = query.Where(s => s.Name.Contains(search) || (s.Description != null && s.Description.Contains(search)));
+            var searchTerm = search.ToLower();
+            query = query.Where(s => s.Name.ToLower().Contains(searchTerm) || (s.Description != null && s.Description.ToLower().Contains(searchTerm)));
         }
 
         var services = await query

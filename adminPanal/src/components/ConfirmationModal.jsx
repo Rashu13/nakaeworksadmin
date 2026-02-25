@@ -74,7 +74,7 @@ const ConfirmationModal = ({
                                 if (onConfirm) onConfirm();
                                 onClose();
                             }}
-                            className={`flex-1 py-2.5 px-4 text-slate-900 dark:text-white font-medium rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${getButtonColor()}`}
+                            className={`flex-1 py-2.5 px-4 text-white font-medium rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${getButtonColor()}`}
                         >
                             {confirmText}
                         </button>

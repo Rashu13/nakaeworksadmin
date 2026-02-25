@@ -102,7 +102,7 @@ const Navbar = () => {
                                     onChange={(e) => setSearchNavbar(e.target.value)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
-                                            navigate(`/services?q=${searchNavbar}`);
+                                            navigate(`/services?search=${searchNavbar}`);
                                             setSearchNavbar('');
                                         }
                                     }}
