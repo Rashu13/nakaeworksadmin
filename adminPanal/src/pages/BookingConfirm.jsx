@@ -305,7 +305,8 @@ const BookingConfirm = () => {
                                 />
                                 <button
                                     onClick={applyCoupon}
-                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
+                                    style={{ color: 'white' }}
+                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 !text-white rounded-lg text-xs font-bold hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
                                 >
                                     Apply
                                 </button>
@@ -340,8 +341,9 @@ const BookingConfirm = () => {
                             {/* Confirm Button */}
                             <button
                                 onClick={handleBooking}
+                                style={{ color: 'white' }}
                                 disabled={loading}
-                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-800 dark:hover:bg-primary-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-800 dark:hover:bg-primary-700 !text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

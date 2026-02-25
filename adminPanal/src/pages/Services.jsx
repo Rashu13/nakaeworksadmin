@@ -14,22 +14,18 @@ const sortOptions = [
 
 const Services = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [allServices, setAllServices] = useState([]); // Store all fetched services
-    const [categories, setCategories] = useState([]); // To store categories for filter pills
+    const getQueryParam = useCallback((name) => {
+        return searchParams.get(name) || searchParams.get(name === 'search' ? 'q' : name);
+    }, [searchParams]);
+
+    const [searchTerm, setSearchTerm] = useState(getQueryParam('search') || '');
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState('grid');
     const [showFilters, setShowFilters] = useState(false);
-    const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
-    const [filters, setFilters] = useState({
-        category: searchParams.get('category') || 'All',
-        search: searchParams.get('search') || '',
-        sort: 'popular',
-        rating: 0
-    });
+    const [allServices, setAllServices] = useState([]);
 
-    const navigate = useNavigate();
-
-    // Fetch Services and Categories
+    // Fetch Categories
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -44,14 +40,25 @@ const Services = () => {
         fetchCategories();
     }, []);
 
-    // Fetch Services whenever filters change (memory efficient - fetch only what's needed)
+    const handleCategoryClick = useCallback((cat) => {
+        setSearchParams(prev => {
+            if (cat === 'All') prev.delete('category');
+            else prev.set('category', cat);
+            return prev;
+        }, { replace: true });
+    }, [setSearchParams]);
+
+    // Fetch Services whenever URL params change
     useEffect(() => {
         const fetchServices = async () => {
             try {
                 setLoading(true);
+                const category = getQueryParam('category');
+                const search = getQueryParam('search');
+
                 const params = {};
-                if (filters.category !== 'All') params.category = filters.category;
-                if (filters.search) params.search = filters.search;
+                if (category && category !== 'All') params.category = category;
+                if (search) params.search = search;
 
                 const data = await serviceService.getAll(params);
                 setAllServices(data || []);
@@ -62,64 +69,58 @@ const Services = () => {
             }
         };
         fetchServices();
-    }, [filters.category, filters.search]);
+    }, [searchParams, getQueryParam]);
 
-    // Debounce search input
+    // Handle Search Input Debounce
     useEffect(() => {
         const handler = setTimeout(() => {
-            setFilters(prev => ({ ...prev, search: searchTerm }));
+            const currentSearch = getQueryParam('search') || '';
+            if (searchTerm !== currentSearch) {
+                setSearchParams(prev => {
+                    if (searchTerm) prev.set('search', searchTerm);
+                    else prev.delete('search');
+                    return prev;
+                }, { replace: true });
+            }
         }, 300);
 
         return () => clearTimeout(handler);
-    }, [searchTerm]);
+    }, [searchTerm, setSearchParams, getQueryParam]);
 
-    // Sorting - Memory Efficient using useMemo on the fetched subset
+    // Sync input with URL if it changes from outside (e.g. Navbar)
+    useEffect(() => {
+        const urlSearch = getQueryParam('search') || '';
+        if (urlSearch !== searchTerm) {
+            setSearchTerm(urlSearch);
+        }
+    }, [searchParams, getQueryParam]); // We only do this when URL changes
+
+    // Final filtering/sorting on client side (rating and sort)
     const filteredServices = useMemo(() => {
-        let sorted = [...allServices];
+        let items = [...allServices];
+        const rating = parseFloat(getQueryParam('rating') || '0');
+        const sort = getQueryParam('sort') || 'popular';
 
-        // Rating Filter (Client-side secondary filter if needed, or already handled by backend)
-        if (filters.rating > 0) {
-            sorted = sorted.filter(s => (s.rating || 0) >= filters.rating);
+        if (rating > 0) {
+            items = items.filter(s => (s.rating || 0) >= rating);
         }
 
-        // Sort
-        switch (filters.sort) {
+        switch (sort) {
             case 'rating':
-                sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+                items.sort((a, b) => (b.rating || 0) - (a.rating || 0));
                 break;
             case 'price_low':
-                sorted.sort((a, b) => a.price - b.price);
+                items.sort((a, b) => a.price - b.price);
                 break;
             case 'price_high':
-                sorted.sort((a, b) => b.price - a.price);
+                items.sort((a, b) => b.price - a.price);
                 break;
             default:
-                sorted.sort((a, b) => (b.reviewsCount || 0) - (a.reviewsCount || 0));
+                items.sort((a, b) => (b.reviewsCount || 0) - (a.reviewsCount || 0));
         }
 
-        return sorted;
-    }, [allServices, filters.sort, filters.rating]);
-
-    // Sync searchParams with filters when navigating directly
-    useEffect(() => {
-        const category = searchParams.get('category');
-        const search = searchParams.get('search');
-
-        setFilters(prev => ({
-            ...prev,
-            category: category || 'All',
-            search: search || ''
-        }));
-        if (search !== null) setSearchTerm(search);
-    }, [searchParams]);
-
-    // Update URL when filters change
-    useEffect(() => {
-        const params = {};
-        if (filters.category !== 'All') params.category = filters.category;
-        if (filters.search) params.search = filters.search;
-        setSearchParams(params, { replace: true });
-    }, [filters.category, filters.search]);
+        return items;
+    }, [allServices, searchParams, getQueryParam]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-slate-950 pt-20 transition-colors duration-300">
@@ -136,7 +137,11 @@ const Services = () => {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
-                                        setFilters(prev => ({ ...prev, search: searchTerm }));
+                                        setSearchParams(prev => {
+                                            if (searchTerm) prev.set('search', searchTerm);
+                                            else prev.delete('search');
+                                            return prev;
+                                        }, { replace: true });
                                     }
                                 }}
                                 placeholder="Search services..."
@@ -149,8 +154,8 @@ const Services = () => {
                             {categories.slice(0, 5).map((cat) => (
                                 <button
                                     key={cat}
-                                    onClick={() => setFilters({ ...filters, category: cat })}
-                                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${filters.category === cat
+                                    onClick={() => handleCategoryClick(cat)}
+                                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${(getQueryParam('category') || 'All') === cat
                                         ? 'bg-primary-600 text-slate-900 dark:text-white shadow-lg shadow-primary-200 dark:shadow-primary-900/20'
                                         : 'bg-gray-100 dark:bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'
                                         }`}
@@ -210,8 +215,8 @@ const Services = () => {
                                 Sort By
                             </h4>
                             <select
-                                value={filters.sort}
-                                onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
+                                value={getQueryParam('sort') || 'popular'}
+                                onChange={(e) => setSearchParams(prev => { prev.set('sort', e.target.value); return prev; }, { replace: true })}
                                 className="w-full p-3 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-primary-500"
                             >
                                 {sortOptions.map((opt) => (
@@ -230,15 +235,19 @@ const Services = () => {
                                 {[0, 3, 3.5, 4, 4.5].map((r) => (
                                     <button
                                         key={r}
-                                        onClick={() => setFilters({ ...filters, rating: r })}
-                                        className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border transition-all ${filters.rating === r
+                                        onClick={() => setSearchParams(prev => {
+                                            if (r === 0) prev.delete('rating');
+                                            else prev.set('rating', r.toString());
+                                            return prev;
+                                        }, { replace: true })}
+                                        className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border transition-all ${parseFloat(getQueryParam('rating') || '0') === r
                                             ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
                                             : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-500'
                                             }`}
                                     >
                                         {r > 0 ? (
                                             <>
-                                                <Star size={14} className={filters.rating === r ? 'fill-primary-600' : 'fill-yellow-400 text-yellow-400'} />
+                                                <Star size={14} className={parseFloat(getQueryParam('rating') || '0') === r ? 'fill-primary-600' : 'fill-yellow-400 text-yellow-400'} />
                                                 <span>{r}</span>
                                             </>
                                         ) : 'All'}
@@ -263,13 +272,13 @@ const Services = () => {
                 <div className="flex items-center justify-between mb-8">
                     <p className="text-gray-600 dark:text-gray-400">
                         Showing <span className="font-bold text-gray-900 dark:text-white">{filteredServices.length}</span> services
-                        {filters.category !== 'All' && (
-                            <> in <span className="text-primary-600 dark:text-primary-400 font-medium">{filters.category}</span></>
+                        {getQueryParam('category') && getQueryParam('category') !== 'All' && (
+                            <> in <span className="text-primary-600 dark:text-primary-400 font-medium">{getQueryParam('category')}</span></>
                         )}
                     </p>
                     <select
-                        value={filters.sort}
-                        onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
+                        value={getQueryParam('sort') || 'popular'}
+                        onChange={(e) => setSearchParams(prev => { prev.set('sort', e.target.value); return prev; }, { replace: true })}
                         className="hidden md:block px-4 py-2 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary-500 transition-all font-medium"
                     >
                         {sortOptions.map((opt) => (
@@ -304,7 +313,7 @@ const Services = () => {
                         <button
                             onClick={() => {
                                 setSearchTerm('');
-                                setFilters({ ...filters, category: 'All', search: '', rating: 0 });
+                                setSearchParams({}, { replace: true });
                             }}
                             className="px-6 py-3 bg-primary-600 text-slate-900 dark:text-white rounded-xl font-medium"
                         >
