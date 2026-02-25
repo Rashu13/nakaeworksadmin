@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import api from '../services/api';
 
 const Footer = () => {
+    const [settings, setSettings] = useState({
+        support_email: 'support@nakaeworks.com',
+        support_phone: '+91 98765 43210'
+    });
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const data = await api.settings.getAll();
+                const settingsMap = {};
+                data.forEach(item => {
+                    settingsMap[item.key] = item.value;
+                });
+                setSettings(prev => ({
+                    ...prev,
+                    ...settingsMap
+                }));
+            } catch (err) {
+                console.error("Failed to load footer settings:", err);
+            }
+        };
+        fetchSettings();
+    }, []);
+
     return (
         <footer className="bg-gray-900 text-gray-300">
             {/* Main Footer */}
@@ -67,11 +92,11 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={18} className="text-primary-400 flex-shrink-0" />
-                                <span>+91 98765 43210</span>
+                                <span>{settings.support_phone}</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={18} className="text-primary-400 flex-shrink-0" />
-                                <span>support@nakaeworks.com</span>
+                                <span className="break-all">{settings.support_email}</span>
                             </li>
                         </ul>
                     </div>

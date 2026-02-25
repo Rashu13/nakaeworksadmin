@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-import { Settings, Save, RefreshCw, DollarSign, Percent } from 'lucide-react';
+import { Settings, Save, RefreshCw, DollarSign, Percent, Mail, Phone, Clock } from 'lucide-react';
 
 const SystemSettings = () => {
     const [settings, setSettings] = useState([]);
@@ -48,6 +48,9 @@ const SystemSettings = () => {
     const getIcon = (key) => {
         if (key.includes('fee')) return <DollarSign size={20} />;
         if (key.includes('percentage') || key.includes('tax')) return <Percent size={20} />;
+        if (key.includes('email')) return <Mail size={20} />;
+        if (key.includes('phone')) return <Phone size={20} />;
+        if (key.includes('time')) return <Clock size={20} />;
         return <Settings size={20} />;
     };
 
@@ -55,6 +58,9 @@ const SystemSettings = () => {
         switch (key) {
             case 'platform_fee': return 'Platform Fee (Fixed Amount)';
             case 'tax_percentage': return 'Tax Percentage (GST)';
+            case 'support_email': return 'Support Email Address';
+            case 'support_phone': return 'Support Phone Number';
+            case 'work_time': return 'Official Working Hours';
             default: return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         }
     };
@@ -63,8 +69,8 @@ const SystemSettings = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">System Settings</h1>
-                    <p className="text-gray-500 mt-1">Manage global application configuration.</p>
+                    <h1 className="text-2xl font-bold text-gray-900">System & Contact Settings</h1>
+                    <p className="text-gray-500 mt-1">Manage global application business & contact configuration.</p>
                 </div>
                 <button
                     onClick={fetchSettings}
@@ -84,7 +90,7 @@ const SystemSettings = () => {
                 <div className="p-6 border-b border-gray-100">
                     <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                         <Settings size={20} />
-                        Financial Configuration
+                        Global Configuration
                     </h2>
                 </div>
 
@@ -93,9 +99,9 @@ const SystemSettings = () => {
                 ) : (
                     <div className="divide-y divide-gray-100">
                         {settings.map((setting) => (
-                            <div key={setting.id} className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div key={setting.id} className="p-6 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-blue-50 text-blue-600 rounded-xl mt-1">
+                                    <div className="p-3 bg-blue-50 text-blue-600 rounded-xl mt-1 shrink-0">
                                         {getIcon(setting.key)}
                                     </div>
                                     <div>
@@ -105,10 +111,10 @@ const SystemSettings = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-4 w-full md:w-auto">
-                                    <div className="relative w-full md:w-48">
+                                <div className="flex items-center gap-4 w-full xl:w-1/2">
+                                    <div className="relative w-full">
                                         <input
-                                            type="number"
+                                            type={setting.key.includes('fee') || setting.key.includes('percentage') ? "number" : "text"}
                                             defaultValue={setting.value}
                                             onBlur={(e) => {
                                                 if (e.target.value !== setting.value) {
@@ -123,7 +129,7 @@ const SystemSettings = () => {
                                     </div>
                                     <button
                                         disabled={saving}
-                                        className="p-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+                                        className="p-2 shrink-0 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
                                         title="Changes are saved automatically on blur"
                                     >
                                         <Save size={20} />

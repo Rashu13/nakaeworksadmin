@@ -107,16 +107,25 @@ using (var scope = app.Services.CreateScope())
         }
 
         // -1. Seed System Settings
-        if (!context.SystemSettings.Any())
+        var defaultSettings = new List<SystemSetting>
         {
-            var settings = new List<SystemSetting>
+            new SystemSetting { Key = "platform_fee", Value = "49", Description = "Fixed platform fee per booking" },
+            new SystemSetting { Key = "tax_percentage", Value = "18", Description = "GST percentage applicable on service + fee" },
+            new SystemSetting { Key = "support_email", Value = "Jaspreetsinghkhalasa97@gmail.com", Description = "Support email address" },
+            new SystemSetting { Key = "support_phone", Value = "8168142981", Description = "Support phone number" },
+            new SystemSetting { Key = "work_time", Value = "9:00 AM - 9:00 PM", Description = "Official working hours" }
+        };
+
+        foreach (var ds in defaultSettings)
+        {
+            if (!context.SystemSettings.Any(s => s.Key == ds.Key))
             {
-                new SystemSetting { Key = "platform_fee", Value = "49", Description = "Fixed platform fee per booking", CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow },
-                new SystemSetting { Key = "tax_percentage", Value = "18", Description = "GST percentage applicable on service + fee", CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow }
-            };
-            context.SystemSettings.AddRange(settings);
-            context.SaveChanges();
+                ds.CreatedAt = DateTime.UtcNow;
+                ds.UpdatedAt = DateTime.UtcNow;
+                context.SystemSettings.Add(ds);
+            }
         }
+        context.SaveChanges();
 
         // 0. Seed Booking Statuses
         if (!context.BookingStatuses.Any())

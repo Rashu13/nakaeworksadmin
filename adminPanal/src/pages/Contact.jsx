@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
+import api from '../services/api';
 
 const Contact = () => {
+    const [settings, setSettings] = useState({
+        support_email: 'Jaspreetsinghkhalasa97@gmail.com',
+        support_phone: '8168142981',
+        work_time: '9:00 AM - 9:00 PM'
+    });
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -10,6 +17,25 @@ const Contact = () => {
     });
 
     const [status, setStatus] = useState(null); // 'success', 'error', null
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const data = await api.settings.getAll();
+                const settingsMap = {};
+                data.forEach(item => {
+                    settingsMap[item.key] = item.value;
+                });
+                setSettings(prev => ({
+                    ...prev,
+                    ...settingsMap
+                }));
+            } catch (err) {
+                console.error("Failed to load contact settings:", err);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,34 +69,46 @@ const Contact = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Contact Information */}
-                    <div className="space-y-8">
+                    <div className="space-y-6">
                         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                             Get In Touch
                         </h2>
 
-                        <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
+                        <div className="bg-white dark:bg-slate-900/40 p-6 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
                             <div className="w-14 h-14 bg-primary-100 dark:bg-primary-500/10 shrink-0 rounded-2xl flex items-center justify-center">
                                 <Phone className="text-primary-500" size={28} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Phone</h3>
                                 <p className="text-gray-600 dark:text-gray-400 mb-1">Call us directly during working hours.</p>
-                                <a href="tel:+919876543210" className="text-primary-500 font-semibold hover:underline">+91 98765 43210</a>
+                                <a href={`tel:${settings.support_phone}`} className="text-primary-500 font-semibold hover:underline">{settings.support_phone}</a>
                             </div>
                         </div>
 
-                        <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
+                        <div className="bg-white dark:bg-slate-900/40 p-6 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
                             <div className="w-14 h-14 bg-primary-100 dark:bg-primary-500/10 shrink-0 rounded-2xl flex items-center justify-center">
                                 <Mail className="text-primary-500" size={28} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Email</h3>
                                 <p className="text-gray-600 dark:text-gray-400 mb-1">We typically reply within 24 hours.</p>
-                                <a href="mailto:support@nakaeworks.com" className="text-primary-500 font-semibold hover:underline">support@nakaeworks.com</a>
+                                <a href={`mailto:${settings.support_email}`} className="text-primary-500 font-semibold hover:underline">{settings.support_email}</a>
                             </div>
                         </div>
 
-                        <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
+                        <div className="bg-white dark:bg-slate-900/40 p-6 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
+                            <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-500/10 shrink-0 rounded-2xl flex items-center justify-center">
+                                <Clock className="text-emerald-500" size={28} />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Working Hours</h3>
+                                <p className="text-gray-600 dark:text-gray-400 font-semibold">
+                                    {settings.work_time}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-white dark:bg-slate-900/40 p-6 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
                             <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-500/10 shrink-0 rounded-2xl flex items-center justify-center">
                                 <MapPin className="text-emerald-500" size={28} />
                             </div>
