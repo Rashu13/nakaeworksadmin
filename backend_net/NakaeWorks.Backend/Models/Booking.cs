@@ -42,9 +42,11 @@ public class Booking
     public User? Provider { get; set; }
 
     [Column("service_id")]
-    public long ServiceId { get; set; }
+    public long? ServiceId { get; set; } // Optional for multiple services
     [ForeignKey("ServiceId")]
     public Service? Service { get; set; }
+
+    public ICollection<BookingItem> Items { get; set; } = new List<BookingItem>();
 
     [Column("address_id")]
     public long AddressId { get; set; }

@@ -5,6 +5,7 @@ using NakaeWorks.Backend.Data;
 using NakaeWorks.Backend.DTOs;
 using NakaeWorks.Backend.Models;
 using System.Security.Claims;
+using System.Linq;
 using AppUser = NakaeWorks.Backend.Models.User;
 
 namespace NakaeWorks.Backend.Controllers;
@@ -30,9 +31,41 @@ public class BookingsController : ControllerBase
         if (userIdStr == null) return Unauthorized();
         long consumerId = long.Parse(userIdStr);
 
-        // Get service details
-        var service = await _context.Services.FindAsync(dto.ServiceId);
-        if (service == null) return BadRequest(new { message = "Service not found" });
+        // Prepare items list
+        var bookingItems = new List<BookingItem>();
+        
+        // Handle legacy single service if items is empty
+        if ((dto.Items == null || !dto.Items.Any()) && dto.ServiceId.HasValue)
+        {
+            dto.Items = new List<CartItemDto> { new CartItemDto { ServiceId = dto.ServiceId.Value, Quantity = 1 } };
+        }
+
+        if (dto.Items == null || !dto.Items.Any())
+        {
+            return BadRequest(new { message = "At least one service must be selected" });
+        }
+
+        // Fetch services and validate
+        foreach (var item in dto.Items)
+        {
+            var service = await _context.Services.FindAsync(item.ServiceId);
+            if (service == null) return BadRequest(new { message = $"Service with ID {item.ServiceId} not found" });
+
+            // Calculate item price (treating discount as percentage as per common practice, 
+            // but keeping it simple to match previous logic where it might be amount)
+            // Let's check: if service.Discount < 100, treat as percentage, else treat as amount?
+            // Existing logic was subtotal = price - discount. Let's stick to that for now for safety.
+            decimal discountedPrice = service.Price - service.Discount;
+            if (discountedPrice < 0) discountedPrice = 0;
+
+            bookingItems.Add(new BookingItem
+            {
+                ServiceId = item.ServiceId,
+                Quantity = item.Quantity,
+                Price = service.Price,
+                Total = discountedPrice * item.Quantity
+            });
+        }
 
         // Verify address belongs to user
         var address = await _context.Addresses
@@ -43,17 +76,14 @@ public class BookingsController : ControllerBase
         var pendingStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "pending");
         if (pendingStatus == null) return StatusCode(500, new { message = "Booking status 'pending' not found" });
 
-        // Calculate pricing
-        decimal servicePrice = service.Price;
-        decimal serviceDiscount = service.Discount;
+        decimal itemsSubtotal = bookingItems.Sum(i => i.Total);
         decimal couponDiscount = 0;
 
         // Handle Coupon Logic
         if (!string.IsNullOrEmpty(dto.CouponCode))
         {
-            var subtotalForCoupon = servicePrice - serviceDiscount;
             var (isValid, discountAmount, message) = await _bookingService.ValidateAndApplyCoupon(
-                dto.CouponCode, subtotalForCoupon, consumerId);
+                dto.CouponCode, itemsSubtotal, consumerId);
 
             if (isValid)
             {
@@ -67,8 +97,8 @@ public class BookingsController : ControllerBase
         }
 
         // Final Calculations
-        var (subtotal, tax, platformFees, totalAmount) = _bookingService.CalculateBookingPrice(
-            servicePrice, serviceDiscount, couponDiscount);
+        var (subtotal, tax, platformFees, totalAmount) = _bookingService.CalculateMultiItemBookingPrice(
+            bookingItems, couponDiscount);
 
         // Generate booking number
         var bookingNumber = await _bookingService.GenerateBookingNumber();
@@ -78,19 +108,20 @@ public class BookingsController : ControllerBase
             BookingNumber = bookingNumber,
             ConsumerId = consumerId,
             ProviderId = dto.ProviderId,
-            ServiceId = dto.ServiceId,
+            ServiceId = dto.Items.First().ServiceId, // Store first service for compatibility
             AddressId = dto.AddressId,
             BookingStatusId = pendingStatus.Id,
-            DateTime = DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc), // Fix for Postgres
-            ServicePrice = servicePrice,
+            DateTime = DateTime.SpecifyKind(dto.DateTime, DateTimeKind.Utc),
+            ServicePrice = itemsSubtotal,
             Tax = tax,
-            Discount = couponDiscount + serviceDiscount,
+            Discount = couponDiscount, // In multi-item, individual service discounts are already in items' totals
             PlatformFees = platformFees,
             Subtotal = subtotal,
             TotalAmount = totalAmount,
-            PaymentMethod = "cod",
+            PaymentMethod = dto.PaymentMethod,
             PaymentStatus = "pending",
             Description = dto.Description ?? (dto.CouponCode != null ? $"Coupon Applied: {dto.CouponCode}" : ""),
+            Items = bookingItems,
             IsReviewed = false,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
@@ -105,7 +136,7 @@ public class BookingsController : ControllerBase
 
         // Fetch complete booking with relations
         var completeBooking = await _context.Bookings
-            .Include(b => b.Service)
+            .Include(b => b.Items).ThenInclude(i => i.Service)
             .Include(b => b.Address)
             .Include(b => b.BookingStatus)
             .Include(b => b.Provider)
@@ -159,6 +190,15 @@ public class BookingsController : ControllerBase
                 PaymentStatus = b.PaymentStatus,
                 PaymentMethod = b.PaymentMethod,
                 Description = b.Description,
+                Items = b.Items.Select(i => new BookingItemDto
+                {
+                    Id = i.Id,
+                    ServiceId = i.ServiceId,
+                    ServiceName = i.Service != null ? i.Service.Name : "Service",
+                    Quantity = i.Quantity,
+                    Price = i.Price,
+                    Total = i.Total
+                }).ToList(),
                 Service = b.Service != null ? new SharedServiceDto 
                 { 
                     Id = b.Service.Id, 
@@ -189,7 +229,7 @@ public class BookingsController : ControllerBase
     public async Task<IActionResult> GetBookingById(long id)
     {
          var b = await _context.Bookings
-            .Include(b => b.Service)
+            .Include(b => b.Items).ThenInclude(i => i.Service)
             .Include(b => b.Provider)
             .Include(b => b.Consumer)
             .Include(b => b.BookingStatus)
@@ -202,7 +242,7 @@ public class BookingsController : ControllerBase
          {
              Id = b.Id,
              BookingNumber = b.BookingNumber,
-             ServiceName = b.Service != null ? b.Service.Name : "",
+             ServiceName = b.Service != null ? b.Service.Name : (b.Items.Any() ? b.Items.First().Service?.Name : ""),
              ProviderName = b.Provider != null ? b.Provider.Name : "",
              ConsumerName = b.Consumer != null ? b.Consumer.Name : "",
              Status = b.BookingStatus != null ? b.BookingStatus.Name : "",
@@ -216,6 +256,15 @@ public class BookingsController : ControllerBase
              PaymentStatus = b.PaymentStatus,
              PaymentMethod = b.PaymentMethod,
              Description = b.Description,
+             Items = b.Items.Select(i => new BookingItemDto
+             {
+                 Id = i.Id,
+                 ServiceId = i.ServiceId,
+                 ServiceName = i.Service != null ? i.Service.Name : "Service",
+                 Quantity = i.Quantity,
+                 Price = i.Price,
+                 Total = i.Total
+             }).ToList(),
              Service = b.Service != null ? new SharedServiceDto 
              { 
                  Id = b.Service.Id, 

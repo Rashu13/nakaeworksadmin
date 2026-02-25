@@ -2,10 +2,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NakaeWorks.Backend.DTOs;
 
+public class CartItemDto
+{
+    public long ServiceId { get; set; }
+    public int Quantity { get; set; } = 1;
+}
+
 public class CreateBookingDto
 {
-    [Required]
-    public long ServiceId { get; set; }
+    // Support both single service (legacy) and multiple items
+    public long? ServiceId { get; set; }
+    
+    public List<CartItemDto> Items { get; set; } = new();
 
     [Required]
     public long AddressId { get; set; }
@@ -18,6 +26,7 @@ public class CreateBookingDto
 
     public string? Description { get; set; }
     public string? CouponCode { get; set; }
+    public string PaymentMethod { get; set; } = "online";
 }
 
 public class AssignProviderDto
@@ -29,7 +38,7 @@ public class BookingDto
 {
     public long Id { get; set; }
     public string BookingNumber { get; set; } = string.Empty;
-    public string ServiceName { get; set; } = string.Empty;
+    public string? ServiceName { get; set; } // May be empty if multiple services
     public string ProviderName { get; set; } = string.Empty;
     public string ConsumerName { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
@@ -44,10 +53,22 @@ public class BookingDto
     public string PaymentMethod { get; set; } = string.Empty;
     public string? Description { get; set; }
 
+    public List<BookingItemDto> Items { get; set; } = new();
+
     // Nested objects for frontend parity
     public SharedServiceDto? Service { get; set; }
     public SharedAddressDto? Address { get; set; }
     public SharedStatusDto? BookingStatus { get; set; }
+}
+
+public class BookingItemDto
+{
+    public long Id { get; set; }
+    public long ServiceId { get; set; }
+    public string ServiceName { get; set; } = string.Empty;
+    public int Quantity { get; set; }
+    public decimal Price { get; set; }
+    public decimal Total { get; set; }
 }
 
 public class SharedServiceDto

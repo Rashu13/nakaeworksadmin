@@ -1,6 +1,7 @@
 using NakaeWorks.Backend.Data;
 using NakaeWorks.Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace NakaeWorks.Backend.Services;
 
@@ -126,5 +127,20 @@ public class BookingService
         if (totalAmount < 0) totalAmount = 0;
 
         return (subtotal, tax, platformFees, totalAmount);
+    }
+
+    public (decimal subtotal, decimal tax, decimal platformFees, decimal totalAmount) CalculateMultiItemBookingPrice(
+        List<BookingItem> items,
+        decimal couponDiscount)
+    {
+        decimal itemsSubtotal = items.Sum(i => i.Total);
+
+        var platformFees = GetPlatformFees();
+        var tax = CalculateTax(itemsSubtotal, platformFees);
+        var totalAmount = itemsSubtotal + tax + platformFees - couponDiscount;
+
+        if (totalAmount < 0) totalAmount = 0;
+
+        return (itemsSubtotal, tax, platformFees, totalAmount);
     }
 }

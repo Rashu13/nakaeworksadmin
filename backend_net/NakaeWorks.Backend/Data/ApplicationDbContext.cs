@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Service> Services { get; set; }
     public DbSet<BookingStatus> BookingStatuses { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+    public DbSet<BookingItem> BookingItems { get; set; }
     public DbSet<Wallet> Wallets { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<Document> Documents { get; set; }
