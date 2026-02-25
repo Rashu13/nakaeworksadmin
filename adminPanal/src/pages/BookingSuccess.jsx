@@ -80,7 +80,8 @@ const BookingSuccess = () => {
                         <Link
                             to="/profile"
                             state={{ activeTab: 'bookings' }}
-                            className="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 dark:bg-white text-slate-900 dark:text-white dark:text-slate-900 font-bold rounded-xl hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+                            style={{ color: 'white' }}
+                            className="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 dark:bg-primary-600 !text-white font-bold rounded-xl hover:bg-gray-800 dark:hover:bg-primary-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
                         >
                             View My Bookings
                             <ArrowRight size={18} />
