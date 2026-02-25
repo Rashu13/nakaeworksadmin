@@ -73,7 +73,7 @@ const AdminDashboard = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
             </div>
         );
     }
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
                     title="Total Bookings"
                     value={(stats.totalBookings || 0).toLocaleString()}
                     icon={ShoppingBag}
-                    color="bg-orange-500"
+                    color="bg-primary-500"
                     trend="up"
                     trendValue="15"
                 />
@@ -121,7 +121,7 @@ const AdminDashboard = () => {
 
             {/* Revenue & Pending */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
+                <div className="bg-gradient-to-br from-primary-600 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-medium opacity-90">Total Revenue</h3>
                         <DollarSign size={24} className="opacity-70" />
@@ -139,7 +139,7 @@ const AdminDashboard = () => {
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-gray-600 dark:text-gray-400">Pending Bookings</span>
-                            <span className="font-semibold text-orange-600 dark:text-orange-400">{stats.pendingBookings}</span>
+                            <span className="font-semibold text-primary-600 dark:text-primary-400">{stats.pendingBookings}</span>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-gray-600 dark:text-gray-400">Avg. Order Value</span>
@@ -173,7 +173,7 @@ const AdminDashboard = () => {
                             <tbody className="divide-y divide-gray-50 dark:divide-slate-700">
                                 {stats.recentBookings.map((booking) => (
                                     <tr key={booking.id} className="text-sm">
-                                        <td className="py-3 pl-2 font-medium text-indigo-600 dark:text-indigo-400">{booking.bookingNumber}</td>
+                                        <td className="py-3 pl-2 font-medium text-primary-600 dark:text-primary-400">{booking.bookingNumber}</td>
                                         <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.service?.name}</td>
                                         <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.consumer?.name}</td>
                                         <td className="py-3 text-center text-gray-600 dark:text-gray-300">{booking.provider?.name || <span className="text-gray-400 italic">Unassigned</span>}</td>

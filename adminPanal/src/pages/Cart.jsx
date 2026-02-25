@@ -12,14 +12,14 @@ const Cart = () => {
         return (
             <div className="min-h-screen bg-gray-50 dark:bg-slate-950 pt-32 pb-12 flex items-center justify-center px-4 transition-colors duration-300">
                 <div className="text-center max-w-md w-full p-8 bg-white dark:bg-slate-900 rounded-3xl border border-gray-100 dark:border-white/5 shadow-2xl shadow-black/5">
-                    <div className="w-20 h-20 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <ShoppingBag size={40} className="text-orange-500" />
+                    <div className="w-20 h-20 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <ShoppingBag size={40} className="text-primary-500" />
                     </div>
                     <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2 uppercase tracking-tight">Your cart is empty</h2>
                     <p className="text-gray-500 dark:text-gray-400 mb-8 text-sm font-medium">Looks like you haven't added any services yet. Start exploring our premium services.</p>
                     <Link
                         to="/services"
-                        className="inline-flex items-center justify-center w-full px-8 py-4 bg-orange-500 hover:bg-orange-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-orange-500/20"
+                        className="inline-flex items-center justify-center w-full px-8 py-4 bg-primary-500 hover:bg-primary-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-primary-500/20"
                     >
                         Explore Services
                     </Link>
@@ -48,7 +48,7 @@ const Cart = () => {
                     {/* Cart Items */}
                     <div className="lg:col-span-8 space-y-4">
                         {cartItems.map((item) => (
-                            <div key={item.id} className="group bg-white dark:bg-slate-900 p-5 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl shadow-black/5 flex flex-col sm:flex-row items-center gap-6 transition-all hover:border-orange-500/20">
+                            <div key={item.id} className="group bg-white dark:bg-slate-900 p-5 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl shadow-black/5 flex flex-col sm:flex-row items-center gap-6 transition-all hover:border-primary-500/20">
                                 <div className="w-full sm:w-32 h-32 bg-gray-100 dark:bg-white/5 rounded-2xl overflow-hidden flex-shrink-0 border border-gray-100 dark:border-white/5">
                                     <img
                                         src={item.thumbnail ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${BASE_URL}${item.thumbnail}`) : `https://ui-avatars.com/api/?name=${item.name}`}
@@ -59,11 +59,11 @@ const Cart = () => {
                                 <div className="flex-1 text-center sm:text-left">
                                     <h3
                                         onClick={() => navigate(`/service/${item.slug || item.id}`)}
-                                        className="text-lg font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight hover:text-orange-500 cursor-pointer transition-colors"
+                                        className="text-lg font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight hover:text-primary-500 cursor-pointer transition-colors"
                                     >
                                         {item.name}
                                     </h3>
-                                    <p className="text-xs text-orange-500 font-black uppercase tracking-widest mb-3">{item.category?.name || 'Service'}</p>
+                                    <p className="text-xs text-primary-500 font-black uppercase tracking-widest mb-3">{item.category?.name || 'Service'}</p>
                                     <div className="flex items-center justify-center sm:justify-start gap-4">
                                         <div className="flex items-center gap-2 bg-gray-50 dark:bg-white/5 p-1.5 rounded-xl border border-gray-200/50 dark:border-white/5">
                                             <button
@@ -119,7 +119,7 @@ const Cart = () => {
 
                             <button
                                 onClick={() => navigate('/booking/confirm', { state: { cartFlow: true } })}
-                                className="group relative w-full px-8 py-5 bg-orange-500 hover:bg-orange-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-orange-500/20 flex items-center justify-center gap-3 overflow-hidden"
+                                className="group relative w-full px-8 py-5 bg-primary-500 hover:bg-primary-400 text-black font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-primary-500/20 flex items-center justify-center gap-3 overflow-hidden"
                             >
                                 <span className="relative z-10">Proceed to Checkout</span>
                                 <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
@@ -128,7 +128,7 @@ const Cart = () => {
 
                             <Link
                                 to="/services"
-                                className="block text-center mt-6 text-xs font-black text-gray-400 hover:text-orange-500 transition-colors uppercase tracking-widest"
+                                className="block text-center mt-6 text-xs font-black text-gray-400 hover:text-primary-500 transition-colors uppercase tracking-widest"
                             >
                                 Continue Shopping
                             </Link>

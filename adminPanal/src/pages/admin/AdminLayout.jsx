@@ -57,7 +57,7 @@ const AdminLayout = () => {
                 {/* Logo */}
                 <div className="h-16 flex items-center justify-between px-4 border-b border-gray-800 dark:border-slate-800">
                     <Link to="/admin" className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-purple-600 flex items-center justify-center">
                             <span className="text-white font-bold text-xl">N</span>
                         </div>
                         {sidebarOpen && <span className="text-white font-bold text-lg">Admin Panel</span>}
@@ -89,7 +89,7 @@ const AdminLayout = () => {
                                             key={item.path}
                                             to={item.path}
                                             className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all ${isActive
-                                                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+                                                ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
                                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                                                 }`}
                                         >

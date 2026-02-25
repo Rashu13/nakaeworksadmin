@@ -152,7 +152,7 @@ const Login = () => {
                         <button
                             onClick={() => { setAuthMode('otp'); setError(''); }}
                             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'otp'
-                                    ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
+                                    ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-sm'
                                     : 'text-gray-500 dark:text-gray-400'
                                 }`}
                         >
@@ -162,7 +162,7 @@ const Login = () => {
                         <button
                             onClick={() => { setAuthMode('email'); setError(''); }}
                             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'email'
-                                    ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
+                                    ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-sm'
                                     : 'text-gray-500 dark:text-gray-400'
                                 }`}
                         >
@@ -195,7 +195,7 @@ const Login = () => {
                                                 value={phone}
                                                 onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                                 placeholder="98765 43210"
-                                                className="w-full pl-16 pr-4 py-3.5 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 text-lg tracking-wider"
+                                                className="w-full pl-16 pr-4 py-3.5 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 text-lg tracking-wider"
                                                 required
                                                 maxLength={10}
                                             />
@@ -205,7 +205,7 @@ const Login = () => {
                                     <button
                                         type="submit"
                                         disabled={loading || phone.replace(/\D/g, '').length !== 10}
-                                        className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                        className="w-full py-3.5 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                     >
                                         {loading ? (
                                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -220,8 +220,8 @@ const Login = () => {
                             ) : (
                                 <div className="space-y-6">
                                     <div className="text-center">
-                                        <div className="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Smartphone className="text-indigo-600 dark:text-indigo-400" size={28} />
+                                        <div className="w-16 h-16 bg-primary-50 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <Smartphone className="text-primary-600 dark:text-primary-400" size={28} />
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                                             We've sent a 6-digit OTP to
@@ -243,7 +243,7 @@ const Login = () => {
                                                 value={digit}
                                                 onChange={(e) => handleOtpChange(index, e.target.value)}
                                                 onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                                                className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-200 dark:border-slate-700 rounded-xl focus:border-indigo-500 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                                                className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-200 dark:border-slate-700 rounded-xl focus:border-primary-500 dark:focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
                                             />
                                         ))}
                                     </div>
@@ -252,7 +252,7 @@ const Login = () => {
                                     <button
                                         onClick={() => handleVerifyOtp(otp.join(''))}
                                         disabled={loading || otp.some(d => !d)}
-                                        className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                        className="w-full py-3.5 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                     >
                                         {loading ? (
                                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -268,7 +268,7 @@ const Login = () => {
                                     <div className="flex items-center justify-between text-sm">
                                         <button
                                             onClick={() => { setOtpSent(false); setError(''); }}
-                                            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                            className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                                         >
                                             Change number
                                         </button>
@@ -279,7 +279,7 @@ const Login = () => {
                                         ) : (
                                             <button
                                                 onClick={handleSendOtp}
-                                                className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
+                                                className="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
                                             >
                                                 Resend OTP
                                             </button>
@@ -304,7 +304,7 @@ const Login = () => {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="you@example.com"
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600"
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600"
                                         required
                                     />
                                 </div>
@@ -321,7 +321,7 @@ const Login = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder="••••••••"
-                                        className="w-full pl-12 pr-12 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600"
+                                        className="w-full pl-12 pr-12 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600"
                                         required
                                     />
                                     <button
@@ -336,10 +336,10 @@ const Login = () => {
 
                             <div className="flex items-center justify-between">
                                 <label className="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" className="w-4 h-4 text-indigo-600 rounded" />
+                                    <input type="checkbox" className="w-4 h-4 text-primary-600 rounded" />
                                     <span className="text-sm text-gray-600">Remember me</span>
                                 </label>
-                                <Link to="/forgot-password" className="text-sm text-indigo-600 hover:underline">
+                                <Link to="/forgot-password" className="text-sm text-primary-600 hover:underline">
                                     Forgot password?
                                 </Link>
                             </div>
@@ -347,7 +347,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                className="w-full py-3 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -364,7 +364,7 @@ const Login = () => {
                     {/* Sign Up Link */}
                     <p className="mt-8 text-center text-gray-600 dark:text-gray-400">
                         Don't have an account?{' '}
-                        <Link to="/register" className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
+                        <Link to="/register" className="text-primary-600 dark:text-primary-400 font-semibold hover:underline">
                             Sign up
                         </Link>
                     </p>
@@ -372,8 +372,8 @@ const Login = () => {
             </div>
 
             {/* Right Side - Image */}
-            <div className="hidden lg:block lg:w-1/2 relative bg-indigo-600 dark:bg-indigo-950 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700 dark:from-indigo-900 dark:to-slate-950 opacity-100">
+            <div className="hidden lg:block lg:w-1/2 relative bg-primary-600 dark:bg-primary-950 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-purple-700 dark:from-primary-900 dark:to-slate-950 opacity-100">
                     <img
                         src="https://images.unsplash.com/photo-1581578731117-104f8a746950?auto=format&fit=crop&w=1000"
                         alt="Home Services"

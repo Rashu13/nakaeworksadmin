@@ -85,16 +85,16 @@ const Navbar = () => {
                                     }`}
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-400 transition-all duration-300 group-hover:w-full" />
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
 
                         {/* Search Bar */}
                         <div className="relative group ml-2">
-                            <div className="absolute inset-0 bg-orange-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-primary-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
                             <div className={`relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-white/5 border-white/10 w-48' : 'bg-gray-800/20 border-white/5 w-60'
-                                } group-focus-within:w-72 group-focus-within:border-orange-500/50 group-focus-within:bg-white/10 backdrop-blur-md`}>
-                                <Search size={14} className="text-orange-400 shrink-0" />
+                                } group-focus-within:w-72 group-focus-within:border-primary-500/50 group-focus-within:bg-white/10 backdrop-blur-md`}>
+                                <Search size={14} className="text-primary-400 shrink-0" />
                                 <input
                                     type="text"
                                     placeholder="Search services..."
@@ -119,7 +119,7 @@ const Navbar = () => {
                             ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
                             : 'bg-white/5 border-white/10 text-gray-200 hover:bg-white/10'
                             }`}>
-                            <MapPin size={14} className="text-orange-400" />
+                            <MapPin size={14} className="text-primary-400" />
                             <span className="text-xs font-bold tracking-tight uppercase">{userLocation}</span>
                             <ChevronDown size={12} className="text-gray-400" />
                         </button>
@@ -146,7 +146,7 @@ const Navbar = () => {
                                     >
                                         <ShoppingBag size={20} />
                                         {totalItems > 0 && (
-                                            <span className="absolute top-1 right-1 w-4 h-4 bg-orange-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
+                                            <span className="absolute top-1 right-1 w-4 h-4 bg-primary-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
                                                 {totalItems}
                                             </span>
                                         )}
@@ -157,7 +157,7 @@ const Navbar = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={() => setShowUserMenu(!showUserMenu)}
-                                            className="relative flex items-center gap-2 p-0.5 rounded-full border-2 border-orange-500/30"
+                                            className="relative flex items-center gap-2 p-0.5 rounded-full border-2 border-primary-500/30"
                                         >
                                             <img
                                                 src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=FFBF00&color=000`}
@@ -194,7 +194,7 @@ const Navbar = () => {
                                                                     }}
                                                                     className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
                                                                 >
-                                                                    <item.icon size={16} className="text-orange-400" />
+                                                                    <item.icon size={16} className="text-primary-400" />
                                                                     {item.label}
                                                                 </button>
                                                             )
@@ -224,7 +224,7 @@ const Navbar = () => {
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="px-6 py-2.5 bg-orange-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
+                                        className="px-6 py-2.5 bg-primary-400 hover:bg-amber-300 text-[#0a0f1c] text-xs font-black tracking-widest uppercase rounded-full transition-all shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]"
                                     >
                                         Join Now
                                     </Link>
@@ -274,7 +274,7 @@ const Navbar = () => {
                                         </Link>
                                         <Link
                                             to="/register"
-                                            className="w-full py-4 text-center text-[#0a0f1c] bg-orange-400 rounded-2xl font-black uppercase"
+                                            className="w-full py-4 text-center text-[#0a0f1c] bg-primary-400 rounded-2xl font-black uppercase"
                                             onClick={() => setIsOpen(false)}
                                         >
                                             Sign Up

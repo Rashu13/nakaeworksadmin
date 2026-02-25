@@ -17,14 +17,14 @@ const iconMap = {
 
 const colorMap = {
     'cleaning': 'from-blue-500 to-cyan-400',
-    'electrician': 'from-yellow-500 to-orange-400',
+    'electrician': 'from-yellow-500 to-primary-400',
     'plumber': 'from-cyan-500 to-blue-400',
     'carpenter': 'from-amber-500 to-yellow-400',
     'painting': 'from-purple-500 to-pink-400',
     'salon': 'from-pink-500 to-rose-400',
     'automotive': 'from-gray-600 to-gray-500',
     'security': 'from-green-500 to-emerald-400',
-    'default': 'from-indigo-500 to-purple-400'
+    'default': 'from-primary-500 to-purple-400'
 };
 
 const CategoryGrid = () => {
@@ -77,7 +77,7 @@ const CategoryGrid = () => {
                     </div>
                     <button
                         onClick={() => navigate('/services')}
-                        className="hidden md:flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold transition-colors"
+                        className="hidden md:flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition-colors"
                     >
                         Browse All Categories
                         <ChevronRight size={20} />
@@ -103,12 +103,12 @@ const CategoryGrid = () => {
                                 relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center
                                 p-4 transition-all duration-500 z-10
                                 bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800
-                                group-hover:border-indigo-500/30 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
+                                group-hover:border-primary-500/30 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
                                 dark:group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]
-                                ${activeCategory === category.id ? 'ring-2 ring-indigo-500 border-transparent' : ''}
+                                ${activeCategory === category.id ? 'ring-2 ring-primary-500 border-transparent' : ''}
                             `}>
                                 {/* Decorative background glow on hover */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 to-indigo-500/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-primary-500/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
 
                                 {category.icon && (category.icon.startsWith('http') || category.icon.startsWith('/')) ? (
                                     <div className="w-full h-full flex items-center justify-center rounded-xl overflow-hidden transition-transform duration-500 group-hover:scale-110">
@@ -121,7 +121,7 @@ const CategoryGrid = () => {
                                 ) : (
                                     <div className={`
                                         w-full h-full rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-110
-                                        bg-gradient-to-br ${getGradient(category)} shadow-lg shadow-indigo-500/10
+                                        bg-gradient-to-br ${getGradient(category)} shadow-lg shadow-primary-500/10
                                     `}>
                                         {getIcon(category)}
                                     </div>
@@ -130,7 +130,7 @@ const CategoryGrid = () => {
 
                             {/* Content */}
                             <div className="text-center z-10 space-y-1">
-                                <h3 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 uppercase tracking-widest px-2">
+                                <h3 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300 uppercase tracking-widest px-2">
                                     {category.name}
                                 </h3>
                                 <p className="text-[9px] sm:text-[10px] font-medium text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors duration-300">
@@ -144,7 +144,7 @@ const CategoryGrid = () => {
                 {/* Mobile View All Button */}
                 <button
                     onClick={() => navigate('/services')}
-                    className="md:hidden w-full mt-6 py-3 text-center text-indigo-600 dark:text-indigo-400 font-semibold border-2 border-indigo-100 dark:border-indigo-900 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
+                    className="md:hidden w-full mt-6 py-3 text-center text-primary-600 dark:text-primary-400 font-semibold border-2 border-primary-100 dark:border-primary-900 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
                 >
                     View All Categories
                 </button>

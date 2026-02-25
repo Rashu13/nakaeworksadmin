@@ -8,7 +8,7 @@ const About = () => {
                 {/* Header Section */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-                        About <span className="text-orange-500">NakaeWorks</span>
+                        About <span className="text-primary-500">NakaeWorks</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                         Your trusted platform for premium home services. We connect skilled professionals with customers who need elite, reliable, and swift service delivery.
@@ -29,7 +29,7 @@ const About = () => {
                         </p>
                     </div>
                     <div className="rounded-3xl overflow-hidden shadow-2xl relative group">
-                        <div className="absolute inset-0 bg-orange-500/10 group-hover:bg-orange-500/0 transition-colors duration-500 z-10"></div>
+                        <div className="absolute inset-0 bg-primary-500/10 group-hover:bg-primary-500/0 transition-colors duration-500 z-10"></div>
                         <img
                             src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop"
                             alt="Professional Services"
@@ -46,8 +46,8 @@ const About = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {/* Value 1 */}
                         <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-2 transition-transform duration-300">
-                            <div className="w-14 h-14 bg-orange-100 dark:bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6">
-                                <Shield className="text-orange-500" size={28} />
+                            <div className="w-14 h-14 bg-primary-100 dark:bg-primary-500/10 rounded-2xl flex items-center justify-center mb-6">
+                                <Shield className="text-primary-500" size={28} />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Verified Experts</h3>
                             <p className="text-gray-600 dark:text-gray-400">Every professional on our platform undergoes strict background checks and skill assessments.</p>

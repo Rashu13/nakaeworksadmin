@@ -43,17 +43,17 @@ const AdminLogin = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-primary-900 via-purple-900 to-pink-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full">
                 {/* Logo & Title */}
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4">
-                        <svg className="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-10 h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>
                     <h2 className="text-3xl font-bold text-white">Admin Portal</h2>
-                    <p className="mt-2 text-indigo-200">Sign in to access the admin panel</p>
+                    <p className="mt-2 text-primary-200">Sign in to access the admin panel</p>
                 </div>
 
                 {/* Login Card */}
@@ -76,7 +76,7 @@ const AdminLogin = () => {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                 placeholder="admin@nakaeworks.com"
                             />
                         </div>
@@ -92,7 +92,7 @@ const AdminLogin = () => {
                                 required
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -100,7 +100,7 @@ const AdminLogin = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center">
@@ -117,7 +117,7 @@ const AdminLogin = () => {
                     </form>
 
                     <div className="mt-6 text-center">
-                        <Link to="/" className="text-sm text-indigo-600 hover:text-indigo-500">
+                        <Link to="/" className="text-sm text-primary-600 hover:text-primary-500">
                             ← Back to Home
                         </Link>
                     </div>
@@ -125,7 +125,7 @@ const AdminLogin = () => {
 
                 {/* Footer Note */}
                 <div className="mt-6 text-center">
-                    <p className="text-sm text-indigo-200 dark:text-indigo-300">
+                    <p className="text-sm text-primary-200 dark:text-primary-300">
                         Admin access only • Unauthorized access is prohibited
                     </p>
                 </div>

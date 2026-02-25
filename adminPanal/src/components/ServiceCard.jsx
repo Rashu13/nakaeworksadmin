@@ -42,7 +42,7 @@ const ServiceCard = ({ service, viewMode }) => {
     // LIST VIEW
     if (viewMode === 'list') {
         return (
-            <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-sm dark:shadow-none hover:shadow-xl dark:hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col sm:flex-row h-auto sm:h-[13rem]">
+            <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-sm dark:shadow-none hover:shadow-xl dark:hover:shadow-primary-500/10 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col sm:flex-row h-auto sm:h-[13rem]">
                 {/* Image Container */}
                 <div className="relative w-full sm:w-72 h-48 sm:h-full flex-shrink-0 p-3">
                     <img
@@ -73,7 +73,7 @@ const ServiceCard = ({ service, viewMode }) => {
                                 {name}
                             </h3>
                             <div className="flex items-center gap-2 text-sm">
-                                <span className="font-bold text-slate-800 dark:text-indigo-300 text-lg">₹{discountedPrice}</span>
+                                <span className="font-bold text-slate-800 dark:text-primary-300 text-lg">₹{discountedPrice}</span>
                                 {discount > 0 && (
                                     <span className="text-gray-400 dark:text-gray-500 line-through text-xs">₹{price}</span>
                                 )}
@@ -136,7 +136,7 @@ const ServiceCard = ({ service, viewMode }) => {
                             </button>
                             <button
                                 onClick={() => navigate(`/service/${service.slug || id}`)}
-                                className="px-5 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+                                className="px-5 py-2 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
                             >
                                 Book
                             </button>
@@ -150,7 +150,7 @@ const ServiceCard = ({ service, viewMode }) => {
     // GRID VIEW (Default)
     return (
         <div
-            className="group bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col h-full"
+            className="group bg-white dark:bg-slate-900 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-primary-500/10 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-slate-800 flex flex-col h-full"
         >
             {/* Image Container */}
             <div className="relative aspect-[4/3] overflow-hidden p-3">
@@ -193,7 +193,7 @@ const ServiceCard = ({ service, viewMode }) => {
                 <div className="flex items-start justify-between gap-2 mb-3">
                     <h3
                         onClick={() => navigate(`/service/${service.slug || id}`)}
-                        className="font-semibold text-gray-800 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer line-clamp-2 flex-1 transition-colors"
+                        className="font-semibold text-gray-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer line-clamp-2 flex-1 transition-colors"
                     >
                         {name}
                     </h3>
@@ -203,7 +203,7 @@ const ServiceCard = ({ service, viewMode }) => {
                                 ₹{price}
                             </span>
                         )}
-                        <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                        <span className="font-bold text-primary-600 dark:text-primary-400">
                             ₹{discountedPrice}
                         </span>
                     </div>
@@ -264,7 +264,7 @@ const ServiceCard = ({ service, viewMode }) => {
                         </button>
                         <button
                             onClick={() => navigate(`/service/${service.slug || id}`)}
-                            className="px-4 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-all"
+                            className="px-4 py-2 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-500 text-white text-sm font-medium rounded-lg transition-all"
                         >
                             Book
                         </button>

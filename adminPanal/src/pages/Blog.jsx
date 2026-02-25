@@ -73,7 +73,7 @@ const Blog = () => {
                 {/* Header Section */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-                        NakaeWorks <span className="text-orange-500">Blog</span>
+                        NakaeWorks <span className="text-primary-500">Blog</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Insights, tips, and expert advice on home maintenance, lifestyle improvements, and modern living solutions.
@@ -83,7 +83,7 @@ const Blog = () => {
                 {/* Featured Post */}
                 <div className="mb-16">
                     <div className="bg-white dark:bg-slate-900/40 rounded-[2.5rem] border border-gray-100 dark:border-white/5 shadow-2xl overflow-hidden group flex flex-col lg:flex-row relative">
-                        <div className="absolute right-0 top-0 w-64 h-64 bg-orange-600/5 blur-[100px] pointer-events-none"></div>
+                        <div className="absolute right-0 top-0 w-64 h-64 bg-primary-600/5 blur-[100px] pointer-events-none"></div>
                         <div className="lg:w-1/2 overflow-hidden">
                             <img
                                 src={blogPosts[0].thumbnail}
@@ -92,10 +92,10 @@ const Blog = () => {
                             />
                         </div>
                         <div className="lg:w-1/2 p-10 flex flex-col justify-center">
-                            <span className="inline-block px-4 py-1.5 bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-500 text-xs font-black uppercase tracking-widest rounded-full mb-6 max-w-fit">
+                            <span className="inline-block px-4 py-1.5 bg-primary-100 dark:bg-primary-500/10 text-primary-600 dark:text-primary-500 text-xs font-black uppercase tracking-widest rounded-full mb-6 max-w-fit">
                                 Featured • {blogPosts[0].category}
                             </span>
-                            <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4 group-hover:text-orange-500 transition-colors">
+                            <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4 group-hover:text-primary-500 transition-colors">
                                 {blogPosts[0].title}
                             </h2>
                             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
@@ -106,7 +106,7 @@ const Blog = () => {
                                 <span className="flex items-center gap-2"><Calendar size={16} /> {blogPosts[0].date}</span>
                                 <span className="flex items-center gap-2"><Clock size={16} /> {blogPosts[0].readTime}</span>
                             </div>
-                            <button className="flex items-center gap-2 text-orange-500 font-black uppercase tracking-widest hover:gap-4 transition-all w-max bg-orange-500/10 px-6 py-3 rounded-xl border border-orange-500/20">
+                            <button className="flex items-center gap-2 text-primary-500 font-black uppercase tracking-widest hover:gap-4 transition-all w-max bg-primary-500/10 px-6 py-3 rounded-xl border border-primary-500/20">
                                 Read Article <ArrowRight size={18} />
                             </button>
                         </div>
@@ -128,7 +128,7 @@ const Blog = () => {
                                 </div>
                             </div>
                             <div className="p-8 flex flex-col flex-grow">
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-orange-500 transition-colors line-clamp-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-500 transition-colors line-clamp-2">
                                     {post.title}
                                 </h3>
                                 <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
@@ -145,7 +145,7 @@ const Blog = () => {
 
                 {/* Keep Exploring Button */}
                 <div className="mt-16 text-center">
-                    <button className="px-10 py-4 bg-transparent border-2 border-orange-500 text-orange-500 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-500 hover:text-slate-900 transition-all shadow-[0_0_20px_rgba(249,115,22,0.1)] hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]">
+                    <button className="px-10 py-4 bg-transparent border-2 border-primary-500 text-primary-500 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-500 hover:text-slate-900 transition-all shadow-[0_0_20px_rgba(28,56,102,0.1)] hover:shadow-[0_0_30px_rgba(28,56,102,0.3)]">
                         Load More Articles
                     </button>
                 </div>

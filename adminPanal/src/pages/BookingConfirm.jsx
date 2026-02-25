@@ -204,7 +204,7 @@ const BookingConfirm = () => {
                                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Service Address</h2>
                                 <button
                                     onClick={() => setShowAddAddress(true)}
-                                    className="flex items-center gap-1 text-slate-900 dark:text-indigo-400 text-sm font-medium hover:text-blue-600 dark:hover:text-indigo-300"
+                                    className="flex items-center gap-1 text-slate-900 dark:text-primary-400 text-sm font-medium hover:text-blue-600 dark:hover:text-primary-300"
                                 >
                                     <Plus size={16} />
                                     Add New
@@ -215,7 +215,7 @@ const BookingConfirm = () => {
                                     <label
                                         key={addr.id}
                                         className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${selectedAddress === addr.id
-                                            ? 'border-slate-900 dark:border-indigo-500 bg-slate-50 dark:bg-indigo-900/10'
+                                            ? 'border-slate-900 dark:border-primary-500 bg-slate-50 dark:bg-primary-900/10'
                                             : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                                             }`}
                                     >
@@ -250,7 +250,7 @@ const BookingConfirm = () => {
                             <div className="space-y-3">
                                 <label
                                     className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'cod'
-                                        ? 'border-slate-900 dark:border-indigo-500 bg-slate-50 dark:bg-indigo-900/10'
+                                        ? 'border-slate-900 dark:border-primary-500 bg-slate-50 dark:bg-primary-900/10'
                                         : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                                         }`}
                                 >
@@ -269,7 +269,7 @@ const BookingConfirm = () => {
 
                                 <label
                                     className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'online'
-                                        ? 'border-slate-900 dark:border-indigo-500 bg-slate-50 dark:bg-indigo-900/10'
+                                        ? 'border-slate-900 dark:border-primary-500 bg-slate-50 dark:bg-primary-900/10'
                                         : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                                         }`}
                                 >
@@ -301,11 +301,11 @@ const BookingConfirm = () => {
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                     placeholder="Enter Coupon Code"
-                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-xl text-sm focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-xl text-sm focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                                 />
                                 <button
                                     onClick={applyCoupon}
-                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-indigo-600 text-white rounded-lg text-xs font-bold hover:bg-slate-800 dark:hover:bg-indigo-700 transition-colors shadow-sm"
+                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-slate-900 dark:bg-primary-600 text-white rounded-lg text-xs font-bold hover:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-sm"
                                 >
                                     Apply
                                 </button>
@@ -341,7 +341,7 @@ const BookingConfirm = () => {
                             <button
                                 onClick={handleBooking}
                                 disabled={loading}
-                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 dark:hover:bg-indigo-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-slate-800 dark:hover:bg-primary-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -389,20 +389,20 @@ const BookingConfirm = () => {
                             }
                         }}>
                             <div className="space-y-4">
-                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors" />
+                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 <div className="grid grid-cols-2 gap-4">
-                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors" />
-                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors" />
+                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 </div>
-                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors" />
-                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white focus:border-slate-900 dark:focus:border-indigo-500 outline-none transition-colors appearance-none">
+                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-white focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors appearance-none">
                                     <option value="home">Home</option>
                                     <option value="work">Work</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <div className="flex gap-3 pt-2">
                                     <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
-                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-indigo-600 text-white font-medium rounded-xl hover:bg-slate-800 dark:hover:bg-indigo-700 transition-colors shadow-lg">Save</button>
+                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-white font-medium rounded-xl hover:bg-slate-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
                                 </div>
                             </div>
                         </form>

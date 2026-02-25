@@ -289,8 +289,8 @@ const Profile = () => {
         <div className="min-h-screen bg-[#0a0d14] pt-24 pb-12 transition-colors duration-300 relative overflow-hidden">
             {/* Background Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/5 rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/5 rounded-full blur-[120px]"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/5 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-500/5 rounded-full blur-[120px]"></div>
             </div>
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -301,9 +301,9 @@ const Profile = () => {
                     className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12"
                 >
                     <div>
-                        <p className="text-orange-500 text-xs font-black uppercase tracking-[4px] mb-2 px-1">Control Center</p>
+                        <p className="text-primary-500 text-xs font-black uppercase tracking-[4px] mb-2 px-1">Control Center</p>
                         <h1 className="text-4xl font-black text-white tracking-tight">
-                            MY ACCOUNT <span className="text-orange-500">PORTAL</span>
+                            MY ACCOUNT <span className="text-primary-500">PORTAL</span>
                         </h1>
                         <p className="text-gray-500 mt-2 font-medium">Manage your professional services and account configurations</p>
                     </div>
@@ -336,7 +336,7 @@ const Profile = () => {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-left font-bold transition-all relative group overflow-hidden ${activeTab === tab.id
-                                        ? 'text-white bg-orange-600 shadow-[0_10px_20px_rgba(234,88,12,0.2)]'
+                                        ? 'text-white bg-primary-600 shadow-[0_10px_20px_rgba(234,88,12,0.2)]'
                                         : 'text-gray-500 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
@@ -390,11 +390,11 @@ const Profile = () => {
                                             className="bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-[2.5rem] p-12 text-white relative overflow-hidden border border-white/5 shadow-2xl mb-12 group"
                                         >
                                             <div className="relative z-10">
-                                                <p className="text-orange-500 text-xs font-black uppercase tracking-[5px] mb-4">Account Status: Active</p>
-                                                <h2 className="text-5xl font-black mb-4 tracking-tighter">WELCOME, <span className="text-orange-500">{authUser?.name?.split(' ')[0]?.toUpperCase()}</span></h2>
+                                                <p className="text-primary-500 text-xs font-black uppercase tracking-[5px] mb-4">Account Status: Active</p>
+                                                <h2 className="text-5xl font-black mb-4 tracking-tighter">WELCOME, <span className="text-primary-500">{authUser?.name?.split(' ')[0]?.toUpperCase()}</span></h2>
                                                 <p className="text-gray-400 font-medium max-w-sm text-lg leading-relaxed">Your professional service management terminal is online and fully operational.</p>
                                             </div>
-                                            <div className="absolute right-0 top-0 h-full w-[60%] bg-orange-600/5 blur-[120px] pointer-events-none group-hover:bg-orange-600/10 transition-all duration-700"></div>
+                                            <div className="absolute right-0 top-0 h-full w-[60%] bg-primary-600/5 blur-[120px] pointer-events-none group-hover:bg-primary-600/10 transition-all duration-700"></div>
                                             <LayoutDashboard className="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 group-hover:rotate-12 transition-transform duration-1000" />
                                         </motion.div>
 
@@ -402,7 +402,7 @@ const Profile = () => {
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                                             {[
                                                 { label: 'Total Logs', val: stats.total, icon: Package, color: 'text-blue-500', bg: 'bg-blue-500/10' },
-                                                { label: 'Pending', val: stats.pending, icon: Clock, color: 'text-orange-500', bg: 'bg-orange-500/10' },
+                                                { label: 'Pending', val: stats.pending, icon: Clock, color: 'text-primary-500', bg: 'bg-primary-500/10' },
                                                 { label: 'Processing', val: stats.active, icon: Loader, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
                                                 { label: 'Completed', val: stats.completed, icon: CheckCircle, color: 'text-sky-500', bg: 'bg-sky-500/10' }
                                             ].map((stat, i) => (
@@ -411,9 +411,9 @@ const Profile = () => {
                                                     initial={{ opacity: 0, y: 20 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.1 }}
-                                                    className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-xl hover:border-orange-500/30 transition-all group relative overflow-hidden"
+                                                    className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-xl hover:border-primary-500/30 transition-all group relative overflow-hidden"
                                                 >
-                                                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12 group-hover:bg-orange-500/5 transition-colors"></div>
+                                                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12 group-hover:bg-primary-500/5 transition-colors"></div>
                                                     <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10`}>
                                                         <stat.icon size={26} />
                                                     </div>
@@ -428,20 +428,20 @@ const Profile = () => {
                                         <div className="pt-4">
                                             <div className="flex justify-between items-end mb-10">
                                                 <div>
-                                                    <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Operation Logs</p>
+                                                    <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Operation Logs</p>
                                                     <h3 className="text-3xl font-black text-white tracking-tight uppercase">RECENT SYSTEM ACTIVITY</h3>
                                                 </div>
                                                 <button
                                                     onClick={() => setActiveTab('bookings')}
                                                     className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-black uppercase text-[10px] tracking-widest rounded-xl transition-all flex items-center gap-3 border border-white/10"
                                                 >
-                                                    Access All Logs <ChevronRight size={14} className="text-orange-500" />
+                                                    Access All Logs <ChevronRight size={14} className="text-primary-500" />
                                                 </button>
                                             </div>
 
                                             {loadingBookings ? (
                                                 <div className="flex justify-center py-12">
-                                                    <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                                    <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                                                 </div>
                                             ) : bookings.length === 0 ? (
                                                 <div className="bg-slate-900/60 shadow-2xl backdrop-blur-xl p-12 rounded-3xl text-center border border-white/10 border-dashed">
@@ -472,14 +472,14 @@ const Profile = () => {
                                                                 )}
                                                             </div>
                                                             <div className="flex-1 text-center sm:text-left">
-                                                                <h4 className="font-black text-white text-lg tracking-tight uppercase group-hover:text-orange-500 transition-colors">{booking.service?.name}</h4>
+                                                                <h4 className="font-black text-white text-lg tracking-tight uppercase group-hover:text-primary-500 transition-colors">{booking.service?.name}</h4>
                                                                 <div className="flex items-center justify-center sm:justify-start gap-4 mt-2">
                                                                     <div className="flex items-center gap-1.5 text-gray-400 text-xs font-bold uppercase">
-                                                                        <Calendar size={14} className="text-orange-500" />
+                                                                        <Calendar size={14} className="text-primary-500" />
                                                                         {new Date(booking.dateTime).toDateString()}
                                                                     </div>
                                                                     <div className="flex items-center gap-1.5 text-gray-400 text-xs font-bold uppercase">
-                                                                        <Clock size={14} className="text-orange-500" />
+                                                                        <Clock size={14} className="text-primary-500" />
                                                                         {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                                     </div>
                                                                 </div>
@@ -488,7 +488,7 @@ const Profile = () => {
                                                                 <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[2px] shadow-sm ${getStatusColor(booking.bookingStatus)}`}>
                                                                     {booking.bookingStatus?.name}
                                                                 </span>
-                                                                <p className="text-xl font-black text-orange-500 tracking-tighter">₹{booking.totalAmount}</p>
+                                                                <p className="text-xl font-black text-primary-500 tracking-tighter">₹{booking.totalAmount}</p>
                                                             </div>
                                                         </motion.div>
                                                     ))}
@@ -501,19 +501,19 @@ const Profile = () => {
 
                                 {activeTab === 'profile' && (
                                     <div className="bg-slate-900/60 p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-600/5 blur-[100px] pointer-events-none"></div>
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/5 blur-[100px] pointer-events-none"></div>
 
                                         {/* Photo Upload Section */}
                                         <div className="mb-12 flex flex-col items-center sm:flex-row gap-10 p-8 rounded-3xl bg-white/[0.03] border border-white/5 group">
                                             <div className="relative">
-                                                <div className="w-32 h-32 rounded-[2.5rem] bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-orange-500/30 group-hover:border-orange-500 transition-colors shadow-2xl">
+                                                <div className="w-32 h-32 rounded-[2.5rem] bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-primary-500/30 group-hover:border-primary-500 transition-colors shadow-2xl">
                                                     {profile.avatar ? (
                                                         <img src={profile.avatar} alt="Profile" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                                     ) : (
                                                         <User size={50} className="text-gray-600" />
                                                     )}
                                                 </div>
-                                                <label className="absolute -bottom-3 -right-3 p-3 bg-orange-500 text-slate-900 rounded-2xl cursor-pointer hover:bg-orange-600 transition-all shadow-xl hover:scale-110">
+                                                <label className="absolute -bottom-3 -right-3 p-3 bg-primary-500 text-slate-900 rounded-2xl cursor-pointer hover:bg-primary-600 transition-all shadow-xl hover:scale-110">
                                                     <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
                                                     {uploadingImage ? <Loader size={20} className="animate-spin" /> : <Camera size={20} />}
                                                 </label>
@@ -527,14 +527,14 @@ const Profile = () => {
                                         <form onSubmit={handleProfileUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                             {/* Name input */}
                                             <div className="md:col-span-2">
-                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Operational Identity (Full Name)</label>
+                                                <label className="block text-[10px] font-black text-primary-500/70 uppercase tracking-[2.5px] mb-3">Operational Identity (Full Name)</label>
                                                 <div className="relative group">
-                                                    <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors" />
+                                                    <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary-500 transition-colors" />
                                                     <input
                                                         type="text"
                                                         value={profile.name}
                                                         onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all placeholder:text-gray-600 font-bold"
+                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all placeholder:text-gray-600 font-bold"
                                                         placeholder="Enter your full name"
                                                     />
                                                 </div>
@@ -542,22 +542,22 @@ const Profile = () => {
 
                                             {/* Phone input */}
                                             <div>
-                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Direct Contact (Phone)</label>
+                                                <label className="block text-[10px] font-black text-primary-500/70 uppercase tracking-[2.5px] mb-3">Direct Contact (Phone)</label>
                                                 <div className="relative group">
-                                                    <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors" />
+                                                    <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary-500 transition-colors" />
                                                     <input
                                                         type="tel"
                                                         value={profile.phone}
                                                         onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                                                         placeholder="+91 98765 43210"
-                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all font-bold"
+                                                        className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all font-bold"
                                                     />
                                                 </div>
                                             </div>
 
                                             {/* Email input (Read Only) */}
                                             <div>
-                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Verified Intel (Email)</label>
+                                                <label className="block text-[10px] font-black text-primary-500/70 uppercase tracking-[2.5px] mb-3">Verified Intel (Email)</label>
                                                 <div className="relative group">
                                                     <Mail size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600" />
                                                     <input
@@ -571,13 +571,13 @@ const Profile = () => {
 
                                             {/* About input */}
                                             <div className="md:col-span-2">
-                                                <label className="block text-[10px] font-black text-orange-500/70 uppercase tracking-[2.5px] mb-3">Briefing (About Your Profile)</label>
+                                                <label className="block text-[10px] font-black text-primary-500/70 uppercase tracking-[2.5px] mb-3">Briefing (About Your Profile)</label>
                                                 <textarea
                                                     rows="4"
                                                     value={profile.about}
                                                     onChange={(e) => setProfile({ ...profile, about: e.target.value })}
                                                     placeholder="Write a brief professional summary..."
-                                                    className="block w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 outline-none transition-all resize-none font-bold"
+                                                    className="block w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all resize-none font-bold"
                                                 />
                                             </div>
 
@@ -585,7 +585,7 @@ const Profile = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={loading}
-                                                    className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                    className="px-12 py-5 bg-primary-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(28,56,102,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
                                                     {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     Update Protocol Data
@@ -601,14 +601,14 @@ const Profile = () => {
                                         <div className="flex justify-between items-center">
                                             <h2 className="text-3xl font-black text-white tracking-tight uppercase">Order History</h2>
                                             <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-widest">
-                                                <Package size={14} className="text-orange-500" />
+                                                <Package size={14} className="text-primary-500" />
                                                 {bookings.length} Total
                                             </div>
                                         </div>
 
                                         {loadingBookings ? (
                                             <div className="flex justify-center py-20">
-                                                <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                                <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                                             </div>
                                         ) : bookings.length === 0 ? (
                                             <motion.div
@@ -623,7 +623,7 @@ const Profile = () => {
                                                 <p className="text-gray-500 font-medium mb-10 max-w-xs mx-auto">Explore our elite services and start your journey with us today.</p>
                                                 <button
                                                     onClick={() => navigate('/services')}
-                                                    className="px-10 py-4 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl hover:shadow-orange-500/20"
+                                                    className="px-10 py-4 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl hover:shadow-primary-500/20"
                                                 >
                                                     Browse Services
                                                 </button>
@@ -638,7 +638,7 @@ const Profile = () => {
                                                         transition={{ delay: i * 0.05 }}
                                                         className="bg-slate-900/40 rounded-[2.5rem] p-8 flex flex-col lg:flex-row gap-8 border border-white/5 hover:bg-slate-900/60 transition-all group relative overflow-hidden shadow-2xl"
                                                     >
-                                                        <div className="absolute right-0 top-0 w-32 h-32 bg-orange-600/5 blur-[60px] pointer-events-none group-hover:bg-orange-600/10 transition-all"></div>
+                                                        <div className="absolute right-0 top-0 w-32 h-32 bg-primary-600/5 blur-[60px] pointer-events-none group-hover:bg-primary-600/10 transition-all"></div>
 
                                                         <div className="shrink-0 relative">
                                                             <img
@@ -646,7 +646,7 @@ const Profile = () => {
                                                                 alt={booking.service?.name}
                                                                 className="w-32 h-32 rounded-[2rem] object-cover border border-white/10 shadow-xl group-hover:scale-105 transition-transform duration-500"
                                                             />
-                                                            <div className="absolute -top-2 -left-2 bg-orange-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
+                                                            <div className="absolute -top-2 -left-2 bg-primary-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
                                                                 ID: #{booking.bookingNumber}
                                                             </div>
                                                         </div>
@@ -654,15 +654,15 @@ const Profile = () => {
                                                         <div className="flex-1">
                                                             <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
                                                                 <div>
-                                                                    <p className="text-orange-500 text-[10px] font-black uppercase tracking-[2px] mb-1">Operational Task</p>
-                                                                    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 group-hover:text-orange-500 transition-colors">{booking.service?.name}</h3>
+                                                                    <p className="text-primary-500 text-[10px] font-black uppercase tracking-[2px] mb-1">Operational Task</p>
+                                                                    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2 group-hover:text-primary-500 transition-colors">{booking.service?.name}</h3>
                                                                     <div className="flex flex-wrap gap-4">
                                                                         <div className="flex items-center gap-2 text-gray-500 text-[10px] font-black uppercase tracking-widest">
-                                                                            <Calendar size={14} className="text-orange-500" />
+                                                                            <Calendar size={14} className="text-primary-500" />
                                                                             {new Date(booking.dateTime).toDateString()}
                                                                         </div>
                                                                         <div className="flex items-center gap-2 text-gray-500 text-[10px] font-black uppercase tracking-widest">
-                                                                            <Clock size={14} className="text-orange-500" />
+                                                                            <Clock size={14} className="text-primary-500" />
                                                                             {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                                         </div>
                                                                     </div>
@@ -673,7 +673,7 @@ const Profile = () => {
                                                             </div>
 
                                                             <div className="flex items-center gap-3 text-gray-500 text-xs font-bold p-4 bg-white/[0.03] rounded-2xl border border-white/5">
-                                                                <MapPin size={16} className="text-orange-500 shrink-0" />
+                                                                <MapPin size={16} className="text-primary-500 shrink-0" />
                                                                 <span className="truncate uppercase tracking-widest">{booking.address?.addressLine1}, {booking.address?.city}</span>
                                                             </div>
                                                         </div>
@@ -685,7 +685,7 @@ const Profile = () => {
                                                             </div>
                                                             <button
                                                                 onClick={() => handleViewDetails(booking)}
-                                                                className="w-full lg:w-auto px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-500/10 group/btn"
+                                                                className="w-full lg:w-auto px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-primary-500/10 group/btn"
                                                             >
                                                                 ACCESS INTEL
                                                                 <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
@@ -702,7 +702,7 @@ const Profile = () => {
                                     <div className="space-y-8">
                                         <div className="flex justify-between items-end">
                                             <div>
-                                                <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Base Operations</p>
+                                                <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Base Operations</p>
                                                 <h2 className="text-4xl font-black text-white tracking-tight uppercase">Coordinates</h2>
                                             </div>
                                             <button
@@ -711,7 +711,7 @@ const Profile = () => {
                                                     setEditingAddressId(null);
                                                     setShowAddressModal(true);
                                                 }}
-                                                className="flex items-center gap-3 px-8 py-4 bg-orange-500 text-white rounded-2xl hover:bg-orange-600 transition-all font-black uppercase tracking-widest shadow-xl shadow-orange-500/20"
+                                                className="flex items-center gap-3 px-8 py-4 bg-primary-500 text-white rounded-2xl hover:bg-primary-600 transition-all font-black uppercase tracking-widest shadow-xl shadow-primary-500/20"
                                             >
                                                 <Plus size={20} /> ESTABLISH NEW
                                             </button>
@@ -719,7 +719,7 @@ const Profile = () => {
 
                                         {loadingAddresses ? (
                                             <div className="flex justify-center py-20">
-                                                <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                                                <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                                             </div>
                                         ) : addresses.length === 0 ? (
                                             <motion.div
@@ -739,12 +739,12 @@ const Profile = () => {
                                                         initial={{ opacity: 0, scale: 0.95 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         transition={{ delay: i * 0.1 }}
-                                                        className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-2xl relative group hover:border-orange-500/30 transition-all overflow-hidden"
+                                                        className="bg-slate-900/60 p-8 rounded-[2rem] border border-white/5 shadow-2xl relative group hover:border-primary-500/30 transition-all overflow-hidden"
                                                     >
                                                         <div className="absolute top-6 right-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                                                             <button
                                                                 onClick={() => handleEditAddress(addr)}
-                                                                className="p-2.5 bg-white/10 text-white hover:bg-orange-500 hover:text-slate-900 rounded-xl transition-all shadow-xl"
+                                                                className="p-2.5 bg-white/10 text-white hover:bg-primary-500 hover:text-slate-900 rounded-xl transition-all shadow-xl"
                                                             >
                                                                 <Edit2 size={16} />
                                                             </button>
@@ -763,9 +763,9 @@ const Profile = () => {
                                                                 {addr.type}
                                                             </div>
                                                         </div>
-                                                        <p className="text-white text-xl font-black mb-2 tracking-tight uppercase group-hover:text-orange-500 transition-colors">{addr.addressLine1}</p>
+                                                        <p className="text-white text-xl font-black mb-2 tracking-tight uppercase group-hover:text-primary-500 transition-colors">{addr.addressLine1}</p>
                                                         <div className="flex items-start gap-2 text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4">
-                                                            <MapPin size={14} className="text-orange-500 shrink-0" />
+                                                            <MapPin size={14} className="text-primary-500 shrink-0" />
                                                             <span>{addr.city}, {addr.state} - {addr.pincode}</span>
                                                         </div>
                                                     </motion.div>
@@ -777,14 +777,14 @@ const Profile = () => {
 
                                 {activeTab === 'security' && (
                                     <div className="bg-slate-900/60 rounded-[2.5rem] border border-white/5 p-10 shadow-2xl relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-[100px] pointer-events-none"></div>
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/5 blur-[100px] pointer-events-none"></div>
 
                                         <div className="flex items-center gap-6 mb-12">
-                                            <div className="w-16 h-16 bg-orange-600/10 rounded-2xl flex items-center justify-center border border-orange-600/20 shadow-xl">
-                                                <Key size={30} className="text-orange-500" />
+                                            <div className="w-16 h-16 bg-primary-600/10 rounded-2xl flex items-center justify-center border border-primary-600/20 shadow-xl">
+                                                <Key size={30} className="text-primary-500" />
                                             </div>
                                             <div>
-                                                <p className="text-orange-500 text-[10px] font-black uppercase tracking-[3px] mb-1">Security Protocol</p>
+                                                <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-1">Security Protocol</p>
                                                 <h2 className="text-3xl font-black text-white uppercase tracking-tight">Access Protocol</h2>
                                             </div>
                                         </div>
@@ -792,15 +792,15 @@ const Profile = () => {
                                         <form onSubmit={handlePasswordChange} className="space-y-8 max-w-xl relative z-10">
                                             <div className="space-y-6">
                                                 <div>
-                                                    <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Current Authorization</label>
+                                                    <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Current Authorization</label>
                                                     <div className="relative group">
-                                                        <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                        <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-primary-500 transition-colors" />
                                                         <input
                                                             type="password"
                                                             value={passwords.current}
                                                             onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
                                                             placeholder="Enter current password"
-                                                            className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                            className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                             required
                                                         />
                                                     </div>
@@ -808,29 +808,29 @@ const Profile = () => {
 
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                     <div>
-                                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">New Cipher</label>
+                                                        <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">New Cipher</label>
                                                         <div className="relative group">
-                                                            <Key size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                            <Key size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-primary-500 transition-colors" />
                                                             <input
                                                                 type="password"
                                                                 value={passwords.new}
                                                                 onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
                                                                 placeholder="New password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                                 required
                                                             />
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Re-verify Cipher</label>
+                                                        <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Re-verify Cipher</label>
                                                         <div className="relative group">
-                                                            <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-orange-500 transition-colors" />
+                                                            <Lock size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-primary-500 transition-colors" />
                                                             <input
                                                                 type="password"
                                                                 value={passwords.confirm}
                                                                 onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                                                                 placeholder="Confirm new password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                                 required
                                                             />
                                                         </div>
@@ -842,7 +842,7 @@ const Profile = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={loading}
-                                                    className="px-12 py-5 bg-orange-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-orange-600 shadow-[0_15px_30px_rgba(249,115,22,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                    className="px-12 py-5 bg-primary-500 text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(28,56,102,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
                                                     {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     UPDATE AUTHORIZATION
@@ -873,7 +873,7 @@ const Profile = () => {
                                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                                 className="relative bg-slate-900/90 rounded-[2.5rem] w-full max-w-md p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-xl overflow-hidden"
                             >
-                                <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/5 blur-[80px] pointer-events-none"></div>
+                                <div className="absolute top-0 right-0 w-48 h-48 bg-primary-500/5 blur-[80px] pointer-events-none"></div>
 
                                 <div className="flex justify-between items-center mb-8 relative z-10">
                                     <h2 className="text-2xl font-black text-white uppercase tracking-tight">
@@ -889,37 +889,37 @@ const Profile = () => {
 
                                 <form onSubmit={handleAddressSubmit} className="space-y-6 relative z-10">
                                     <div>
-                                        <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Address Line 1</label>
+                                        <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Address Line 1</label>
                                         <input
                                             type="text"
                                             value={addressForm.addressLine1}
                                             onChange={(e) => setAddressForm({ ...addressForm, addressLine1: e.target.value })}
                                             placeholder="Enter street address"
-                                            className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                            className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                             required
                                         />
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">City</label>
+                                            <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">City</label>
                                             <input
                                                 type="text"
                                                 value={addressForm.city}
                                                 onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
                                                 placeholder="City"
-                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                 required
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">State</label>
+                                            <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">State</label>
                                             <input
                                                 type="text"
                                                 value={addressForm.state}
                                                 onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
                                                 placeholder="State"
-                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                 required
                                             />
                                         </div>
@@ -927,22 +927,22 @@ const Profile = () => {
 
                                     <div className="grid grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Pincode</label>
+                                            <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Pincode</label>
                                             <input
                                                 type="text"
                                                 value={addressForm.pincode}
                                                 onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
                                                 placeholder="123456"
-                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                 required
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-black text-orange-500/70 uppercase tracking-[2px] mb-3">Type</label>
+                                            <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Type</label>
                                             <select
                                                 value={addressForm.type}
                                                 onChange={(e) => setAddressForm({ ...addressForm, type: e.target.value })}
-                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-bold appearance-none cursor-pointer"
+                                                className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold appearance-none cursor-pointer"
                                             >
                                                 <option value="home">Home</option>
                                                 <option value="work">Work</option>
@@ -957,7 +957,7 @@ const Profile = () => {
                                             id="isPrimary"
                                             checked={addressForm.isPrimary}
                                             onChange={(e) => setAddressForm({ ...addressForm, isPrimary: e.target.checked })}
-                                            className="w-5 h-5 accent-orange-500 cursor-pointer"
+                                            className="w-5 h-5 accent-primary-500 cursor-pointer"
                                         />
                                         <label htmlFor="isPrimary" className="text-xs font-bold text-gray-400 uppercase tracking-widest cursor-pointer">Set as primary address</label>
                                     </div>
@@ -965,7 +965,7 @@ const Profile = () => {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-5 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/10 flex items-center justify-center gap-3 disabled:opacity-50 mt-4"
+                                        className="w-full py-5 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/10 flex items-center justify-center gap-3 disabled:opacity-50 mt-4"
                                     >
                                         {loading ? <Loader className="animate-spin" /> : <MapPin size={20} />}
                                         Save Coordinates
@@ -1005,7 +1005,7 @@ const Profile = () => {
                                 <div className="space-y-8">
                                     {/* Service Header / Items List */}
                                     <div className="space-y-4">
-                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest px-1">Booked Services</p>
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest px-1">Booked Services</p>
                                         <div className="space-y-3">
                                             {selectedBooking.items && selectedBooking.items.length > 0 ? (
                                                 selectedBooking.items.map((item, idx) => (
@@ -1017,7 +1017,7 @@ const Profile = () => {
                                                             <h3 className="font-black text-sm text-white uppercase truncate">{item.serviceName || item.service?.name}</h3>
                                                             <div className="flex items-center gap-3 mt-1">
                                                                 <span className="text-[10px] text-gray-500 font-bold uppercase">Qty: {item.quantity}</span>
-                                                                <span className="text-[10px] text-orange-500 font-bold tracking-wider">₹{item.price} each</span>
+                                                                <span className="text-[10px] text-primary-500 font-bold tracking-wider">₹{item.price} each</span>
                                                             </div>
                                                         </div>
                                                         <div className="text-right shrink-0">
@@ -1027,7 +1027,7 @@ const Profile = () => {
                                                 ))
                                             ) : (
                                                 <div className="flex gap-6 p-6 bg-white/5 rounded-3xl border border-white/10 relative overflow-hidden group">
-                                                    <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/5 blur-[40px] pointer-events-none"></div>
+                                                    <div className="absolute right-0 top-0 w-32 h-32 bg-primary-500/5 blur-[40px] pointer-events-none"></div>
                                                     <img
                                                         src={selectedBooking.service?.thumbnail}
                                                         alt={selectedBooking.service?.name}
@@ -1035,7 +1035,7 @@ const Profile = () => {
                                                     />
                                                     <div>
                                                         <h3 className="font-black text-xl text-white uppercase tracking-tight mb-1">{selectedBooking.service?.name}</h3>
-                                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 text-orange-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 text-primary-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-primary-500/20">
                                                             ID: #{selectedBooking.bookingNumber}
                                                         </div>
                                                     </div>
@@ -1047,18 +1047,18 @@ const Profile = () => {
                                     {/* Details Grid */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="p-5 bg-white/5 border border-white/10 rounded-2xl">
-                                            <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">Schedule</p>
+                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">Schedule</p>
                                             <div className="flex items-center gap-3 text-white font-bold text-sm">
-                                                <Calendar size={16} className="text-orange-500" />
+                                                <Calendar size={16} className="text-primary-500" />
                                                 {new Date(selectedBooking.dateTime).toDateString()}
                                             </div>
                                             <div className="flex items-center gap-3 text-white font-bold text-sm mt-2">
-                                                <Clock size={16} className="text-orange-500" />
+                                                <Clock size={16} className="text-primary-500" />
                                                 {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </div>
                                         </div>
                                         <div className="p-5 bg-white/5 border border-white/10 rounded-2xl">
-                                            <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">status & Payment</p>
+                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">status & Payment</p>
                                             <div className="flex items-center gap-2 mb-2">
                                                 <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/10 ${getStatusColor(selectedBooking.bookingStatus)}`}>
                                                     {selectedBooking.bookingStatus?.name || 'Pending'}
@@ -1073,10 +1073,10 @@ const Profile = () => {
 
                                     {/* Service Address */}
                                     <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-3">Target Location</p>
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-3">Target Location</p>
                                         <div className="flex gap-4">
-                                            <div className="w-10 h-10 bg-orange-500/10 rounded-xl flex items-center justify-center shrink-0">
-                                                <MapPin size={20} className="text-orange-500" />
+                                            <div className="w-10 h-10 bg-primary-500/10 rounded-xl flex items-center justify-center shrink-0">
+                                                <MapPin size={20} className="text-primary-500" />
                                             </div>
                                             <div>
                                                 <p className="font-bold text-white text-sm mb-1">{selectedBooking.address?.addressLine1}</p>
@@ -1087,10 +1087,10 @@ const Profile = () => {
 
                                     {/* Timeline */}
                                     <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-6">Execution Log</p>
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-6">Execution Log</p>
                                         {loadingTimeline ? (
                                             <div className="flex justify-center py-4">
-                                                <Loader className="animate-spin text-orange-500" size={20} />
+                                                <Loader className="animate-spin text-primary-500" size={20} />
                                             </div>
                                         ) : timeline.length === 0 ? (
                                             <p className="text-xs text-gray-500 text-center py-2 font-bold uppercase tracking-widest">No log entries found</p>
@@ -1100,7 +1100,7 @@ const Profile = () => {
                                                 {timeline.map((item, index) => (
                                                     <div key={item.id} className="flex gap-4 relative z-10">
                                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs shadow-lg border-2 border-slate-900 ${['Completed', 'Confirmed'].includes(item.status) ? 'bg-emerald-500' :
-                                                            ['Cancelled', 'Rejected'].includes(item.status) ? 'bg-red-500' : 'bg-orange-500'
+                                                            ['Cancelled', 'Rejected'].includes(item.status) ? 'bg-red-500' : 'bg-primary-500'
                                                             }`}>
                                                             {index + 1}
                                                         </div>
@@ -1119,7 +1119,7 @@ const Profile = () => {
 
                                     {/* Price Breakup */}
                                     <div className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4">
-                                        <p className="text-[10px] text-orange-500/70 uppercase font-black tracking-widest mb-2">Financial Summary</p>
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">Financial Summary</p>
                                         <div className="space-y-3">
                                             <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
                                                 <span>Base Premium</span>
@@ -1142,7 +1142,7 @@ const Profile = () => {
                                                 </div>
                                             )}
                                             <div className="flex justify-between items-center pt-4 border-t border-white/10">
-                                                <span className="text-xs font-black uppercase tracking-[2px] text-orange-500">Total Settlement</span>
+                                                <span className="text-xs font-black uppercase tracking-[2px] text-primary-500">Total Settlement</span>
                                                 <span className="text-2xl font-black text-white tracking-tighter">₹{selectedBooking.totalAmount}</span>
                                             </div>
                                         </div>
@@ -1150,14 +1150,14 @@ const Profile = () => {
 
                                     {/* Review Section */}
                                     {selectedBooking.bookingStatus?.slug === 'completed' && !selectedBooking.isReviewed && (
-                                        <div className="p-6 bg-orange-500/5 border border-orange-500/20 rounded-3xl space-y-6">
-                                            <p className="text-[10px] text-orange-500 uppercase font-black tracking-[3px] text-center">Protocol Evaluation</p>
+                                        <div className="p-6 bg-primary-500/5 border border-primary-500/20 rounded-3xl space-y-6">
+                                            <p className="text-[10px] text-primary-500 uppercase font-black tracking-[3px] text-center">Protocol Evaluation</p>
                                             <div className="flex justify-center gap-3">
                                                 {[1, 2, 3, 4, 5].map((star) => (
                                                     <button
                                                         key={star}
                                                         onClick={() => setReviewState({ ...reviewState, rating: star })}
-                                                        className={`transition-all transform hover:scale-110 ${reviewState.rating >= star ? 'text-orange-500' : 'text-white/10'}`}
+                                                        className={`transition-all transform hover:scale-110 ${reviewState.rating >= star ? 'text-primary-500' : 'text-white/10'}`}
                                                     >
                                                         <Star size={36} fill={reviewState.rating >= star ? 'currentColor' : 'none'} strokeWidth={1} />
                                                     </button>
@@ -1165,7 +1165,7 @@ const Profile = () => {
                                             </div>
                                             <textarea
                                                 placeholder="Share your experience with the elite protocol..."
-                                                className="w-full p-5 bg-slate-900 border border-white/10 rounded-2xl text-white text-sm font-bold outline-none focus:border-orange-500 transition-all h-28 resize-none"
+                                                className="w-full p-5 bg-slate-900 border border-white/10 rounded-2xl text-white text-sm font-bold outline-none focus:border-primary-500 transition-all h-28 resize-none"
                                                 value={reviewState.comment}
                                                 onChange={(e) => setReviewState({ ...reviewState, comment: e.target.value })}
                                             ></textarea>
@@ -1189,7 +1189,7 @@ const Profile = () => {
                                                     }
                                                 }}
                                                 disabled={reviewState.loading}
-                                                className="w-full py-4 bg-orange-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                                                className="w-full py-4 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/20 flex items-center justify-center gap-3 disabled:opacity-50"
                                             >
                                                 {reviewState.loading ? <Loader className="animate-spin" /> : <Star size={18} />}
                                                 Transmit Review
@@ -1202,7 +1202,7 @@ const Profile = () => {
                                             onClick={() => downloadInvoice(selectedBooking)}
                                             className="w-full flex items-center justify-center gap-3 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
                                         >
-                                            <FileText size={18} className="text-orange-500" />
+                                            <FileText size={18} className="text-primary-500" />
                                             Acquire Invoice
                                         </button>
                                     )}

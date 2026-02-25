@@ -34,7 +34,7 @@ const Contact = () => {
                 {/* Header Section */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-                        Contact <span className="text-orange-500">Us</span>
+                        Contact <span className="text-primary-500">Us</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Have a question, feedback, or need support? Our team is here to help you around the clock. Fill out the form below or reach us directly.
@@ -49,24 +49,24 @@ const Contact = () => {
                         </h2>
 
                         <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
-                            <div className="w-14 h-14 bg-orange-100 dark:bg-orange-500/10 shrink-0 rounded-2xl flex items-center justify-center">
-                                <Phone className="text-orange-500" size={28} />
+                            <div className="w-14 h-14 bg-primary-100 dark:bg-primary-500/10 shrink-0 rounded-2xl flex items-center justify-center">
+                                <Phone className="text-primary-500" size={28} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Phone</h3>
                                 <p className="text-gray-600 dark:text-gray-400 mb-1">Call us directly during working hours.</p>
-                                <a href="tel:+919876543210" className="text-orange-500 font-semibold hover:underline">+91 98765 43210</a>
+                                <a href="tel:+919876543210" className="text-primary-500 font-semibold hover:underline">+91 98765 43210</a>
                             </div>
                         </div>
 
                         <div className="bg-white dark:bg-slate-900/40 p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl hover:-translate-y-1 transition-transform duration-300 flex items-start gap-6">
-                            <div className="w-14 h-14 bg-indigo-100 dark:bg-indigo-500/10 shrink-0 rounded-2xl flex items-center justify-center">
-                                <Mail className="text-indigo-500" size={28} />
+                            <div className="w-14 h-14 bg-primary-100 dark:bg-primary-500/10 shrink-0 rounded-2xl flex items-center justify-center">
+                                <Mail className="text-primary-500" size={28} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Email</h3>
                                 <p className="text-gray-600 dark:text-gray-400 mb-1">We typically reply within 24 hours.</p>
-                                <a href="mailto:support@nakaeworks.com" className="text-indigo-500 font-semibold hover:underline">support@nakaeworks.com</a>
+                                <a href="mailto:support@nakaeworks.com" className="text-primary-500 font-semibold hover:underline">support@nakaeworks.com</a>
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@ const Contact = () => {
 
                     {/* Contact Form */}
                     <div className="bg-white dark:bg-slate-900/40 p-10 rounded-[2.5rem] border border-gray-100 dark:border-white/5 shadow-2xl relative overflow-hidden">
-                        <div className="absolute right-0 top-0 w-32 h-32 bg-orange-600/5 blur-[60px] pointer-events-none"></div>
+                        <div className="absolute right-0 top-0 w-32 h-32 bg-primary-600/5 blur-[60px] pointer-events-none"></div>
 
                         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
                             Send us a Message
@@ -108,7 +108,7 @@ const Contact = () => {
                                         required
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                                        className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors"
                                         placeholder="John Doe"
                                     />
                                 </div>
@@ -120,7 +120,7 @@ const Contact = () => {
                                         required
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                                        className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors"
                                         placeholder="john@example.com"
                                     />
                                 </div>
@@ -133,7 +133,7 @@ const Contact = () => {
                                     required
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                                    className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors"
                                     placeholder="How can we help?"
                                 />
                             </div>
@@ -145,13 +145,13 @@ const Contact = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows="5"
-                                    className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors resize-none"
+                                    className="w-full bg-gray-50 dark:bg-slate-950/50 border border-gray-200 dark:border-white/10 rounded-2xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none"
                                     placeholder="Type your message here..."
                                 ></textarea>
                             </div>
                             <button
                                 type="submit"
-                                className="w-full text-center px-8 py-4 bg-orange-500 text-slate-900 font-extrabold uppercase tracking-widest rounded-2xl hover:bg-orange-600 transition-all shadow-xl hover:shadow-orange-500/20 flex items-center justify-center gap-3 group"
+                                className="w-full text-center px-8 py-4 bg-primary-500 text-slate-900 font-extrabold uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl hover:shadow-primary-500/20 flex items-center justify-center gap-3 group"
                             >
                                 Send Message
                                 <Send size={20} className="group-hover:translate-x-1 transition-transform" />

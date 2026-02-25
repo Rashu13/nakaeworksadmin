@@ -152,7 +152,7 @@ const Hero = () => {
                             {/* Search Button */}
                             <button
                                 onClick={handleSearch}
-                                className="flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg"
+                                className="flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-yellow-400 to-primary-500 hover:from-yellow-500 hover:to-primary-600 text-gray-900 font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg"
                             >
                                 <span className="hidden sm:inline">Find Service</span>
                                 <ArrowRight size={20} />

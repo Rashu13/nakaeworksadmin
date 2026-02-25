@@ -39,7 +39,7 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
                 <div className="flex items-center justify-between mb-10">
                     <div className="flex items-center gap-3">
                         {showTrending && (
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-red-500 flex items-center justify-center">
                                 <TrendingUp size={20} className="text-white" />
                             </div>
                         )}
@@ -54,7 +54,7 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
                     </div>
                     <button
                         onClick={() => navigate('/services')}
-                        className="hidden md:flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold transition-colors"
+                        className="hidden md:flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition-colors"
                     >
                         View All
                         <ChevronRight size={20} />
@@ -79,7 +79,7 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
                 {/* Mobile View All Button */}
                 <button
                     onClick={() => navigate('/services')}
-                    className="md:hidden w-full mt-8 py-3 text-center text-indigo-600 dark:text-indigo-400 font-semibold border-2 border-indigo-100 dark:border-indigo-900 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors"
+                    className="md:hidden w-full mt-8 py-3 text-center text-primary-600 dark:text-primary-400 font-semibold border-2 border-primary-100 dark:border-primary-900 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
                 >
                     View All Services
                 </button>

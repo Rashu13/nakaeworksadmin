@@ -48,7 +48,7 @@ const ServiceDetail = () => {
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 pt-20 flex justify-center items-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
             </div>
         );
     }
@@ -60,7 +60,7 @@ const ServiceDetail = () => {
                 <h2 className="text-xl font-semibold">Service not found</h2>
                 <button
                     onClick={() => navigate('/services')}
-                    className="mt-4 text-indigo-600 hover:text-indigo-700 font-medium"
+                    className="mt-4 text-primary-600 hover:text-primary-700 font-medium"
                 >
                     Browse all services
                 </button>
@@ -316,7 +316,7 @@ const ServiceDetail = () => {
                             </div>
                             <Link
                                 to={`/provider-detail/${service.providerId || service.ProviderId || service.provider?.id || service.Provider?.id}`}
-                                className="text-black dark:text-indigo-400 font-semibold text-sm hover:underline"
+                                className="text-black dark:text-primary-400 font-semibold text-sm hover:underline"
                             >
                                 View Profile
                             </Link>
@@ -385,7 +385,7 @@ const ServiceDetail = () => {
                                                     disabled={isDisabled}
                                                     onClick={() => setSelectedTime(t)}
                                                     className={`py-2 px-1 text-xs font-medium border rounded-md transition-all ${selectedTime === t
-                                                        ? 'bg-slate-900 dark:bg-indigo-600 text-white border-slate-900 dark:border-indigo-600 shadow-sm'
+                                                        ? 'bg-slate-900 dark:bg-primary-600 text-white border-slate-900 dark:border-primary-600 shadow-sm'
                                                         : isDisabled
                                                             ? 'bg-gray-50 dark:bg-gray-800/50 text-gray-300 dark:text-gray-600 border-gray-100 dark:border-gray-700 cursor-not-allowed'
                                                             : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-200 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-600'
@@ -428,7 +428,7 @@ const ServiceDetail = () => {
                                     </button>
                                     <button
                                         onClick={handleBooking}
-                                        className="py-4 bg-black dark:bg-indigo-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-indigo-700 transition-colors shadow-lg"
+                                        className="py-4 bg-black dark:bg-primary-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
                                     >
                                         Buy Now
                                     </button>

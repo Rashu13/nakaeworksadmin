@@ -231,7 +231,7 @@ const ContentAdmin = () => {
                     {collections.map((col) => (
                         <div key={col.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between group">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center font-bold">
+                                <div className="w-10 h-10 bg-primary-50 text-primary-600 rounded-lg flex items-center justify-center font-bold">
                                     {col.position}
                                 </div>
                                 <div>
@@ -378,7 +378,7 @@ const ContentAdmin = () => {
                                             type="checkbox"
                                             checked={formData.isActive !== false}
                                             onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                                            className="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500"
+                                            className="w-5 h-5 text-primary-600 rounded focus:ring-primary-500"
                                         />
                                         <span className="ml-2 text-gray-700 font-medium">Active</span>
                                     </label>

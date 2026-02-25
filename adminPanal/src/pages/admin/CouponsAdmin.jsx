@@ -160,7 +160,7 @@ const CouponsAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Create Coupon
@@ -190,7 +190,7 @@ const CouponsAdmin = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search coupons..."
-                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                     />
                 </div>
             </div>
@@ -213,7 +213,7 @@ const CouponsAdmin = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredCoupons.length === 0 ? (
@@ -227,7 +227,7 @@ const CouponsAdmin = () => {
                                     <tr key={coupon.id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="p-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg">
+                                                <div className="p-2 bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-lg">
                                                     <Ticket size={20} />
                                                 </div>
                                                 <div>
@@ -269,7 +269,7 @@ const CouponsAdmin = () => {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => openModal(coupon)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
@@ -311,7 +311,7 @@ const CouponsAdmin = () => {
                                     value={formData.code}
                                     onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
                                     placeholder="e.g. SAVE20"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -322,7 +322,7 @@ const CouponsAdmin = () => {
                                     <select
                                         value={formData.discountType}
                                         onChange={(e) => setFormData({ ...formData, discountType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                     >
                                         <option value="fixed">Fixed Amount</option>
                                         <option value="percentage">Percentage (%)</option>
@@ -338,7 +338,7 @@ const CouponsAdmin = () => {
                                             value={formData.discountValue}
                                             onChange={(e) => setFormData({ ...formData, discountValue: e.target.value })}
                                             placeholder={formData.discountType === 'percentage' ? "20" : "500"}
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                             required={formData.discountType !== 'free_service_charge'}
                                         />
                                     </div>
@@ -353,7 +353,7 @@ const CouponsAdmin = () => {
                                         value={formData.minOrderValue}
                                         onChange={(e) => setFormData({ ...formData, minOrderValue: e.target.value })}
                                         placeholder="0"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
 
@@ -365,7 +365,7 @@ const CouponsAdmin = () => {
                                             value={formData.maxDiscount}
                                             onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                                             placeholder="Optional"
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                         />
                                     </div>
                                 )}
@@ -379,7 +379,7 @@ const CouponsAdmin = () => {
                                         value={formData.usageLimitPerUser}
                                         onChange={(e) => setFormData({ ...formData, usageLimitPerUser: e.target.value })}
                                         placeholder="1"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                                 <div>
@@ -387,7 +387,7 @@ const CouponsAdmin = () => {
                                     <select
                                         value={formData.customerType}
                                         onChange={(e) => setFormData({ ...formData, customerType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                     >
                                         <option value="all">All Customers</option>
                                         <option value="new">New Customers Only (0 orders)</option>
@@ -403,7 +403,7 @@ const CouponsAdmin = () => {
                                         value={formData.maxPastOrders}
                                         onChange={(e) => setFormData({ ...formData, maxPastOrders: e.target.value })}
                                         placeholder="e.g. 0 (First order only), 4 (First 5)"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Leave empty for no history check</p>
                                 </div>
@@ -414,7 +414,7 @@ const CouponsAdmin = () => {
                                         value={formData.usageLimit}
                                         onChange={(e) => setFormData({ ...formData, usageLimit: e.target.value })}
                                         placeholder="Unlimited"
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                             </div>
@@ -426,7 +426,7 @@ const CouponsAdmin = () => {
                                         type="datetime-local"
                                         value={formData.startDate}
                                         onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                                 <div>
@@ -435,7 +435,7 @@ const CouponsAdmin = () => {
                                         type="datetime-local"
                                         value={formData.expiresAt}
                                         onChange={(e) => setFormData({ ...formData, expiresAt: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                     />
                                 </div>
                             </div>
@@ -450,7 +450,7 @@ const CouponsAdmin = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl"
                                 >
                                     {editingCoupon ? 'Update Coupon' : 'Create Coupon'}
                                 </button>

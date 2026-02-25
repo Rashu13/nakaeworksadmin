@@ -28,7 +28,7 @@ const TermsOfService = () => {
                         {/* 1. Agreement to Terms */}
                         <section>
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
+                                <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
                                     <FileText size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">1. Agreement to Terms</h2>
@@ -82,7 +82,7 @@ const TermsOfService = () => {
                         {/* 4. Limitation of Liability */}
                         <section>
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-orange-100 rounded-lg text-orange-600">
+                                <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
                                     <Scale size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">4. Limitation of Liability</h2>

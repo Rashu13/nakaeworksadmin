@@ -192,7 +192,7 @@ const ServicesAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add Service
@@ -224,7 +224,7 @@ const ServicesAdmin = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                             />
                         </div>
 
@@ -232,7 +232,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={categoryFilter}
                                 onChange={(e) => setCategoryFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[150px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[150px]"
                             >
                                 <option value="all">All Categories</option>
                                 {categories.map(cat => (
@@ -243,7 +243,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[120px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white min-w-[120px]"
                             >
                                 <option value="all">All Status</option>
                                 <option value="active">Active</option>
@@ -269,7 +269,7 @@ const ServicesAdmin = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredServices.length === 0 ? (
@@ -319,7 +319,7 @@ const ServicesAdmin = () => {
                                                 </button>
                                                 <button
                                                     onClick={() => openModal(service)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
@@ -351,7 +351,7 @@ const ServicesAdmin = () => {
                                     setItemsPerPage(val === 'all' ? 'all' : Number(val));
                                     setCurrentPage(1);
                                 }}
-                                className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 dark:text-white"
+                                className="bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 dark:text-white"
                             >
                                 <option value={10}>10</option>
                                 <option value={20}>20</option>
@@ -413,7 +413,7 @@ const ServicesAdmin = () => {
                                 {/* Section 1: Basic Information */}
                                 <div className="space-y-4">
                                     <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                                        <span className="w-1 h-4 bg-indigo-600 rounded-full"></span>
+                                        <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Basic Information
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -424,7 +424,7 @@ const ServicesAdmin = () => {
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                 placeholder="e.g., Full Home Deep Cleaning"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                                 required
                                             />
                                         </div>
@@ -434,7 +434,7 @@ const ServicesAdmin = () => {
                                             <select
                                                 value={formData.categoryId}
                                                 onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                                 required
                                             >
                                                 <option value="">Select Category</option>
@@ -449,7 +449,7 @@ const ServicesAdmin = () => {
                                             <select
                                                 value={formData.providerId}
                                                 onChange={(e) => setFormData({ ...formData, providerId: e.target.value })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                             >
                                                 <option value="">Select Provider (Optional)</option>
                                                 {providers.map(p => (
@@ -463,7 +463,7 @@ const ServicesAdmin = () => {
                                 {/* Section 2: Pricing & Details */}
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
                                     <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                                        <span className="w-1 h-4 bg-indigo-600 rounded-full"></span>
+                                        <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Pricing & Details
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -476,7 +476,7 @@ const ServicesAdmin = () => {
                                                     value={formData.price}
                                                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                                                     placeholder="0.00"
-                                                    className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                    className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                                     required
                                                 />
                                             </div>
@@ -491,7 +491,7 @@ const ServicesAdmin = () => {
                                                 placeholder="0"
                                                 min="0"
                                                 max="100"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
 
@@ -502,7 +502,7 @@ const ServicesAdmin = () => {
                                                 value={formData.duration}
                                                 onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                                                 placeholder="60"
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
 
@@ -511,7 +511,7 @@ const ServicesAdmin = () => {
                                             <select
                                                 value={formData.status}
                                                 onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                             >
                                                 <option value={true}>Active</option>
                                                 <option value={false}>Inactive</option>
@@ -523,7 +523,7 @@ const ServicesAdmin = () => {
                                 {/* Section 3: Media & Description */}
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
                                     <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                                        <span className="w-1 h-4 bg-indigo-600 rounded-full"></span>
+                                        <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                         Media & Description
                                     </h3>
                                     <div className="space-y-6">
@@ -594,18 +594,18 @@ const ServicesAdmin = () => {
                                                             htmlFor="thumbnail-upload"
                                                             className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-all ${uploading
                                                                 ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-400 cursor-not-allowed'
-                                                                : 'border-gray-200 dark:border-slate-600 hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-50/30 dark:hover:bg-indigo-900/20 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400'
+                                                                : 'border-gray-200 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50/30 dark:hover:bg-primary-900/20 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
                                                                 }`}
                                                         >
                                                             {uploading ? (
                                                                 <div className="flex flex-col items-center gap-2">
-                                                                    <div className="w-8 h-8 border-3 border-gray-300 border-t-indigo-600 rounded-full animate-spin"></div>
+                                                                    <div className="w-8 h-8 border-3 border-gray-300 border-t-primary-600 rounded-full animate-spin"></div>
                                                                     <span className="text-sm font-medium">Uploading image...</span>
                                                                 </div>
                                                             ) : (
                                                                 <div className="flex flex-col items-center gap-2">
-                                                                    <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-full group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/30 transition-colors">
-                                                                        <Upload size={24} className="group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
+                                                                    <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-full group-hover:bg-primary-100 dark:group-hover:bg-primary-900/30 transition-colors">
+                                                                        <Upload size={24} className="group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
                                                                     </div>
                                                                     <div className="text-center">
                                                                         <span className="text-sm font-semibold text-gray-900 dark:text-white">Click to upload</span>
@@ -627,7 +627,7 @@ const ServicesAdmin = () => {
                                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                                 placeholder="Write a detailed description of the service..."
                                                 rows={4}
-                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow resize-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                                                className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-shadow resize-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                                             />
                                         </div>
                                     </div>
@@ -637,7 +637,7 @@ const ServicesAdmin = () => {
                                 <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-700">
                                     <div className="flex items-center justify-between">
                                         <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                                            <span className="w-1 h-4 bg-indigo-600 rounded-full"></span>
+                                            <span className="w-1 h-4 bg-primary-600 rounded-full"></span>
                                             Frequently Asked Questions
                                         </h3>
                                         <button
@@ -646,7 +646,7 @@ const ServicesAdmin = () => {
                                                 ...formData,
                                                 faqs: [...formData.faqs, { question: '', answer: '' }]
                                             })}
-                                            className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+                                            className="text-sm font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
                                         >
                                             <Plus size={16} />
                                             Add Question
@@ -655,7 +655,7 @@ const ServicesAdmin = () => {
 
                                     <div className="space-y-4">
                                         {formData.faqs.map((faq, index) => (
-                                            <div key={index} className="p-4 bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-700 rounded-xl relative group hover:border-indigo-100 dark:hover:border-indigo-900/50 transition-colors">
+                                            <div key={index} className="p-4 bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-700 rounded-xl relative group hover:border-primary-100 dark:hover:border-primary-900/50 transition-colors">
                                                 <button
                                                     type="button"
                                                     onClick={() => setFormData({
@@ -676,7 +676,7 @@ const ServicesAdmin = () => {
                                                             newFaqs[index].question = e.target.value;
                                                             setFormData({ ...formData, faqs: newFaqs });
                                                         }}
-                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm font-medium focus:border-indigo-500 outline-none text-gray-900 dark:text-white placeholder-gray-400"
+                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm font-medium focus:border-primary-500 outline-none text-gray-900 dark:text-white placeholder-gray-400"
                                                     />
                                                     <textarea
                                                         placeholder="Answer"
@@ -687,7 +687,7 @@ const ServicesAdmin = () => {
                                                             setFormData({ ...formData, faqs: newFaqs });
                                                         }}
                                                         rows={2}
-                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300 focus:border-indigo-500 outline-none resize-none placeholder-gray-400"
+                                                        className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300 focus:border-primary-500 outline-none resize-none placeholder-gray-400"
                                                     />
                                                 </div>
                                             </div>
@@ -714,7 +714,7 @@ const ServicesAdmin = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none hover:shadow-xl transition-all"
+                                    className="flex-1 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-lg shadow-primary-200 dark:shadow-none hover:shadow-xl transition-all"
                                 >
                                     {editingService ? 'Update Service' : 'Create Service'}
                                 </button>

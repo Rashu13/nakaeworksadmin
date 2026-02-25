@@ -124,7 +124,7 @@ const Categories = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add Category
@@ -155,7 +155,7 @@ const Categories = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search categories..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                 </div>
@@ -176,7 +176,7 @@ const Categories = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="5" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredCategories.length === 0 ? (
@@ -205,7 +205,7 @@ const Categories = () => {
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => openModal(category)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
@@ -249,7 +249,7 @@ const Categories = () => {
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="e.g., Home Cleaning"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                     required
                                 />
                             </div>
@@ -271,7 +271,7 @@ const Categories = () => {
                                                     onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
                                                 />
                                             ) : (
-                                                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-indigo-600 dark:text-indigo-400">
+                                                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-primary-600 dark:text-primary-400">
                                                     {/* Fallback for simple icon names if any */}
                                                     <span className="text-xs font-bold">{formData.icon}</span>
                                                 </div>
@@ -331,7 +331,7 @@ const Categories = () => {
                                             htmlFor="icon-upload"
                                             className={`flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${uploading
                                                 ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-400 cursor-not-allowed'
-                                                : 'border-gray-300 dark:border-slate-600 hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400'
+                                                : 'border-gray-300 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
                                                 }`}
                                         >
                                             {uploading ? (
@@ -360,7 +360,7 @@ const Categories = () => {
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     placeholder="Brief description of the category"
                                     rows={3}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                 />
                             </div>
 
@@ -371,7 +371,7 @@ const Categories = () => {
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
                                 >
                                     <option value={true}>Active</option>
                                     <option value={false}>Inactive</option>
@@ -388,7 +388,7 @@ const Categories = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl"
                                 >
                                     {editingCategory ? 'Update' : 'Create'}
                                 </button>

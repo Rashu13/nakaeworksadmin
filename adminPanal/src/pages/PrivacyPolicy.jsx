@@ -31,7 +31,7 @@ const PrivacyPolicy = () => {
                         {/* 1. Information We Collect */}
                         <section>
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
+                                <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
                                     <Eye size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">1. Information We Collect</h2>

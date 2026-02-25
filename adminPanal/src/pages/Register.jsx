@@ -157,7 +157,7 @@ const Register = () => {
         <div className="min-h-screen flex">
             {/* Left Side - Image */}
             <div className="hidden lg:block lg:w-1/2 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-700">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-primary-700">
                     <img
                         src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1000"
                         alt="Home Services"
@@ -189,7 +189,7 @@ const Register = () => {
                         <button
                             onClick={() => { setAuthMode('otp'); setError(''); }}
                             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'otp'
-                                    ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
+                                    ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-sm'
                                     : 'text-gray-500 dark:text-gray-400'
                                 }`}
                         >
@@ -199,7 +199,7 @@ const Register = () => {
                         <button
                             onClick={() => { setAuthMode('email'); setError(''); }}
                             className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'email'
-                                    ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
+                                    ? 'bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 shadow-sm'
                                     : 'text-gray-500 dark:text-gray-400'
                                 }`}
                         >
@@ -228,7 +228,7 @@ const Register = () => {
                                                 value={otpName}
                                                 onChange={(e) => setOtpName(e.target.value)}
                                                 placeholder="Your full name"
-                                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
                                                 required
                                             />
                                         </div>
@@ -245,7 +245,7 @@ const Register = () => {
                                                 value={otpPhone}
                                                 onChange={(e) => setOtpPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                                                 placeholder="98765 43210"
-                                                className="w-full pl-16 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white text-lg tracking-wider"
+                                                className="w-full pl-16 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white text-lg tracking-wider"
                                                 required
                                                 maxLength={10}
                                             />
@@ -253,19 +253,19 @@ const Register = () => {
                                     </div>
 
                                     <label className="flex items-start gap-3 cursor-pointer">
-                                        <input type="checkbox" className="w-4 h-4 mt-1 text-indigo-600 rounded" required />
+                                        <input type="checkbox" className="w-4 h-4 mt-1 text-primary-600 rounded" required />
                                         <span className="text-sm text-gray-600 dark:text-gray-400">
                                             I agree to the{' '}
-                                            <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Service</Link>
+                                            <Link to="/terms" className="text-primary-600 dark:text-primary-400 hover:underline">Terms of Service</Link>
                                             {' '}and{' '}
-                                            <Link to="/privacy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
+                                            <Link to="/privacy" className="text-primary-600 dark:text-primary-400 hover:underline">Privacy Policy</Link>
                                         </span>
                                     </label>
 
                                     <button
                                         type="submit"
                                         disabled={loading || otpPhone.replace(/\D/g, '').length !== 10 || !otpName.trim()}
-                                        className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                        className="w-full py-3.5 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                     >
                                         {loading ? (
                                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -280,8 +280,8 @@ const Register = () => {
                             ) : (
                                 <div className="space-y-6">
                                     <div className="text-center">
-                                        <div className="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <Smartphone className="text-indigo-600 dark:text-indigo-400" size={28} />
+                                        <div className="w-16 h-16 bg-primary-50 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <Smartphone className="text-primary-600 dark:text-primary-400" size={28} />
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                                             We've sent a 6-digit OTP to
@@ -302,7 +302,7 @@ const Register = () => {
                                                 value={digit}
                                                 onChange={(e) => handleOtpChange(index, e.target.value)}
                                                 onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                                                className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-200 dark:border-slate-700 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                                                className="w-12 h-14 text-center text-xl font-bold border-2 border-gray-200 dark:border-slate-700 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 outline-none transition-all bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
                                             />
                                         ))}
                                     </div>
@@ -310,7 +310,7 @@ const Register = () => {
                                     <button
                                         onClick={() => handleVerifyOtp(otp.join(''))}
                                         disabled={loading || otp.some(d => !d)}
-                                        className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                        className="w-full py-3.5 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                                     >
                                         {loading ? (
                                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -325,7 +325,7 @@ const Register = () => {
                                     <div className="flex items-center justify-between text-sm">
                                         <button
                                             onClick={() => { setOtpSent(false); setError(''); }}
-                                            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 transition-colors"
+                                            className="text-gray-500 dark:text-gray-400 hover:text-primary-600 transition-colors"
                                         >
                                             Change number
                                         </button>
@@ -334,7 +334,7 @@ const Register = () => {
                                         ) : (
                                             <button
                                                 onClick={handleSendOtp}
-                                                className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
+                                                className="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
                                             >
                                                 Resend OTP
                                             </button>
@@ -353,7 +353,7 @@ const Register = () => {
                                     type="button"
                                     onClick={() => setFormData({ ...formData, role: 'consumer' })}
                                     className={`flex-1 py-3 rounded-xl border-2 font-medium transition-all ${formData.role === 'consumer'
-                                        ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400'
+                                        ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
                                         : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-400'
                                         }`}
                                 >
@@ -363,7 +363,7 @@ const Register = () => {
                                     type="button"
                                     onClick={() => setFormData({ ...formData, role: 'provider' })}
                                     className={`flex-1 py-3 rounded-xl border-2 font-medium transition-all ${formData.role === 'provider'
-                                        ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400'
+                                        ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
                                         : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-400'
                                         }`}
                                 >
@@ -376,7 +376,7 @@ const Register = () => {
                                 <div className="relative">
                                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                                     <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe"
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
                                 </div>
                             </div>
 
@@ -385,7 +385,7 @@ const Register = () => {
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                                     <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="you@example.com"
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
                                 </div>
                             </div>
 
@@ -394,7 +394,7 @@ const Register = () => {
                                 <div className="relative">
                                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                                     <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210"
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" />
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" />
                                 </div>
                             </div>
 
@@ -403,7 +403,7 @@ const Register = () => {
                                 <div className="relative">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                                     <input type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} placeholder="••••••••"
-                                        className="w-full pl-12 pr-12 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
+                                        className="w-full pl-12 pr-12 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
                                     <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
                                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                     </button>
@@ -415,24 +415,24 @@ const Register = () => {
                                 <div className="relative">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                                     <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="••••••••"
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white" required />
                                 </div>
                             </div>
 
                             <label className="flex items-start gap-3 cursor-pointer">
-                                <input type="checkbox" className="w-4 h-4 mt-1 text-indigo-600 rounded" required />
+                                <input type="checkbox" className="w-4 h-4 mt-1 text-primary-600 rounded" required />
                                 <span className="text-sm text-gray-600 dark:text-gray-400">
                                     I agree to the{' '}
-                                    <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Service</Link>
+                                    <Link to="/terms" className="text-primary-600 dark:text-primary-400 hover:underline">Terms of Service</Link>
                                     {' '}and{' '}
-                                    <Link to="/privacy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
+                                    <Link to="/privacy" className="text-primary-600 dark:text-primary-400 hover:underline">Privacy Policy</Link>
                                 </span>
                             </label>
 
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                className="w-full py-3 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -448,7 +448,7 @@ const Register = () => {
 
                     <p className="mt-8 text-center text-gray-600 dark:text-gray-400">
                         Already have an account?{' '}
-                        <Link to="/login" className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
+                        <Link to="/login" className="text-primary-600 dark:text-primary-400 font-semibold hover:underline">
                             Sign in
                         </Link>
                     </p>

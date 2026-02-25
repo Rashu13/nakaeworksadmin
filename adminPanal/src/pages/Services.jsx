@@ -129,7 +129,7 @@ const Services = () => {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+                                className="w-full pl-12 pr-4 py-3 border border-gray-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-600 focus:border-transparent outline-none bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
                             />
                         </div>
 
@@ -140,7 +140,7 @@ const Services = () => {
                                     key={cat}
                                     onClick={() => setFilters({ ...filters, category: cat })}
                                     className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${filters.category === cat
-                                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-indigo-900/20'
+                                        ? 'bg-primary-600 text-white shadow-lg shadow-primary-200 dark:shadow-primary-900/20'
                                         : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'
                                         }`}
                                 >
@@ -161,13 +161,13 @@ const Services = () => {
                             <div className="flex border border-gray-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
                                 <button
                                     onClick={() => setViewMode('grid')}
-                                    className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
+                                    className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                                 >
                                     <Grid size={18} />
                                 </button>
                                 <button
                                     onClick={() => setViewMode('list')}
-                                    className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
+                                    className={`p-2 transition-colors ${viewMode === 'list' ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                                 >
                                     <List size={18} />
                                 </button>
@@ -201,7 +201,7 @@ const Services = () => {
                             <select
                                 value={filters.sort}
                                 onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
-                                className="w-full p-3 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                                className="w-full p-3 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-primary-500"
                             >
                                 {sortOptions.map((opt) => (
                                     <option key={opt.value} value={opt.value} className="bg-white dark:bg-slate-900">{opt.label}</option>
@@ -221,13 +221,13 @@ const Services = () => {
                                         key={r}
                                         onClick={() => setFilters({ ...filters, rating: r })}
                                         className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border transition-all ${filters.rating === r
-                                            ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 font-bold'
-                                            : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-400 hover:border-indigo-400 dark:hover:border-indigo-500'
+                                            ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
+                                            : 'border-gray-200 dark:border-slate-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-500'
                                             }`}
                                     >
                                         {r > 0 ? (
                                             <>
-                                                <Star size={14} className={filters.rating === r ? 'fill-indigo-600' : 'fill-yellow-400 text-yellow-400'} />
+                                                <Star size={14} className={filters.rating === r ? 'fill-primary-600' : 'fill-yellow-400 text-yellow-400'} />
                                                 <span>{r}</span>
                                             </>
                                         ) : 'All'}
@@ -238,7 +238,7 @@ const Services = () => {
 
                         <button
                             onClick={() => setShowFilters(false)}
-                            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-lg shadow-indigo-200 dark:shadow-none transition-all"
+                            className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold shadow-lg shadow-primary-200 dark:shadow-none transition-all"
                         >
                             Apply Filters
                         </button>
@@ -253,13 +253,13 @@ const Services = () => {
                     <p className="text-gray-600 dark:text-gray-400">
                         Showing <span className="font-bold text-gray-900 dark:text-white">{filteredServices.length}</span> services
                         {filters.category !== 'All' && (
-                            <> in <span className="text-indigo-600 dark:text-indigo-400 font-medium">{filters.category}</span></>
+                            <> in <span className="text-primary-600 dark:text-primary-400 font-medium">{filters.category}</span></>
                         )}
                     </p>
                     <select
                         value={filters.sort}
                         onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
-                        className="hidden md:block px-4 py-2 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
+                        className="hidden md:block px-4 py-2 border border-gray-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 outline-none focus:ring-2 focus:ring-primary-500 transition-all font-medium"
                     >
                         {sortOptions.map((opt) => (
                             <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -295,7 +295,7 @@ const Services = () => {
                                 setSearchTerm('');
                                 setFilters({ ...filters, category: 'All', search: '', rating: 0 });
                             }}
-                            className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium"
+                            className="px-6 py-3 bg-primary-600 text-white rounded-xl font-medium"
                         >
                             Clear Filters
                         </button>

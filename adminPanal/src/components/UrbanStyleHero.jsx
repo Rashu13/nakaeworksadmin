@@ -38,7 +38,7 @@ export default function UrbanStyleHero() {
         }
         const slug = category.slug?.toLowerCase() || category.name?.toLowerCase() || 'default';
         const IconComponent = iconMap[slug] || iconMap['default'];
-        return <IconComponent size={26} strokeWidth={1.5} className="group-hover:text-orange-500 transition-colors duration-300" />;
+        return <IconComponent size={26} strokeWidth={1.5} className="group-hover:text-primary-500 transition-colors duration-300" />;
     };
 
     const containerVariants = {
@@ -61,7 +61,7 @@ export default function UrbanStyleHero() {
     return (
         <div className="relative w-full bg-[#0a0f1c] pt-28 pb-24 overflow-hidden">
             {/* Abstract Background Decorations */}
-            <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 lg:flex lg:items-center lg:gap-16 relative z-10">
@@ -78,7 +78,7 @@ export default function UrbanStyleHero() {
                         className="text-5xl md:text-6xl lg:text-[72px] font-extrabold text-white leading-[1.05] tracking-tight mb-8"
                     >
                         Expert services,<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-200">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-200">
                             at your doorstep
                         </span>
                     </motion.h1>
@@ -95,7 +95,7 @@ export default function UrbanStyleHero() {
                         variants={itemVariants}
                         className="relative max-w-xl mb-12 group"
                     >
-                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-orange-300 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-primary-300 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
@@ -107,7 +107,7 @@ export default function UrbanStyleHero() {
                             className="relative flex items-center bg-[#161b22] border border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl"
                         >
                             <div className="pl-6 text-gray-500">
-                                <Search size={22} className="group-focus-within:text-orange-500 transition-colors" />
+                                <Search size={22} className="group-focus-within:text-primary-500 transition-colors" />
                             </div>
                             <input
                                 name="search"
@@ -117,7 +117,7 @@ export default function UrbanStyleHero() {
                             />
                             <button
                                 type="submit"
-                                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-orange-500/20 active:scale-95"
+                                className="bg-primary-500 hover:bg-primary-600 text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95"
                             >
                                 Search
                             </button>
@@ -136,7 +136,7 @@ export default function UrbanStyleHero() {
 
                         {isLoading ? (
                             <div className="flex justify-center py-10">
-                                <div className="w-10 h-10 border-4 border-white/5 border-t-orange-400 rounded-full animate-spin"></div>
+                                <div className="w-10 h-10 border-4 border-white/5 border-t-primary-400 rounded-full animate-spin"></div>
                             </div>
                         ) : isError ? (
                             <div className="text-red-400 py-4 text-center bg-red-400/10 rounded-lg border border-red-400/20">
@@ -152,13 +152,13 @@ export default function UrbanStyleHero() {
                                         className="flex flex-col items-center justify-start cursor-pointer group"
                                         onClick={() => navigate(`/services?category=${category.slug || category.name}`)}
                                     >
-                                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-orange-500/10 group-hover:border-orange-500/30 mb-3 relative overflow-hidden">
+                                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-primary-500/10 group-hover:border-primary-500/30 mb-3 relative overflow-hidden">
                                             {/* Glow effect on hover */}
-                                            <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-300" />
+                                            <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/5 transition-colors duration-300" />
 
                                             {/* 'New' Badge */}
                                             {index === 1 && (
-                                                <span className="absolute top-0 right-0 bg-orange-500 text-black text-[9px] font-black px-1.5 py-0.5 rounded-bl-lg shadow-sm">
+                                                <span className="absolute top-0 right-0 bg-primary-500 text-black text-[9px] font-black px-1.5 py-0.5 rounded-bl-lg shadow-sm">
                                                     NEW
                                                 </span>
                                             )}
@@ -222,7 +222,7 @@ export default function UrbanStyleHero() {
                             </motion.div>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="h-[200px] rounded-3xl overflow-hidden bg-orange-500/20 flex items-center justify-center border border-white/10 relative group"
+                                className="h-[200px] rounded-3xl overflow-hidden bg-primary-500/20 flex items-center justify-center border border-white/10 relative group"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&w=600&q=80"
@@ -230,7 +230,7 @@ export default function UrbanStyleHero() {
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                                 />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
-                                    <Sparkles className="mb-2 text-orange-400 group-hover:rotate-12 transition-transform duration-300" size={32} />
+                                    <Sparkles className="mb-2 text-primary-400 group-hover:rotate-12 transition-transform duration-300" size={32} />
                                     <span className="font-bold text-lg">Verified Help</span>
                                     <span className="text-xs text-white/70">Top rated pros only</span>
                                 </div>

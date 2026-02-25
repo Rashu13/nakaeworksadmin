@@ -69,7 +69,7 @@ const RefundPolicy = () => {
                         {/* 3. Disputes */}
                         <section>
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-orange-100 rounded-lg text-orange-600">
+                                <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
                                     <AlertCircle size={24} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">3. Disputes</h2>
