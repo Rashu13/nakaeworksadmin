@@ -62,8 +62,8 @@ public class ReviewsController : ControllerBase
         {
             BookingId = dto.BookingId,
             ConsumerId = userId,
-            ProviderId = booking.ProviderId ?? 0,
-            ServiceId = booking.ServiceId,
+            ProviderId = booking.ProviderId,
+            ServiceId = booking.ServiceId ?? 0,
             Rating = dto.Rating,
             Comment = dto.Comment,
             CreatedAt = DateTime.UtcNow
