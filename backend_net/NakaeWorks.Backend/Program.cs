@@ -5,6 +5,10 @@ using NakaeWorks.Backend.Data;
 using NakaeWorks.Backend.Models;
 using System.Text;
 
+// 0. Npgsql DateTime Handling (Fixes 500 errors with UTC timestamps)
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -312,6 +316,7 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
