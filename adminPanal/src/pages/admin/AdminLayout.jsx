@@ -51,35 +51,40 @@ const AdminLayout = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
+        <div className="min-h-screen bg-[#f8fafc] dark:bg-[#020617] transition-colors duration-500">
             {/* Sidebar */}
-            <aside className={`fixed inset-y-0 left-0 z-50 ${sidebarOpen ? 'w-64' : 'w-20'} bg-gray-900 dark:bg-slate-950 transition-all duration-300`}>
-                {/* Logo */}
-                <div className="h-16 flex items-center justify-between px-4 border-b border-gray-800 dark:border-slate-800">
-                    <Link to="/admin" className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-purple-600 flex items-center justify-center">
-                            <span className="text-slate-900 dark:text-white font-bold text-xl">N</span>
+            <aside className={`fixed inset-y-0 left-0 z-50 ${sidebarOpen ? 'w-72' : 'w-24'} bg-white dark:bg-[#0f172a] transition-all duration-500 border-r border-gray-200/60 dark:border-white/5 shadow-[20px_0_40px_rgba(0,0,0,0.02)] dark:shadow-none`}>
+                {/* Logo Section */}
+                <div className="h-20 flex items-center justify-between px-6 mb-4">
+                    <Link to="/admin" className="flex items-center gap-4 group">
+                        <div className="w-12 h-12 rounded-[1.25rem] bg-gradient-to-br from-[#1c3866] to-[#2d4d80] flex items-center justify-center shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform duration-500">
+                            <span className="text-white font-black text-2xl tracking-tighter">N</span>
                         </div>
-                        {sidebarOpen && <span className="text-slate-900 dark:text-white font-bold text-lg">Admin Panel</span>}
+                        {sidebarOpen && (
+                            <div className="flex flex-col">
+                                <span className="text-gray-900 dark:text-white font-black text-lg tracking-tight leading-none uppercase">NAKAE</span>
+                                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[3px] mt-1">Strategic Command</span>
+                            </div>
+                        )}
                     </Link>
                     <button
                         onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className="text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-white lg:hidden"
+                        className="text-gray-400 hover:text-gray-900 dark:hover:text-white lg:hidden"
                     >
                         {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
 
-                {/* Menu */}
-                <nav className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-180px)] custom-scrollbar">
+                {/* Navigation Menu */}
+                <nav className="px-4 py-4 space-y-8 overflow-y-auto max-h-[calc(100vh-180px)] custom-scrollbar">
                     {menuItems.map((section, idx) => (
-                        <div key={idx}>
+                        <div key={idx} className="space-y-2">
                             {sidebarOpen && section.section && (
-                                <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4">
+                                <h3 className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[4px] px-4 mb-4">
                                     {section.section}
                                 </h3>
                             )}
-                            <div className="space-y-1">
+                            <div className="space-y-1.5">
                                 {section.items.map((item) => {
                                     const Icon = item.icon;
                                     const isActive = location.pathname === item.path;
@@ -88,13 +93,13 @@ const AdminLayout = () => {
                                         <Link
                                             key={item.path}
                                             to={item.path}
-                                            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all ${isActive
-                                                ? 'bg-primary-600 text-slate-900 dark:text-white shadow-lg shadow-primary-500/30'
-                                                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-800 hover:text-slate-900 dark:text-white'
+                                            className={`flex items-center gap-4 px-5 py-3.5 rounded-2xl transition-all duration-300 group relative ${isActive
+                                                ? 'bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400 shadow-sm shadow-primary-500/10'
+                                                : 'text-gray-500 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5'
                                                 }`}
                                         >
-                                            <Icon size={20} className={isActive ? 'text-slate-900 dark:text-white' : 'text-gray-600 dark:text-gray-400 group-hover:text-slate-900 dark:text-white'} />
-                                            {sidebarOpen && <span className="font-medium text-sm">{item.name}</span>}
+                                            <Icon size={22} className={`${isActive ? 'text-primary-600 dark:text-primary-400 scale-110' : 'text-gray-400 group-hover:scale-110'} transition-transform duration-300`} />
+                                            {sidebarOpen && <span className="font-bold text-sm tracking-tight">{item.name}</span>}
                                         </Link>
                                     );
                                 })}
@@ -103,85 +108,105 @@ const AdminLayout = () => {
                     ))}
                 </nav>
 
-                {/* Bottom */}
-                <div className="absolute bottom-4 left-4 right-4">
+                {/* Logout Action */}
+                <div className="absolute bottom-8 left-4 right-4">
                     <button
                         onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-3 w-full text-gray-600 dark:text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-xl transition-all"
+                        className="flex items-center gap-4 px-6 py-4 w-full text-gray-500 dark:text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-2xl transition-all duration-300 group"
                     >
-                        <LogOut size={20} />
-                        {sidebarOpen && <span className="font-medium">Logout</span>}
+                        <LogOut size={22} className="group-hover:translate-x-1 transition-transform" />
+                        {sidebarOpen && <span className="font-bold text-sm tracking-tight uppercase tracking-[2px]">Systems Logout</span>}
                     </button>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <div className={`${sidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300`}>
-                {/* Top Header */}
-                <header className="h-16 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40 transition-colors duration-300">
-                    <button
-                        onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className="text-gray-600 dark:text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-slate-900 dark:text-white"
-                    >
-                        <Menu size={24} />
-                    </button>
+            {/* Main Operational Surface */}
+            <div className={`${sidebarOpen ? 'ml-72' : 'ml-24'} transition-all duration-500`}>
+                {/* Tactical Header */}
+                <header className="h-20 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-gray-200/60 dark:border-white/5 flex items-center justify-between px-10 sticky top-0 z-40 transition-all duration-500">
+                    <div className="flex items-center gap-8">
+                        <button
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            className="p-3 text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5 rounded-2xl transition-all"
+                        >
+                            <Menu size={24} />
+                        </button>
+                    </div>
 
-                    <div className="flex items-center gap-4">
-                        {/* Theme Toggle */}
+                    <div className="flex items-center gap-6">
+                        {/* Status Grid */}
+                        <div className="hidden lg:flex items-center gap-4 mr-6 pr-6 border-r border-gray-100 dark:border-white/5">
+                            <div className="flex flex-col items-end">
+                                <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">Network Secure</span>
+                                <span className="text-[8px] font-bold text-gray-400 dark:text-gray-500 uppercase">Gateway 4.2.1-X</span>
+                            </div>
+                        </div>
+
+                        {/* Theme Controller */}
                         <button
                             onClick={toggleTheme}
-                            className="p-2 text-gray-600 dark:text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-100 dark:bg-slate-800 rounded-lg transition-colors"
+                            className="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-gray-100 dark:hover:bg-white/5 rounded-2xl transition-all bg-gray-50/50 dark:bg-white/5 border border-gray-100 dark:border-white/5"
                         >
                             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
 
-                        {/* Notifications */}
-                        <button className="relative p-2 text-gray-600 dark:text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-100 dark:bg-slate-800 rounded-lg">
+                        {/* Intel Notifications */}
+                        <button className="relative w-12 h-12 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-gray-100 dark:hover:bg-white/5 rounded-2xl transition-all bg-gray-50/50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
                             <Bell size={20} />
-                            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                            <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-[#0f172a] animate-pulse"></span>
                         </button>
 
-                        {/* User Menu */}
-                        <div className="relative">
+                        {/* Command Profile */}
+                        <div className="relative group/user">
                             <button
                                 onClick={() => setShowUserMenu(!showUserMenu)}
-                                className="flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-gray-100 dark:bg-slate-800 p-2 rounded-lg transition-colors"
+                                className="flex items-center gap-4 pl-2 pr-4 py-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-[1.25rem] transition-all border border-transparent hover:border-gray-200/60 dark:hover:border-white/10"
                             >
-                                <img
-                                    src={`https://ui-avatars.com/api/?name=${user?.name || 'Admin'}&background=6366f1&color=fff`}
-                                    alt="Admin"
-                                    className="w-8 h-8 rounded-full"
-                                />
-                                <span className="font-medium text-gray-700 dark:text-gray-200">{user?.name || 'Admin'}</span>
-                                <ChevronDown size={16} className="text-gray-600 dark:text-gray-400" />
+                                <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-100 dark:border-white/20">
+                                    <img
+                                        src={`https://ui-avatars.com/api/?name=${user?.name || 'Admin'}&background=1c3866&color=fff&bold=true`}
+                                        alt="Admin"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="hidden md:flex flex-col items-start translate-y-[-1px]">
+                                    <span className="font-black text-sm text-gray-900 dark:text-white tracking-tight leading-none truncate max-w-[100px]">{user?.name?.toUpperCase() || 'MASTER ADMIN'}</span>
+                                    <span className="text-[9px] font-bold text-primary-500 uppercase tracking-[2px] mt-1">Superuser</span>
+                                </div>
+                                <ChevronDown size={14} className={`text-gray-400 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} />
                             </button>
 
                             {showUserMenu && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-gray-100 dark:border-slate-800 py-2 z-50">
-                                    <Link to="/admin/profile" className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-200">
-                                        <User size={16} />
-                                        Profile
+                                <div className="absolute right-0 mt-4 w-64 bg-white dark:bg-[#0f172a] rounded-3xl shadow-2xl border border-gray-100 dark:border-white/10 py-3 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                                    <div className="px-6 py-4 border-b border-gray-50 dark:border-white/5 mb-2">
+                                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[3px] mb-1">Authenticated As</p>
+                                        <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{user?.email}</p>
+                                    </div>
+                                    <Link to="/admin/profile" className="flex items-center gap-3 px-6 py-3 hover:bg-gray-50 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 text-sm font-bold transition-colors">
+                                        <User size={18} className="text-gray-400" />
+                                        Protocol Profile
                                     </Link>
-                                    <Link to="/admin/settings" className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-200">
-                                        <Settings size={16} />
-                                        Settings
+                                    <Link to="/admin/settings" className="flex items-center gap-3 px-6 py-3 hover:bg-gray-50 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 text-sm font-bold transition-colors">
+                                        <Settings size={18} className="text-gray-400" />
+                                        System Configuration
                                     </Link>
-                                    <hr className="my-2 border-gray-100 dark:border-slate-800" />
-                                    <button
-                                        onClick={handleLogout}
-                                        className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 text-red-600 w-full"
-                                    >
-                                        <LogOut size={16} />
-                                        Logout
-                                    </button>
+                                    <div className="px-4 mt-2">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-3 w-full px-4 py-3 bg-red-500/5 hover:bg-red-500 text-red-500 hover:text-white rounded-2xl text-sm font-black uppercase tracking-[2px] transition-all group"
+                                        >
+                                            <LogOut size={18} className="group-hover:-translate-x-1 transition-transform" />
+                                            Terminate Session
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                         </div>
                     </div>
                 </header>
 
-                {/* Page Content */}
-                <main className="p-6">
+                {/* Tactical Surface */}
+                <main className="p-10 max-w-[1600px] mx-auto">
                     <Outlet />
                 </main>
             </div>

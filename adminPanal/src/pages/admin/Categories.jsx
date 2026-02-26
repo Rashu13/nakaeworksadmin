@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Pencil, Trash2, X, Search, Check, AlertCircle, Upload } from 'lucide-react';
-import { adminService, uploadService } from '../../services/api';
-import ConfirmationModal from '../../components/ConfirmationModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Categories = () => {
+    // ... existing state ...
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
@@ -31,7 +29,6 @@ const Categories = () => {
             const data = await adminService.getCategories();
             setCategories(data);
         } catch (error) {
-            // Demo data if API fails
             setCategories([
                 { id: 1, name: 'Cleaning', slug: 'cleaning', icon: 'sparkles', description: 'Home cleaning services', status: true },
                 { id: 2, name: 'Electrician', slug: 'electrician', icon: 'zap', description: 'Electrical repair services', status: true },
@@ -70,7 +67,6 @@ const Categories = () => {
 
     const handleDelete = async () => {
         if (!categoryToDelete) return;
-
         try {
             await adminService.deleteCategory(categoryToDelete);
             setSuccess('Category deleted successfully!');
@@ -109,109 +105,123 @@ const Categories = () => {
         cat.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const iconOptions = [
-        'sparkles', 'zap', 'droplet', 'hammer', 'paintbrush', 'scissors',
-        'car', 'Lock', 'home', 'wrench', 'thermometer', 'wind'
-    ];
-
     return (
-        <div>
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="space-y-8 pb-20">
+            {/* Header Strategy */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Categories</h1>
-                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Manage service categories</p>
+                    <div className="flex items-center gap-3 mb-2">
+                        <span className="w-8 h-[2px] bg-primary-500"></span>
+                        <span className="text-[10px] font-black text-primary-500 uppercase tracking-[4px]">Operations Index</span>
+                    </div>
+                    <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">Category <span className="text-primary-500">Archives</span></h1>
+                    <p className="text-gray-500 dark:text-gray-500 text-sm font-bold mt-2 uppercase tracking-[1px]">Manage and classify professional service protocols.</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-[1.25rem] font-black text-sm uppercase tracking-[2px] shadow-lg shadow-primary-500/20 transition-all hover:scale-105 active:scale-95"
                 >
                     <Plus size={20} />
-                    Add Category
+                    Deploy New Category
                 </button>
             </div>
 
-            {/* Alerts */}
-            {error && (
-                <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-xl flex items-center gap-2">
-                    <AlertCircle size={20} />
-                    {error}
-                </div>
-            )}
-            {success && (
-                <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-600 dark:text-green-400 rounded-xl flex items-center gap-2">
-                    <Check size={20} />
-                    {success}
-                </div>
-            )}
+            {/* Notification Surface */}
+            <AnimatePresence>
+                {(error || success) && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className={`p-5 rounded-[1.5rem] border ${error ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'} flex items-center gap-4`}
+                    >
+                        {error ? <AlertCircle size={20} /> : <Check size={20} />}
+                        <p className="text-[10px] font-black uppercase tracking-[2px]">{error || success}</p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-            {/* Search */}
-            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
-                <div className="p-4 border-b border-gray-100 dark:border-slate-700">
-                    <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
+            {/* Search Grid */}
+            <div className="bg-white dark:bg-white/5 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-white/10 overflow-hidden">
+                <div className="p-8 border-b border-gray-100 dark:border-white/5 relative bg-gray-50/30 dark:bg-transparent">
+                    <div className="relative group">
+                        <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary-500 transition-colors" size={22} />
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search categories..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                            placeholder="FILTER REGISTRY BY NAME OR PROTOCOL..."
+                            className="w-full pl-16 pr-8 py-5 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white placeholder-gray-400 text-xs font-black tracking-[1px] transition-all"
                         />
                     </div>
                 </div>
 
-                {/* Table */}
+                {/* Registry Table */}
                 <div className="overflow-x-auto">
                     <table className="w-full">
-                        <thead className="bg-gray-50 dark:bg-slate-700/50">
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Name</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Slug</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Icon</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Status</th>
-                                <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 uppercase">Actions</th>
+                        <thead>
+                            <tr className="text-left text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[3px]">
+                                <th className="py-8 px-8">Identifier</th>
+                                <th className="py-8 px-8">Registry Slug</th>
+                                <th className="py-8 px-8">Visual Index</th>
+                                <th className="py-8 px-8">Authorization</th>
+                                <th className="py-8 px-8 text-right">System Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                        <tbody className="divide-y divide-gray-50 dark:divide-white/5">
                             {loading ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                    <td colSpan="5" className="py-20 text-center">
+                                        <div className="w-10 h-10 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[3px] mt-4">Retrieving Archives...</p>
                                     </td>
                                 </tr>
                             ) : filteredCategories.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-10 text-center text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">
-                                        No categories found
+                                    <td colSpan="5" className="py-20 text-center bg-gray-50/50 dark:bg-white/[0.01]">
+                                        <div className="max-w-[200px] mx-auto opacity-20 filter grayscale mb-6">
+                                            <Search size={64} className="mx-auto" />
+                                        </div>
+                                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[3px]">Zero match in registry frequency</p>
                                     </td>
                                 </tr>
                             ) : (
                                 filteredCategories.map((category) => (
-                                    <tr key={category.id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
-                                        <td className="px-6 py-4">
-                                            <span className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">{category.name}</span>
+                                    <tr key={category.id} className="group hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
+                                        <td className="py-6 px-8">
+                                            <span className="font-black text-gray-900 dark:text-white text-sm tracking-tight">{category.name}</span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{category.slug}</td>
-                                        <td className="px-6 py-4 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{category.icon || '-'}</td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${category.status === true
-                                                ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-                                                : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-700 dark:text-gray-300'
-                                                }`}>
-                                                {category.status === true ? 'Active' : 'Inactive'}
-                                            </span>
+                                        <td className="py-6 px-8">
+                                            <code className="text-[10px] font-bold text-primary-500 bg-primary-500/5 px-2 py-1 rounded-md uppercase tracking-wider">{category.slug}</code>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center justify-end gap-2">
+                                        <td className="py-6 px-8">
+                                            {category.icon ? (
+                                                <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-100 dark:border-white/10 group-hover:scale-110 transition-transform">
+                                                    <img src={category.icon} alt={category.name} className="w-full h-full object-cover" />
+                                                </div>
+                                            ) : (
+                                                <span className="text-gray-400 italic text-[10px]">NO VISUAL</span>
+                                            )}
+                                        </td>
+                                        <td className="py-6 px-8">
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-2 h-2 rounded-full ${category.status ? 'bg-emerald-500 animate-pulse' : 'bg-gray-400'}`} />
+                                                <span className={`text-[10px] font-black uppercase tracking-widest ${category.status ? 'text-emerald-500' : 'text-gray-400'}`}>
+                                                    {category.status ? 'AUTHORIZED' : 'DEACTIVATED'}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td className="py-6 px-8">
+                                            <div className="flex items-center justify-end gap-3">
                                                 <button
                                                     onClick={() => openModal(category)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
+                                                    className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary-500 hover:bg-primary-500/10 rounded-xl transition-all"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => confirmDelete(category.id)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                                                    className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
                                                 >
                                                     <Trash2 size={18} />
                                                 </button>
@@ -225,191 +235,163 @@ const Categories = () => {
                 </div>
             </div>
 
-            {/* Modal */}
-            {showModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeModal}></div>
-                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 border border-gray-100 dark:border-slate-700 shadow-xl">
-                        <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-900 dark:text-white">
-                                {editingCategory ? 'Edit Category' : 'Add Category'}
-                            </h2>
-                            <button onClick={closeModal} className="text-gray-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-700 dark:text-gray-300">
-                                <X size={24} />
-                            </button>
-                        </div>
+            {/* Premium Modal Surface */}
+            <AnimatePresence>
+                {showModal && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-gray-900/60 backdrop-blur-md"
+                            onClick={closeModal}
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="relative bg-white dark:bg-[#0f172a] rounded-[3rem] w-full max-w-xl p-10 border border-gray-100 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 blur-[80px] pointer-events-none" />
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
-                                    Category Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    placeholder="e.g., Home Cleaning"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
-                                    Category Icon / Image
-                                </label>
-
-                                <div className="space-y-3">
-                                    {/* Preview */}
-                                    {formData.icon && (
-                                        <div className="flex items-center gap-4 p-3 border border-gray-100 dark:border-slate-700 rounded-xl bg-gray-50 dark:bg-slate-700/50">
-                                            {formData.icon.startsWith('http') || formData.icon.includes('/') ? (
-                                                <img
-                                                    src={formData.icon}
-                                                    alt="Category Icon"
-                                                    className="w-12 h-12 object-cover rounded-lg bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600"
-                                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
-                                                />
-                                            ) : (
-                                                <div className="w-12 h-12 flex items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-primary-600 dark:text-primary-400">
-                                                    {/* Fallback for simple icon names if any */}
-                                                    <span className="text-xs font-bold">{formData.icon}</span>
-                                                </div>
-                                            )}
-                                            {/* Fallback hidden img */}
-                                            <div className="hidden w-12 h-12 items-center justify-center bg-white dark:bg-slate-600 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-600 dark:text-gray-400">
-                                                <AlertCircle size={20} />
-                                            </div>
-
-                                            <div className="flex-1 overflow-hidden">
-                                                <p className="text-sm font-medium text-gray-900 dark:text-slate-900 dark:text-white truncate">{formData.icon.split('/').pop()}</p>
-                                                <p className="text-xs text-green-600 dark:text-green-400">Image successfully linked</p>
-                                            </div>
-
-                                            <button
-                                                type="button"
-                                                onClick={() => setFormData({ ...formData, icon: '' })}
-                                                className="p-1 hover:bg-red-50 dark:hover:bg-red-900/30 text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full transition-colors"
-                                            >
-                                                <X size={18} />
-                                            </button>
-                                        </div>
-                                    )}
-
-                                    {/* Upload Input */}
-                                    <div className="relative">
-                                        <input
-                                            type="file"
-                                            id="icon-upload"
-                                            className="hidden"
-                                            accept="image/*"
-                                            onChange={async (e) => {
-                                                const file = e.target.files[0];
-                                                if (!file) return;
-
-                                                const uploadData = new FormData();
-                                                uploadData.append('image', file);
-
-                                                try {
-                                                    setUploading(true);
-                                                    const { data } = await uploadService.uploadImage(uploadData);
-                                                    setFormData(prev => ({ ...prev, icon: data.imageUrl }));
-                                                } catch (err) {
-                                                    console.error(err);
-                                                    setAlertConfig({
-                                                        isOpen: true,
-                                                        title: 'Error',
-                                                        message: err.message || 'Error uploading image',
-                                                        type: 'danger'
-                                                    });
-                                                } finally {
-                                                    setUploading(false);
-                                                }
-                                            }}
-                                        />
-                                        <label
-                                            htmlFor="icon-upload"
-                                            className={`flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${uploading
-                                                ? 'border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 cursor-not-allowed'
-                                                : 'border-gray-300 dark:border-slate-600 hover:border-primary-500 dark:hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400'
-                                                }`}
-                                        >
-                                            {uploading ? (
-                                                <>
-                                                    <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-                                                    <span>Uploading...</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <Upload size={20} />
-                                                    <span>{formData.icon ? 'Change Image' : 'Upload Image'}</span>
-                                                </>
-                                            )}
-                                        </label>
-                                    </div>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Supported: JPG, PNG, GIF (Max 5MB)</p>
+                            <div className="flex items-center justify-between mb-10 relative z-10">
+                                <div>
+                                    <p className="text-[10px] font-black text-primary-500 uppercase tracking-[4px] mb-2">Registry Command</p>
+                                    <h2 className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter uppercase whitespace-nowrap">
+                                        {editingCategory ? 'Modify Protocol' : 'Deploy Protocol'}
+                                    </h2>
                                 </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
-                                    Description
-                                </label>
-                                <textarea
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    placeholder="Brief description of the category"
-                                    rows={3}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300 mb-2">
-                                    Status
-                                </label>
-                                <select
-                                    value={formData.status}
-                                    onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
-                                >
-                                    <option value={true}>Active</option>
-                                    <option value={false}>Inactive</option>
-                                </select>
-                            </div>
-
-                            <div className="flex gap-3 pt-4">
-                                <button
-                                    type="button"
-                                    onClick={closeModal}
-                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-xl"
-                                >
-                                    {editingCategory ? 'Update' : 'Create'}
+                                <button onClick={closeModal} className="w-12 h-12 flex items-center justify-center bg-gray-50 dark:bg-white/5 hover:bg-red-500 hover:text-white rounded-2xl transition-all text-gray-400">
+                                    <X size={24} />
                                 </button>
                             </div>
-                        </form>
+
+                            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[2px] ml-1">Protocol Name</label>
+                                    <input
+                                        type="text"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        placeholder="E.G. TECHNICAL REPAIR"
+                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold tracking-tight transition-all"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="space-y-4">
+                                    <label className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[2px] ml-1">Visual Encryption (Icon/Image)</label>
+                                    <div className="space-y-3">
+                                        {formData.icon ? (
+                                            <div className="flex items-center gap-5 p-4 border border-primary-500/20 rounded-2xl bg-primary-500/5">
+                                                <img src={formData.icon} alt="Preview" className="w-14 h-14 object-cover rounded-xl border-2 border-primary-500/30 shadow-lg" />
+                                                <div className="flex-1 overflow-hidden">
+                                                    <p className="text-[10px] font-black text-gray-900 dark:text-white truncate uppercase tracking-[1px]">{formData.icon.split('/').pop()}</p>
+                                                    <p className="text-[8px] font-black text-emerald-500 uppercase tracking-[2px] mt-1">Status: Linked</p>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setFormData({ ...formData, icon: '' })}
+                                                    className="p-2 hover:bg-red-500 hover:text-white text-gray-400 rounded-xl transition-all"
+                                                >
+                                                    <X size={18} />
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div className="relative group">
+                                                <input
+                                                    type="file"
+                                                    id="icon-upload"
+                                                    className="hidden"
+                                                    accept="image/*"
+                                                    onChange={async (e) => {
+                                                        const file = e.target.files[0];
+                                                        if (!file) return;
+                                                        const uploadData = new FormData();
+                                                        uploadData.append('image', file);
+                                                        try {
+                                                            setUploading(true);
+                                                            const { data } = await uploadService.uploadImage(uploadData);
+                                                            setFormData(prev => ({ ...prev, icon: data.imageUrl }));
+                                                        } catch (err) {
+                                                            console.error(err);
+                                                            setAlertConfig({ isOpen: true, title: 'Error', message: 'Encryption Failed', type: 'danger' });
+                                                        } finally {
+                                                            setUploading(false);
+                                                        }
+                                                    }}
+                                                />
+                                                <label
+                                                    htmlFor="icon-upload"
+                                                    className={`flex flex-col items-center justify-center gap-2 w-full py-8 border-2 border-dashed rounded-[2rem] cursor-pointer transition-all ${uploading
+                                                        ? 'bg-gray-50 dark:bg-white/5 border-gray-300'
+                                                        : 'border-gray-200 dark:border-white/10 hover:border-primary-500 hover:bg-primary-500/5'}`}
+                                                >
+                                                    {uploading ? (
+                                                        <div className="w-8 h-8 border-3 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+                                                    ) : (
+                                                        <>
+                                                            <Upload size={32} className="text-gray-300 group-hover:text-primary-500 transition-colors" />
+                                                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-[3px]">Upload Visual Data</span>
+                                                        </>
+                                                    )}
+                                                </label>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[2px] ml-1">Protocol Intelligence (Description)</label>
+                                    <textarea
+                                        value={formData.description}
+                                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                        placeholder="Brief strategic briefing for this category..."
+                                        rows={3}
+                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-medium transition-all"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[2px] ml-1">Access Level</label>
+                                        <select
+                                            value={formData.status}
+                                            onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
+                                            className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold uppercase text-[10px] tracking-[2px] transition-all"
+                                        >
+                                            <option value={true}>AUTHORIZED</option>
+                                            <option value={false}>DEACTIVATED</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex items-end">
+                                        <button
+                                            type="submit"
+                                            className="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-black text-xs uppercase tracking-[3px] rounded-2xl shadow-xl shadow-primary-500/20 transition-all hover:scale-[1.02]"
+                                        >
+                                            {editingCategory ? 'Update Protocol' : 'Sync Protocol'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </motion.div>
                     </div>
-                </div>
-            )}
-            {/* Delete Confirmation Modal */}
+                )}
+            </AnimatePresence>
+
+            {/* Standard Modals */}
             <ConfirmationModal
                 isOpen={deleteModalOpen}
                 onClose={() => setDeleteModalOpen(false)}
                 onConfirm={handleDelete}
-                title="Delete Category?"
-                message="Are you sure you want to delete this category? This action cannot be undone."
-                confirmText="Delete"
-                cancelText="Cancel"
-                icon={<Trash2 size={48} className="text-red-500 mb-4" />}
+                title="Wipe Protocol?"
+                message="This will permanently delete the category from the operational registry. Strategic data loss imminent."
+                confirmText="PURGE"
+                cancelText="ABORT"
+                icon={<Trash2 size={48} className="text-red-500 mb-6" />}
             />
 
-            {/* Alert Modal */}
+            {/* Alert System */}
             <ConfirmationModal
                 isOpen={alertConfig.isOpen}
                 onClose={() => setAlertConfig({ ...alertConfig, isOpen: false })}
@@ -417,7 +399,7 @@ const Categories = () => {
                 title={alertConfig.title}
                 message={alertConfig.message}
                 type={alertConfig.type}
-                confirmText="OK"
+                confirmText="ACKNOWLEDGE"
                 cancelText={null}
             />
         </div>
