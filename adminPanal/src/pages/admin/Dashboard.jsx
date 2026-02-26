@@ -1,27 +1,33 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import {
+    Users, UserCheck, Briefcase, ShoppingBag,
+    TrendingUp, ArrowUp, ArrowDown, DollarSign,
+    Search, Filter, Calendar, MoreVertical
+} from 'lucide-react';
+import { adminService } from '../../services/api';
 
 const StatCard = ({ title, value, icon: Icon, color, trend, trendValue, delay }) => (
     <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay }}
-        className="bg-white dark:bg-white/5 rounded-[2rem] p-8 shadow-xl border border-gray-100 dark:border-white/10 hover:border-primary-500/30 transition-all group relative overflow-hidden"
+        transition={{ duration: 0.3, delay }}
+        className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
     >
-        <div className={`absolute top-0 right-0 w-32 h-32 ${color}/5 blur-[40px] pointer-events-none group-hover:opacity-100 transition-opacity`} />
-        <div className="flex items-start justify-between relative z-10">
-            <div>
-                <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[3px] mb-4">{title}</p>
-                <h3 className="text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{value}</h3>
-                {trend && (
-                    <div className={`flex items-center gap-2 mt-4 inline-flex px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${trend === 'up' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-red-500/10 text-red-500'}`}>
-                        {trend === 'up' ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
-                        <span>{trendValue}% Growth</span>
-                    </div>
-                )}
+        <div className="flex items-center justify-between mb-4">
+            <div className={`p-2.5 rounded-lg ${color.replace('text-', 'bg-')}/10 border ${color.replace('text-', 'border-')}/20`}>
+                <Icon size={20} className={color} />
             </div>
-            <div className={`w-14 h-14 rounded-2xl ${color}/10 border border-${color.split('-')[1]}-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
-                <Icon size={26} className={color.replace('bg-', 'text-')} />
-            </div>
+            {trend && (
+                <div className={`flex items-center gap-1 text-xs font-semibold ${trend === 'up' ? 'text-emerald-600' : 'text-red-500'}`}>
+                    {trend === 'up' ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+                    {trendValue}%
+                </div>
+            )}
+        </div>
+        <div>
+            <p className="text-sm font-medium text-slate-500 mb-1">{title}</p>
+            <h3 className="text-2xl font-bold text-slate-900 tracking-tight">{value}</h3>
         </div>
     </motion.div>
 );
@@ -74,215 +80,198 @@ const AdminDashboard = () => {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center h-[60vh] gap-6">
-                <div className="w-16 h-16 border-4 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-[4px] animate-pulse">Syncing Command Systems...</p>
+            <div className="flex flex-col items-center justify-center h-[60vh] gap-4">
+                <div className="w-10 h-10 border-[3px] border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-sm font-medium text-slate-500">Loading dashboard data...</p>
             </div>
         );
     }
 
     return (
-        <div className="space-y-12">
-            {/* Intel Briefing Header */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex flex-col md:flex-row md:items-end justify-between gap-6"
-            >
+        <div className="space-y-8 pb-10">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span className="w-12 h-[2px] bg-primary-500 rounded-full"></span>
-                        <span className="text-[10px] font-black text-primary-500 uppercase tracking-[4px]">Mission Control Center</span>
-                    </div>
-                    <h1 className="text-6xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">Operations <span className="text-primary-500">Overview</span></h1>
-                    <p className="text-gray-500 dark:text-gray-500 font-medium text-xl mt-4 max-w-xl">Unified command interface for managing NakaeWorks professional deployments.</p>
+                    <h1 className="text-2xl font-bold text-slate-900 mb-1">Dashboard</h1>
+                    <p className="text-slate-500 text-sm">Welcome back! Here's an overview of your platform today.</p>
                 </div>
-                <div className="flex items-center gap-4 bg-white dark:bg-white/5 p-4 rounded-3xl border border-gray-100 dark:border-white/10 shadow-xl">
-                    <div className="text-right">
-                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[2px]">System Time</p>
-                        <p className="text-[10px] font-bold text-gray-900 dark:text-white uppercase mt-1">{new Date().toLocaleTimeString()}</p>
-                    </div>
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                        <TrendingUp size={20} className="text-emerald-500" />
-                    </div>
+                <div className="flex items-center gap-2">
+                    <button className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors flex items-center gap-2">
+                        <Calendar size={16} />
+                        Filter Date
+                    </button>
+                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200">
+                        Generate Report
+                    </button>
                 </div>
-            </motion.div>
+            </div>
 
-            {/* Core Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard
-                    title="Unified Userbase"
+                    title="Total Users"
                     value={stats.totalUsers.toLocaleString()}
                     icon={Users}
-                    color="bg-blue-500"
+                    color="text-blue-600"
                     trend="up"
                     trendValue="12"
                     delay={0.1}
                 />
                 <StatCard
-                    title="Active Operatives"
+                    title="Active Providers"
                     value={stats.totalProviders}
                     icon={UserCheck}
-                    color="bg-emerald-500"
+                    color="text-emerald-600"
                     trend="up"
-                    trendValue="8"
+                    trendValue="5"
                     delay={0.2}
                 />
                 <StatCard
-                    title="Service Protocols"
+                    title="Total Services"
                     value={stats.totalServices}
                     icon={Briefcase}
-                    color="bg-purple-500"
+                    color="text-amber-500"
                     delay={0.3}
                 />
                 <StatCard
-                    title="Total Deployments"
+                    title="Total Bookings"
                     value={stats.totalBookings.toLocaleString()}
                     icon={ShoppingBag}
-                    color="bg-primary-500"
+                    color="text-indigo-600"
                     trend="up"
-                    trendValue="15"
+                    trendValue="8"
                     delay={0.4}
                 />
             </div>
 
-            {/* Strategic Intelligence Blocks */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Revenue Nexus */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="lg:col-span-2 bg-gradient-to-br from-gray-900 to-black dark:from-[#0f172a] dark:to-black rounded-[3rem] p-10 text-white relative overflow-hidden shadow-2xl border border-white/5"
-                >
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary-500/10 blur-[120px] pointer-events-none" />
-                    <div className="relative z-10">
-                        <div className="flex items-center justify-between mb-12">
-                            <div>
-                                <p className="text-[10px] font-black text-primary-500 uppercase tracking-[4px] mb-2">Revenue Nexus</p>
-                                <h3 className="text-4xl font-black tracking-tighter">FINANCIAL SETTLEMENT</h3>
-                            </div>
-                            <div className="w-16 h-16 rounded-[1.5rem] bg-white/5 border border-white/10 flex items-center justify-center">
-                                <DollarSign size={32} className="text-primary-500" />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Main Revenue Card */}
+                <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Financial Analysis</p>
+                            <h3 className="text-xl font-bold text-slate-900 tracking-tight">Revenue Overview</h3>
+                        </div>
+                        <div className="p-3 bg-indigo-50 rounded-xl">
+                            <DollarSign size={24} className="text-indigo-600" />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-end gap-8 mb-8">
+                        <div>
+                            <p className="text-sm font-medium text-slate-500 mb-2">Total Net Income</p>
+                            <div className="flex items-center gap-3">
+                                <span className="text-5xl font-extrabold text-slate-900 tracking-tighter">₹{(stats.totalRevenue || 0).toLocaleString()}</span>
+                                <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-[10px] font-bold">+12.5%</span>
                             </div>
                         </div>
-                        <div className="flex flex-col md:flex-row md:items-end gap-10">
-                            <div>
-                                <p className="text-gray-500 text-[10px] font-black uppercase tracking-[2px] mb-2">Net Accumulation</p>
-                                <div className="flex items-center gap-4">
-                                    <span className="text-7xl font-black text-white tracking-tighter">₹{(stats.totalRevenue || 0).toLocaleString()}</span>
-                                    <div className="px-3 py-1 bg-emerald-500 rounded-full flex items-center gap-1">
-                                        <ArrowUp size={12} className="text-black" />
-                                        <span className="text-[10px] font-black text-black">Verified</span>
-                                    </div>
-                                </div>
+                        <div className="flex-1">
+                            <div className="flex justify-between text-xs font-medium text-slate-500 mb-2">
+                                <span>Target Achievement</span>
+                                <span>82%</span>
                             </div>
-                            <div className="flex-1 space-y-4 pt-10 md:pt-0">
-                                <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div className="h-full bg-primary-500 w-[75%] shadow-[0_0_20px_rgba(59,130,246,0.5)]" />
-                                </div>
-                                <p className="text-[10px] font-black text-gray-400 uppercase tracking-[2px]">Asset Performance Index: 88%</p>
+                            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                <div className="h-full bg-indigo-600 w-[82%]" />
                             </div>
                         </div>
                     </div>
-                </motion.div>
 
-                {/* Efficiency Matrix */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="bg-white dark:bg-white/5 rounded-[3rem] p-10 border border-gray-100 dark:border-white/10 shadow-xl"
-                >
-                    <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[4px] mb-10">Intelligence Matrix</p>
-                    <div className="space-y-8">
+                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+                        <div>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Previous Month</p>
+                            <p className="text-lg font-bold text-slate-900 tracking-tight">₹{(stats.totalRevenue * 0.85).toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Avg Order</p>
+                            <p className="text-lg font-bold text-slate-900 tracking-tight">₹{Math.round(stats.totalRevenue / stats.totalBookings || 0)}</p>
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Growth</p>
+                            <p className="text-lg font-bold text-emerald-600 tracking-tight">+₹{(stats.totalRevenue * 0.15).toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Performance Card */}
+                <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+                    <h3 className="text-lg font-bold text-slate-900 mb-6">Operations List</h3>
+                    <div className="space-y-6">
                         {[
-                            { label: 'Current Cycle Bookings', value: stats.monthlyBookings, color: 'text-gray-900 dark:text-white' },
-                            { label: 'Pending Authorizations', value: stats.pendingBookings, color: 'text-primary-500' },
-                            { label: 'Ticket Optimization', value: `₹${Math.round(stats.totalRevenue / stats.totalBookings || 0)}`, color: 'text-emerald-500' }
+                            { label: 'Monthly Bookings', value: stats.monthlyBookings, total: 200, color: 'bg-indigo-600' },
+                            { label: 'Pending Approvals', value: stats.pendingBookings, total: 50, color: 'bg-amber-500' },
+                            { label: 'Active Sessions', value: 12, total: 30, color: 'bg-emerald-500' }
                         ].map((item, i) => (
-                            <div key={i} className="flex flex-col gap-2">
-                                <div className="flex justify-between items-end">
-                                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-[2px]">{item.label}</span>
-                                    <span className={`text-3xl font-black tracking-tighter ${item.color}`}>{item.value}</span>
+                            <div key={i}>
+                                <div className="flex justify-between items-end mb-2">
+                                    <span className="text-sm font-medium text-slate-500">{item.label}</span>
+                                    <span className="text-lg font-bold text-slate-900">{item.value}</span>
                                 </div>
-                                <div className="h-[1px] w-full bg-gray-100 dark:bg-white/5" />
+                                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div className={`h-full ${item.color}`} style={{ width: `${(item.value / item.total) * 100}%` }} />
+                                </div>
                             </div>
                         ))}
                     </div>
-                </motion.div>
+                    <div className="mt-8 p-4 bg-slate-50 rounded-xl">
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                            System is running within optimal parameters. No critical issues detected.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            {/* Strategic Logbook */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="bg-white dark:bg-white/5 rounded-[3.5rem] p-10 border border-gray-100 dark:border-white/10 shadow-2xl relative overflow-hidden"
-            >
-                <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 blur-[100px] pointer-events-none" />
-                <div className="flex items-center justify-between mb-12 relative z-10">
-                    <div>
-                        <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[4px] mb-2">Strategic Logbook</p>
-                        <h3 className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">RECENT DEPLOYMENTS</h3>
+            {/* Recent Bookings Table */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-slate-900">Recent Transactions</h3>
+                    <div className="flex items-center gap-2">
+                        <button className="text-slate-400 hover:text-slate-600 p-1">
+                            <Search size={18} />
+                        </button>
+                        <button className="text-slate-400 hover:text-slate-600 p-1">
+                            <Filter size={18} />
+                        </button>
+                        <button className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 ml-4">
+                            View All
+                        </button>
                     </div>
-                    <button className="px-6 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-[3px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all">
-                        Full Archives
-                    </button>
                 </div>
 
-                {!stats.recentBookings || stats.recentBookings.length === 0 ? (
-                    <div className="text-center py-20 bg-gray-50/50 dark:bg-white/[0.02] rounded-[2.5rem] border border-dashed border-gray-200 dark:border-white/10">
-                        <ShoppingBag size={64} className="mx-auto mb-6 opacity-10" />
-                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[3px]">No records found in current frequency</p>
-                    </div>
-                ) : (
-                    <div className="overflow-x-auto relative z-10">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-left text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[3px]">
-                                    <th className="pb-8 px-4">Protocol ID</th>
-                                    <th className="pb-8 px-4">Unit Type</th>
-                                    <th className="pb-8 px-4">Subject</th>
-                                    <th className="pb-8 px-4">Asset</th>
-                                    <th className="pb-8 px-4 text-right">Settlement</th>
-                                    <th className="pb-8 px-4 text-right">Status</th>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                        <thead>
+                            <tr className="bg-slate-50/50 text-left border-b border-slate-100">
+                                <th className="px-6 py-4 font-semibold text-slate-500">Order ID</th>
+                                <th className="px-6 py-4 font-semibold text-slate-500">Service</th>
+                                <th className="px-6 py-4 font-semibold text-slate-500">Customer</th>
+                                <th className="px-6 py-4 font-semibold text-slate-500">Provider</th>
+                                <th className="px-6 py-4 font-semibold text-slate-500">Amount</th>
+                                <th className="px-6 py-4 font-semibold text-slate-500 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                            {stats.recentBookings.map((booking) => (
+                                <tr key={booking.id} className="hover:bg-slate-50/50 transition-colors">
+                                    <td className="px-6 py-4 font-mono font-medium text-slate-900">#{booking.bookingNumber}</td>
+                                    <td className="px-6 py-4 font-medium text-slate-700">{booking.service?.name}</td>
+                                    <td className="px-6 py-4 text-slate-600">{booking.consumer?.name}</td>
+                                    <td className="px-6 py-4 text-slate-600">{booking.provider?.name || <span className="text-slate-400 italic">Unassigned</span>}</td>
+                                    <td className="px-6 py-4 font-bold text-slate-900">₹{booking.totalAmount}</td>
+                                    <td className="px-6 py-4 text-right">
+                                        <span className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-bold lowercase
+                                            ${booking.status?.slug === 'completed' ? 'bg-emerald-100 text-emerald-700' :
+                                                booking.status?.slug === 'cancelled' ? 'bg-red-100 text-red-700' :
+                                                    booking.status?.slug === 'confirmed' ? 'bg-blue-100 text-blue-700' :
+                                                        'bg-amber-100 text-amber-700'}`}>
+                                            {booking.status?.name}
+                                        </span>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-100 dark:divide-white/5">
-                                {stats.recentBookings.map((booking, i) => (
-                                    <tr key={booking.id} className="group hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-all duration-300">
-                                        <td className="py-6 px-4">
-                                            <span className="font-black text-primary-500 tracking-wider font-mono uppercase truncate block max-w-[120px]">{booking.bookingNumber}</span>
-                                        </td>
-                                        <td className="py-6 px-4">
-                                            <span className="font-black text-gray-900 dark:text-white text-xs uppercase tracking-tight">{booking.service?.name}</span>
-                                        </td>
-                                        <td className="py-6 px-4">
-                                            <span className="font-bold text-gray-500 dark:text-gray-400 text-xs uppercase tracking-tight">{booking.consumer?.name}</span>
-                                        </td>
-                                        <td className="py-6 px-4">
-                                            <span className="font-bold text-gray-500 dark:text-gray-400 text-xs uppercase tracking-tight">{booking.provider?.name || 'UNASSIGNED'}</span>
-                                        </td>
-                                        <td className="py-6 px-4 text-right">
-                                            <span className="font-black text-gray-900 dark:text-white text-lg tracking-tighter">₹{booking.totalAmount}</span>
-                                        </td>
-                                        <td className="py-6 px-4 text-right">
-                                            <span className={`inline-flex px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest
-                                                ${booking.status?.slug === 'completed' ? 'bg-emerald-500/10 text-emerald-500' :
-                                                    booking.status?.slug === 'cancelled' ? 'bg-red-500/10 text-red-500' :
-                                                        booking.status?.slug === 'confirmed' ? 'bg-blue-500/10 text-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.2)]' :
-                                                            'bg-orange-500/10 text-orange-500'}`}>
-                                                {booking.status?.name}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </motion.div>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 };
