@@ -167,7 +167,8 @@ public class ProviderController : ControllerBase
 
             if (statusMap.ContainsKey(status.ToLower()))
             {
-                query = query.Where(b => b.BookingStatusId == statusMap[status.ToLower()]);
+                var statusSlug = status.ToLower();
+                query = query.Where(b => b.BookingStatus.Slug == statusSlug);
             }
         }
 
@@ -232,19 +233,22 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
-        if (currentStatus?.Slug != "pending")
+        var status = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (status?.Slug != "pending")
             return BadRequest(new { success = false, message = "Only 'Pending' bookings can be accepted" });
 
         var acceptedStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "confirmed");
-        if (acceptedStatus == null) return BadRequest("Status configuration error");
+        if (acceptedStatus == null) return BadRequest(new { success = false, message = "Status 'confirmed' not found in system" });
 
-        booking.BookingStatusId = acceptedStatus.Id;
-        booking.UpdatedAt = DateTime.UtcNow;
-        _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Confirmed", Note = "Booking accepted by provider", CreatedAt = DateTime.UtcNow });
-        await _context.SaveChangesAsync();
-
-        return Ok(new { success = true, message = "Booking accepted", data = booking });
+        try {
+            booking.BookingStatusId = acceptedStatus.Id;
+            booking.UpdatedAt = DateTime.UtcNow;
+            _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Confirmed", Note = "Booking accepted by provider", CreatedAt = DateTime.UtcNow });
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, message = "Booking accepted", data = booking });
+        } catch (Exception ex) {
+            return StatusCode(500, new { success = false, message = "Database error: " + ex.Message });
+        }
     }
 
     // PUT: api/providers/bookings/{id}/reject
@@ -259,20 +263,23 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
-        if (currentStatus?.Slug != "pending")
+        var status = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (status?.Slug != "pending")
             return BadRequest(new { success = false, message = "Only 'Pending' bookings can be rejected" });
 
         var cancelledStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "cancelled");
-        if (cancelledStatus == null) return BadRequest("Status configuration error");
+        if (cancelledStatus == null) return BadRequest(new { success = false, message = "Status 'cancelled' not found in system" });
 
-        booking.BookingStatusId = cancelledStatus.Id;
-        booking.Description = dto.Reason ?? "Rejected by provider";
-        booking.UpdatedAt = DateTime.UtcNow;
-        _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Rejected", Note = dto.Reason ?? "Rejected by provider", CreatedAt = DateTime.UtcNow });
-        await _context.SaveChangesAsync();
-
-        return Ok(new { success = true, message = "Booking rejected", data = booking });
+        try {
+            booking.BookingStatusId = cancelledStatus.Id;
+            booking.Description = dto.Reason ?? "Rejected by provider";
+            booking.UpdatedAt = DateTime.UtcNow;
+            _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Rejected", Note = dto.Reason ?? "Rejected by provider", CreatedAt = DateTime.UtcNow });
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, message = "Booking rejected", data = booking });
+        } catch (Exception ex) {
+            return StatusCode(500, new { success = false, message = "Database error: " + ex.Message });
+        }
     }
 
     // PUT: api/providers/bookings/{id}/start
@@ -287,19 +294,22 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
-        if (currentStatus?.Slug != "confirmed")
+        var status = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (status?.Slug != "confirmed")
             return BadRequest(new { success = false, message = "Booking must be 'Confirmed' before starting service" });
 
         var inProgressStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "in_progress");
-        if (inProgressStatus == null) return BadRequest("Status configuration error");
+        if (inProgressStatus == null) return BadRequest(new { success = false, message = "Status 'in_progress' not found in system" });
 
-        booking.BookingStatusId = inProgressStatus.Id;
-        booking.UpdatedAt = DateTime.UtcNow;
-        _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "In Progress", Note = "Service started by provider", CreatedAt = DateTime.UtcNow });
-        await _context.SaveChangesAsync();
-
-        return Ok(new { success = true, message = "Service started", data = booking });
+        try {
+            booking.BookingStatusId = inProgressStatus.Id;
+            booking.UpdatedAt = DateTime.UtcNow;
+            _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "In Progress", Note = "Service started by provider", CreatedAt = DateTime.UtcNow });
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, message = "Service started", data = booking });
+        } catch (Exception ex) {
+            return StatusCode(500, new { success = false, message = "Database error: " + ex.Message });
+        }
     }
 
     // PUT: api/providers/bookings/{id}/complete
@@ -314,31 +324,35 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
-        if (currentStatus?.Slug != "in_progress")
+        var status = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (status?.Slug != "in_progress")
             return BadRequest(new { success = false, message = "Service must be 'In Progress' to complete" });
 
         var completedStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "completed");
-        if (completedStatus == null) return BadRequest("Status configuration error");
+        if (completedStatus == null) return BadRequest(new { success = false, message = "Status 'completed' not found in system" });
 
-        booking.BookingStatusId = completedStatus.Id;
-        if (booking.PaymentMethod == "cod")
-        {
-            booking.PaymentStatus = "paid";
-        }
-        booking.UpdatedAt = DateTime.UtcNow;
-        _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Completed", Note = "Service completed", CreatedAt = DateTime.UtcNow });
-        await _context.SaveChangesAsync();
-
-        // Increment provider's served count
-        var provider = await _context.Users.FindAsync(providerId);
-        if (provider != null)
-        {
-            provider.Served++;
+        try {
+            booking.BookingStatusId = completedStatus.Id;
+            if (booking.PaymentMethod == "cod")
+            {
+                booking.PaymentStatus = "paid";
+            }
+            booking.UpdatedAt = DateTime.UtcNow;
+            _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Completed", Note = "Service completed", CreatedAt = DateTime.UtcNow });
             await _context.SaveChangesAsync();
-        }
 
-        return Ok(new { success = true, message = "Booking completed", data = booking });
+            // Increment provider's served count
+            var provider = await _context.Users.FindAsync(providerId);
+            if (provider != null)
+            {
+                provider.Served++;
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { success = true, message = "Booking completed", data = booking });
+        } catch (Exception ex) {
+            return StatusCode(500, new { success = false, message = "Database error: " + ex.Message });
+        }
     }
 
     // Services are now strictly managed by Admin. Providers no longer have service management endpoints here.

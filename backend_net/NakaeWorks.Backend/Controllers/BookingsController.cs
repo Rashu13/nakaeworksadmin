@@ -103,11 +103,24 @@ public class BookingsController : ControllerBase
         // Generate booking number
         var bookingNumber = await _bookingService.GenerateBookingNumber();
 
+        // Determine ProviderId if not provided (fallback to first service's provider)
+        long finalProviderId = dto.ProviderId ?? 0;
+        if (finalProviderId == 0)
+        {
+            var firstService = await _context.Services.FindAsync(dto.Items.First().ServiceId);
+            finalProviderId = firstService?.ProviderId ?? 0;
+        }
+
+        if (finalProviderId == 0)
+        {
+            return BadRequest(new { message = "ProviderId is required" });
+        }
+
         var booking = new Booking
         {
             BookingNumber = bookingNumber,
             ConsumerId = consumerId,
-            ProviderId = dto.ProviderId,
+            ProviderId = finalProviderId,
             ServiceId = dto.Items.First().ServiceId, // Store first service for compatibility
             AddressId = dto.AddressId,
             BookingStatusId = pendingStatus.Id,
@@ -128,12 +141,25 @@ public class BookingsController : ControllerBase
             UpdatedAt = DateTime.UtcNow
         };
 
-        _context.Bookings.Add(booking);
-        await _context.SaveChangesAsync();
+        try {
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
 
-        // Record initial activity
-        _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Booking Placed", Note = "Booking created by consumer", CreatedAt = DateTime.UtcNow });
-        await _context.SaveChangesAsync();
+            // Record initial activity
+            _context.BookingActivities.Add(new BookingActivity { 
+                BookingId = booking.Id, 
+                Status = "Booking Placed", 
+                Note = "Booking created by consumer", 
+                CreatedAt = DateTime.UtcNow 
+            });
+            await _context.SaveChangesAsync();
+        } catch (Exception ex) {
+            return StatusCode(500, new { 
+                success = false, 
+                message = "Booking failed: " + ex.Message, 
+                detail = ex.InnerException?.Message ?? ex.StackTrace 
+            });
+        }
 
         // Fetch complete booking with relations
         var completeBooking = await _context.Bookings

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-// Force rebuild
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NakaeWorks.Backend.Data;
@@ -81,7 +80,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ApplicationDbContext>();
     try
     {
-        // context.Database.Migrate();
+        context.Database.Migrate();
 
         // -2. Seed Content (Banners & Collections)
         if (!context.Banners.Any())
@@ -127,20 +126,24 @@ using (var scope = app.Services.CreateScope())
         }
         context.SaveChanges();
 
-        // 0. Seed Booking Statuses
-        if (!context.BookingStatuses.Any())
+        // 0. Seed Booking Statuses (Ensure all slugs exist)
+        var requiredStatuses = new List<BookingStatus>
         {
-            var statuses = new List<BookingStatus>
+            new BookingStatus { Name = "Pending", Slug = "pending", Sequence = 1 },
+            new BookingStatus { Name = "Confirmed", Slug = "confirmed", Sequence = 2 },
+            new BookingStatus { Name = "In Progress", Slug = "in_progress", Sequence = 3 },
+            new BookingStatus { Name = "Completed", Slug = "completed", Sequence = 4 },
+            new BookingStatus { Name = "Cancelled", Slug = "cancelled", Sequence = 5 }
+        };
+
+        foreach (var rs in requiredStatuses)
+        {
+            if (!context.BookingStatuses.Any(s => s.Slug == rs.Slug))
             {
-                new BookingStatus { Name = "Pending", Slug = "pending", Sequence = 1 },
-                new BookingStatus { Name = "Confirmed", Slug = "confirmed", Sequence = 2 },
-                new BookingStatus { Name = "In Progress", Slug = "in_progress", Sequence = 3 },
-                new BookingStatus { Name = "Completed", Slug = "completed", Sequence = 4 },
-                new BookingStatus { Name = "Cancelled", Slug = "cancelled", Sequence = 5 }
-            };
-            context.BookingStatuses.AddRange(statuses);
-            context.SaveChanges();
+                context.BookingStatuses.Add(rs);
+            }
         }
+        context.SaveChanges();
 
         // 1. Seed Categories if empty or low
         if (context.Categories.Count() < 5) // Seeding only if data is low

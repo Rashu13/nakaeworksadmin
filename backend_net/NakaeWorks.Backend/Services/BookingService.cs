@@ -77,8 +77,11 @@ public class BookingService
         string custType = coupon.CustomerType.ToLower();
         if (custType != "all")
         {
+            var completedStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "completed");
+            var completedId = completedStatus?.Id ?? 4;
+
             var bookingCount = await _context.Bookings
-                .Where(b => b.ConsumerId == userId && b.BookingStatusId == 4) // Completed bookings
+                .Where(b => b.ConsumerId == userId && b.BookingStatusId == completedId) // Completed bookings
                 .CountAsync();
 
             if (custType == "new" && bookingCount > 0)
