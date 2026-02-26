@@ -19,6 +19,13 @@ public class ProviderService
         var tomorrow = today.AddDays(1);
         var startOfMonth = new DateTime(today.Year, today.Month, 1);
 
+        // Efficiently get status IDs by slug
+        var statuses = await _context.BookingStatuses.ToListAsync();
+        var pendingId = statuses.FirstOrDefault(s => s.Slug == "pending")?.Id ?? 1;
+        var confirmedId = statuses.FirstOrDefault(s => s.Slug == "confirmed")?.Id ?? 2;
+        var inProgressId = statuses.FirstOrDefault(s => s.Slug == "in_progress")?.Id ?? 3;
+        var completedId = statuses.FirstOrDefault(s => s.Slug == "completed")?.Id ?? 4;
+
         // Today's bookings count
         var todaysBookings = await _context.Bookings
             .Where(b => b.ProviderId == providerId && b.DateTime >= today && b.DateTime < tomorrow)
@@ -26,22 +33,27 @@ public class ProviderService
 
         // Pending requests count
         var pendingRequests = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 1)
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == pendingId)
+            .CountAsync();
+
+        // Live Services (In Progress) count
+        var inProgressBookings = await _context.Bookings
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == inProgressId)
             .CountAsync();
 
         // Total completed bookings
         var completedBookings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4)
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId)
             .CountAsync();
 
         // Total earnings
         var totalEarnings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && b.PaymentStatus == "paid")
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && b.PaymentStatus == "paid")
             .SumAsync(b => (decimal?)b.TotalAmount) ?? 0;
 
         // Monthly earnings
         var monthlyEarnings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && 
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && 
                        b.PaymentStatus == "paid" && b.CreatedAt >= startOfMonth)
             .SumAsync(b => (decimal?)b.TotalAmount) ?? 0;
 
@@ -84,6 +96,7 @@ public class ProviderService
                 {
                     TodaysBookings = todaysBookings,
                     PendingRequests = pendingRequests,
+                    InProgressBookings = inProgressBookings,
                     CompletedBookings = completedBookings,
                     TotalEarnings = totalEarnings,
                     MonthlyEarnings = monthlyEarnings,
@@ -114,23 +127,25 @@ public class ProviderService
                 break;
         }
 
+        var completedId = (await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "completed"))?.Id ?? 4;
+
         var periodEarnings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && 
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && 
                        b.PaymentStatus == "paid" && b.CreatedAt >= startDate)
             .SumAsync(b => (decimal?)b.TotalAmount) ?? 0;
 
         var totalEarnings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && b.PaymentStatus == "paid")
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && b.PaymentStatus == "paid")
             .SumAsync(b => (decimal?)b.TotalAmount) ?? 0;
 
         var pendingEarnings = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && b.PaymentStatus == "pending")
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && b.PaymentStatus == "pending")
             .SumAsync(b => (decimal?)b.TotalAmount) ?? 0;
 
         // Monthly breakdown for current year
         var yearStart = new DateTime(today.Year, 1, 1);
         var monthlyData = await _context.Bookings
-            .Where(b => b.ProviderId == providerId && b.BookingStatusId == 4 && 
+            .Where(b => b.ProviderId == providerId && b.BookingStatusId == completedId && 
                        b.PaymentStatus == "paid" && b.CreatedAt >= yearStart)
             .GroupBy(b => b.CreatedAt.Month)
             .Select(g => new

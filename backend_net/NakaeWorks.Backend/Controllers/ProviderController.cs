@@ -232,10 +232,14 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        if (booking.BookingStatusId != 1)
-            return BadRequest(new { success = false, message = "Booking cannot be accepted" });
+        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (currentStatus?.Slug != "pending")
+            return BadRequest(new { success = false, message = "Only 'Pending' bookings can be accepted" });
 
-        booking.BookingStatusId = 2; // Accepted
+        var acceptedStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "confirmed");
+        if (acceptedStatus == null) return BadRequest("Status configuration error");
+
+        booking.BookingStatusId = acceptedStatus.Id;
         booking.UpdatedAt = DateTime.UtcNow;
         _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Confirmed", Note = "Booking accepted by provider", CreatedAt = DateTime.UtcNow });
         await _context.SaveChangesAsync();
@@ -255,10 +259,14 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        if (booking.BookingStatusId != 1)
-            return BadRequest(new { success = false, message = "Booking cannot be rejected" });
+        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (currentStatus?.Slug != "pending")
+            return BadRequest(new { success = false, message = "Only 'Pending' bookings can be rejected" });
 
-        booking.BookingStatusId = 5; // Cancelled
+        var cancelledStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "cancelled");
+        if (cancelledStatus == null) return BadRequest("Status configuration error");
+
+        booking.BookingStatusId = cancelledStatus.Id;
         booking.Description = dto.Reason ?? "Rejected by provider";
         booking.UpdatedAt = DateTime.UtcNow;
         _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "Rejected", Note = dto.Reason ?? "Rejected by provider", CreatedAt = DateTime.UtcNow });
@@ -279,10 +287,14 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        if (booking.BookingStatusId != 2)
-            return BadRequest(new { success = false, message = "Booking must be accepted first" });
+        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (currentStatus?.Slug != "confirmed")
+            return BadRequest(new { success = false, message = "Booking must be 'Confirmed' before starting service" });
 
-        booking.BookingStatusId = 3; // In Progress
+        var inProgressStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "in_progress");
+        if (inProgressStatus == null) return BadRequest("Status configuration error");
+
+        booking.BookingStatusId = inProgressStatus.Id;
         booking.UpdatedAt = DateTime.UtcNow;
         _context.BookingActivities.Add(new BookingActivity { BookingId = booking.Id, Status = "In Progress", Note = "Service started by provider", CreatedAt = DateTime.UtcNow });
         await _context.SaveChangesAsync();
@@ -302,10 +314,14 @@ public class ProviderController : ControllerBase
         if (booking == null)
             return NotFound(new { success = false, message = "Booking not found" });
 
-        if (booking.BookingStatusId != 3)
-            return BadRequest(new { success = false, message = "Service must be in progress" });
+        var currentStatus = await _context.BookingStatuses.FindAsync(booking.BookingStatusId);
+        if (currentStatus?.Slug != "in_progress")
+            return BadRequest(new { success = false, message = "Service must be 'In Progress' to complete" });
 
-        booking.BookingStatusId = 4; // Completed
+        var completedStatus = await _context.BookingStatuses.FirstOrDefaultAsync(s => s.Slug == "completed");
+        if (completedStatus == null) return BadRequest("Status configuration error");
+
+        booking.BookingStatusId = completedStatus.Id;
         if (booking.PaymentMethod == "cod")
         {
             booking.PaymentStatus = "paid";

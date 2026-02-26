@@ -54,7 +54,7 @@ const Dashboard = () => {
             value: stats?.todaysBookings || 0,
             icon: Calendar,
             color: 'bg-blue-500',
-            trend: '+12%'
+            trend: null
         },
         {
             title: 'Pending Requests',
@@ -64,18 +64,18 @@ const Dashboard = () => {
             trend: null
         },
         {
+            title: 'Live Services',
+            value: stats?.inProgressBookings || 0,
+            icon: Play,
+            color: 'bg-purple-500',
+            trend: null
+        },
+        {
             title: 'Total Earnings',
             value: `₹${(stats?.totalEarnings || 0).toLocaleString()}`,
             icon: IndianRupee,
             color: 'bg-emerald-500',
-            trend: '+8%'
-        },
-        {
-            title: 'Rating',
-            value: stats?.avgRating || '0.0',
-            icon: Star,
-            color: 'bg-purple-500',
-            subtitle: `${stats?.totalReviews || 0} reviews`
+            trend: null
         }
     ];
 

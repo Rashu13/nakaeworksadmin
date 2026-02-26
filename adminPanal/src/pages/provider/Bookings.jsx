@@ -61,7 +61,7 @@ const Bookings = () => {
             setAlertConfig({
                 isOpen: true,
                 title: 'Accept Failed',
-                message: 'Failed to accept booking. Please try again.',
+                message: error.message || 'Failed to accept booking. Please try again.',
                 type: 'danger'
             });
         } finally {
@@ -87,7 +87,7 @@ const Bookings = () => {
             setAlertConfig({
                 isOpen: true,
                 title: 'Reject Failed',
-                message: 'Failed to reject booking. Please try again.',
+                message: error.message || 'Failed to reject booking. Please try again.',
                 type: 'danger'
             });
         } finally {
@@ -107,7 +107,7 @@ const Bookings = () => {
             setAlertConfig({
                 isOpen: true,
                 title: 'Start Failed',
-                message: 'Failed to start service. Please try again.',
+                message: error.message || 'Failed to start service. Please try again.',
                 type: 'danger'
             });
         } finally {
@@ -132,7 +132,7 @@ const Bookings = () => {
             setAlertConfig({
                 isOpen: true,
                 title: 'Complete Failed',
-                message: 'Failed to complete booking. Please try again.',
+                message: error.message || 'Failed to complete booking. Please try again.',
                 type: 'danger'
             });
         } finally {

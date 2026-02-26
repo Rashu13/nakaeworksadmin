@@ -64,10 +64,12 @@ const AdminDashboard = () => {
             setStats({
                 totalUsers: statsData.totalUsers ?? 0,
                 totalProviders: statsData.totalProviders ?? 0,
+                liveWorkingProviders: statsData.liveWorkingProviders ?? 0,
                 totalServices: statsData.totalServices ?? 0,
                 totalBookings: statsData.totalBookings ?? 0,
                 monthlyBookings: currentMonthStats?.count ?? 0,
                 pendingBookings: statsData.pendingBookings ?? 0,
+                inProgressBookings: statsData.inProgressBookings ?? 0,
                 totalRevenue: revenueData.total ?? 0,
                 recentBookings: recentBookings
             });
@@ -199,7 +201,8 @@ const AdminDashboard = () => {
                         {[
                             { label: 'Monthly Bookings', value: stats.monthlyBookings, total: 200, color: 'bg-slate-900' },
                             { label: 'Pending Approvals', value: stats.pendingBookings, total: 50, color: 'bg-amber-500' },
-                            { label: 'Active Sessions', value: 12, total: 30, color: 'bg-emerald-500' }
+                            { label: 'Live Working Providers', value: stats.liveWorkingProviders, total: stats.totalProviders || 1, color: 'bg-blue-600' },
+                            { label: 'Working Now (Sessions)', value: stats.inProgressBookings, total: 20, color: 'bg-emerald-500' }
                         ].map((item, i) => (
                             <div key={i}>
                                 <div className="flex justify-between items-end mb-2">

@@ -31,32 +31,47 @@ public class AdminController : ControllerBase
         var today = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0, DateTimeKind.Utc);
         var thisMonth = new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Utc);
 
+        // Efficiently get status IDs by slug
+        var statuses = await _context.BookingStatuses.ToListAsync();
+        var pendingId = statuses.FirstOrDefault(s => s.Slug == "pending")?.Id ?? 1;
+        var confirmedId = statuses.FirstOrDefault(s => s.Slug == "confirmed")?.Id ?? 2;
+        var inProgressId = statuses.FirstOrDefault(s => s.Slug == "in_progress")?.Id ?? 3;
+        var completedId = statuses.FirstOrDefault(s => s.Slug == "completed")?.Id ?? 4;
+
         // Count statistics
         var totalUsers = await _context.Users.CountAsync();
-        var totalProviders = await _context.Users.CountAsync(u => u.Role == "provider");
+        var totalProviders = await _context.Users.CountAsync(u => u.Role == "provider" && u.Status);
         var totalConsumers = await _context.Users.CountAsync(u => u.Role == "consumer");
         var totalServices = await _context.Services.CountAsync(s => s.Status);
         var totalBookings = await _context.Bookings.CountAsync();
         var todayBookings = await _context.Bookings.CountAsync(b => b.CreatedAt.Date == today);
-        var pendingBookings = await _context.Bookings.CountAsync(b => b.BookingStatusId == 1);
-        var completedBookings = await _context.Bookings.CountAsync(b => b.BookingStatusId == 4);
+        var pendingBookings = await _context.Bookings.CountAsync(b => b.BookingStatusId == pendingId);
+        var inProgressBookingsCount = await _context.Bookings.CountAsync(b => b.BookingStatusId == inProgressId);
+        var completedBookings = await _context.Bookings.CountAsync(b => b.BookingStatusId == completedId);
+
+        // Providers currently working (have at least one In Progress booking)
+        var liveWorkingProviders = await _context.Bookings
+            .Where(b => b.BookingStatusId == inProgressId)
+            .Select(b => b.ProviderId)
+            .Distinct()
+            .CountAsync();
 
         // Revenue statistics
         var totalRevenue = await _context.Bookings
-            .Where(b => b.BookingStatusId == 4)
+            .Where(b => b.BookingStatusId == completedId)
             .SumAsync(b => b.TotalAmount);
 
         var monthlyRevenue = await _context.Bookings
-            .Where(b => b.BookingStatusId == 4 && b.CreatedAt >= thisMonth)
+            .Where(b => b.BookingStatusId == completedId && b.CreatedAt >= thisMonth)
             .SumAsync(b => b.TotalAmount);
 
         var todayRevenue = await _context.Bookings
-            .Where(b => b.BookingStatusId == 4 && b.CreatedAt.Date == today)
+            .Where(b => b.BookingStatusId == completedId && b.CreatedAt.Date == today)
             .SumAsync(b => b.TotalAmount);
 
         // Platform fees collected
         var totalPlatformFees = await _context.Bookings
-            .Where(b => b.BookingStatusId == 4)
+            .Where(b => b.BookingStatusId == completedId)
             .SumAsync(b => b.PlatformFees);
 
         // Recent bookings
@@ -90,7 +105,7 @@ public class AdminController : ControllerBase
                 Year = g.Key.Year,
                 Month = g.Key.Month,
                 Count = g.Count(),
-                Revenue = g.Where(b => b.BookingStatusId == 4).Sum(b => b.TotalAmount)
+                Revenue = g.Where(b => b.BookingStatusId == completedId).Sum(b => b.TotalAmount)
             })
             .OrderBy(x => x.Year).ThenBy(x => x.Month)
             .ToListAsync();
@@ -104,11 +119,13 @@ public class AdminController : ControllerBase
                 {
                     TotalUsers = totalUsers,
                     TotalProviders = totalProviders,
+                    LiveWorkingProviders = liveWorkingProviders,
                     TotalConsumers = totalConsumers,
                     TotalServices = totalServices,
                     TotalBookings = totalBookings,
                     TodayBookings = todayBookings,
                     PendingBookings = pendingBookings,
+                    InProgressBookings = inProgressBookingsCount,
                     CompletedBookings = completedBookings
                 },
                 Revenue = new

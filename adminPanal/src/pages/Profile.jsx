@@ -288,7 +288,7 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-50 dark:bg-[#0a0d14] pt-24 pb-12 transition-colors duration-300 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0a0d14] pt-24 pb-12 transition-colors duration-300 relative overflow-hidden">
             {/* Background Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/5 rounded-full blur-[120px]"></div>
@@ -333,7 +333,7 @@ const Profile = () => {
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white dark:bg-white dark:bg-slate-900/40 rounded-3xl border border-gray-200 dark:border-gray-200 dark:border-white/5 p-4 h-fit sticky top-28 shadow-2xl backdrop-blur-xl"
+                        className="bg-white dark:bg-slate-900/40 rounded-3xl border border-gray-200 dark:border-white/5 p-4 h-fit sticky top-28 shadow-2xl backdrop-blur-xl"
                     >
                         <div className="space-y-1.5">
                             {[
@@ -347,7 +347,7 @@ const Profile = () => {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-left font-bold transition-all relative group overflow-hidden ${activeTab === tab.id
-                                        ? 'text-white bg-slate-900 shadow-[0_10px_20px_rgba(0,0,0,0.1)]'
+                                        ? 'text-white bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.3)]'
                                         : 'text-gray-500 hover:text-slate-900 hover:bg-slate-50'
                                         }`}
                                 >
@@ -457,7 +457,7 @@ const Profile = () => {
                                                     <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                                                 </div>
                                             ) : bookings.length === 0 ? (
-                                                <div className="bg-white dark:bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl p-12 rounded-3xl text-center border border-gray-200 dark:border-gray-200 dark:border-white/10 border-dashed">
+                                                <div className="bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl p-12 rounded-3xl text-center border border-gray-200 dark:border-white/10 border-dashed">
                                                     <Package size={48} className="mx-auto text-gray-600 mb-4" />
                                                     <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-bold tracking-wide uppercase text-sm">No premium activity yet</p>
                                                 </div>
@@ -469,7 +469,7 @@ const Profile = () => {
                                                             initial={{ opacity: 0, x: -20 }}
                                                             animate={{ opacity: 1, x: 0 }}
                                                             transition={{ delay: i * 0.1 }}
-                                                            className="bg-white dark:bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl p-6 rounded-2xl border border-gray-200 dark:border-gray-200 dark:border-white/10 flex flex-col sm:flex-row items-center gap-6 hover:bg-white/[0.08] transition-all cursor-pointer group shadow-lg"
+                                                            className="bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl p-6 rounded-2xl border border-gray-200 dark:border-white/10 flex flex-col sm:flex-row items-center gap-6 hover:bg-white/[0.08] transition-all cursor-pointer group shadow-lg"
                                                             onClick={() => handleViewDetails(booking)}
                                                         >
                                                             <div className="relative shrink-0">
@@ -509,7 +509,7 @@ const Profile = () => {
                                 )}
 
                                 {activeTab === 'profile' && (
-                                    <div className="bg-white dark:bg-white dark:bg-slate-900/60 p-10 rounded-[2.5rem] border border-gray-200 dark:border-gray-200 dark:border-white/5 shadow-2xl relative overflow-hidden">
+                                    <div className="bg-white dark:bg-slate-900/60 p-10 rounded-[2.5rem] border border-gray-200 dark:border-white/5 shadow-2xl relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/5 blur-[100px] pointer-events-none"></div>
 
                                         {/* Photo Upload Section */}
@@ -608,7 +608,7 @@ const Profile = () => {
                                 {activeTab === 'bookings' && (
                                     <div className="space-y-8">
                                         <div className="flex justify-between items-center">
-                                            <h2 className="text-3xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tight uppercase">Order History</h2>
+                                            <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Order History</h2>
                                             <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-600 dark:text-gray-400 text-xs font-bold uppercase tracking-widest">
                                                 <Package size={14} className="text-primary-500" />
                                                 {bookings.length} Total
@@ -623,7 +623,7 @@ const Profile = () => {
                                             <motion.div
                                                 initial={{ opacity: 0, scale: 0.9 }}
                                                 animate={{ opacity: 1, scale: 1 }}
-                                                className="bg-white dark:bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-gray-200 dark:border-gray-200 dark:border-white/10 border-dashed"
+                                                className="bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-gray-200 dark:border-white/10 border-dashed"
                                             >
                                                 <div className="w-24 h-24 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
                                                     <Package size={48} className="text-gray-600" />
@@ -645,7 +645,7 @@ const Profile = () => {
                                                         initial={{ opacity: 0, y: 20 }}
                                                         animate={{ opacity: 1, y: 0 }}
                                                         transition={{ delay: i * 0.05 }}
-                                                        className="bg-white dark:bg-white dark:bg-slate-900/40 rounded-[2.5rem] p-8 flex flex-col lg:flex-row gap-8 border border-gray-200 dark:border-gray-200 dark:border-white/5 hover:bg-white dark:bg-white dark:bg-slate-900/60 transition-all group relative overflow-hidden shadow-2xl"
+                                                        className="bg-white dark:bg-slate-900/40 rounded-[2.5rem] p-8 flex flex-col lg:flex-row gap-8 border border-gray-200 dark:border-white/5 hover:bg-white dark:bg-slate-900/60 transition-all group relative overflow-hidden shadow-2xl"
                                                     >
                                                         <div className="absolute right-0 top-0 w-32 h-32 bg-primary-600/5 blur-[60px] pointer-events-none group-hover:bg-primary-600/10 transition-all"></div>
 
@@ -730,7 +730,7 @@ const Profile = () => {
                                             <motion.div
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
-                                                className="bg-white dark:bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-gray-200 dark:border-gray-200 dark:border-white/10 border-dashed"
+                                                className="bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-gray-200 dark:border-white/10 border-dashed"
                                             >
                                                 <MapPin size={48} className="mx-auto text-gray-600 mb-6" />
                                                 <h3 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight mb-4">No coordinates saved</h3>
@@ -744,7 +744,7 @@ const Profile = () => {
                                                         initial={{ opacity: 0, scale: 0.95 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         transition={{ delay: i * 0.1 }}
-                                                        className="bg-white dark:bg-white dark:bg-slate-900/60 p-8 rounded-[2rem] border border-gray-200 dark:border-gray-200 dark:border-white/5 shadow-2xl relative group hover:border-primary-500/30 transition-all overflow-hidden"
+                                                        className="bg-white dark:bg-slate-900/60 p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 shadow-2xl relative group hover:border-primary-500/30 transition-all overflow-hidden"
                                                     >
                                                         <div className="absolute top-6 right-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                                                             <button
@@ -805,7 +805,7 @@ const Profile = () => {
                                                             value={passwords.current}
                                                             onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
                                                             placeholder="Enter current password"
-                                                            className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                            className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                             required
                                                         />
                                                     </div>
@@ -821,7 +821,7 @@ const Profile = () => {
                                                                 value={passwords.new}
                                                                 onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
                                                                 placeholder="New password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                                 required
                                                             />
                                                         </div>
@@ -835,7 +835,7 @@ const Profile = () => {
                                                                 value={passwords.confirm}
                                                                 onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                                                                 placeholder="Confirm new password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
                                                                 required
                                                             />
                                                         </div>
