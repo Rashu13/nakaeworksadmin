@@ -104,11 +104,15 @@ public class BookingsController : ControllerBase
         var bookingNumber = await _bookingService.GenerateBookingNumber();
 
         // Determine ProviderId if not provided (fallback to first service's provider)
-        long finalProviderId = dto.ProviderId ?? 0;
+        long finalProviderId = dto.ProviderId;
         if (finalProviderId == 0)
         {
-            var firstService = await _context.Services.FindAsync(dto.Items.First().ServiceId);
-            finalProviderId = firstService?.ProviderId ?? 0;
+            var firstItem = dto.Items.FirstOrDefault();
+            if (firstItem != null)
+            {
+                var firstService = await _context.Services.FindAsync(firstItem.ServiceId);
+                finalProviderId = firstService?.ProviderId ?? 0L;
+            }
         }
 
         if (finalProviderId == 0)
