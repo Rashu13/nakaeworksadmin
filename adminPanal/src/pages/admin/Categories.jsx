@@ -123,7 +123,7 @@ const Categories = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-[1.25rem] font-black text-sm uppercase tracking-[2px] shadow-lg shadow-primary-500/20 transition-all hover:scale-105 active:scale-95"
+                    className="flex items-center justify-center gap-3 px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-black text-sm uppercase tracking-[2px] shadow-lg shadow-primary-500/20 transition-all hover:scale-[1.02] active:scale-95"
                 >
                     <Plus size={20} />
                     Deploy New Category
@@ -137,7 +137,7 @@ const Categories = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className={`p-5 rounded-[1.5rem] border ${error ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'} flex items-center gap-4`}
+                        className={`p-5 rounded-xl border ${error ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'} flex items-center gap-4`}
                     >
                         {error ? <AlertCircle size={20} /> : <Check size={20} />}
                         <p className="text-[10px] font-black uppercase tracking-[2px]">{error || success}</p>
@@ -146,7 +146,7 @@ const Categories = () => {
             </AnimatePresence>
 
             {/* Search Grid */}
-            <div className="bg-white dark:bg-white/5 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-white/10 overflow-hidden">
+            <div className="bg-white dark:bg-white/5 rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10 overflow-hidden">
                 <div className="p-8 border-b border-gray-100 dark:border-white/5 relative bg-gray-50/30 dark:bg-transparent">
                     <div className="relative group">
                         <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary-500 transition-colors" size={22} />
@@ -155,7 +155,7 @@ const Categories = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="FILTER REGISTRY BY NAME OR PROTOCOL..."
-                            className="w-full pl-16 pr-8 py-5 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white placeholder-gray-400 text-xs font-black tracking-[1px] transition-all"
+                            className="w-full pl-16 pr-8 py-5 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white placeholder-gray-400 text-xs font-black tracking-[1px] transition-all"
                         />
                     </div>
                 </div>
@@ -254,7 +254,7 @@ const Categories = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative bg-white dark:bg-[#0f172a] rounded-[3rem] w-full max-w-xl p-10 border border-gray-100 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden"
+                            className="relative bg-white dark:bg-[#0f172a] rounded-3xl w-full max-w-xl p-10 border border-gray-100 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 blur-[80px] pointer-events-none" />
 
@@ -265,7 +265,7 @@ const Categories = () => {
                                         {editingCategory ? 'Modify Protocol' : 'Deploy Protocol'}
                                     </h2>
                                 </div>
-                                <button onClick={closeModal} className="w-12 h-12 flex items-center justify-center bg-gray-50 dark:bg-white/5 hover:bg-red-500 hover:text-white rounded-2xl transition-all text-gray-400">
+                                <button onClick={closeModal} className="w-12 h-12 flex items-center justify-center bg-gray-50 dark:bg-white/5 hover:bg-red-500 hover:text-white rounded-xl transition-all text-gray-400">
                                     <X size={24} />
                                 </button>
                             </div>
@@ -278,7 +278,7 @@ const Categories = () => {
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                         placeholder="E.G. TECHNICAL REPAIR"
-                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold tracking-tight transition-all"
+                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold tracking-tight transition-all"
                                         required
                                     />
                                 </div>
@@ -288,7 +288,7 @@ const Categories = () => {
                                     <div className="space-y-3">
                                         {formData.icon ? (
                                             <div className="flex items-center gap-5 p-4 border border-primary-500/20 rounded-2xl bg-primary-500/5">
-                                                <img src={formData.icon} alt="Preview" className="w-14 h-14 object-cover rounded-xl border-2 border-primary-500/30 shadow-lg" />
+                                                <img src={formData.icon} alt="Preview" className="w-14 h-14 object-cover rounded-lg border-2 border-primary-500/30 shadow-lg" />
                                                 <div className="flex-1 overflow-hidden">
                                                     <p className="text-[10px] font-black text-gray-900 dark:text-white truncate uppercase tracking-[1px]">{formData.icon.split('/').pop()}</p>
                                                     <p className="text-[8px] font-black text-emerald-500 uppercase tracking-[2px] mt-1">Status: Linked</p>
@@ -327,7 +327,7 @@ const Categories = () => {
                                                 />
                                                 <label
                                                     htmlFor="icon-upload"
-                                                    className={`flex flex-col items-center justify-center gap-2 w-full py-8 border-2 border-dashed rounded-[2rem] cursor-pointer transition-all ${uploading
+                                                    className={`flex flex-col items-center justify-center gap-2 w-full py-8 border-2 border-dashed rounded-2xl cursor-pointer transition-all ${uploading
                                                         ? 'bg-gray-50 dark:bg-white/5 border-gray-300'
                                                         : 'border-gray-200 dark:border-white/10 hover:border-primary-500 hover:bg-primary-500/5'}`}
                                                 >
@@ -352,7 +352,7 @@ const Categories = () => {
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                         placeholder="Brief strategic briefing for this category..."
                                         rows={3}
-                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-medium transition-all"
+                                        className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-medium transition-all"
                                     />
                                 </div>
 
@@ -362,7 +362,7 @@ const Categories = () => {
                                         <select
                                             value={formData.status}
                                             onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                            className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-2xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold uppercase text-[10px] tracking-[2px] transition-all"
+                                            className="w-full px-6 py-4 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white font-bold uppercase text-[10px] tracking-[2px] transition-all"
                                         >
                                             <option value={true}>AUTHORIZED</option>
                                             <option value={false}>DEACTIVATED</option>
@@ -371,7 +371,7 @@ const Categories = () => {
                                     <div className="flex items-end">
                                         <button
                                             type="submit"
-                                            className="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-black text-xs uppercase tracking-[3px] rounded-2xl shadow-xl shadow-primary-500/20 transition-all hover:scale-[1.02]"
+                                            className="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-black text-xs uppercase tracking-[3px] rounded-xl shadow-xl shadow-primary-500/20 transition-all hover:scale-[1.02]"
                                         >
                                             {editingCategory ? 'Update Protocol' : 'Sync Protocol'}
                                         </button>

@@ -57,10 +57,10 @@ const AdminLogin = () => {
                 </div>
 
                 {/* Login Card */}
-                <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-2xl p-8 border border-transparent dark:border-slate-700">
+                <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-xl shadow-2xl p-8 border border-transparent dark:border-slate-700">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
-                            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
                                 {error}
                             </div>
                         )}
@@ -76,7 +76,7 @@ const AdminLogin = () => {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                 placeholder="admin@nakaeworks.com"
                             />
                         </div>
@@ -92,7 +92,7 @@ const AdminLogin = () => {
                                 required
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -100,7 +100,7 @@ const AdminLogin = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-primary-600 text-slate-900 dark:text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-primary-600 text-slate-900 dark:text-white py-3 px-4 rounded-md font-semibold hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center">

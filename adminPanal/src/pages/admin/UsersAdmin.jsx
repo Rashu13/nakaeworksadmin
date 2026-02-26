@@ -138,7 +138,7 @@ const UsersAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-lg font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add User
@@ -147,20 +147,20 @@ const UsersAdmin = () => {
 
             {/* Alerts */}
             {error && (
-                <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-xl flex items-center gap-2">
+                <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 rounded-lg flex items-center gap-2">
                     <AlertCircle size={20} />
                     {error}
                 </div>
             )}
             {success && (
-                <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-600 dark:text-green-400 rounded-xl flex items-center gap-2">
+                <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-600 dark:text-green-400 rounded-lg flex items-center gap-2">
                     <Check size={20} />
                     {success}
                 </div>
             )}
 
             {/* Filters */}
-            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
                 <div className="p-4 flex flex-col sm:flex-row gap-4">
                     <div className="flex-1 relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
@@ -169,7 +169,7 @@ const UsersAdmin = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search users..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="flex gap-2">
@@ -177,7 +177,7 @@ const UsersAdmin = () => {
                             <button
                                 key={role}
                                 onClick={() => setRoleFilter(role)}
-                                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${roleFilter === role
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${roleFilter === role
                                     ? 'bg-primary-600 text-slate-900 dark:text-white'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-700 dark:text-gray-300 dark:hover:bg-slate-600'
                                     }`}
@@ -238,12 +238,12 @@ const UsersAdmin = () => {
                                             {user.phone || '-'}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-xs font-medium rounded-full capitalize ${getRoleBadge(user.role)}`}>
+                                            <span className={`px-2 py-1 text-xs font-medium rounded-md capitalize ${getRoleBadge(user.role)}`}>
                                                 {user.role}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-xs font-medium rounded-full ${user.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+                                            <span className={`px-2 py-1 text-xs font-medium rounded-md ${user.status === true ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
                                                 }`}>
                                                 {user.status === true ? 'Active' : 'Inactive'}
                                             </span>
@@ -281,7 +281,7 @@ const UsersAdmin = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeModal}></div>
-                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
+                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-900 dark:text-white">
                                 {editingUser ? 'Edit User' : 'Add User'}
@@ -338,7 +338,7 @@ const UsersAdmin = () => {
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="Full name"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -350,7 +350,7 @@ const UsersAdmin = () => {
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="email@example.com"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -362,7 +362,7 @@ const UsersAdmin = () => {
                                     value={formData.phone}
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                     placeholder="+91 98765 43210"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                 />
                             </div>
 
@@ -375,7 +375,7 @@ const UsersAdmin = () => {
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     placeholder="••••••••"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required={!editingUser}
                                 />
                             </div>
@@ -385,7 +385,7 @@ const UsersAdmin = () => {
                                 <select
                                     value={formData.role}
                                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 >
                                     <option value="consumer">Consumer</option>
                                     <option value="provider">Provider</option>
@@ -398,7 +398,7 @@ const UsersAdmin = () => {
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 >
                                     <option value={true}>Active</option>
                                     <option value={false}>Inactive</option>
@@ -409,13 +409,13 @@ const UsersAdmin = () => {
                                 <button
                                     type="button"
                                     onClick={closeModal}
-                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700"
+                                    className="flex-1 py-3 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-lg"
                                 >
                                     {editingUser ? 'Update' : 'Create'}
                                 </button>

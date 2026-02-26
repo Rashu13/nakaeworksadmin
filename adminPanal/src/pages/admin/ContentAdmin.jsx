@@ -146,7 +146,7 @@ const ContentAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-md hover:bg-slate-800"
                 >
                     <Plus size={18} />
                     Add {activeTab === 'banners' ? 'Banner' : 'Collection'}
@@ -178,7 +178,7 @@ const ContentAdmin = () => {
             </div>
 
             {message && (
-                <div className={`mb-6 p-4 rounded-lg ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                <div className={`mb-6 p-4 rounded-md ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
                     {message.text}
                 </div>
             )}
@@ -187,7 +187,7 @@ const ContentAdmin = () => {
             {activeTab === 'banners' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {banners.map((banner) => (
-                        <div key={banner.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                        <div key={banner.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden group">
                             <div className="relative h-48 bg-gray-100">
                                 <img src={banner.imageUrl} alt={banner.title} className="w-full h-full object-cover" />
                                 <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -200,7 +200,7 @@ const ContentAdmin = () => {
                                 </div>
                                 {!banner.isActive && (
                                     <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-                                        <span className="px-3 py-1 bg-gray-800 text-slate-900 dark:text-white rounded-full text-xs font-bold flex items-center gap-1">
+                                        <span className="px-3 py-1 bg-gray-800 text-white rounded-md text-xs font-bold flex items-center gap-1">
                                             <EyeOff size={12} /> Hidden
                                         </span>
                                     </div>
@@ -230,9 +230,9 @@ const ContentAdmin = () => {
             {activeTab === 'collections' && (
                 <div className="space-y-4">
                     {collections.map((col) => (
-                        <div key={col.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between group">
+                        <div key={col.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between group">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 bg-primary-50 text-primary-600 rounded-lg flex items-center justify-center font-bold">
+                                <div className="w-10 h-10 bg-primary-50 text-primary-600 rounded flex items-center justify-center font-bold">
                                     {col.position}
                                 </div>
                                 <div>
@@ -248,7 +248,7 @@ const ContentAdmin = () => {
                                     {col.isActive ? 'Active' : 'Hidden'}
                                 </span>
                                 <div className="flex gap-2">
-                                    <button onClick={() => openModal(col)} className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 hover:bg-gray-50 rounded-lg">
+                                    <button onClick={() => openModal(col)} className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 hover:bg-gray-50 rounded">
                                         <Edit2 size={18} />
                                     </button>
                                     <button onClick={() => confirmDelete(col.id)} className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
@@ -265,7 +265,7 @@ const ContentAdmin = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50" onClick={() => setShowModal(false)}></div>
-                    <div className="relative bg-white rounded-2xl w-full max-w-md p-6">
+                    <div className="relative bg-white rounded-xl w-full max-w-md p-6">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-bold text-gray-900">
                                 {editingItem ? 'Edit' : 'Add'} {activeTab === 'banners' ? 'Banner' : 'Collection'}
@@ -282,7 +282,7 @@ const ContentAdmin = () => {
                                     type="text"
                                     value={formData.title || ''}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                                     required
                                 />
                             </div>
@@ -309,7 +309,7 @@ const ContentAdmin = () => {
                                                     type="text"
                                                     value={formData.imageUrl || ''}
                                                     onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm"
+                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-sm"
                                                     placeholder="Enter Image URL or upload"
                                                     required
                                                 />
@@ -364,7 +364,7 @@ const ContentAdmin = () => {
                                         <select
                                             value={formData.type || 'manual'}
                                             onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-md"
                                         >
                                             <option value="manual">Manual Selection</option>
                                             <option value="auto-new">New Arrivals (Auto)</option>
@@ -431,7 +431,7 @@ const ContentAdmin = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="w-full py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">
+                            <button type="submit" className="w-full py-3 bg-slate-900 text-white font-bold rounded-md hover:bg-slate-800">
                                 <Save size={18} className="inline mr-2" /> Save Changes
                             </button>
                         </form>

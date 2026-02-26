@@ -133,7 +133,7 @@ const BookingsAdmin = () => {
             </div>
 
             {/* Filters */}
-            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
+            <div className="bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-xl shadow-sm mb-6 border border-gray-100 dark:border-slate-700">
                 <div className="p-4 flex flex-col sm:flex-row gap-4">
                     <div className="flex-1 relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
@@ -142,14 +142,14 @@ const BookingsAdmin = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search by ID, customer or provider..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="flex gap-2 relative">
                         <select
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
-                            className="px-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none appearance-none pr-10 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300"
+                            className="px-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none appearance-none pr-10 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300"
                         >
                             <option value="">All Status</option>
                             <option value="pending">Pending</option>
@@ -226,7 +226,7 @@ const BookingsAdmin = () => {
                                             )}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(booking.status?.slug)}`}>
+                                            <span className={`px-2 py-1 text-xs font-medium rounded-md capitalize ${getStatusColor(booking.status?.slug)}`}>
                                                 {booking.status?.name}
                                             </span>
                                         </td>
@@ -253,7 +253,7 @@ const BookingsAdmin = () => {
             {showModal && selectedBooking && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowModal(false)}></div>
-                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-2xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
+                    <div className="relative bg-white dark:bg-gray-100 dark:bg-slate-800 rounded-xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-slate-700 shadow-2xl">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">Booking Details</h2>
                             <button onClick={() => setShowModal(false)} className="text-gray-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-700 dark:text-gray-300">
@@ -263,7 +263,7 @@ const BookingsAdmin = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Service Info */}
-                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600">
+                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-100 dark:border-slate-600">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                                     <Briefcase size={18} /> Service Info
                                 </h3>
@@ -290,7 +290,7 @@ const BookingsAdmin = () => {
                             </div>
 
                             {/* Payment Info */}
-                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600">
+                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-100 dark:border-slate-600">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                                     <DollarSign size={18} /> Payment
                                 </h3>
@@ -303,7 +303,7 @@ const BookingsAdmin = () => {
                             </div>
 
                             {/* Customer Info */}
-                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600">
+                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-100 dark:border-slate-600">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                                     <User size={18} /> Customer
                                 </h3>
@@ -315,7 +315,7 @@ const BookingsAdmin = () => {
                             </div>
 
                             {/* Address Info */}
-                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600">
+                            <div className="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-100 dark:border-slate-600">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                                     <FileText size={18} /> Location
                                 </h3>
@@ -328,7 +328,7 @@ const BookingsAdmin = () => {
                         </div>
 
                         {/* Provider Assignment Section */}
-                        <div className="mt-6 bg-primary-50 dark:bg-primary-900/20 p-4 rounded-xl border border-primary-100 dark:border-primary-800">
+                        <div className="mt-6 bg-primary-50 dark:bg-primary-900/20 p-4 rounded-lg border border-primary-100 dark:border-primary-800">
                             <div className="flex items-center justify-between mb-2">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white flex items-center gap-2">
                                     <Briefcase size={18} /> Assigned Provider
@@ -366,7 +366,7 @@ const BookingsAdmin = () => {
                                     <select
                                         value={selectedProvider}
                                         onChange={(e) => setSelectedProvider(e.target.value)}
-                                        className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                        className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="">Select a provider...</option>
                                         {providers.map(p => (
@@ -376,13 +376,13 @@ const BookingsAdmin = () => {
                                     <button
                                         onClick={handleAssignProvider}
                                         disabled={!selectedProvider}
-                                        className="px-4 py-2 bg-primary-600 text-slate-900 dark:text-white rounded-xl font-medium disabled:opacity-50"
+                                        className="px-4 py-2 bg-primary-600 text-slate-900 dark:text-white rounded-lg font-medium disabled:opacity-50"
                                     >
                                         Save
                                     </button>
                                     <button
                                         onClick={() => setShowProviderSelect(false)}
-                                        className="px-4 py-2 bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 rounded-xl font-medium hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
+                                        className="px-4 py-2 bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
                                     >
                                         Cancel
                                     </button>
@@ -392,7 +392,7 @@ const BookingsAdmin = () => {
 
                         {/* Description */}
                         {selectedBooking.description && (
-                            <div className="mt-6 bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600">
+                            <div className="mt-6 bg-gray-50 dark:bg-slate-700/50 p-4 rounded-lg border border-gray-100 dark:border-slate-600">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-2">Description / Notes</h3>
                                 <p className="text-sm text-gray-700 dark:text-gray-700 dark:text-gray-300">{selectedBooking.description}</p>
                             </div>

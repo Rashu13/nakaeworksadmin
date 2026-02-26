@@ -12,10 +12,10 @@ const StatCard = ({ title, value, icon: Icon, color, trend, trendValue, delay })
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay }}
-        className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
+        className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
     >
         <div className="flex items-center justify-between mb-4">
-            <div className={`p-2.5 rounded-lg ${color.replace('text-', 'bg-')}/10 border ${color.replace('text-', 'border-')}/20`}>
+            <div className={`p-2.5 rounded-md ${color.replace('text-', 'bg-')}/10 border ${color.replace('text-', 'border-')}/20`}>
                 <Icon size={20} className={color} />
             </div>
             {trend && (
@@ -96,11 +96,11 @@ const AdminDashboard = () => {
                     <p className="text-slate-500 text-sm">Welcome back! Here's an overview of your platform today.</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <button className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors flex items-center gap-2">
+                    <button className="px-4 py-2 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors flex items-center gap-2">
                         <Calendar size={16} />
                         Filter Date
                     </button>
-                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200">
+                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200">
                         Generate Report
                     </button>
                 </div>
@@ -146,13 +146,13 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Main Revenue Card */}
-                <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+                <div className="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-8 shadow-sm">
                     <div className="flex items-center justify-between mb-8">
                         <div>
                             <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Financial Analysis</p>
                             <h3 className="text-xl font-bold text-slate-900 tracking-tight">Revenue Overview</h3>
                         </div>
-                        <div className="p-3 bg-indigo-50 rounded-xl">
+                        <div className="p-3 bg-indigo-50 rounded-lg">
                             <DollarSign size={24} className="text-indigo-600" />
                         </div>
                     </div>
@@ -193,7 +193,7 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Performance Card */}
-                <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+                <div className="bg-white rounded-lg border border-slate-200 p-8 shadow-sm">
                     <h3 className="text-lg font-bold text-slate-900 mb-6">Operations List</h3>
                     <div className="space-y-6">
                         {[
@@ -212,7 +212,7 @@ const AdminDashboard = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="mt-8 p-4 bg-slate-50 rounded-xl">
+                    <div className="mt-8 p-4 bg-slate-50 rounded-lg">
                         <p className="text-xs text-slate-500 leading-relaxed font-medium">
                             System is running within optimal parameters. No critical issues detected.
                         </p>
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
             </div>
 
             {/* Recent Bookings Table */}
-            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
                 <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                     <h3 className="text-lg font-bold text-slate-900">Recent Transactions</h3>
                     <div className="flex items-center gap-2">
@@ -258,7 +258,7 @@ const AdminDashboard = () => {
                                     <td className="px-6 py-4 text-slate-600">{booking.provider?.name || <span className="text-slate-400 italic">Unassigned</span>}</td>
                                     <td className="px-6 py-4 font-bold text-slate-900">₹{booking.totalAmount}</td>
                                     <td className="px-6 py-4 text-right">
-                                        <span className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-bold lowercase
+                                        <span className={`inline-flex px-2.5 py-1 rounded-md text-[11px] font-bold lowercase
                                             ${booking.status?.slug === 'completed' ? 'bg-emerald-100 text-emerald-700' :
                                                 booking.status?.slug === 'cancelled' ? 'bg-red-100 text-red-700' :
                                                     booking.status?.slug === 'confirmed' ? 'bg-blue-100 text-blue-700' :
