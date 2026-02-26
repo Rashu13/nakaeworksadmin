@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Star, MapPin, Lock, CheckCircle, ChevronRight, Award } from 'lucide-react';
 import { providerService, BASE_URL } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Providers = () => {
     const [providers, setProviders] = useState([]);
@@ -51,7 +52,7 @@ const Providers = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight"
+                        className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
                     >
                         Experience the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-600">Mastery</span>
                     </motion.h1>
@@ -83,9 +84,9 @@ const Providers = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Find your service master..."
-                            className="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white py-4 px-4 font-medium placeholder:text-gray-600"
+                            className="w-full bg-transparent border-none focus:ring-0 text-gray-900 dark:text-white py-4 px-4 font-medium placeholder:text-gray-500"
                         />
-                        <button className="bg-primary-500 hover:bg-primary-600 text-slate-900 dark:text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95">
+                        <button className="bg-primary-500 hover:bg-primary-600 text-slate-900 px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95">
                             Search
                         </button>
                     </div>
@@ -107,7 +108,7 @@ const Providers = () => {
                         <div className="bg-primary-500/10 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                             <Search size={40} className="text-primary-500" />
                         </div>
-                        <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">No Masters Found</h3>
+                        <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">No Masters Found</h3>
                         <p className="text-gray-500 dark:text-gray-400 font-medium">Try broadening your search criteria.</p>
                     </motion.div>
                 ) : (
@@ -139,7 +140,7 @@ const Providers = () => {
                                                 )}
                                             </div>
                                             <div>
-                                                <h3 className="font-black text-xl text-slate-900 dark:text-white group-hover:text-primary-400 transition-colors tracking-tight line-clamp-1">
+                                                <h3 className="font-black text-xl text-gray-900 dark:text-white group-hover:text-primary-400 transition-colors tracking-tight line-clamp-1">
                                                     {provider.name}
                                                 </h3>
                                                 <div className="flex items-center gap-2 mt-2">
@@ -169,12 +170,12 @@ const Providers = () => {
 
                                     <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/5">
                                         <div className="flex flex-col">
-                                            <span className="text-2xl font-black text-slate-900 dark:text-white">{provider.served || 0}+</span>
+                                            <span className="text-2xl font-black text-gray-900 dark:text-white">{provider.served || 0}+</span>
                                             <span className="text-[10px] text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest">Jobs Done</span>
                                         </div>
                                         <Link
                                             to={`/provider-detail/${provider.id}`}
-                                            className="px-6 py-3 bg-white hover:bg-primary-500 text-black hover:text-slate-900 dark:text-white rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center gap-2"
+                                            className="px-6 py-3 bg-gray-50 dark:bg-white text-gray-900 dark:text-slate-900 hover:bg-primary-500 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center gap-2"
                                         >
                                             Profile <ChevronRight size={14} />
                                         </Link>

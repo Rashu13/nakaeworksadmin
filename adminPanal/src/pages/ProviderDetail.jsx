@@ -74,41 +74,37 @@ const ProviderDetail = () => {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="flex flex-col md:flex-row gap-8 items-center md:items-start"
+                            className="flex flex-col md:flex-row gap-10 items-center md:items-start p-2"
                         >
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-primary-500 rounded-[2.5rem] blur-2xl opacity-20" />
+                            <div className="relative group/avatar">
+                                <div className="absolute inset-0 bg-primary-500 rounded-[3rem] blur-2xl opacity-10 group-hover/avatar:opacity-30 transition-opacity" />
                                 <img
                                     src={fullAvatar}
                                     alt={provider.name}
-                                    className="w-40 h-40 rounded-[2.5rem] object-cover border-2 border-gray-200 dark:border-white/10 relative z-10"
+                                    className="w-44 h-44 rounded-[3rem] object-cover border-4 border-white dark:border-white/5 relative z-10 shadow-2xl transition-transform duration-500 group-hover/avatar:scale-[1.02]"
                                 />
                                 {provider.isVerified && (
-                                    <div className="absolute -bottom-2 -right-2 bg-primary-500 p-2 rounded-full border-4 border-[#0a0f1c] z-20 shadow-xl">
-                                        <Shield size={20} className="text-black" />
+                                    <div className="absolute -bottom-2 -right-2 bg-primary-500 p-3 rounded-2xl border-4 border-white dark:border-[#0a0f1c] z-20 shadow-2xl">
+                                        <CheckCircle size={24} className="text-white" />
                                     </div>
                                 )}
                             </div>
 
-                            <div className="text-center md:text-left pt-2">
-                                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{provider.name}</h1>
+                            <div className="text-center md:text-left pt-4">
+                                <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
+                                    <h1 className="text-5xl font-black text-gray-900 dark:text-white tracking-tighter leading-none">{provider.name}</h1>
                                 </div>
-                                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-gray-600 dark:text-gray-400 text-sm font-bold uppercase tracking-widest mb-6">
-                                    <div className="flex items-center gap-1.5 bg-primary-500/10 px-3 py-1 rounded-full border border-primary-500/20">
-                                        <Star size={14} className="fill-primary-500 text-primary-500" />
+                                <div className="flex flex-wrap items-center justify-center md:justify-start gap-5 text-gray-500 dark:text-gray-400 text-[10px] font-black uppercase tracking-[3px] mb-8">
+                                    <div className="flex items-center gap-2 bg-primary-500/10 px-4 py-2 rounded-xl border border-primary-500/20 shadow-sm">
+                                        <Star size={16} className="fill-primary-500 text-primary-500" />
                                         <span className="text-primary-500">{parseFloat(provider.rating || 4.5).toFixed(1)} Rating</span>
                                     </div>
-                                    <div className="flex items-center gap-1.5">
-                                        <MapPin size={14} className="text-primary-500" />
+                                    <div className="flex items-center gap-2 px-4 py-2 bg-white/5 dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/10">
+                                        <MapPin size={16} className="text-primary-500" />
                                         <span>New Delhi</span>
                                     </div>
-                                    <div className="flex items-center gap-1.5 text-emerald-400">
-                                        <CheckCircle size={14} />
-                                        <span>Verified Professional</span>
-                                    </div>
                                 </div>
-                                <p className="text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-xl">
+                                <p className="text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-xl">
                                     {provider.about || "This master professional provides exceptional home services with a focus on quality, reliability, and precision. Vetted for excellence in their respective craft."}
                                 </p>
                             </div>
@@ -152,18 +148,25 @@ const ProviderDetail = () => {
                                             <Link
                                                 key={service.id}
                                                 to={`/service/${service.id}`}
-                                                className="group bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 hover:bg-white/[0.08] hover:border-primary-500/30 transition-all flex items-center gap-4"
+                                                className="group bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-[2rem] p-6 hover:bg-gray-50 dark:hover:bg-white/[0.08] hover:border-primary-500/30 transition-all flex items-center gap-6 shadow-xl hover:shadow-2xl"
                                             >
-                                                <img
-                                                    src={service.thumbnail ? (service.thumbnail.startsWith('http') ? service.thumbnail : `${BASE_URL}${service.thumbnail}`) : `https://ui-avatars.com/api/?name=${service.name}`}
-                                                    className="w-16 h-16 rounded-2xl object-cover border border-gray-200 dark:border-white/10"
-                                                    alt={service.name}
-                                                />
+                                                <div className="relative shrink-0">
+                                                    <img
+                                                        src={service.thumbnail ? (service.thumbnail.startsWith('http') ? service.thumbnail : `${BASE_URL}${service.thumbnail}`) : `https://ui-avatars.com/api/?name=${service.name}`}
+                                                        className="w-20 h-20 rounded-[1.5rem] object-cover border border-gray-100 dark:border-white/10 group-hover:scale-105 transition-transform duration-500"
+                                                        alt={service.name}
+                                                    />
+                                                </div>
                                                 <div className="flex-1">
-                                                    <h4 className="text-slate-900 dark:text-white font-bold group-hover:text-primary-400 transition-colors">{service.name}</h4>
-                                                    <div className="flex items-center justify-between mt-1">
-                                                        <span className="text-primary-500 font-black tracking-tighter text-lg">₹{service.price}</span>
-                                                        <ChevronRight size={16} className="text-gray-600 group-hover:text-primary-500 group-hover:translate-x-1 transition-all" />
+                                                    <h4 className="text-gray-900 dark:text-white font-black uppercase text-sm tracking-tight group-hover:text-primary-500 transition-colors mb-2">{service.name}</h4>
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-primary-500 font-black tracking-tighter text-2xl flex items-center gap-1">
+                                                            <IndianRupee size={18} />
+                                                            {service.price}
+                                                        </span>
+                                                        <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center group-hover:bg-primary-500 group-hover:text-white transition-all">
+                                                            <ChevronRight size={18} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </Link>
@@ -220,36 +223,42 @@ const ProviderDetail = () => {
 
                     {/* Right: Master Stats & Contact */}
                     <div className="space-y-6">
-                        <div className="bg-gradient-to-br from-[#1c2230] to-[#0a0f1c] border border-gray-200 dark:border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 blur-3xl rounded-full" />
+                        <div className="bg-white dark:bg-[#0a0f1c] border border-gray-200 dark:border-white/10 rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-48 h-48 bg-primary-500/5 blur-3xl rounded-full group-hover:bg-primary-500/10 transition-all duration-700" />
 
-                            <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8">Performance Archives</h3>
+                            <h3 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tighter mb-10 border-b border-gray-100 dark:border-white/5 pb-4">Performance Archives</h3>
 
                             <div className="space-y-6">
-                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
-                                    <div className="flex items-center gap-3">
-                                        <Award className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Total Served</span>
+                                <div className="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-[1.5rem] border border-gray-100 dark:border-white/5 hover:border-primary-500/20 transition-all">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center">
+                                            <Award className="text-primary-500" size={20} />
+                                        </div>
+                                        <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 dark:text-gray-400">Total Served</span>
                                     </div>
-                                    <span className="text-slate-900 dark:text-white font-black text-lg">{provider.served || 0}+</span>
+                                    <span className="text-gray-900 dark:text-white font-black text-xl tracking-tighter">{provider.served || 0}+</span>
                                 </div>
-                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
-                                    <div className="flex items-center gap-3">
-                                        <Clock className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Response Matrix</span>
+                                <div className="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-[1.5rem] border border-gray-100 dark:border-white/5 hover:border-primary-500/20 transition-all">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center">
+                                            <Clock className="text-primary-500" size={20} />
+                                        </div>
+                                        <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 dark:text-gray-400">Efficiency Index</span>
                                     </div>
-                                    <span className="text-slate-900 dark:text-white font-black text-lg">98% Efficient</span>
+                                    <span className="text-gray-900 dark:text-white font-black text-xl tracking-tighter">98.4%</span>
                                 </div>
-                                <div className="flex items-center justify-between p-4 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/5">
-                                    <div className="flex items-center gap-3">
-                                        <Shield className="text-primary-500" size={20} />
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400">Quality Lock</span>
+                                <div className="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-[1.5rem] border border-gray-100 dark:border-white/5 hover:border-primary-500/20 transition-all">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center">
+                                            <Shield className="text-primary-500" size={20} />
+                                        </div>
+                                        <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 dark:text-gray-400">Quality Lock</span>
                                     </div>
-                                    <span className="text-slate-900 dark:text-white font-black text-lg">Guaranteed</span>
+                                    <span className="text-gray-900 dark:text-white font-black text-xl tracking-tighter">Elite</span>
                                 </div>
                             </div>
 
-                            <button className="w-full mt-10 py-5 bg-primary-500 text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/20 active:scale-95 flex items-center justify-center gap-3">
+                            <button className="w-full mt-10 py-5 bg-primary-500 text-slate-900 font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/20 active:scale-95 flex items-center justify-center gap-3">
                                 Request Consultation <ChevronRight size={18} />
                             </button>
                         </div>

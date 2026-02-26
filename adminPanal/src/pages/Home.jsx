@@ -28,7 +28,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] text-slate-900 dark:text-white">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0a0f1c] text-gray-900 dark:text-white">
             {/* New Urban Company Style Hero & Categories */}
             <UrbanStyleHero />
 

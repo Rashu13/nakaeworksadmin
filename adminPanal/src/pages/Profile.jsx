@@ -304,22 +304,22 @@ const Profile = () => {
                 >
                     <div>
                         <p className="text-primary-500 text-xs font-black uppercase tracking-[4px] mb-2 px-1">Control Center</p>
-                        <h1 className="text-4xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tight">
+                        <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">
                             MY ACCOUNT <span className="text-primary-500">PORTAL</span>
                         </h1>
-                        <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-2 font-medium">Manage your professional services and account configurations</p>
+                        <p className="text-gray-500 dark:text-gray-400 mt-2 font-medium">Manage your professional services and account configurations</p>
                     </div>
 
                     <div className="flex items-center gap-4">
                         <button
                             onClick={toggleTheme}
-                            className="p-3 bg-gray-100 dark:bg-white/5 dark:bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:bg-white/10 dark:hover:bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-xl transition-all"
+                            className="p-3 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 rounded-xl transition-all shadow-lg"
                         >
                             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         <button
                             onClick={() => { logout(); navigate('/'); }}
-                            className="group flex items-center gap-2 px-8 py-3 bg-gray-100 dark:bg-white/5 hover:bg-red-500 text-gray-600 hover:text-slate-900 dark:text-white border border-gray-200 dark:border-white/10 hover:border-red-500 rounded-xl transition-all font-black tracking-widest text-xs backdrop-blur-md"
+                            className="group flex items-center gap-2 px-8 py-3 bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-500 border border-white/10 hover:border-red-500/30 rounded-xl transition-all font-black tracking-widest text-xs backdrop-blur-md"
                         >
                             <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
                             TERMINATE SESSION
@@ -347,11 +347,11 @@ const Profile = () => {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-left font-bold transition-all relative group overflow-hidden ${activeTab === tab.id
-                                        ? 'text-slate-900 dark:text-slate-900 dark:text-white bg-primary-600 shadow-[0_10px_20px_rgba(28,56,102,0.3)]'
-                                        : 'text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-slate-900 dark:text-white hover:bg-gray-100 dark:bg-gray-100 dark:bg-white/5'
+                                        ? 'text-white bg-primary-500 shadow-[0_10px_20px_rgba(245,158,11,0.2)]'
+                                        : 'text-gray-500 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
-                                    <tab.icon size={20} className={`${activeTab === tab.id ? 'text-slate-900 dark:text-slate-900 dark:text-white' : 'text-gray-600'} group-hover:scale-110 transition-transform`} />
+                                    <tab.icon size={20} className={`${activeTab === tab.id ? 'text-white' : 'text-gray-500'} group-hover:scale-110 transition-transform`} />
                                     <span className="tracking-widest uppercase text-[10px] font-black">{tab.label}</span>
                                     {activeTab === tab.id && (
                                         <motion.div
@@ -398,7 +398,7 @@ const Profile = () => {
                                         <motion.div
                                             initial={{ scale: 0.95 }}
                                             animate={{ scale: 1 }}
-                                            className="bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-slate-900 dark:via-slate-950 dark:to-black rounded-[2.5rem] p-12 text-slate-900 dark:text-slate-900 dark:text-white relative overflow-hidden border border-gray-200 dark:border-gray-200 dark:border-white/5 shadow-2xl mb-12 group"
+                                            className="bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-white/5 dark:via-white/[0.02] dark:to-transparent rounded-[2.5rem] p-12 text-gray-900 dark:text-white relative overflow-hidden border border-gray-200 dark:border-white/10 shadow-2xl mb-12 group"
                                         >
                                             <div className="relative z-10">
                                                 <p className="text-primary-500 text-xs font-black uppercase tracking-[5px] mb-4">Account Status: Active</p>
@@ -410,26 +410,28 @@ const Profile = () => {
                                         </motion.div>
 
                                         {/* Stats Grid */}
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
                                             {[
-                                                { label: 'Total Logs', val: stats.total, icon: Package, color: 'text-blue-500', bg: 'bg-blue-500/10' },
-                                                { label: 'Pending', val: stats.pending, icon: Clock, color: 'text-primary-500', bg: 'bg-primary-500/10' },
-                                                { label: 'Processing', val: stats.active, icon: Loader, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-                                                { label: 'Completed', val: stats.completed, icon: CheckCircle, color: 'text-sky-500', bg: 'bg-sky-500/10' }
+                                                { label: 'Total Missions', val: stats.total, icon: Package, color: 'text-blue-500', bg: 'bg-blue-500/10' },
+                                                { label: 'Pending Access', val: stats.pending, icon: Clock, color: 'text-primary-500', bg: 'bg-primary-500/10' },
+                                                { label: 'Active Protocols', val: stats.active, icon: Loader, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+                                                { label: 'Archived Logs', val: stats.completed, icon: CheckCircle, color: 'text-sky-500', bg: 'bg-sky-500/10' }
                                             ].map((stat, i) => (
                                                 <motion.div
                                                     key={i}
                                                     initial={{ opacity: 0, y: 20 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: i * 0.1 }}
-                                                    className="bg-white dark:bg-white dark:bg-slate-900/60 p-8 rounded-[2rem] border border-gray-200 dark:border-gray-200 dark:border-white/5 shadow-xl hover:border-primary-500/30 transition-all group relative overflow-hidden"
+                                                    className="bg-white dark:bg-white/5 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-xl hover:border-primary-500/30 transition-all group relative overflow-hidden"
                                                 >
-                                                    <div className="absolute top-0 right-0 w-24 h-24 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-full -mr-12 -mt-12 group-hover:bg-primary-500/5 transition-colors"></div>
-                                                    <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10`}>
-                                                        <stat.icon size={26} />
+                                                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 blur-[40px] pointer-events-none group-hover:bg-primary-500/10 transition-colors" />
+                                                    <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-current opacity-30 shadow-inner`}>
+                                                        <stat.icon size={26} className="opacity-100" />
                                                     </div>
-                                                    <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-[2px] mb-2 relative z-10">{stat.label}</p>
-                                                    <h3 className="text-4xl font-black text-slate-900 dark:text-slate-900 dark:text-white relative z-10">{stat.val}</h3>
+                                                    <div className="relative z-10">
+                                                        <p className="text-gray-500 dark:text-gray-400 text-[10px] font-black uppercase tracking-[3px] mb-2">{stat.label}</p>
+                                                        <h3 className="text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{stat.val}</h3>
+                                                    </div>
                                                 </motion.div>
                                             ))}
                                         </div>
@@ -440,11 +442,11 @@ const Profile = () => {
                                             <div className="flex justify-between items-end mb-10">
                                                 <div>
                                                     <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Operation Logs</p>
-                                                    <h3 className="text-3xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tight uppercase">RECENT SYSTEM ACTIVITY</h3>
+                                                    <h3 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight uppercase">RECENT SYSTEM ACTIVITY</h3>
                                                 </div>
                                                 <button
                                                     onClick={() => setActiveTab('bookings')}
-                                                    className="px-6 py-3 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:bg-gray-200 dark:bg-white/10 text-slate-900 dark:text-slate-900 dark:text-white font-black uppercase text-[10px] tracking-widest rounded-xl transition-all flex items-center gap-3 border border-gray-200 dark:border-gray-200 dark:border-white/10"
+                                                    className="px-6 py-3 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-900 dark:text-white font-black uppercase text-[10px] tracking-widest rounded-xl transition-all flex items-center gap-3 border border-gray-200 dark:border-white/10"
                                                 >
                                                     Access All Logs <ChevronRight size={14} className="text-primary-500" />
                                                 </button>
@@ -483,13 +485,13 @@ const Profile = () => {
                                                                 )}
                                                             </div>
                                                             <div className="flex-1 text-center sm:text-left">
-                                                                <h4 className="font-black text-slate-900 dark:text-slate-900 dark:text-white text-lg tracking-tight uppercase group-hover:text-primary-500 transition-colors">{booking.service?.name}</h4>
+                                                                <h4 className="font-black text-gray-900 dark:text-white text-lg tracking-tight uppercase group-hover:text-primary-500 transition-colors">{booking.service?.name}</h4>
                                                                 <div className="flex items-center justify-center sm:justify-start gap-4 mt-2">
-                                                                    <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-600 dark:text-gray-400 text-xs font-bold uppercase">
+                                                                    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 text-xs font-bold uppercase">
                                                                         <Calendar size={14} className="text-primary-500" />
                                                                         {new Date(booking.dateTime).toDateString()}
                                                                     </div>
-                                                                    <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-600 dark:text-gray-400 text-xs font-bold uppercase">
+                                                                    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 text-xs font-bold uppercase">
                                                                         <Clock size={14} className="text-primary-500" />
                                                                         {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                                     </div>
@@ -530,8 +532,8 @@ const Profile = () => {
                                                 </label>
                                             </div>
                                             <div className="text-center sm:text-left">
-                                                <h3 className="text-xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight mb-2">MASTER PORTRAIT</h3>
-                                                <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 font-medium max-w-xs">Upload a high-resolution portrait for your premium profile identity.</p>
+                                                <h3 className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight mb-2">MASTER PORTRAIT</h3>
+                                                <p className="text-gray-600 dark:text-gray-400 font-medium max-w-xs">Upload a high-resolution portrait for your premium profile identity.</p>
                                             </div>
                                         </div>
 
@@ -540,12 +542,12 @@ const Profile = () => {
                                             <div className="md:col-span-2">
                                                 <label className="block text-[10px] font-black text-primary-500/70 uppercase tracking-[2.5px] mb-3">Operational Identity (Full Name)</label>
                                                 <div className="relative group">
-                                                    <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 group-focus-within:text-primary-500 transition-colors" />
+                                                    <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary-500 transition-colors" />
                                                     <input
                                                         type="text"
                                                         value={profile.name}
                                                         onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                                                        className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all placeholder:text-gray-600 font-bold"
+                                                        className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all placeholder:text-gray-500 font-bold"
                                                         placeholder="Enter your full name"
                                                     />
                                                 </div>
@@ -596,7 +598,7 @@ const Profile = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={loading}
-                                                    className="px-12 py-5 bg-primary-500 text-slate-900 dark:text-slate-900 dark:text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(28,56,102,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                    className="px-12 py-5 bg-primary-500 text-gray-900 dark:text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(245,158,11,0.2)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
                                                     {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     Update Protocol Data
@@ -1001,38 +1003,41 @@ const Profile = () => {
                                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                className="relative bg-slate-900/90 rounded-[2.5rem] w-full max-w-xl p-8 max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-200 dark:border-white/10 backdrop-blur-xl shadow-2xl custom-scrollbar"
+                                className="relative bg-white dark:bg-[#0a0f1c] rounded-[2.5rem] w-full max-w-xl p-0 max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-white/10 backdrop-blur-xl shadow-2xl custom-scrollbar"
                             >
-                                <div className="flex justify-between items-center mb-8 sticky top-0 bg-slate-900/10 backdrop-blur-md py-2 z-20">
-                                    <h2 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight">Deployment Intel</h2>
+                                <div className="flex justify-between items-center p-8 border-b border-gray-100 dark:border-white/5 sticky top-0 bg-white/80 dark:bg-[#0a0f1c]/80 backdrop-blur-xl z-20">
+                                    <div>
+                                        <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-1">Deployment Intel</p>
+                                        <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight leading-none">Record: #{selectedBooking.bookingNumber}</h2>
+                                    </div>
                                     <button
                                         onClick={() => setShowBookingModal(false)}
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all border border-gray-200 dark:border-gray-200 dark:border-white/5"
+                                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:bg-red-500/10 hover:text-red-500 transition-all border border-gray-200 dark:border-white/10"
                                     >
-                                        <X size={20} />
+                                        <X size={24} />
                                     </button>
                                 </div>
 
-                                <div className="space-y-8">
+                                <div className="p-8 space-y-8">
                                     {/* Service Header / Items List */}
                                     <div className="space-y-4">
-                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest px-1">Booked Services</p>
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-[2px] px-1">Booked Services</p>
                                         <div className="space-y-3">
                                             {selectedBooking.items && selectedBooking.items.length > 0 ? (
                                                 selectedBooking.items.map((item, idx) => (
-                                                    <div key={idx} className="flex gap-4 p-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-gray-200 dark:border-white/10 group">
-                                                        <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-100 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-gray-200 dark:border-gray-200 dark:border-white/10 overflow-hidden">
-                                                            <FileText size={20} className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400" />
+                                                    <div key={idx} className="flex gap-4 p-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-gray-100 dark:border-white/10 group">
+                                                        <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-white/10 flex items-center justify-center shrink-0 border border-gray-200 dark:border-white/10 overflow-hidden">
+                                                            <FileText size={20} className="text-gray-400" />
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <h3 className="font-black text-sm text-slate-900 dark:text-slate-900 dark:text-white uppercase truncate">{item.serviceName || item.service?.name}</h3>
+                                                            <h3 className="font-black text-sm text-gray-900 dark:text-white uppercase truncate tracking-tight">{item.serviceName || item.service?.name}</h3>
                                                             <div className="flex items-center gap-3 mt-1">
-                                                                <span className="text-[10px] text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-bold uppercase">Qty: {item.quantity}</span>
-                                                                <span className="text-[10px] text-primary-500 font-bold tracking-wider">₹{item.price} each</span>
+                                                                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wider">Qty: {item.quantity}</span>
+                                                                <span className="text-[10px] text-primary-500 font-bold tracking-widest">₹{item.price} UNIT</span>
                                                             </div>
                                                         </div>
                                                         <div className="text-right shrink-0">
-                                                            <p className="text-sm font-black text-slate-900 dark:text-slate-900 dark:text-white">₹{item.total}</p>
+                                                            <p className="text-sm font-black text-gray-900 dark:text-white">₹{item.total}</p>
                                                         </div>
                                                     </div>
                                                 ))
@@ -1057,70 +1062,88 @@ const Profile = () => {
 
                                     {/* Details Grid */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div className="p-5 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl">
-                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">Schedule</p>
-                                            <div className="flex items-center gap-3 text-slate-900 dark:text-slate-900 dark:text-white font-bold text-sm">
-                                                <Calendar size={16} className="text-primary-500" />
-                                                {new Date(selectedBooking.dateTime).toDateString()}
-                                            </div>
-                                            <div className="flex items-center gap-3 text-slate-900 dark:text-slate-900 dark:text-white font-bold text-sm mt-2">
-                                                <Clock size={16} className="text-primary-500" />
-                                                {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        <div className="p-6 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl">
+                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-4">Deployment Schedule</p>
+                                            <div className="space-y-3">
+                                                <div className="flex items-center gap-3 text-gray-900 dark:text-white font-bold text-sm">
+                                                    <div className="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center">
+                                                        <Calendar size={16} className="text-primary-500" />
+                                                    </div>
+                                                    {new Date(selectedBooking.dateTime).toDateString()}
+                                                </div>
+                                                <div className="flex items-center gap-3 text-gray-900 dark:text-white font-bold text-sm">
+                                                    <div className="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center">
+                                                        <Clock size={16} className="text-primary-500" />
+                                                    </div>
+                                                    {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="p-5 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl">
-                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">status & Payment</p>
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-gray-200 dark:border-gray-200 dark:border-white/10 ${getStatusColor(selectedBooking.bookingStatus)}`}>
-                                                    {selectedBooking.bookingStatus?.name || 'Pending'}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center gap-2 text-slate-900 dark:text-slate-900 dark:text-white font-bold text-sm">
-                                                <CheckCircle size={16} className="text-emerald-400" />
-                                                <span className="capitalize">{selectedBooking.paymentMethod || 'Gold Membership'}</span>
+                                        <div className="p-6 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl">
+                                            <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-4">Protocol Status</p>
+                                            <div className="space-y-4">
+                                                <div className="flex items-center gap-2">
+                                                    <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-gray-200 dark:border-white/5 ${getStatusColor(selectedBooking.bookingStatus)}`}>
+                                                        {selectedBooking.bookingStatus?.name || 'Pending'}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center gap-3 text-gray-900 dark:text-white font-bold text-sm">
+                                                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                                        <CheckCircle size={16} className="text-emerald-500" />
+                                                    </div>
+                                                    <span className="capitalize">{selectedBooking.paymentMethod || 'Gold Membership'}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Service Address */}
-                                    <div className="p-6 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl">
-                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-3">Target Location</p>
+                                    <div className="p-6 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl">
+                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-4">Target Location</p>
                                         <div className="flex gap-4">
-                                            <div className="w-10 h-10 bg-primary-500/10 rounded-xl flex items-center justify-center shrink-0">
-                                                <MapPin size={20} className="text-primary-500" />
+                                            <div className="w-12 h-12 bg-primary-500/10 rounded-2xl flex items-center justify-center shrink-0 border border-primary-500/20">
+                                                <MapPin size={22} className="text-primary-500" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-slate-900 dark:text-slate-900 dark:text-white text-sm mb-1">{selectedBooking.address?.addressLine1}</p>
-                                                <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 text-xs font-medium uppercase tracking-wider">{selectedBooking.address?.city}, {selectedBooking.address?.state}</p>
+                                                <p className="font-bold text-gray-900 dark:text-white text-base mb-1 uppercase tracking-tight whitespace-pre-wrap">{selectedBooking.address?.addressLine1}</p>
+                                                <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-[2px]">{selectedBooking.address?.city}, {selectedBooking.address?.state}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Timeline */}
-                                    <div className="p-6 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl">
-                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-6">Execution Log</p>
+                                    <div className="p-8 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-[2rem]">
+                                        <p className="text-[10px] text-primary-500 uppercase font-black tracking-[4px] mb-8">System Execution Log</p>
                                         {loadingTimeline ? (
-                                            <div className="flex justify-center py-4">
-                                                <Loader className="animate-spin text-primary-500" size={20} />
+                                            <div className="flex flex-col items-center justify-center py-10 gap-4">
+                                                <Loader className="animate-spin text-primary-500" size={32} />
+                                                <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Retrieving Logs...</p>
                                             </div>
                                         ) : timeline.length === 0 ? (
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 text-center py-2 font-bold uppercase tracking-widest">No log entries found</p>
+                                            <div className="text-center py-6 border-2 border-dashed border-gray-100 dark:border-white/5 rounded-2xl">
+                                                <p className="text-xs text-gray-500 font-bold uppercase tracking-widest italic">No log entries recorded</p>
+                                            </div>
                                         ) : (
-                                            <div className="relative space-y-6">
-                                                <div className="absolute left-[15px] top-2 bottom-2 w-0.5 bg-gray-200 dark:bg-gray-200 dark:bg-white/10"></div>
+                                            <div className="relative space-y-8 pl-4">
+                                                <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-primary-500/50 via-gray-200 to-transparent dark:from-primary-500/50 dark:via-white/10 dark:to-transparent"></div>
                                                 {timeline.map((item, index) => (
-                                                    <div key={item.id} className="flex gap-4 relative z-10">
-                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs shadow-lg border-2 border-slate-900 ${['Completed', 'Confirmed'].includes(item.status) ? 'bg-emerald-500' :
-                                                            ['Cancelled', 'Rejected'].includes(item.status) ? 'bg-red-500' : 'bg-primary-500'
+                                                    <div key={item.id} className="flex gap-6 relative z-10 group/log">
+                                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-[10px] font-black shadow-xl border-2 border-white dark:border-slate-900 transition-transform group-hover/log:scale-110 ${['Completed', 'Confirmed'].includes(item.status) ? 'bg-emerald-500 text-white' :
+                                                            ['Cancelled', 'Rejected'].includes(item.status) ? 'bg-red-500 text-white' : 'bg-primary-500 text-slate-900'
                                                             }`}>
                                                             {index + 1}
                                                         </div>
-                                                        <div className="flex-1">
-                                                            <p className="font-black text-slate-900 dark:text-slate-900 dark:text-white text-sm uppercase tracking-tight">{item.status}</p>
-                                                            <p className="text-[10px] text-gray-600 dark:text-gray-600 dark:text-gray-400 font-bold uppercase tracking-widest mt-0.5">
-                                                                {new Date(item.createdAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                                                        <div className="flex-1 bg-white/50 dark:bg-white/[0.02] p-4 rounded-2xl border border-gray-100 dark:border-white/5">
+                                                            <div className="flex justify-between items-start mb-1">
+                                                                <p className="font-black text-gray-900 dark:text-white text-sm uppercase tracking-tight">{item.status}</p>
+                                                                <p className="text-[9px] text-primary-500 font-black uppercase tracking-widest opacity-70">
+                                                                    {new Date(item.createdAt).toLocaleString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                                                                </p>
+                                                            </div>
+                                                            <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-2">
+                                                                {new Date(item.createdAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                                                             </p>
-                                                            {item.note && <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-2 p-2 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-200 dark:border-white/5 italic">"{item.note}"</p>}
+                                                            {item.note && <p className="text-xs text-gray-600 dark:text-gray-400 font-medium italic border-l-2 border-primary-500/30 pl-3 py-1 bg-primary-500/5 rounded-r-lg">"{item.note}"</p>}
                                                         </div>
                                                     </div>
                                                 ))}
@@ -1129,32 +1152,38 @@ const Profile = () => {
                                     </div>
 
                                     {/* Price Breakup */}
-                                    <div className="p-6 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl space-y-4">
-                                        <p className="text-[10px] text-primary-500/70 uppercase font-black tracking-widest mb-2">Financial Summary</p>
-                                        <div className="space-y-3">
-                                            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-600 dark:text-gray-400">
-                                                <span>Base Premium</span>
-                                                <span className="text-slate-900 dark:text-slate-900 dark:text-white">₹{selectedBooking.servicePrice || selectedBooking.service?.price}</span>
+                                    <div className="p-8 bg-gray-900 dark:bg-black rounded-[2rem] border border-white/5 shadow-2xl space-y-6 relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 blur-[40px] pointer-events-none"></div>
+                                        <p className="text-[10px] text-primary-500 uppercase font-black tracking-[4px]">Financial Settlement</p>
+                                        <div className="space-y-4">
+                                            <div className="flex justify-between items-center group/price">
+                                                <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Base Premium</span>
+                                                <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.servicePrice || selectedBooking.service?.price}</span>
                                             </div>
                                             {(selectedBooking.discount > 0 || selectedBooking.discountAmount > 0) && (
-                                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-emerald-400">
-                                                    <span>Privilege Discount</span>
-                                                    <span>-₹{selectedBooking.discount || selectedBooking.discountAmount}</span>
+                                                <div className="flex justify-between items-center group/price">
+                                                    <span className="text-[10px] font-black uppercase tracking-[2px] text-emerald-500 group-hover/price:text-emerald-400 transition-colors">Privilege Discount</span>
+                                                    <span className="text-sm font-black text-emerald-500">-₹{selectedBooking.discount || selectedBooking.discountAmount}</span>
                                                 </div>
                                             )}
-                                            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-600 dark:text-gray-400">
-                                                <span>Logistics & Platform</span>
-                                                <span className="text-slate-900 dark:text-slate-900 dark:text-white">₹{selectedBooking.platformFees || 0}</span>
+                                            <div className="flex justify-between items-center group/price">
+                                                <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Logistics / Platform</span>
+                                                <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.platformFees || 0}</span>
                                             </div>
                                             {selectedBooking.tax > 0 && (
-                                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-600 dark:text-gray-400">
-                                                    <span>Regulatory Tax (GST)</span>
-                                                    <span className="text-slate-900 dark:text-slate-900 dark:text-white">₹{selectedBooking.tax}</span>
+                                                <div className="flex justify-between items-center group/price">
+                                                    <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Regulatory Tax (CGST/SGST)</span>
+                                                    <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.tax}</span>
                                                 </div>
                                             )}
-                                            <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-200 dark:border-white/10">
-                                                <span className="text-xs font-black uppercase tracking-[2px] text-primary-500">Total Settlement</span>
-                                                <span className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tighter">₹{selectedBooking.totalAmount}</span>
+                                            <div className="pt-6 border-t border-white/10 flex justify-between items-end">
+                                                <div>
+                                                    <p className="text-[10px] font-black uppercase tracking-[3px] text-primary-500 mb-1">Total Settlement</p>
+                                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider italic">inclusive of all dynamic pricing</p>
+                                                </div>
+                                                <div className="text-right">
+                                                    <span className="text-3xl font-black text-white tracking-tighter">₹{selectedBooking.totalAmount}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

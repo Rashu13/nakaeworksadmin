@@ -55,14 +55,14 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-gray-50 dark:bg-gray-50 dark:bg-[#0a0d14] min-h-screen pt-32 pb-12 transition-colors duration-300">
+        <div className="bg-gray-50 dark:bg-[#0a0f1c] min-h-screen pt-32 pb-12 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-slate-900 dark:text-white mb-6">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
                         Contact <span className="text-primary-500">Us</span>
                     </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Have a question, feedback, or need support? Our team is here to help you around the clock. Fill out the form below or reach us directly.
                     </p>
                 </div>
@@ -70,7 +70,7 @@ const Contact = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Contact Information */}
                     <div className="space-y-6">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-6">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                             Get In Touch
                         </h2>
 
@@ -79,8 +79,8 @@ const Contact = () => {
                                 <Phone className="text-primary-500" size={28} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-2">Phone</h3>
-                                <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 mb-1">Call us directly during working hours.</p>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Phone</h3>
+                                <p className="text-gray-600 dark:text-gray-400 mb-1">Call us directly during working hours.</p>
                                 <a href={`tel:${settings.support_phone}`} className="text-primary-500 font-semibold hover:underline">{settings.support_phone}</a>
                             </div>
                         </div>
@@ -101,8 +101,8 @@ const Contact = () => {
                                 <Clock className="text-emerald-500" size={28} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-2">Working Hours</h3>
-                                <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 font-semibold">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Working Hours</h3>
+                                <p className="text-gray-600 dark:text-gray-400 font-semibold">
                                     {settings.work_time}
                                 </p>
                             </div>

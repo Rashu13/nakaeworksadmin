@@ -33,7 +33,7 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
     }, []);
 
     return (
-        <section className="py-10 px-4 bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+        <section className="py-10 px-4 bg-gray-50 dark:bg-[#0a0f1c] transition-colors duration-300 border-t dark:border-white/5">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <div className="flex items-center justify-between mb-10">
@@ -44,11 +44,11 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
                             </div>
                         )}
                         <div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-900 dark:text-white">
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                                 {title || 'Popular Services'}
                             </h2>
                             {subtitle && (
-                                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 mt-1">{subtitle}</p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">{subtitle}</p>
                             )}
                         </div>
                     </div>
@@ -65,7 +65,7 @@ const ServiceSection = ({ title, subtitle, showTrending = false }) => {
                 {loading ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="bg-gray-100 dark:bg-slate-900 rounded-2xl h-80 animate-pulse"></div>
+                            <div key={i} className="bg-gray-200 dark:bg-white/5 rounded-2xl h-80 animate-pulse"></div>
                         ))}
                     </div>
                 ) : (

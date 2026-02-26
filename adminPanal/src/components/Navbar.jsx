@@ -47,22 +47,41 @@ const Navbar = () => {
         setShowUserMenu(false);
     };
 
+    const fetchLocation = async () => {
+        if (!navigator.geolocation) return;
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            try {
+                const { latitude, longitude } = position.coords;
+                // Using a more reliable zoom level and city detection
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=12&addressdetails=1`);
+                const data = await response.json();
+
+                // Comprehensive city/town detection for Indian addresses
+                const city = data.address.city ||
+                    data.address.town ||
+                    data.address.village ||
+                    data.address.suburb ||
+                    data.address.city_district ||
+                    data.address.county ||
+                    data.address.state_district ||
+                    'New Delhi';
+
+                setUserLocation(city);
+                localStorage.setItem('user_location', city);
+            } catch (error) {
+                console.error("Error fetching location:", error);
+            }
+        }, (error) => {
+            console.error("Geolocation error:", error);
+        }, { enableHighAccuracy: true });
+    };
+
     useEffect(() => {
-        if (!localStorage.getItem('user_location') && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async (position) => {
-                try {
-                    const { latitude, longitude } = position.coords;
-                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`);
-                    const data = await response.json();
-                    const city = data.address.city || data.address.town || data.address.village || data.address.state || 'New Delhi';
-                    setUserLocation(city);
-                    localStorage.setItem('user_location', city);
-                } catch (error) {
-                    console.error("Error fetching location:", error);
-                }
-            }, (error) => {
-                console.error("Geolocation error:", error);
-            });
+        const savedLocation = localStorage.getItem('user_location');
+        // If no location saved, or if it's the default "New Delhi", try to detect
+        if (!savedLocation || savedLocation === 'New Delhi') {
+            fetchLocation();
         }
     }, []);
 
@@ -100,20 +119,20 @@ const Navbar = () => {
                             <Link
                                 key={link.name}
                                 to={link.path}
-                                className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group ${isTransparent ? 'text-slate-900 dark:text-white/80 hover:text-slate-900 dark:text-white' : 'text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white'
+                                className={`relative text-sm font-semibold tracking-wide transition-all duration-300 group ${isTransparent ? 'text-slate-900 dark:text-white hover:text-primary-400' : 'text-gray-700 dark:text-gray-300 hover:text-primary-400'
                                     }`}
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full" />
+                                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`} />
                             </Link>
                         ))}
 
                         {/* Search Bar */}
                         <div className="relative group ml-2">
-                            <div className="absolute inset-0 bg-primary-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 w-64' : 'bg-gray-800/20 border-gray-200 dark:border-white/5 w-80'
-                                } group-focus-within:w-[400px] group-focus-within:border-primary-500/50 group-focus-within:bg-gray-200 dark:bg-white/10 backdrop-blur-md`}>
-                                <Search size={16} className="text-primary-400 shrink-0" />
+                            <div className="absolute inset-0 bg-primary-500/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 w-64' : 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 w-80'
+                                } group-focus-within:w-[400px] group-focus-within:border-primary-500/50 group-focus-within:bg-gray-100 dark:bg-white/10 backdrop-blur-md`}>
+                                <Search size={16} className="text-primary-500 shrink-0" />
                                 <input
                                     type="text"
                                     placeholder="Search services..."
@@ -125,7 +144,7 @@ const Navbar = () => {
                                             setSearchNavbar('');
                                         }
                                     }}
-                                    className="bg-transparent border-none focus:ring-0 text-[13px] font-bold text-slate-900 dark:text-white placeholder:text-gray-500 dark:text-gray-400 w-full tracking-wider"
+                                    className="bg-transparent border-none focus:ring-0 text-[13px] font-bold text-slate-900 dark:text-white placeholder:text-gray-500 w-full tracking-wider"
                                 />
                             </div>
                         </div>
@@ -134,13 +153,15 @@ const Navbar = () => {
                     {/* Right Side */}
                     <div className="flex items-center gap-6">
                         {/* Location */}
-                        <button className={`hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${isTransparent
-                            ? 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white hover:bg-gray-200 dark:bg-white/10'
-                            : 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-800 dark:text-gray-200 hover:bg-gray-200 dark:bg-white/10'
-                            }`}>
-                            <MapPin size={14} className="text-primary-400" />
+                        <button
+                            onClick={fetchLocation}
+                            className={`hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${isTransparent
+                                ? 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white hover:bg-gray-200 dark:bg-white/10'
+                                : 'bg-gray-200/50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-800 dark:text-gray-200 hover:bg-gray-200 dark:bg-white/10'
+                                }`}>
+                            <MapPin size={14} className="text-primary-500" />
                             <span className="text-xs font-bold tracking-tight uppercase">{userLocation}</span>
-                            <ChevronDown size={12} className="text-gray-600 dark:text-gray-400" />
+                            <ChevronDown size={12} className="text-gray-400" />
                         </button>
 
                         <div className="flex items-center gap-3">
@@ -206,7 +227,7 @@ const Navbar = () => {
                                                                     }}
                                                                     className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-slate-900 dark:text-white hover:bg-gray-100 dark:bg-white/5 rounded-xl transition-all"
                                                                 >
-                                                                    <item.icon size={16} className="text-primary-400" />
+                                                                    <item.icon size={16} className="text-primary-500" />
                                                                     {item.label}
                                                                 </button>
                                                             )
