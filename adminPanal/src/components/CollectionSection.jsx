@@ -100,9 +100,13 @@ const CollectionSection = ({ title, services }) => {
                                                 {addedIds.includes(service.id) ? <Check size={16} /> : <ShoppingCart size={16} />}
                                             </motion.button>
                                             <motion.button
-                                                whileHover={{ scale: 1.05 }}
+                                                whileHover={{
+                                                    scale: 1.05,
+                                                    backgroundColor: "#fbbf24", // amber-400
+                                                    boxShadow: "0 0 20px rgba(251, 191, 36, 0.4)"
+                                                }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="px-6 py-2.5 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-amber-400 transition-colors shadow-lg"
+                                                className="px-6 py-2.5 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full transition-all shadow-lg"
                                             >
                                                 Book Now
                                             </motion.button>

@@ -120,6 +120,7 @@ public class BookingsController : ControllerBase
             TotalAmount = totalAmount,
             PaymentMethod = dto.PaymentMethod,
             PaymentStatus = "pending",
+            CouponCode = !string.IsNullOrEmpty(dto.CouponCode) && couponDiscount > 0 ? dto.CouponCode.ToUpper() : null,
             Description = dto.Description ?? (dto.CouponCode != null ? $"Coupon Applied: {dto.CouponCode}" : ""),
             Items = bookingItems,
             IsReviewed = false,

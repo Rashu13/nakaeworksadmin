@@ -92,6 +92,10 @@ public class Booking
     [Column("is_reviewed")]
     public bool IsReviewed { get; set; } = false;
 
+    [Column("coupon_code")]
+    [MaxLength(50)]
+    public string? CouponCode { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

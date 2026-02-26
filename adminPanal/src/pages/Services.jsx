@@ -31,7 +31,7 @@ const Services = () => {
             try {
                 const categoriesData = await serviceService.getCategories();
                 if (categoriesData) {
-                    setCategories(['All', ...categoriesData.map(c => c.name)]);
+                    setCategories([{ id: 'all', name: 'All' }, ...categoriesData]);
                 }
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -42,11 +42,23 @@ const Services = () => {
 
     const handleCategoryClick = useCallback((cat) => {
         setSearchParams(prev => {
-            if (cat === 'All') prev.delete('category');
-            else prev.set('category', cat);
-            return prev;
+            const next = new URLSearchParams(prev);
+            if (cat.name === 'All') next.delete('category');
+            else next.set('category', cat.slug || cat.name);
+            return next;
         }, { replace: true });
     }, [setSearchParams]);
+
+    const isCategoryActive = useCallback((cat) => {
+        const currentCat = getQueryParam('category') || 'All';
+        if (cat.name === 'All') return currentCat === 'All';
+
+        const lowerCurrent = currentCat.toLowerCase();
+        return (
+            cat.name.toLowerCase() === lowerCurrent ||
+            (cat.slug && cat.slug.toLowerCase() === lowerCurrent)
+        );
+    }, [getQueryParam]);
 
     // Fetch Services whenever URL params change
     useEffect(() => {
@@ -57,7 +69,7 @@ const Services = () => {
                 const search = getQueryParam('search');
 
                 const params = {};
-                if (category && category !== 'All') params.category = category;
+                if (category && category.toLowerCase() !== 'all') params.category = category;
                 if (search) params.search = search;
 
                 const data = await serviceService.getAll(params);
@@ -77,9 +89,10 @@ const Services = () => {
             const currentSearch = getQueryParam('search') || '';
             if (searchTerm !== currentSearch) {
                 setSearchParams(prev => {
-                    if (searchTerm) prev.set('search', searchTerm);
-                    else prev.delete('search');
-                    return prev;
+                    const next = new URLSearchParams(prev);
+                    if (searchTerm) next.set('search', searchTerm);
+                    else next.delete('search');
+                    return next;
                 }, { replace: true });
             }
         }, 300);
@@ -130,7 +143,7 @@ const Services = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                         {/* Search */}
                         <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400" size={20} />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                             <input
                                 type="text"
                                 value={searchTerm}
@@ -138,9 +151,10 @@ const Services = () => {
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         setSearchParams(prev => {
-                                            if (searchTerm) prev.set('search', searchTerm);
-                                            else prev.delete('search');
-                                            return prev;
+                                            const next = new URLSearchParams(prev);
+                                            if (searchTerm) next.set('search', searchTerm);
+                                            else next.delete('search');
+                                            return next;
                                         }, { replace: true });
                                     }
                                 }}
@@ -151,16 +165,16 @@ const Services = () => {
 
                         {/* Category Pills */}
                         <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-                            {categories.slice(0, 5).map((cat) => (
+                            {categories.map((cat) => (
                                 <button
-                                    key={cat}
+                                    key={cat.id}
                                     onClick={() => handleCategoryClick(cat)}
-                                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${(getQueryParam('category') || 'All') === cat
+                                    className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${isCategoryActive(cat)
                                         ? 'bg-primary-500 text-slate-900 shadow-lg shadow-primary-500/20'
                                         : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/10'
                                         }`}
                                 >
-                                    {cat}
+                                    {cat.name}
                                 </button>
                             ))}
                         </div>

@@ -28,7 +28,7 @@ public class BookingService
     {
         // Dynamic tax percentage
         var taxSetting = _context.SystemSettings.FirstOrDefault(s => s.Key == "tax_percentage");
-        decimal taxPercent = taxSetting != null && decimal.TryParse(taxSetting.Value, out var val) ? val : 18m;
+        decimal taxPercent = taxSetting != null && decimal.TryParse(taxSetting.Value, out var val) ? val : 0m;
 
         return Math.Round((subtotal + platformFees) * (taxPercent / 100m), 2);
     }
@@ -46,7 +46,7 @@ public class BookingService
         long userId)
     {
         var coupon = await _context.Coupons
-            .FirstOrDefaultAsync(c => c.Code == couponCode);
+            .FirstOrDefaultAsync(c => c.Code.ToLower() == couponCode.ToLower());
 
         if (coupon == null)
             return (false, 0, "Invalid coupon code");
@@ -64,23 +64,31 @@ public class BookingService
             return (false, 0, $"Minimum order value is ₹{coupon.MinOrderValue}");
 
         if (coupon.UsageLimit.HasValue && coupon.UsedCount >= coupon.UsageLimit.Value)
-            return (false, 0, "Coupon usage limit reached");
+            return (false, 0, "Global coupon usage limit reached");
 
-        // Check customer type eligibility
-        if (coupon.CustomerType != "all")
+        // Check per-user limit (Case-insensitive)
+        var userUsageCount = await _context.Bookings
+            .CountAsync(b => b.ConsumerId == userId && b.CouponCode != null && b.CouponCode.ToLower() == couponCode.ToLower());
+
+        if (userUsageCount >= coupon.UsageLimitPerUser)
+            return (false, 0, $"You have already used this coupon {coupon.UsageLimitPerUser} time(s)");
+
+        // Check customer type eligibility (Case-insensitive)
+        string custType = coupon.CustomerType.ToLower();
+        if (custType != "all")
         {
             var bookingCount = await _context.Bookings
                 .Where(b => b.ConsumerId == userId && b.BookingStatusId == 4) // Completed bookings
                 .CountAsync();
 
-            if (coupon.CustomerType == "new" && bookingCount > 0)
-                return (false, 0, "Coupon is only for new customers");
+            if (custType == "new" && bookingCount > 0)
+                return (false, 0, "This coupon is only available for your first completed order");
 
-            if (coupon.CustomerType == "existing" && bookingCount == 0)
-                return (false, 0, "Coupon is only for existing customers");
+            if (custType == "existing" && bookingCount == 0)
+                return (false, 0, "This coupon is only for existing customers");
 
             if (coupon.MaxPastOrders.HasValue && bookingCount > coupon.MaxPastOrders.Value)
-                return (false, 0, $"Maximum {coupon.MaxPastOrders.Value} past orders allowed");
+                return (false, 0, $"Maximum {coupon.MaxPastOrders.Value} past orders allowed for this coupon");
         }
 
         // Calculate discount

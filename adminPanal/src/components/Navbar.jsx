@@ -140,7 +140,7 @@ const Navbar = () => {
                                     onChange={(e) => setSearchNavbar(e.target.value)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
-                                            navigate(`/services?search=${searchNavbar}`);
+                                            navigate(`/services?search=${encodeURIComponent(searchNavbar)}`);
                                             setSearchNavbar('');
                                         }
                                     }}

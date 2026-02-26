@@ -347,8 +347,8 @@ const Profile = () => {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-left font-bold transition-all relative group overflow-hidden ${activeTab === tab.id
-                                        ? 'text-white bg-primary-500 shadow-[0_10px_20px_rgba(245,158,11,0.2)]'
-                                        : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                        ? 'text-white bg-slate-900 shadow-[0_10px_20px_rgba(0,0,0,0.1)]'
+                                        : 'text-gray-500 hover:text-slate-900 hover:bg-slate-50'
                                         }`}
                                 >
                                     <tab.icon size={20} className={`${activeTab === tab.id ? 'text-white' : 'text-gray-500'} group-hover:scale-110 transition-transform`} />
@@ -490,10 +490,6 @@ const Profile = () => {
                                                                     <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 text-xs font-bold uppercase">
                                                                         <Calendar size={14} className="text-primary-500" />
                                                                         {new Date(booking.dateTime).toDateString()}
-                                                                    </div>
-                                                                    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400 text-xs font-bold uppercase">
-                                                                        <Clock size={14} className="text-primary-500" />
-                                                                        {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -673,10 +669,6 @@ const Profile = () => {
                                                                         <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest">
                                                                             <Calendar size={14} className="text-primary-500" />
                                                                             {new Date(booking.dateTime).toDateString()}
-                                                                        </div>
-                                                                        <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest">
-                                                                            <Clock size={14} className="text-primary-500" />
-                                                                            {new Date(booking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1071,12 +1063,6 @@ const Profile = () => {
                                                     </div>
                                                     {new Date(selectedBooking.dateTime).toDateString()}
                                                 </div>
-                                                <div className="flex items-center gap-3 text-gray-900 dark:text-white font-bold text-sm">
-                                                    <div className="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center">
-                                                        <Clock size={16} className="text-primary-500" />
-                                                    </div>
-                                                    {new Date(selectedBooking.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                </div>
                                             </div>
                                         </div>
                                         <div className="p-6 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl">
@@ -1136,9 +1122,6 @@ const Profile = () => {
                                                         <div className="flex-1 bg-white/50 dark:bg-white/[0.02] p-4 rounded-2xl border border-gray-100 dark:border-white/5">
                                                             <div className="flex justify-between items-start mb-1">
                                                                 <p className="font-black text-gray-900 dark:text-white text-sm uppercase tracking-tight">{item.status}</p>
-                                                                <p className="text-[9px] text-primary-500 font-black uppercase tracking-widest opacity-70">
-                                                                    {new Date(item.createdAt).toLocaleString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                                                                </p>
                                                             </div>
                                                             <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-2">
                                                                 {new Date(item.createdAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}

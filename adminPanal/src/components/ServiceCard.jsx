@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, Clock, MapPin, User, Heart, ShoppingCart } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { BASE_URL } from '../services/api';
@@ -134,12 +135,17 @@ const ServiceCard = ({ service, viewMode }) => {
                                 <ShoppingCart size={18} />
                                 <span className="text-xs font-bold">{added ? 'Added!' : 'Add'}</span>
                             </button>
-                            <button
+                            <motion.button
+                                whileHover={{
+                                    scale: 1.05,
+                                    boxShadow: "0 0 15px rgba(251, 191, 36, 0.4)"
+                                }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => navigate(`/service/${service.slug || id}`)}
-                                className="px-5 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-colors shadow-sm"
+                                className="px-5 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-all shadow-sm"
                             >
                                 Book
-                            </button>
+                            </motion.button>
                         </div>
                     </div>
                 </div>
@@ -262,12 +268,17 @@ const ServiceCard = ({ service, viewMode }) => {
                         >
                             <ShoppingCart size={18} />
                         </button>
-                        <button
+                        <motion.button
+                            whileHover={{
+                                scale: 1.05,
+                                boxShadow: "0 0 15px rgba(251, 191, 36, 0.4)"
+                            }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => navigate(`/service/${service.slug || id}`)}
-                            className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-colors shadow-sm"
+                            className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-slate-900 text-sm font-bold uppercase tracking-widest rounded-lg transition-all shadow-sm"
                         >
                             Book
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </div>
