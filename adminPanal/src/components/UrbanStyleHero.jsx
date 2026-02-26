@@ -93,7 +93,7 @@ export default function UrbanStyleHero() {
                     {/* Prominent Search Bar */}
                     <motion.div
                         variants={itemVariants}
-                        className="relative max-w-xl mb-12 group"
+                        className="relative max-w-2xl mb-12 group"
                     >
                         <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-primary-300 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                         <form
@@ -107,17 +107,17 @@ export default function UrbanStyleHero() {
                             className="relative flex items-center bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/10 rounded-[2rem] p-2 pr-4 shadow-2xl backdrop-blur-xl"
                         >
                             <div className="pl-6 text-gray-500 dark:text-gray-400">
-                                <Search size={22} className="group-focus-within:text-primary-500 transition-colors" />
+                                <Search size={24} className="group-focus-within:text-primary-500 transition-colors" />
                             </div>
                             <input
                                 name="search"
                                 type="text"
                                 placeholder="Search for 'AC Repair', 'Cleaning'..."
-                                className="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white py-4 px-4 font-medium placeholder:text-gray-600 outline-none"
+                                className="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white py-5 px-4 text-lg font-medium placeholder:text-gray-600 outline-none"
                             />
                             <button
                                 type="submit"
-                                className="bg-primary-500 hover:bg-primary-600 text-slate-900 dark:text-white px-8 py-3 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary-500/20 active:scale-95"
+                                className="bg-primary-500 hover:bg-primary-600 text-slate-900 dark:text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-sm transition-all shadow-lg shadow-primary-500/20 active:scale-95"
                             >
                                 Search
                             </button>
@@ -225,7 +225,7 @@ export default function UrbanStyleHero() {
                                 className="h-[200px] rounded-3xl overflow-hidden bg-primary-500/20 flex items-center justify-center border border-gray-200 dark:border-white/10 relative group"
                             >
                                 <img
-                                    src="https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&w=600&q=80"
+                                    src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"
                                     alt="Home Cleaning"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                                 />

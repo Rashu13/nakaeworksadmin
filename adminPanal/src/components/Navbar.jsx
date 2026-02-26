@@ -47,6 +47,25 @@ const Navbar = () => {
         setShowUserMenu(false);
     };
 
+    useEffect(() => {
+        if (!localStorage.getItem('user_location') && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                try {
+                    const { latitude, longitude } = position.coords;
+                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`);
+                    const data = await response.json();
+                    const city = data.address.city || data.address.town || data.address.village || data.address.state || 'New Delhi';
+                    setUserLocation(city);
+                    localStorage.setItem('user_location', city);
+                } catch (error) {
+                    console.error("Error fetching location:", error);
+                }
+            }, (error) => {
+                console.error("Geolocation error:", error);
+            });
+        }
+    }, []);
+
     const navLinks = [
         { name: 'Services', path: '/services' },
         { name: 'Providers', path: '/providers' },
@@ -92,9 +111,9 @@ const Navbar = () => {
                         {/* Search Bar */}
                         <div className="relative group ml-2">
                             <div className="absolute inset-0 bg-primary-400/5 rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className={`relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 w-48' : 'bg-gray-800/20 border-gray-200 dark:border-white/5 w-60'
-                                } group-focus-within:w-72 group-focus-within:border-primary-500/50 group-focus-within:bg-gray-200 dark:bg-white/10 backdrop-blur-md`}>
-                                <Search size={14} className="text-primary-400 shrink-0" />
+                            <div className={`relative flex items-center gap-3 px-5 py-2.5 rounded-full border transition-all duration-500 ${isTransparent ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 w-64' : 'bg-gray-800/20 border-gray-200 dark:border-white/5 w-80'
+                                } group-focus-within:w-[400px] group-focus-within:border-primary-500/50 group-focus-within:bg-gray-200 dark:bg-white/10 backdrop-blur-md`}>
+                                <Search size={16} className="text-primary-400 shrink-0" />
                                 <input
                                     type="text"
                                     placeholder="Search services..."
@@ -106,7 +125,7 @@ const Navbar = () => {
                                             setSearchNavbar('');
                                         }
                                     }}
-                                    className="bg-transparent border-none focus:ring-0 text-[11px] font-bold text-slate-900 dark:text-white placeholder:text-gray-500 dark:text-gray-400 w-full tracking-wider"
+                                    className="bg-transparent border-none focus:ring-0 text-[13px] font-bold text-slate-900 dark:text-white placeholder:text-gray-500 dark:text-gray-400 w-full tracking-wider"
                                 />
                             </div>
                         </div>
@@ -125,14 +144,7 @@ const Navbar = () => {
                         </button>
 
                         <div className="flex items-center gap-3">
-                            {/* Theme Toggle - Potentially hidden in this specific dark-first premium look, but kept for functionality */}
-                            <button
-                                onClick={toggleTheme}
-                                className={`p-2 rounded-full transition-all duration-300 ${isTransparent ? 'text-slate-900 dark:text-white/80 hover:bg-gray-200 dark:bg-white/10' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:bg-white/5 hover:text-slate-900 dark:text-white'
-                                    }`}
-                            >
-                                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-                            </button>
+
 
                             {isAuthenticated ? (
                                 <div className="flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-white/10">

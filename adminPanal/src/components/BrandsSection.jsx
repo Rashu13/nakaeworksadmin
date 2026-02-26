@@ -56,6 +56,7 @@ const BrandsSection = () => {
                                     ease: "linear",
                                 },
                             }}
+                            style={{ willChange: "transform" }}
                             className="flex w-[200%] gap-12 items-center"
                         >
                             {/* Double the brands array to create seamless loop */}
@@ -64,10 +65,10 @@ const BrandsSection = () => {
                                 return (
                                     <div
                                         key={i}
-                                        className="flex-shrink-0 flex items-center gap-3 px-8 py-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 opacity-70 hover:opacity-100 hover:scale-105 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 cursor-default group shadow-sm hover:shadow-lg"
+                                        className="flex-shrink-0 flex items-center gap-3 px-8 py-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 hover:scale-105 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 cursor-default group shadow-sm hover:shadow-lg"
                                     >
                                         <IconComponent size={24} strokeWidth={1.5} className="text-gray-400 group-hover:text-primary-500 transition-colors" />
-                                        <span className="text-lg md:text-xl font-black uppercase tracking-widest text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{brand.name}</span>
+                                        <span className="text-lg md:text-xl font-black uppercase tracking-widest text-gray-500 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{brand.name}</span>
                                     </div>
                                 );
                             })}
