@@ -138,7 +138,7 @@ const UsersAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-black text-white rounded-lg font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add User
@@ -169,7 +169,7 @@ const UsersAdmin = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search users..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="flex gap-2">
@@ -178,7 +178,7 @@ const UsersAdmin = () => {
                                 key={role}
                                 onClick={() => setRoleFilter(role)}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${roleFilter === role
-                                    ? 'bg-primary-600 text-slate-900 dark:text-white'
+                                    ? 'bg-slate-900 text-white'
                                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-700 dark:text-gray-300 dark:hover:bg-slate-600'
                                     }`}
                             >
@@ -204,7 +204,7 @@ const UsersAdmin = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="5" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredUsers.length === 0 ? (
@@ -255,7 +255,7 @@ const UsersAdmin = () => {
                                                 </button>
                                                 <button
                                                     onClick={() => openModal(user)}
-                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-colors"
+                                                    className="p-2 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/30 rounded-lg transition-colors"
                                                 >
                                                     <Pencil size={18} />
                                                 </button>
@@ -302,7 +302,7 @@ const UsersAdmin = () => {
                                             <Camera size={40} className="text-slate-400" />
                                         )}
                                     </div>
-                                    <label className="absolute bottom-0 right-0 p-1.5 bg-primary-600 text-slate-900 dark:text-white rounded-full cursor-pointer hover:bg-primary-700 transition-colors shadow-sm">
+                                    <label className="absolute bottom-0 right-0 p-1.5 bg-slate-900 text-white rounded-full cursor-pointer hover:bg-black transition-colors shadow-sm">
                                         <input
                                             type="file"
                                             className="hidden"
@@ -338,7 +338,7 @@ const UsersAdmin = () => {
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     placeholder="Full name"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -350,7 +350,7 @@ const UsersAdmin = () => {
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="email@example.com"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -362,7 +362,7 @@ const UsersAdmin = () => {
                                     value={formData.phone}
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                     placeholder="+91 98765 43210"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                 />
                             </div>
 
@@ -375,7 +375,7 @@ const UsersAdmin = () => {
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     placeholder="••••••••"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required={!editingUser}
                                 />
                             </div>
@@ -385,7 +385,7 @@ const UsersAdmin = () => {
                                 <select
                                     value={formData.role}
                                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 >
                                     <option value="consumer">Consumer</option>
                                     <option value="provider">Provider</option>
@@ -398,7 +398,7 @@ const UsersAdmin = () => {
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value === 'true' })}
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                 >
                                     <option value={true}>Active</option>
                                     <option value={false}>Inactive</option>
@@ -415,7 +415,7 @@ const UsersAdmin = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-lg"
+                                    className="flex-1 py-3 bg-slate-900 hover:bg-black text-white font-medium rounded-lg shadow-lg shadow-slate-200 dark:shadow-none transition-all"
                                 >
                                     {editingUser ? 'Update' : 'Create'}
                                 </button>

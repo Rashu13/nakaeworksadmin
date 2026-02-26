@@ -192,7 +192,7 @@ const ServicesAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-black text-white rounded-lg font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Add Service
@@ -224,7 +224,7 @@ const ServicesAdmin = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search services..."
-                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                             />
                         </div>
 
@@ -232,7 +232,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={categoryFilter}
                                 onChange={(e) => setCategoryFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[150px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[150px]"
                             >
                                 <option value="all">All Categories</option>
                                 {categories.map(cat => (
@@ -243,7 +243,7 @@ const ServicesAdmin = () => {
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
-                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[120px]"
+                                className="px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white min-w-[120px]"
                             >
                                 <option value="all">All Status</option>
                                 <option value="active">Active</option>
@@ -269,7 +269,7 @@ const ServicesAdmin = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredServices.length === 0 ? (
@@ -714,7 +714,7 @@ const ServicesAdmin = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3.5 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-semibold rounded-lg shadow-lg shadow-primary-200 dark:shadow-none hover:shadow-xl transition-all"
+                                    className="flex-1 py-3.5 bg-slate-900 hover:bg-black text-white font-semibold rounded-lg shadow-lg shadow-slate-200 dark:shadow-none hover:shadow-xl transition-all"
                                 >
                                     {editingService ? 'Update Service' : 'Create Service'}
                                 </button>

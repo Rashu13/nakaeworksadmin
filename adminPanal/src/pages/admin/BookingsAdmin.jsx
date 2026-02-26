@@ -142,14 +142,14 @@ const BookingsAdmin = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search by ID, customer or provider..."
-                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                            className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                         />
                     </div>
                     <div className="flex gap-2 relative">
                         <select
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
-                            className="px-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none appearance-none pr-10 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300"
+                            className="px-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none appearance-none pr-10 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-700 dark:text-gray-300"
                         >
                             <option value="">All Status</option>
                             <option value="pending">Pending</option>
@@ -328,7 +328,7 @@ const BookingsAdmin = () => {
                         </div>
 
                         {/* Provider Assignment Section */}
-                        <div className="mt-6 bg-primary-50 dark:bg-primary-900/20 p-4 rounded-lg border border-primary-100 dark:border-primary-800">
+                        <div className="mt-6 bg-slate-50 dark:bg-slate-900/20 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
                             <div className="flex items-center justify-between mb-2">
                                 <h3 className="font-semibold text-gray-900 dark:text-slate-900 dark:text-white flex items-center gap-2">
                                     <Briefcase size={18} /> Assigned Provider
@@ -336,7 +336,7 @@ const BookingsAdmin = () => {
                                 {!showProviderSelect && (
                                     <button
                                         onClick={() => setShowProviderSelect(true)}
-                                        className="text-sm text-primary-600 font-medium hover:underline"
+                                        className="text-sm text-slate-900 font-medium hover:underline"
                                     >
                                         {selectedBooking.provider ? 'Change Provider' : 'Assign Provider'}
                                     </button>
@@ -366,7 +366,7 @@ const BookingsAdmin = () => {
                                     <select
                                         value={selectedProvider}
                                         onChange={(e) => setSelectedProvider(e.target.value)}
-                                        className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                        className="flex-1 px-4 py-2 border border-gray-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="">Select a provider...</option>
                                         {providers.map(p => (
@@ -376,7 +376,7 @@ const BookingsAdmin = () => {
                                     <button
                                         onClick={handleAssignProvider}
                                         disabled={!selectedProvider}
-                                        className="px-4 py-2 bg-primary-600 text-slate-900 dark:text-white rounded-lg font-medium disabled:opacity-50"
+                                        className="px-4 py-2 bg-slate-900 text-white rounded-lg font-medium disabled:opacity-50"
                                     >
                                         Save
                                     </button>

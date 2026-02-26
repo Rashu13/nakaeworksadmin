@@ -55,11 +55,11 @@ const AdminLayout = () => {
                 {/* Logo Section */}
                 <div className="h-16 flex items-center px-6 mb-6">
                     <Link to="/admin" className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center">
                             <span className="text-white font-bold text-lg lowercase">n</span>
                         </div>
                         {sidebarOpen && (
-                            <span className="text-slate-900 font-extrabold text-xl tracking-tight">Nakae<span className="text-indigo-600">works</span></span>
+                            <span className="text-slate-900 font-extrabold text-xl tracking-tight">Nakae<span className="text-slate-900">works</span></span>
                         )}
                     </Link>
                 </div>
@@ -83,11 +83,11 @@ const AdminLayout = () => {
                                             key={item.path}
                                             to={item.path}
                                             className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 group ${isActive
-                                                ? 'bg-indigo-50 text-indigo-700'
+                                                ? 'bg-slate-100 text-slate-900'
                                                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                                 }`}
                                         >
-                                            <Icon size={18} className={`${isActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-slate-600'}`} />
+                                            <Icon size={18} className={`${isActive ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-600'}`} />
                                             {sidebarOpen && <span className="font-medium text-sm">{item.name}</span>}
                                         </Link>
                                     );
@@ -128,7 +128,7 @@ const AdminLayout = () => {
                     <div className="flex items-center gap-4">
                         <button className="relative p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors">
                             <Bell size={18} />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-indigo-600 rounded-full border-2 border-white"></span>
+                            <span className="absolute top-2 right-2 w-2 h-2 bg-slate-900 rounded-full border-2 border-white"></span>
                         </button>
 
                         <div className="h-6 w-[1px] bg-slate-200 mx-2" />

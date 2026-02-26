@@ -100,7 +100,7 @@ const AdminDashboard = () => {
                         <Calendar size={16} />
                         Filter Date
                     </button>
-                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200">
+                    <button className="px-4 py-2 bg-slate-900 text-white rounded-md text-sm font-medium hover:bg-black transition-colors shadow-sm">
                         Generate Report
                     </button>
                 </div>
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
                     title="Total Bookings"
                     value={stats.totalBookings.toLocaleString()}
                     icon={ShoppingBag}
-                    color="text-indigo-600"
+                    color="text-slate-900"
                     trend="up"
                     trendValue="8"
                     delay={0.4}
@@ -149,11 +149,11 @@ const AdminDashboard = () => {
                 <div className="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-8 shadow-sm">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Financial Analysis</p>
+                            <p className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-1">Financial Analysis</p>
                             <h3 className="text-xl font-bold text-slate-900 tracking-tight">Revenue Overview</h3>
                         </div>
-                        <div className="p-3 bg-indigo-50 rounded-lg">
-                            <DollarSign size={24} className="text-indigo-600" />
+                        <div className="p-3 bg-slate-100 rounded-lg">
+                            <DollarSign size={24} className="text-slate-900" />
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@ const AdminDashboard = () => {
                                 <span>82%</span>
                             </div>
                             <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-indigo-600 w-[82%]" />
+                                <div className="h-full bg-slate-900 w-[82%]" />
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@ const AdminDashboard = () => {
                     <h3 className="text-lg font-bold text-slate-900 mb-6">Operations List</h3>
                     <div className="space-y-6">
                         {[
-                            { label: 'Monthly Bookings', value: stats.monthlyBookings, total: 200, color: 'bg-indigo-600' },
+                            { label: 'Monthly Bookings', value: stats.monthlyBookings, total: 200, color: 'bg-slate-900' },
                             { label: 'Pending Approvals', value: stats.pendingBookings, total: 50, color: 'bg-amber-500' },
                             { label: 'Active Sessions', value: 12, total: 30, color: 'bg-emerald-500' }
                         ].map((item, i) => (
@@ -231,7 +231,7 @@ const AdminDashboard = () => {
                         <button className="text-slate-400 hover:text-slate-600 p-1">
                             <Filter size={18} />
                         </button>
-                        <button className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 ml-4">
+                        <button className="text-xs font-semibold text-slate-900 hover:text-black ml-4">
                             View All
                         </button>
                     </div>

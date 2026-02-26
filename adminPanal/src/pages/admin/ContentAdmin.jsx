@@ -424,7 +424,7 @@ const ContentAdmin = () => {
                                             type="checkbox"
                                             checked={formData.isActive !== false}
                                             onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                                            className="w-5 h-5 text-primary-600 rounded focus:ring-primary-500"
+                                            className="w-5 h-5 text-slate-900 rounded focus:ring-slate-500"
                                         />
                                         <span className="ml-2 text-gray-700 font-medium">Active</span>
                                     </label>

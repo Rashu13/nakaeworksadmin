@@ -101,7 +101,7 @@ const SystemSettings = () => {
                         {settings.map((setting) => (
                             <div key={setting.id} className="p-6 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-blue-50 text-blue-600 rounded-xl mt-1 shrink-0">
+                                    <div className="p-3 bg-slate-100 text-slate-900 rounded-xl mt-1 shrink-0">
                                         {getIcon(setting.key)}
                                     </div>
                                     <div>
@@ -121,7 +121,7 @@ const SystemSettings = () => {
                                                     handleUpdate(setting.key, e.target.value);
                                                 }
                                             }}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-900 outline-none transition-all"
                                         />
                                         <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 pointer-events-none">
                                             {setting.key.includes('percentage') ? '%' : ''}

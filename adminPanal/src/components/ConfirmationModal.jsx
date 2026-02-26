@@ -30,7 +30,7 @@ const ConfirmationModal = ({
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
                 onClick={onClose}
             ></div>
-            <div className="relative bg-white dark:bg-slate-900 rounded-2xl w-full max-w-md shadow-xl transform transition-all scale-100 opacity-100 overflow-hidden">
+            <div className="relative bg-white dark:bg-slate-900 rounded-xl w-full max-w-md shadow-xl transform transition-all scale-100 opacity-100 overflow-hidden">
                 {/* Header / Close Button */}
                 <button
                     onClick={onClose}
@@ -64,7 +64,7 @@ const ConfirmationModal = ({
                         {cancelText && (
                             <button
                                 onClick={onClose}
-                                className="flex-1 py-2.5 px-4 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200"
+                                className="flex-1 py-2.5 px-4 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-700 dark:text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-100 dark:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200"
                             >
                                 {cancelText}
                             </button>
@@ -74,7 +74,7 @@ const ConfirmationModal = ({
                                 if (onConfirm) onConfirm();
                                 onClose();
                             }}
-                            className={`flex-1 py-2.5 px-4 text-white font-medium rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${getButtonColor()}`}
+                            className={`flex-1 py-2.5 px-4 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${getButtonColor()}`}
                         >
                             {confirmText}
                         </button>

@@ -115,15 +115,15 @@ const Categories = () => {
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
-                        <span className="w-8 h-[2px] bg-primary-500"></span>
-                        <span className="text-[10px] font-black text-primary-500 uppercase tracking-[4px]">Operations Index</span>
+                        <span className="w-8 h-[2px] bg-slate-900"></span>
+                        <span className="text-[10px] font-black text-slate-900 uppercase tracking-[4px]">Operations Index</span>
                     </div>
-                    <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">Category <span className="text-primary-500">Archives</span></h1>
+                    <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">Category <span className="text-slate-900">Archives</span></h1>
                     <p className="text-gray-500 dark:text-gray-500 text-sm font-bold mt-2 uppercase tracking-[1px]">Manage and classify professional service protocols.</p>
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center justify-center gap-3 px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-black text-sm uppercase tracking-[2px] shadow-lg shadow-primary-500/20 transition-all hover:scale-[1.02] active:scale-95"
+                    className="flex items-center justify-center gap-3 px-8 py-3 bg-slate-900 hover:bg-black text-white rounded-lg font-black text-sm uppercase tracking-[2px] shadow-lg transition-all hover:scale-[1.02] active:scale-95"
                 >
                     <Plus size={20} />
                     Deploy New Category
@@ -155,7 +155,7 @@ const Categories = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="FILTER REGISTRY BY NAME OR PROTOCOL..."
-                            className="w-full pl-16 pr-8 py-5 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-primary-500/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white placeholder-gray-400 text-xs font-black tracking-[1px] transition-all"
+                            className="w-full pl-16 pr-8 py-5 border border-gray-100 dark:border-white/10 rounded-xl focus:ring-4 focus:ring-slate-900/10 outline-none bg-white dark:bg-black/20 text-gray-900 dark:text-white placeholder-gray-400 text-xs font-black tracking-[1px] transition-all"
                         />
                     </div>
                 </div>
@@ -176,7 +176,7 @@ const Categories = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="5" className="py-20 text-center">
-                                        <div className="w-10 h-10 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-10 h-10 border-4 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                         <p className="text-[10px] font-black text-gray-400 uppercase tracking-[3px] mt-4">Retrieving Archives...</p>
                                     </td>
                                 </tr>
@@ -371,7 +371,7 @@ const Categories = () => {
                                     <div className="flex items-end">
                                         <button
                                             type="submit"
-                                            className="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-black text-xs uppercase tracking-[3px] rounded-xl shadow-xl shadow-primary-500/20 transition-all hover:scale-[1.02]"
+                                            className="w-full py-4 bg-slate-900 hover:bg-black text-white font-black text-xs uppercase tracking-[3px] rounded-xl shadow-xl transition-all hover:scale-[1.02]"
                                         >
                                             {editingCategory ? 'Update Protocol' : 'Sync Protocol'}
                                         </button>

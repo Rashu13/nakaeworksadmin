@@ -44,8 +44,8 @@ const BookingConfirm = () => {
             setLoading(true);
             const response = await couponService.validate(couponCode, effectiveTotalPrice);
 
-            if (response.valid) {
-                setDiscountAmt(parseFloat(response.calculatedDiscount));
+            if (response.isValid) {
+                setDiscountAmt(parseFloat(response.discountAmount));
                 showAlert('Coupon Applied', `Success: ${response.message}`, 'success');
             } else {
                 setDiscountAmt(0);
@@ -161,7 +161,7 @@ const BookingConfirm = () => {
                     {/* Left - Forms */}
                     <div className="md:col-span-2 space-y-6">
                         {/* Service Summary */}
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">
                                 {isCartFlow ? `${cartItems.length} Services Selected` : 'Service Details'}
                             </h2>
@@ -199,7 +199,7 @@ const BookingConfirm = () => {
                         </div>
 
                         {/* Address Selection */}
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white">Service Address</h2>
                                 <button
@@ -245,7 +245,7 @@ const BookingConfirm = () => {
                         </div>
 
                         {/* Payment Method */}
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Payment Method</h2>
                             <div className="space-y-3">
                                 <label
@@ -291,7 +291,7 @@ const BookingConfirm = () => {
 
                     {/* Right - Price Summary */}
                     <div className="md:col-span-1">
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg sticky top-24 border border-gray-100 dark:border-gray-700">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg sticky top-24 border border-gray-100 dark:border-gray-700">
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-8">Price Details</h2>
 
                             {/* Coupon */}
@@ -301,7 +301,7 @@ const BookingConfirm = () => {
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                     placeholder="Enter Coupon Code"
-                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-xl text-sm focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                                    className="w-full px-4 py-3 pr-24 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors bg-gray-50/50 dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                                 />
                                 <button
                                     onClick={applyCoupon}
@@ -343,7 +343,7 @@ const BookingConfirm = () => {
                                 onClick={handleBooking}
                                 style={{ color: 'white' }}
                                 disabled={loading}
-                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-800 dark:hover:bg-primary-700 !text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                className="w-full mt-6 py-4 bg-slate-900 dark:bg-primary-600 hover:bg-gray-800 dark:hover:bg-primary-700 !text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             >
                                 {loading ? (
                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -367,7 +367,7 @@ const BookingConfirm = () => {
             {/* Add Address Modal */}
             {showAddAddress && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 border border-gray-100 dark:border-gray-700 shadow-xl">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl w-full max-w-md p-6 border border-gray-100 dark:border-gray-700 shadow-xl">
                         <h2 className="text-xl font-bold text-gray-900 dark:text-slate-900 dark:text-white mb-4">Add New Address</h2>
                         <form onSubmit={async (e) => {
                             e.preventDefault();
@@ -391,20 +391,20 @@ const BookingConfirm = () => {
                             }
                         }}>
                             <div className="space-y-4">
-                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                <input name="address" placeholder="Address Line" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 <div className="grid grid-cols-2 gap-4">
-                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
-                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                    <input name="city" placeholder="City" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                    <input name="state" placeholder="State" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
                                 </div>
-                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
-                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-xl bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors appearance-none">
+                                <input name="zipCode" placeholder="Pincode" required className="w-full px-4 py-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors" />
+                                <select name="type" className="w-full px-4 py-2 border dark:border-gray-600 rounded-lg bg-transparent dark:bg-gray-700 text-gray-900 dark:text-slate-900 dark:text-white focus:border-slate-900 dark:focus:border-primary-500 outline-none transition-colors appearance-none">
                                     <option value="home">Home</option>
                                     <option value="work">Work</option>
                                     <option value="other">Other</option>
                                 </select>
                                 <div className="flex gap-3 pt-2">
-                                    <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
-                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-white font-medium rounded-xl hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
+                                    <button type="button" onClick={() => setShowAddAddress(false)} className="flex-1 py-2 border dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-700 dark:text-gray-300 transition-colors">Cancel</button>
+                                    <button type="submit" className="flex-1 py-2 bg-slate-900 dark:bg-primary-600 text-white font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg">Save</button>
                                 </div>
                             </div>
                         </form>

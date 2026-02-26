@@ -160,7 +160,7 @@ const CouponsAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white rounded-xl font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-black text-white rounded-xl font-medium transition-colors"
                 >
                     <Plus size={20} />
                     Create Coupon
@@ -190,7 +190,7 @@ const CouponsAdmin = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search coupons..."
-                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                        className="w-full pl-12 pr-4 py-2 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                     />
                 </div>
             </div>
@@ -213,7 +213,7 @@ const CouponsAdmin = () => {
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="px-6 py-10 text-center">
-                                        <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                        <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
                                     </td>
                                 </tr>
                             ) : filteredCoupons.length === 0 ? (
@@ -311,7 +311,7 @@ const CouponsAdmin = () => {
                                     value={formData.code}
                                     onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
                                     placeholder="e.g. SAVE20"
-                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                    className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none uppercase bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                     required
                                 />
                             </div>
@@ -322,7 +322,7 @@ const CouponsAdmin = () => {
                                     <select
                                         value={formData.discountType}
                                         onChange={(e) => setFormData({ ...formData, discountType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="fixed">Fixed Amount</option>
                                         <option value="percentage">Percentage (%)</option>
@@ -338,7 +338,7 @@ const CouponsAdmin = () => {
                                             value={formData.discountValue}
                                             onChange={(e) => setFormData({ ...formData, discountValue: e.target.value })}
                                             placeholder={formData.discountType === 'percentage' ? "20" : "500"}
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                             required={formData.discountType !== 'free_service_charge'}
                                         />
                                     </div>
@@ -365,7 +365,7 @@ const CouponsAdmin = () => {
                                             value={formData.maxDiscount}
                                             onChange={(e) => setFormData({ ...formData, maxDiscount: e.target.value })}
                                             placeholder="Optional"
-                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
+                                            className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white placeholder-gray-400"
                                         />
                                     </div>
                                 )}
@@ -387,7 +387,7 @@ const CouponsAdmin = () => {
                                     <select
                                         value={formData.customerType}
                                         onChange={(e) => setFormData({ ...formData, customerType: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
+                                        className="w-full px-4 py-3 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-slate-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-900 dark:text-white"
                                     >
                                         <option value="all">All Customers</option>
                                         <option value="new">New Customers Only (0 orders)</option>
@@ -450,7 +450,7 @@ const CouponsAdmin = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 py-3 bg-primary-600 hover:bg-primary-700 text-slate-900 dark:text-white font-medium rounded-xl"
+                                    className="flex-1 py-3 bg-slate-900 hover:bg-black text-white font-medium rounded-xl"
                                 >
                                     {editingCoupon ? 'Update Coupon' : 'Create Coupon'}
                                 </button>
