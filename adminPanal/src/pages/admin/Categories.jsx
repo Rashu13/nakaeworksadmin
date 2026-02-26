@@ -1,4 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Search, Pencil, Trash2, X, Upload, AlertCircle, Check } from 'lucide-react';
+import { adminService, uploadService } from '../../services/api';
+import ConfirmationModal from '../../components/ConfirmationModal';
 
 const Categories = () => {
     // ... existing state ...
@@ -311,8 +315,8 @@ const Categories = () => {
                                                         uploadData.append('image', file);
                                                         try {
                                                             setUploading(true);
-                                                            const { data } = await uploadService.uploadImage(uploadData);
-                                                            setFormData(prev => ({ ...prev, icon: data.imageUrl }));
+                                                            const { imageUrl } = await uploadService.uploadImage(file);
+                                                            setFormData(prev => ({ ...prev, icon: imageUrl }));
                                                         } catch (err) {
                                                             console.error(err);
                                                             setAlertConfig({ isOpen: true, title: 'Error', message: 'Encryption Failed', type: 'danger' });

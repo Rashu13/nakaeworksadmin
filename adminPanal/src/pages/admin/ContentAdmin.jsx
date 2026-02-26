@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ConfirmationModal from '../../components/ConfirmationModal';
-import { contentService, serviceService } from '../../services/api';
-import { Plus, Image as ImageIcon, Layers, Edit2, Trash2, Eye, EyeOff, Link, Save, X } from 'lucide-react';
+import { contentService, serviceService, uploadService } from '../../services/api';
+import { Plus, Image as ImageIcon, Layers, Edit2, Trash2, Eye, EyeOff, Link, Save, X, Upload } from 'lucide-react';
 
 const ContentAdmin = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +16,7 @@ const ContentAdmin = () => {
     const [banners, setBanners] = useState([]);
     const [collections, setCollections] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState(null);
 
     // Modal State
@@ -145,7 +146,7 @@ const ContentAdmin = () => {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-slate-900 dark:text-white rounded-lg hover:bg-gray-100 dark:bg-slate-800"
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800"
                 >
                     <Plus size={18} />
                     Add {activeTab === 'banners' ? 'Banner' : 'Collection'}
@@ -289,14 +290,59 @@ const ContentAdmin = () => {
                             {activeTab === 'banners' && (
                                 <>
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                                        <input
-                                            type="text"
-                                            value={formData.imageUrl || ''}
-                                            onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                                            required
-                                        />
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Image {uploading && <span className="text-primary-600 animate-pulse">(Uploading...)</span>}</label>
+                                        <div className="space-y-2">
+                                            {formData.imageUrl && (
+                                                <div className="relative w-full h-32 rounded-lg overflow-hidden border border-gray-200">
+                                                    <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setFormData({ ...formData, imageUrl: '' })}
+                                                        className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-sm"
+                                                    >
+                                                        <X size={14} />
+                                                    </button>
+                                                </div>
+                                            )}
+                                            <div className="flex gap-2">
+                                                <input
+                                                    type="text"
+                                                    value={formData.imageUrl || ''}
+                                                    onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                                                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm"
+                                                    placeholder="Enter Image URL or upload"
+                                                    required
+                                                />
+                                                <div className="relative">
+                                                    <input
+                                                        type="file"
+                                                        id="banner-upload"
+                                                        className="hidden"
+                                                        accept="image/*"
+                                                        onChange={async (e) => {
+                                                            const file = e.target.files[0];
+                                                            if (!file) return;
+                                                            try {
+                                                                setUploading(true);
+                                                                const { imageUrl } = await uploadService.uploadImage(file);
+                                                                setFormData(prev => ({ ...prev, imageUrl }));
+                                                            } catch (err) {
+                                                                console.error(err);
+                                                                setMessage({ type: 'error', text: 'Upload failed' });
+                                                            } finally {
+                                                                setUploading(false);
+                                                            }
+                                                        }}
+                                                    />
+                                                    <label
+                                                        htmlFor="banner-upload"
+                                                        className={`flex items-center justify-center p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                    >
+                                                        <Upload size={20} className="text-gray-500" />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
@@ -385,7 +431,7 @@ const ContentAdmin = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="w-full py-3 bg-slate-900 text-slate-900 dark:text-white font-bold rounded-lg hover:bg-gray-100 dark:bg-slate-800">
+                            <button type="submit" className="w-full py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800">
                                 <Save size={18} className="inline mr-2" /> Save Changes
                             </button>
                         </form>
