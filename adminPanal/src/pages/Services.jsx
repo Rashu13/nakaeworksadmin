@@ -183,7 +183,7 @@ const Services = () => {
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
-                                className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-white/10 rounded-xl hover:bg-gray-50 dark:hover:bg-white/10 transition-colors bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300"
+                                className="flex items-center gap-2 px-5 py-2.5 bg-[#0a2357] hover:bg-[#0c2d6e] text-white rounded-xl transition-all shadow-md hover:shadow-lg font-bold text-sm"
                             >
                                 <SlidersHorizontal size={18} />
                                 <span className="hidden sm:inline">Filters</span>

@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoriteContext';
 
 const Navbar = () => {
     const { totalItems } = useCart();
+    const { favorites } = useFavorites();
     const [isOpen, setIsOpen] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [userLocation, setUserLocation] = useState('New Delhi');
@@ -169,8 +171,16 @@ const Navbar = () => {
 
                             {isAuthenticated ? (
                                 <div className="flex items-center gap-4 pl-4 border-l border-gray-200 dark:border-white/10">
-                                    <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors relative">
+                                    <button
+                                        onClick={() => navigate('/favorites')}
+                                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors relative"
+                                    >
                                         <Heart size={20} />
+                                        {favorites?.length > 0 && (
+                                            <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                                {favorites.length}
+                                            </span>
+                                        )}
                                     </button>
 
                                     <button
@@ -179,7 +189,7 @@ const Navbar = () => {
                                     >
                                         <ShoppingBag size={20} />
                                         {totalItems > 0 && (
-                                            <span className="absolute top-1 right-1 w-4 h-4 bg-primary-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">
+                                            <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                                                 {totalItems}
                                             </span>
                                         )}

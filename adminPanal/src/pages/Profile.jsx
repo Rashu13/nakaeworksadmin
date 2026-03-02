@@ -311,12 +311,7 @@ const Profile = () => {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button
-                            onClick={toggleTheme}
-                            className="p-3 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 rounded-xl transition-all shadow-lg"
-                        >
-                            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
+
                         <button
                             onClick={() => { logout(); navigate('/'); }}
                             className="group flex items-center gap-2 px-8 py-3 bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-500 border border-white/10 hover:border-red-500/30 rounded-xl transition-all font-black tracking-widest text-xs backdrop-blur-md"
@@ -401,8 +396,8 @@ const Profile = () => {
                                             className="bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-white/5 dark:via-white/[0.02] dark:to-transparent rounded-[2.5rem] p-12 text-gray-900 dark:text-white relative overflow-hidden border border-gray-200 dark:border-white/10 shadow-2xl mb-12 group"
                                         >
                                             <div className="relative z-10">
-                                                <p className="text-primary-500 text-xs font-black uppercase tracking-[5px] mb-4">Account Status: Active</p>
-                                                <h2 className="text-5xl font-black mb-4 tracking-tighter">WELCOME, <span className="text-primary-500">{authUser?.name?.split(' ')[0]?.toUpperCase()}</span></h2>
+                                                <p className="text-primary-500 text-xs font-black uppercase tracking-widest mb-3">Account Status: Active</p>
+                                                <h2 className="text-4xl font-black mb-3 tracking-tight">WELCOME, <span className="text-primary-500">{authUser?.name?.split(' ')[0]?.toUpperCase()}</span></h2>
                                                 <p className="text-gray-600 dark:text-gray-600 dark:text-gray-400 font-medium max-w-sm text-lg leading-relaxed">Your professional service management terminal is online and fully operational.</p>
                                             </div>
                                             <div className="absolute right-0 top-0 h-full w-[60%] bg-primary-600/5 blur-[120px] pointer-events-none group-hover:bg-primary-600/10 transition-all duration-700"></div>
@@ -429,8 +424,8 @@ const Profile = () => {
                                                         <stat.icon size={26} className="opacity-100" />
                                                     </div>
                                                     <div className="relative z-10">
-                                                        <p className="text-gray-500 dark:text-gray-400 text-[10px] font-black uppercase tracking-[3px] mb-2">{stat.label}</p>
-                                                        <h3 className="text-5xl font-black text-gray-900 dark:text-white tracking-tighter">{stat.val}</h3>
+                                                        <p className="text-gray-500 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest mb-1">{stat.label}</p>
+                                                        <h3 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">{stat.val}</h3>
                                                     </div>
                                                 </motion.div>
                                             ))}
@@ -441,8 +436,8 @@ const Profile = () => {
                                         <div className="pt-4">
                                             <div className="flex justify-between items-end mb-10">
                                                 <div>
-                                                    <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Operation Logs</p>
-                                                    <h3 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight uppercase">RECENT SYSTEM ACTIVITY</h3>
+                                                    <p className="text-primary-500 text-[10px] font-black uppercase tracking-widest mb-1">Operation Logs</p>
+                                                    <h3 className="text-2xl font-black text-gray-900 dark:text-white uppercase">RECENT SYSTEM ACTIVITY</h3>
                                                 </div>
                                                 <button
                                                     onClick={() => setActiveTab('bookings')}
@@ -497,7 +492,7 @@ const Profile = () => {
                                                                 <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[2px] shadow-sm ${getStatusColor(booking.bookingStatus)}`}>
                                                                     {booking.bookingStatus?.name}
                                                                 </span>
-                                                                <p className="text-xl font-black text-primary-500 tracking-tighter">₹{booking.totalAmount}</p>
+                                                                <p className="text-xl font-black text-primary-500 tracking-tighter">₹{Math.round(booking.totalAmount)}</p>
                                                             </div>
                                                         </motion.div>
                                                     ))}
@@ -543,7 +538,7 @@ const Profile = () => {
                                                         type="text"
                                                         value={profile.name}
                                                         onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                                                        className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all placeholder:text-gray-500 font-bold"
+                                                        className="block w-full pl-14 pr-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all placeholder:text-gray-500 font-bold text-sm"
                                                         placeholder="Enter your full name"
                                                     />
                                                 </div>
@@ -559,7 +554,7 @@ const Profile = () => {
                                                         value={profile.phone}
                                                         onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                                                         placeholder="+91 98765 43210"
-                                                        className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all font-bold"
+                                                        className="block w-full pl-14 pr-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                     />
                                                 </div>
                                             </div>
@@ -573,7 +568,7 @@ const Profile = () => {
                                                         type="email"
                                                         value={profile.email}
                                                         disabled
-                                                        className="block w-full pl-14 pr-4 py-4 bg-gray-50 dark:bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 rounded-2xl cursor-not-allowed font-bold"
+                                                        className="block w-full pl-14 pr-4 py-3 bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 rounded-xl cursor-not-allowed font-bold text-sm"
                                                     />
                                                 </div>
                                             </div>
@@ -586,7 +581,7 @@ const Profile = () => {
                                                     value={profile.about}
                                                     onChange={(e) => setProfile({ ...profile, about: e.target.value })}
                                                     placeholder="Write a brief professional summary..."
-                                                    className="block w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all resize-none font-bold"
+                                                    className="block w-full px-5 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500 outline-none transition-all resize-none font-bold text-sm"
                                                 />
                                             </div>
 
@@ -594,7 +589,7 @@ const Profile = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={loading}
-                                                    className="px-12 py-5 bg-primary-500 text-gray-900 dark:text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(245,158,11,0.2)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                    className="px-12 py-4 bg-[#0a2357] text-white font-black uppercase tracking-[3px] rounded-xl hover:bg-[#0c2d6e] shadow-[0_15px_30px_rgba(24,56,102,0.2)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
                                                     {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     Update Protocol Data
@@ -608,7 +603,7 @@ const Profile = () => {
                                 {activeTab === 'bookings' && (
                                     <div className="space-y-8">
                                         <div className="flex justify-between items-center">
-                                            <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Order History</h2>
+                                            <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase">Order History</h2>
                                             <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-600 dark:text-gray-400 text-xs font-bold uppercase tracking-widest">
                                                 <Package size={14} className="text-primary-500" />
                                                 {bookings.length} Total
@@ -628,11 +623,11 @@ const Profile = () => {
                                                 <div className="w-24 h-24 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
                                                     <Package size={48} className="text-gray-600" />
                                                 </div>
-                                                <h3 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight mb-4">No services booked</h3>
+                                                <h3 className="text-xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase mb-2">No services booked</h3>
                                                 <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-medium mb-10 max-w-xs mx-auto">Explore our elite services and start your journey with us today.</p>
                                                 <button
                                                     onClick={() => navigate('/services')}
-                                                    className="px-10 py-4 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl hover:shadow-primary-500/20"
+                                                    className="px-8 py-3 bg-[#0a2357] text-white font-black uppercase tracking-widest rounded-xl hover:bg-[#0c2d6e] items-center text-sm transition-all shadow-xl hover:shadow-[#0a2357]/20"
                                                 >
                                                     Browse Services
                                                 </button>
@@ -655,7 +650,7 @@ const Profile = () => {
                                                                 alt={booking.service?.name}
                                                                 className="w-32 h-32 rounded-[2rem] object-cover border border-gray-200 dark:border-gray-200 dark:border-white/10 shadow-xl group-hover:scale-105 transition-transform duration-500"
                                                             />
-                                                            <div className="absolute -top-2 -left-2 bg-primary-500 text-slate-900 dark:text-slate-900 dark:text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
+                                                            <div className="absolute -top-6 -left-2 bg-primary-500 text-slate-900 dark:text-slate-900 dark:text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
                                                                 ID: #{booking.bookingNumber}
                                                             </div>
                                                         </div>
@@ -686,7 +681,7 @@ const Profile = () => {
                                                         <div className="flex flex-col justify-between items-center lg:items-end lg:border-l lg:pl-8 lg:border-gray-200 dark:border-gray-200 dark:border-white/5 gap-6">
                                                             <div className="text-center lg:text-right">
                                                                 <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 text-[10px] font-black uppercase tracking-widest mb-1">Total Valuation</p>
-                                                                <span className="text-4xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tighter">₹{booking.totalAmount}</span>
+                                                                <span className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white">₹{Math.round(booking.totalAmount)}</span>
                                                             </div>
                                                             <button
                                                                 onClick={() => handleViewDetails(booking)}
@@ -708,7 +703,7 @@ const Profile = () => {
                                         <div className="flex justify-between items-end">
                                             <div>
                                                 <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-2">Base Operations</p>
-                                                <h2 className="text-4xl font-black text-slate-900 dark:text-slate-900 dark:text-white tracking-tight uppercase">Coordinates</h2>
+                                                <h2 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase">Coordinates</h2>
                                             </div>
                                             <button
                                                 onClick={() => {
@@ -716,7 +711,7 @@ const Profile = () => {
                                                     setEditingAddressId(null);
                                                     setShowAddressModal(true);
                                                 }}
-                                                className="flex items-center gap-3 px-8 py-4 bg-primary-500 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl hover:bg-primary-600 transition-all font-black uppercase tracking-widest shadow-xl shadow-primary-500/20"
+                                                className="flex items-center gap-3 px-6 py-3 bg-[#0a2357] text-white rounded-xl hover:bg-[#0c2d6e] transition-all font-black uppercase tracking-widest shadow-xl shadow-[#0a2357]/20 text-sm"
                                             >
                                                 <Plus size={20} /> ESTABLISH NEW
                                             </button>
@@ -733,7 +728,7 @@ const Profile = () => {
                                                 className="bg-white dark:bg-slate-900/60 shadow-2xl backdrop-blur-xl rounded-[2rem] p-16 text-center border border-gray-200 dark:border-white/10 border-dashed"
                                             >
                                                 <MapPin size={48} className="mx-auto text-gray-600 mb-6" />
-                                                <h3 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight mb-4">No coordinates saved</h3>
+                                                <h3 className="text-xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase mb-2">No coordinates saved</h3>
                                                 <p className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400 font-medium">Add your primary locations for efficient service delivery.</p>
                                             </motion.div>
                                         ) : (
@@ -768,7 +763,7 @@ const Profile = () => {
                                                                 {addr.type}
                                                             </div>
                                                         </div>
-                                                        <p className="text-slate-900 dark:text-slate-900 dark:text-white text-xl font-black mb-2 tracking-tight uppercase group-hover:text-primary-500 transition-colors">{addr.addressLine1}</p>
+                                                        <p className="text-slate-900 dark:text-slate-900 dark:text-white text-lg font-black mb-1 uppercase group-hover:text-primary-500 transition-colors">{addr.addressLine1}</p>
                                                         <div className="flex items-start gap-2 text-gray-600 dark:text-gray-600 dark:text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4">
                                                             <MapPin size={14} className="text-primary-500 shrink-0" />
                                                             <span>{addr.city}, {addr.state} - {addr.pincode}</span>
@@ -790,7 +785,7 @@ const Profile = () => {
                                             </div>
                                             <div>
                                                 <p className="text-primary-500 text-[10px] font-black uppercase tracking-[3px] mb-1">Security Protocol</p>
-                                                <h2 className="text-3xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight">Access Protocol</h2>
+                                                <h2 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase">Access Protocol</h2>
                                             </div>
                                         </div>
 
@@ -805,7 +800,7 @@ const Profile = () => {
                                                             value={passwords.current}
                                                             onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
                                                             placeholder="Enter current password"
-                                                            className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                            className="block w-full pl-14 pr-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                             required
                                                         />
                                                     </div>
@@ -821,7 +816,7 @@ const Profile = () => {
                                                                 value={passwords.new}
                                                                 onChange={(e) => setPasswords({ ...passwords, new: e.target.value })}
                                                                 placeholder="New password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                                 required
                                                             />
                                                         </div>
@@ -835,7 +830,7 @@ const Profile = () => {
                                                                 value={passwords.confirm}
                                                                 onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
                                                                 placeholder="Confirm new password"
-                                                                className="block w-full pl-14 pr-4 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                                className="block w-full pl-14 pr-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                                 required
                                                             />
                                                         </div>
@@ -847,7 +842,7 @@ const Profile = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={loading}
-                                                    className="px-12 py-5 bg-primary-500 text-slate-900 dark:text-slate-900 dark:text-white font-black uppercase tracking-[3px] rounded-2xl hover:bg-primary-600 shadow-[0_15px_30px_rgba(28,56,102,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
+                                                    className="px-12 py-4 bg-[#0a2357] text-white font-black uppercase tracking-[3px] rounded-xl hover:bg-[#0c2d6e] shadow-[0_15px_30px_rgba(28,56,102,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-4 group"
                                                 >
                                                     {loading ? <Loader className="animate-spin" /> : <Lock size={22} className="group-hover:rotate-12 transition-transform" />}
                                                     UPDATE AUTHORIZATION
@@ -864,7 +859,7 @@ const Profile = () => {
                 {/* Address Modal */}
                 <AnimatePresence>
                     {showAddressModal && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -876,23 +871,23 @@ const Profile = () => {
                                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                className="relative bg-slate-900/90 rounded-[2.5rem] w-full max-w-md p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-hidden"
+                                className="relative bg-white dark:bg-slate-900/90 rounded-[2.5rem] w-full max-w-md p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-x-hidden overflow-y-auto max-h-[100vh]"
                             >
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary-500/5 blur-[80px] pointer-events-none"></div>
 
-                                <div className="flex justify-between items-center mb-8 relative z-10">
-                                    <h2 className="text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white uppercase tracking-tight">
+                                <div className="flex justify-between items-center mb-6 relative z-10">
+                                    <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
                                         {editingAddressId ? 'Edit Coordinates' : 'New Coordinates'}
                                     </h2>
                                     <button
                                         onClick={() => setShowAddressModal(false)}
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-600 dark:text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all border border-gray-200 dark:border-gray-200 dark:border-white/5"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all border border-gray-200 dark:border-white/5"
                                     >
                                         <X size={20} />
                                     </button>
                                 </div>
 
-                                <form onSubmit={handleAddressSubmit} className="space-y-6 relative z-10">
+                                <form onSubmit={handleAddressSubmit} className="space-y-4 relative z-10">
                                     <div>
                                         <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Address Line 1</label>
                                         <input
@@ -900,12 +895,12 @@ const Profile = () => {
                                             value={addressForm.addressLine1}
                                             onChange={(e) => setAddressForm({ ...addressForm, addressLine1: e.target.value })}
                                             placeholder="Enter street address"
-                                            className="w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                            className="w-full px-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                             required
                                         />
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-6">
+                                    <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">City</label>
                                             <input
@@ -913,7 +908,7 @@ const Profile = () => {
                                                 value={addressForm.city}
                                                 onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
                                                 placeholder="City"
-                                                className="w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                className="w-full px-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                 required
                                             />
                                         </div>
@@ -924,13 +919,13 @@ const Profile = () => {
                                                 value={addressForm.state}
                                                 onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
                                                 placeholder="State"
-                                                className="w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                className="w-full px-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                 required
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-6">
+                                    <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-xs font-black text-primary-500/70 uppercase tracking-[2px] mb-3">Pincode</label>
                                             <input
@@ -938,7 +933,7 @@ const Profile = () => {
                                                 value={addressForm.pincode}
                                                 onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
                                                 placeholder="123456"
-                                                className="w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold"
+                                                className="w-full px-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                                 required
                                             />
                                         </div>
@@ -947,7 +942,7 @@ const Profile = () => {
                                             <select
                                                 value={addressForm.type}
                                                 onChange={(e) => setAddressForm({ ...addressForm, type: e.target.value })}
-                                                className="w-full px-5 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold appearance-none cursor-pointer"
+                                                className="w-full px-4 py-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all font-bold appearance-none cursor-pointer text-sm"
                                             >
                                                 <option value="home">Home</option>
                                                 <option value="work">Work</option>
@@ -956,7 +951,7 @@ const Profile = () => {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-3 p-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl mb-4">
+                                    <div className="flex items-center gap-3 p-3 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl mb-4">
                                         <input
                                             type="checkbox"
                                             id="isPrimary"
@@ -970,7 +965,7 @@ const Profile = () => {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-5 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/10 flex items-center justify-center gap-3 disabled:opacity-50 mt-4"
+                                        className="w-full py-4 bg-[#0a2357] text-white font-black uppercase tracking-widest rounded-2xl hover:bg-[#0c2d6e] transition-all shadow-xl flex items-center justify-center gap-3 disabled:opacity-50 mt-4"
                                     >
                                         {loading ? <Loader className="animate-spin" /> : <MapPin size={20} />}
                                         Save Coordinates
@@ -983,7 +978,7 @@ const Profile = () => {
                 {/* Booking Details Modal */}
                 <AnimatePresence>
                     {showBookingModal && selectedBooking && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -1137,35 +1132,35 @@ const Profile = () => {
                                     {/* Price Breakup */}
                                     <div className="p-8 bg-gray-900 dark:bg-black rounded-[2rem] border border-white/5 shadow-2xl space-y-6 relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 blur-[40px] pointer-events-none"></div>
-                                        <p className="text-[10px] text-primary-500 uppercase font-black tracking-[4px]">Financial Settlement</p>
+                                        <p className="text-[10px] text-gray-400 uppercase font-black tracking-[4px]">Financial Settlement</p>
                                         <div className="space-y-4">
                                             <div className="flex justify-between items-center group/price">
                                                 <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Base Premium</span>
-                                                <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.servicePrice || selectedBooking.service?.price}</span>
+                                                <span className="text-sm font-black text-white">₹{Math.round(selectedBooking.servicePrice || selectedBooking.service?.price)}</span>
                                             </div>
                                             {(selectedBooking.discount > 0 || selectedBooking.discountAmount > 0) && (
                                                 <div className="flex justify-between items-center group/price">
                                                     <span className="text-[10px] font-black uppercase tracking-[2px] text-emerald-500 group-hover/price:text-emerald-400 transition-colors">Privilege Discount</span>
-                                                    <span className="text-sm font-black text-emerald-500">-₹{selectedBooking.discount || selectedBooking.discountAmount}</span>
+                                                    <span className="text-sm font-black text-emerald-500">-₹{Math.round(selectedBooking.discount || selectedBooking.discountAmount)}</span>
                                                 </div>
                                             )}
                                             <div className="flex justify-between items-center group/price">
                                                 <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Logistics / Platform</span>
-                                                <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.platformFees || 0}</span>
+                                                <span className="text-sm font-black text-white">₹{Math.round(selectedBooking.platformFees || 0)}</span>
                                             </div>
                                             {selectedBooking.tax > 0 && (
                                                 <div className="flex justify-between items-center group/price">
                                                     <span className="text-[10px] font-black uppercase tracking-[2px] text-gray-500 group-hover/price:text-gray-400 transition-colors">Regulatory Tax (CGST/SGST)</span>
-                                                    <span className="text-sm font-black text-gray-900 dark:text-white">₹{selectedBooking.tax}</span>
+                                                    <span className="text-sm font-black text-white">₹{Math.round(selectedBooking.tax)}</span>
                                                 </div>
                                             )}
                                             <div className="pt-6 border-t border-white/10 flex justify-between items-end">
                                                 <div>
-                                                    <p className="text-[10px] font-black uppercase tracking-[3px] text-primary-500 mb-1">Total Settlement</p>
+                                                    <p className="text-[10px] font-black uppercase tracking-[3px] text-gray-400 mb-1">Total Settlement</p>
                                                     <p className="text-[9px] text-gray-500 font-bold uppercase tracking-wider italic">inclusive of all dynamic pricing</p>
                                                 </div>
                                                 <div className="text-right">
-                                                    <span className="text-3xl font-black text-white tracking-tighter">₹{selectedBooking.totalAmount}</span>
+                                                    <span className="text-3xl font-black text-white tracking-tighter">₹{Math.round(selectedBooking.totalAmount)}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1188,7 +1183,7 @@ const Profile = () => {
                                             </div>
                                             <textarea
                                                 placeholder="Share your experience with the elite protocol..."
-                                                className="w-full p-5 bg-slate-900 border border-gray-200 dark:border-gray-200 dark:border-white/10 rounded-2xl text-slate-900 dark:text-slate-900 dark:text-white text-sm font-bold outline-none focus:border-primary-500 transition-all h-28 resize-none"
+                                                className="w-full p-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white text-sm font-bold outline-none focus:border-primary-500 transition-all h-28 resize-none"
                                                 value={reviewState.comment}
                                                 onChange={(e) => setReviewState({ ...reviewState, comment: e.target.value })}
                                             ></textarea>
@@ -1212,7 +1207,7 @@ const Profile = () => {
                                                     }
                                                 }}
                                                 disabled={reviewState.loading}
-                                                className="w-full py-4 bg-primary-500 text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary-600 transition-all shadow-xl shadow-primary-500/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                                                className="w-full py-4 bg-[#0a2357] text-white font-black uppercase tracking-widest rounded-xl hover:bg-[#0c2d6e] transition-all shadow-xl shadow-primary-500/20 flex items-center justify-center gap-3 disabled:opacity-50 text-sm"
                                             >
                                                 {reviewState.loading ? <Loader className="animate-spin" /> : <Star size={18} />}
                                                 Transmit Review
@@ -1223,7 +1218,7 @@ const Profile = () => {
                                     {selectedBooking.bookingStatus?.slug === 'completed' && (
                                         <button
                                             onClick={() => downloadInvoice(selectedBooking)}
-                                            className="w-full flex items-center justify-center gap-3 py-4 bg-gray-100 dark:bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-gray-200 dark:border-white/10 text-slate-900 dark:text-slate-900 dark:text-white font-black uppercase tracking-widest rounded-2xl hover:bg-gray-200 dark:bg-gray-200 dark:bg-white/10 transition-all"
+                                            className="w-full flex items-center justify-center gap-3 py-4 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white font-black uppercase tracking-widest rounded-xl hover:bg-gray-200 dark:hover:bg-white/10 transition-all text-sm"
                                         >
                                             <FileText size={18} className="text-primary-500" />
                                             Acquire Invoice
@@ -1262,8 +1257,8 @@ const Profile = () => {
                     cancelText="CANCEL"
                     icon={<Trash2 size={48} className="text-red-500 mb-4" />}
                 />
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

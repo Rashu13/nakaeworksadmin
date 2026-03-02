@@ -160,13 +160,13 @@ const Register = () => {
                     <div className="flex p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-8">
                         <button
                             onClick={() => { setAuthMode('otp'); setError(''); }}
-                            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${authMode === 'otp' ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${authMode === 'otp' ? 'bg-white dark:bg-slate-700 text-[#0a2357] dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                         >
                             Phone OTP
                         </button>
                         <button
                             onClick={() => { setAuthMode('email'); setError(''); }}
-                            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${authMode === 'email' ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${authMode === 'email' ? 'bg-white dark:bg-slate-700 text-[#0a2357] dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                         >
                             Email
                         </button>
@@ -213,7 +213,7 @@ const Register = () => {
                                 <button
                                     type="submit"
                                     disabled={loading || otpPhone.length !== 10 || !otpName.trim()}
-                                    className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50"
+                                    className="w-full py-3.5 bg-[#0a2357] hover:bg-[#0c2d6e] text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-md active:scale-[0.98]"
                                 >
                                     {loading ? 'Sending...' : 'Send OTP & Register'}
                                 </button>
@@ -238,12 +238,12 @@ const Register = () => {
                                 <button
                                     onClick={() => handleVerifyOtp(otp.join(''))}
                                     disabled={loading || otp.some(d => !d)}
-                                    className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50"
+                                    className="w-full py-3.5 bg-[#0a2357] hover:bg-[#0c2d6e] text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-md active:scale-[0.98]"
                                 >
                                     {loading ? 'Verifying...' : 'Complete Registration'}
                                 </button>
                                 <div className="text-center">
-                                    <button onClick={() => setOtpSent(false)} className="text-sm text-primary-600 hover:underline">Change Details</button>
+                                    <button onClick={() => setOtpSent(false)} className="text-sm text-[#0a2357] hover:underline">Change Details</button>
                                 </div>
                             </div>
                         )
@@ -254,14 +254,14 @@ const Register = () => {
                                 <button
                                     type="button"
                                     onClick={() => setFormData({ ...formData, role: 'consumer' })}
-                                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.role === 'consumer' ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.role === 'consumer' ? 'bg-white dark:bg-slate-700 text-[#0a2357] dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                                 >
                                     USER
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setFormData({ ...formData, role: 'provider' })}
-                                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.role === 'provider' ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${formData.role === 'provider' ? 'bg-white dark:bg-slate-700 text-[#0a2357] dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                                 >
                                     PROVIDER
                                 </button>
@@ -316,7 +316,7 @@ const Register = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 mt-4"
+                                className="w-full py-3.5 bg-[#0a2357] hover:bg-[#0c2d6e] text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-md active:scale-[0.98] mt-4"
                             >
                                 {loading ? 'Creating...' : 'Create Account'}
                             </button>
@@ -326,7 +326,7 @@ const Register = () => {
 
                 <p className="text-center mt-8 text-sm text-gray-500">
                     Already have an account?{' '}
-                    <Link to="/login" className="text-primary-600 font-semibold hover:underline">Sign in</Link>
+                    <Link to="/login" className="text-[#0a2357] font-semibold hover:underline">Sign in</Link>
                 </p>
             </div>
         </div>

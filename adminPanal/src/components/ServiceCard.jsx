@@ -3,13 +3,15 @@ import { Star, Clock, MapPin, User, Heart, ShoppingCart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoriteContext';
 import { BASE_URL } from '../services/api';
 
 const ServiceCard = ({ service, viewMode }) => {
     const navigate = useNavigate();
     const { addToCart } = useCart();
-    const [isFavorite, setIsFavorite] = React.useState(false);
+    const { toggleFavorite, isFavorite: checkIsFav } = useFavorites();
     const [added, setAdded] = React.useState(false);
+    const isFavorite = checkIsFav(service.id);
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
@@ -84,7 +86,7 @@ const ServiceCard = ({ service, viewMode }) => {
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
-                                setIsFavorite(!isFavorite);
+                                toggleFavorite(service);
                             }}
                             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isFavorite ? 'bg-red-50 dark:bg-red-900/20 text-red-500' : 'bg-gray-50 dark:bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-600 dark:hover:text-gray-200'}`}
                         >
@@ -177,9 +179,9 @@ const ServiceCard = ({ service, viewMode }) => {
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
-                        setIsFavorite(!isFavorite);
+                        toggleFavorite(service);
                     }}
-                    className="absolute top-5 right-5 w-9 h-9 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                    className="absolute top-5 right-5 w-9 h-9 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10"
                 >
                     <Heart
                         size={18}
