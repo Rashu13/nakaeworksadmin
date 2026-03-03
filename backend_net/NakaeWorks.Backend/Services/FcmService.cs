@@ -11,18 +11,22 @@ public interface IFcmService
 
 public class FcmService : IFcmService
 {
-    private readonly string _serverKey;
+    private readonly string? _serverKey;
     private readonly HttpClient _httpClient;
 
     public FcmService(IConfiguration configuration)
     {
-        _serverKey = configuration["Firebase:ServerKey"] ?? throw new ArgumentNullException("Firebase:ServerKey is missing");
+        _serverKey = configuration["Firebase:ServerKey"];
+        if (string.IsNullOrEmpty(_serverKey))
+        {
+            Console.WriteLine("WARNING: Firebase:ServerKey is not configured. Push notifications will be disabled.");
+        }
         _httpClient = new HttpClient();
     }
 
     public async Task<bool> SendNotificationAsync(string to, string title, string body, object? data = null)
     {
-        if (string.IsNullOrEmpty(to)) return false;
+        if (string.IsNullOrEmpty(_serverKey) || string.IsNullOrEmpty(to)) return false;
 
         var message = new
         {
@@ -47,3 +51,4 @@ public class FcmService : IFcmService
         return response.IsSuccessStatusCode;
     }
 }
+
