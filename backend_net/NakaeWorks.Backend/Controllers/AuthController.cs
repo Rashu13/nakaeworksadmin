@@ -353,7 +353,11 @@ public class AuthController : ControllerBase
     private string GenerateToken(AppUser user)
     {
         var jwtKey = _configuration["Jwt:Key"];
-        if (string.IsNullOrEmpty(jwtKey)) throw new Exception("JWT Key not configured");
+        if (string.IsNullOrEmpty(jwtKey))
+        {
+            jwtKey = "ThisIsADummyFallbackKeyForTestingPurposesOnlyReplaceItInProduction1234567890!";
+            Console.WriteLine("WARNING: Jwt:Key not found in configuration, using fallback key!");
+        }
 
         var key = Encoding.ASCII.GetBytes(jwtKey);
         
