@@ -1,8 +1,8 @@
-# Flutter App - Ignore from Git
-nakaeworks_app/
+# Flutter App - tracked
+# nakaeworks_app/
 
-# React Native / User App - Ignore from Git
-UserApp/
+# React Native / User App - tracked
+# UserApp/
 
 # Common ignores
 node_modules/
