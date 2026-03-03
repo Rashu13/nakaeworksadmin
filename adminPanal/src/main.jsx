@@ -8,6 +8,8 @@ import { FavoriteProvider } from './context/FavoriteContext'
 import App from './App.jsx'
 import './index.css'
 
+import { NotificationProvider } from './context/NotificationContext'
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,11 +24,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ThemeProvider>
-          <CartProvider>
-            <FavoriteProvider>
-              <App />
-            </FavoriteProvider>
-          </CartProvider>
+          <NotificationProvider>
+            <CartProvider>
+              <FavoriteProvider>
+                <App />
+              </FavoriteProvider>
+            </CartProvider>
+          </NotificationProvider>
         </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>

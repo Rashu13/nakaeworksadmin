@@ -89,6 +89,10 @@ export const authService = {
         method: 'PUT',
         body: JSON.stringify(data),
     }),
+    updateFcmToken: (token) => apiCall('/auth/update-fcm-token', {
+        method: 'POST',
+        body: JSON.stringify({ token }),
+    }),
 
     changePassword: (data) => apiCall('/auth/change-password', {
         method: 'PUT',

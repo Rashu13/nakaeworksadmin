@@ -14,10 +14,12 @@ namespace NakaeWorks.Backend.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly Services.IFcmService _fcmService;
 
-    public AdminController(ApplicationDbContext context)
+    public AdminController(ApplicationDbContext context, Services.IFcmService fcmService)
     {
         _context = context;
+        _fcmService = fcmService;
     }
 
     // ============================================
@@ -434,6 +436,13 @@ public class AdminController : ControllerBase
 
         await _context.SaveChangesAsync();
 
+        // Notify Consumer of status update
+        var consumer = await _context.Users.FindAsync(booking.ConsumerId);
+        if (consumer != null && !string.IsNullOrEmpty(consumer.FcmToken))
+        {
+            await _fcmService.SendNotificationAsync(consumer.FcmToken, "Booking Status Updated", $"Your booking {booking.BookingNumber} is now {status.Name}.", new { bookingId = booking.Id, status = status.Slug });
+        }
+
         return Ok(new { success = true, message = "Booking status updated" });
     }
 
@@ -453,6 +462,19 @@ public class AdminController : ControllerBase
         booking.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
+
+        // Notify Consumer
+        var consumerUser = await _context.Users.FindAsync(booking.ConsumerId);
+        if (consumerUser != null && !string.IsNullOrEmpty(consumerUser.FcmToken))
+        {
+            await _fcmService.SendNotificationAsync(consumerUser.FcmToken, "Provider Assigned!", $"A provider ({provider.Name}) has been assigned to your booking {booking.BookingNumber}.", new { bookingId = booking.Id });
+        }
+        
+        // Notify Provider
+        if (!string.IsNullOrEmpty(provider.FcmToken))
+        {
+            await _fcmService.SendNotificationAsync(provider.FcmToken, "New Job Assigned!", $"You have been assigned to booking {booking.BookingNumber}.", new { bookingId = booking.Id });
+        }
 
         return Ok(new { success = true, message = "Provider assigned successfully" });
     }

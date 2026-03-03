@@ -52,3 +52,8 @@ public class VerifyOtpDto
     public string? Name { get; set; }
 }
 
+public class UpdateFcmTokenDto
+{
+    [Required]
+    public string Token { get; set; } = string.Empty;
+}

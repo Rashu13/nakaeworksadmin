@@ -299,6 +299,14 @@ const BookingsAdmin = () => {
                                     <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Subtotal:</span> <span className="text-gray-700 dark:text-gray-200">₹{selectedBooking.subtotal}</span></p>
                                     <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Discount:</span> <span className="text-gray-700 dark:text-gray-200">₹{selectedBooking.discount}</span></p>
                                     <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Method:</span> <span className="uppercase text-gray-700 dark:text-gray-200">{selectedBooking.paymentMethod}</span></p>
+                                    <button
+                                        onClick={() => {
+                                            setToast({ message: "Status update notifications are automatically sent to customers!", type: "success" });
+                                        }}
+                                        className="mt-4 w-full flex items-center justify-center gap-2 py-2 bg-slate-800 text-white rounded-lg text-xs font-bold hover:bg-slate-900 transition-colors"
+                                    >
+                                        AUTOMATED NOTIFICATIONS ACTIVE
+                                    </button>
                                 </div>
                             </div>
 

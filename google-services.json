@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "660614618791",
+    "firebase_url": "https://babylon-5adb4-default-rtdb.firebaseio.com",
+    "project_id": "babylon-5adb4",
+    "storage_bucket": "babylon-5adb4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660614618791:android:c9ccb22543e1b9850a8582",
+        "android_client_info": {
+          "package_name": "com.example.easy_billing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ri5qMpgPo9xZi4CNcUrj1FGzgEyYsd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660614618791:android:0415aae140c312de0a8582",
+        "android_client_info": {
+          "package_name": "com.ravi.nakae_works"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ri5qMpgPo9xZi4CNcUrj1FGzgEyYsd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660614618791:android:94869fc07153ebf60a8582",
+        "android_client_info": {
+          "package_name": "com.ravi.nakaeworks.nakaeworks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ri5qMpgPo9xZi4CNcUrj1FGzgEyYsd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

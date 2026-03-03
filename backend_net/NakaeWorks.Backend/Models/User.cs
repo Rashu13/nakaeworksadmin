@@ -50,6 +50,9 @@ public class User
 
     public int Served { get; set; } = 0;
 
+    [MaxLength(500)]
+    public string? FcmToken { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 

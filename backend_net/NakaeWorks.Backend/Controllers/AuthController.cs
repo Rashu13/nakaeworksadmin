@@ -328,6 +328,24 @@ public class AuthController : ControllerBase
         return Ok(new { message = "Logged out successfully" });
     }
 
+    [Authorize]
+    [HttpPost("update-fcm-token")]
+    public async Task<IActionResult> UpdateFcmToken([FromBody] UpdateFcmTokenDto dto)
+    {
+        var userIdString = HttpContext.User.FindFirst("id")?.Value;
+        if (string.IsNullOrEmpty(userIdString) || !long.TryParse(userIdString, out var userId))
+            return Unauthorized(new { message = "Not authenticated" });
+
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null) return NotFound(new { message = "User not found" });
+
+        user.FcmToken = dto.Token;
+        user.UpdatedAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "FCM Token updated successfully" });
+    }
+
     // ==========================================
     // HELPERS
     // ==========================================

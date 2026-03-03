@@ -61,6 +61,7 @@ builder.Services.AddScoped<NakaeWorks.Backend.Services.BookingService>();
 builder.Services.AddScoped<NakaeWorks.Backend.Services.ProviderService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<NakaeWorks.Backend.Services.SmsService>();
+builder.Services.AddScoped<NakaeWorks.Backend.Services.IFcmService, NakaeWorks.Backend.Services.FcmService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -17,11 +17,13 @@ public class BookingsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
     private readonly NakaeWorks.Backend.Services.BookingService _bookingService;
+    private readonly IFcmService _fcmService;
 
-    public BookingsController(ApplicationDbContext context, NakaeWorks.Backend.Services.BookingService bookingService)
+    public BookingsController(ApplicationDbContext context, NakaeWorks.Backend.Services.BookingService bookingService, IFcmService fcmService)
     {
         _context = context;
         _bookingService = bookingService;
+        _fcmService = fcmService;
     }
 
     [HttpPost]
@@ -163,6 +165,20 @@ public class BookingsController : ControllerBase
                 message = "Booking failed: " + ex.Message, 
                 detail = ex.InnerException?.Message ?? ex.StackTrace 
             });
+        }
+
+        // Notify Admin of new booking
+        var admin = await _context.Users.FirstOrDefaultAsync(u => u.Role == "admin" && u.FcmToken != null);
+        if (admin != null)
+        {
+            await _fcmService.SendNotificationAsync(admin.FcmToken!, "New Booking Received!", $"Booking {bookingNumber} has been placed for ₹{totalAmount}.", new { bookingId = booking.Id });
+        }
+
+        // Notify Provider
+        var provider = await _context.Users.FirstOrDefaultAsync(u => u.Id == finalProviderId && u.FcmToken != null);
+        if (provider != null)
+        {
+            await _fcmService.SendNotificationAsync(provider.FcmToken!, "New Job Request!", $"You have a new booking request {bookingNumber}.", new { bookingId = booking.Id });
         }
 
         // Fetch complete booking with relations
@@ -335,6 +351,13 @@ public class BookingsController : ControllerBase
 
         _context.Bookings.Update(booking);
         await _context.SaveChangesAsync();
+
+        // Notify Consumer of status update
+        var consumer = await _context.Users.FindAsync(booking.ConsumerId);
+        if (consumer != null && !string.IsNullOrEmpty(consumer.FcmToken))
+        {
+            await _fcmService.SendNotificationAsync(consumer.FcmToken, "Booking Status Updated", $"Your booking {booking.BookingNumber} is now {status.Name}.", new { bookingId = booking.Id, status = status.Slug });
+        }
 
         return Ok(new { message = "Status updated" });
     }
