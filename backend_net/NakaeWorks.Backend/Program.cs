@@ -87,6 +87,20 @@ using (var scope = app.Services.CreateScope())
     {
         context.Database.Migrate();
 
+        // Ensure FcmToken column exists (was added to model but may not be in DB)
+        try
+        {
+            context.Database.ExecuteSqlRaw(@"
+                ALTER TABLE users ADD COLUMN IF NOT EXISTS ""FcmToken"" varchar(500) NULL;
+            ");
+            Console.WriteLine("Ensured FcmToken column exists in users table.");
+        }
+        catch (Exception colEx)
+        {
+            Console.WriteLine($"Note: Could not add FcmToken column (may already exist): {colEx.Message}");
+        }
+
+
         // -2. Seed Content (Banners & Collections)
         if (!context.Banners.Any())
         {
