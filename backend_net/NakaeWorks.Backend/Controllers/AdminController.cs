@@ -5,6 +5,7 @@ using NakaeWorks.Backend.Data;
 using NakaeWorks.Backend.DTOs;
 using NakaeWorks.Backend.Models;
 using System.Security.Claims;
+using NakaeWorks.Backend.Services;
 
 namespace NakaeWorks.Backend.Controllers;
 
@@ -14,9 +15,9 @@ namespace NakaeWorks.Backend.Controllers;
 public class AdminController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    private readonly Services.IFcmService _fcmService;
+    private readonly IFcmService _fcmService;
 
-    public AdminController(ApplicationDbContext context, Services.IFcmService fcmService)
+    public AdminController(ApplicationDbContext context, IFcmService fcmService)
     {
         _context = context;
         _fcmService = fcmService;
