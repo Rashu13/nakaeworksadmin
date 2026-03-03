@@ -48,13 +48,13 @@ public class UploadController : ControllerBase
             await image.CopyToAsync(stream);
         }
 
-        // Return URL
-        var currentUrl = $"{Request.Scheme}://{Request.Host}/uploads/{fileName}";
+        // Return relative path (safer for domain changes)
+        var relativeUrl = $"/uploads/{fileName}";
 
         return Ok(new
         {
             message = "File uploaded successfully",
-            imageUrl = currentUrl,
+            imageUrl = relativeUrl,
             filename = fileName
         });
     }

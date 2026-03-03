@@ -1,6 +1,6 @@
 class AppConstants {
-  // ✅ Coolify Production Server
-  static const String baseUrl = 'http://kkss8k0wgk880w0g0k0cgg80.62.72.13.162.sslip.io';
+  // ✅ Production Server
+  static const String baseUrl = 'https://wati.digital';
   // Updated dynamic location support enabled.
   static String get apiUrl => '$baseUrl/api';
 

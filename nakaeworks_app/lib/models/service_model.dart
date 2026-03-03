@@ -1,3 +1,5 @@
+import '../utils/constants.dart';
+
 class ServiceModel {
   final String id;
   final String name;
@@ -26,13 +28,21 @@ class ServiceModel {
   double get discountedPrice => price - (discount ?? 0);
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) {
+    String? thumb = json['thumbnail'] ?? json['Thumbnail'];
+    if (thumb != null && !thumb.startsWith('http')) {
+      thumb = '${AppConstants.baseUrl}${thumb.startsWith('/') ? '' : '/'}$thumb';
+    } else if (thumb != null && thumb.contains('.sslip.io')) {
+      // Fix old broken links
+      thumb = thumb.replaceFirst(RegExp(r'http://.*\.sslip\.io'), AppConstants.baseUrl);
+    }
+
     return ServiceModel(
       id: json['id']?.toString() ?? json['Id']?.toString() ?? '',
       name: json['name'] ?? json['Name'] ?? '',
       description: json['description'] ?? json['Description'],
       price: _toDouble(json['price'] ?? json['Price']),
       discount: _toDouble(json['discount'] ?? json['Discount']),
-      thumbnail: json['thumbnail'] ?? json['Thumbnail'],
+      thumbnail: thumb,
       category: json['category'] ?? json['Category'] ?? json['categoryName'],
       rating: _toDouble(json['rating'] ?? json['Rating']),
       reviewCount: json['reviewCount'] ?? json['ReviewCount'],
@@ -54,11 +64,17 @@ class CategoryModel {
   CategoryModel({required this.id, required this.name, this.image});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    String? img = json['icon'] ?? json['image'] ?? json['imageUrl'] ?? json['Image'];
+    if (img != null && !img.startsWith('http')) {
+      img = '${AppConstants.baseUrl}${img.startsWith('/') ? '' : '/'}$img';
+    } else if (img != null && img.contains('.sslip.io')) {
+      img = img.replaceFirst(RegExp(r'http://.*\.sslip\.io'), AppConstants.baseUrl);
+    }
+
     return CategoryModel(
       id: json['id']?.toString() ?? json['Id']?.toString() ?? '',
       name: json['name'] ?? json['Name'] ?? '',
-      // API returns 'icon' field with full URL
-      image: json['icon'] ?? json['image'] ?? json['imageUrl'] ?? json['Image'],
+      image: img,
     );
   }
 }

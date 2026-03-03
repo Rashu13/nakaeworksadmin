@@ -1,5 +1,14 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.origin + '/api');
 export const BASE_URL = API_BASE_URL.replace(/\/api$/, '');
+
+export const getFullImageUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http')) {
+        // Fix old broken links if they contain the old domain
+        return path.replace(/http:\/\/.*\.sslip\.io/, BASE_URL);
+    }
+    return `${BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
+};
 import { compressImage } from '../utils/compressor';
 
 // Helper to normalize keys from PascalCase to camelCase

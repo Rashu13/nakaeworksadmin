@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Wrench, Zap, User, Droplets, Paintbrush, Scissors, Car, Lock, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { serviceService } from '../services/api';
+import { serviceService, getFullImageUrl } from '../services/api';
 
 const iconMap = {
     'cleaning': Sparkles,
@@ -113,7 +113,7 @@ const CategoryGrid = () => {
                                 {category.icon && (category.icon.startsWith('http') || category.icon.startsWith('/')) ? (
                                     <div className="w-full h-full flex items-center justify-center rounded-xl overflow-hidden transition-transform duration-500 group-hover:scale-110">
                                         <img
-                                            src={category.icon}
+                                            src={getFullImageUrl(category.icon)}
                                             alt={category.name}
                                             className="w-full h-full object-contain"
                                         />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Pencil, Trash2, X, Upload, AlertCircle, Check } from 'lucide-react';
-import { adminService, uploadService } from '../../services/api';
+import { adminService, uploadService, getFullImageUrl } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 const Categories = () => {
@@ -201,7 +201,7 @@ const Categories = () => {
                                         <td className="py-6 px-8">
                                             {category.icon ? (
                                                 <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-100 dark:border-white/10 group-hover:scale-110 transition-transform">
-                                                    <img src={category.icon} alt={category.name} className="w-full h-full object-cover" />
+                                                    <img src={getFullImageUrl(category.icon)} alt={category.name} className="w-full h-full object-cover" />
                                                 </div>
                                             ) : (
                                                 <span className="text-gray-400 italic text-[10px]">NO VISUAL</span>
@@ -288,7 +288,7 @@ const Categories = () => {
                                     <div className="space-y-3">
                                         {formData.icon ? (
                                             <div className="flex items-center gap-5 p-4 border border-primary-500/20 rounded-2xl bg-primary-500/5">
-                                                <img src={formData.icon} alt="Preview" className="w-14 h-14 object-cover rounded-lg border-2 border-primary-500/30 shadow-lg" />
+                                                <img src={getFullImageUrl(formData.icon)} alt="Preview" className="w-14 h-14 object-cover rounded-lg border-2 border-primary-500/30 shadow-lg" />
                                                 <div className="flex-1 overflow-hidden">
                                                     <p className="text-[10px] font-black text-gray-900 dark:text-white truncate uppercase tracking-[1px]">{formData.icon.split('/').pop()}</p>
                                                     <p className="text-[8px] font-black text-emerald-500 uppercase tracking-[2px] mt-1">Status: Linked</p>

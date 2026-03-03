@@ -99,6 +99,34 @@ using (var scope = app.Services.CreateScope())
         {
             Console.WriteLine($"Note: Could not add FcmToken column (may already exist): {colEx.Message}");
         }
+        // 0. Fix image URLs from old domain (Migration to relative paths)
+        try 
+        {
+            var oldDomain = "kkss8k0wgk880w0g0k0cgg80.62.72.13.162.sslip.io";
+            
+            // Fix categories
+            var catsToFix = context.Categories.Where(c => c.Icon != null && c.Icon.Contains(oldDomain)).ToList();
+            foreach(var c in catsToFix) c.Icon = c.Icon.Replace($"http://{oldDomain}", "");
+            
+            // Fix services
+            var servsToFix = context.Services.Where(s => s.Thumbnail != null && s.Thumbnail.Contains(oldDomain)).ToList();
+            foreach(var s in servsToFix) s.Thumbnail = s.Thumbnail.Replace($"http://{oldDomain}", "");
+            
+            // Fix banners
+            var bansToFix = context.Banners.Where(b => b.ImageUrl != null && b.ImageUrl.Contains(oldDomain)).ToList();
+            foreach(var b in bansToFix) b.ImageUrl = b.ImageUrl.Replace($"http://{oldDomain}", "");
+            
+            // Fix users avatars
+            var usersToFix = context.Users.Where(u => u.Avatar != null && u.Avatar.Contains(oldDomain)).ToList();
+            foreach(var u in usersToFix) u.Avatar = u.Avatar.Replace($"http://{oldDomain}", "");
+            
+            context.SaveChanges();
+            Console.WriteLine("Successfully cleaned up old image URLs to relative paths.");
+        } 
+        catch(Exception fixEx) 
+        {
+            Console.WriteLine($"Note: Error fixing image URLs: {fixEx.Message}");
+        }
 
 
         // -2. Seed Content (Banners & Collections)

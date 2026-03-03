@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ConfirmationModal from '../../components/ConfirmationModal';
-import { contentService, serviceService, uploadService } from '../../services/api';
+import { contentService, serviceService, uploadService, getFullImageUrl } from '../../services/api';
 import { Plus, Image as ImageIcon, Layers, Edit2, Trash2, Eye, EyeOff, Link, Save, X, Upload } from 'lucide-react';
 
 const ContentAdmin = () => {
@@ -189,7 +189,7 @@ const ContentAdmin = () => {
                     {banners.map((banner) => (
                         <div key={banner.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden group">
                             <div className="relative h-48 bg-gray-100">
-                                <img src={banner.imageUrl} alt={banner.title} className="w-full h-full object-cover" />
+                                <img src={getFullImageUrl(banner.imageUrl)} alt={banner.title} className="w-full h-full object-cover" />
                                 <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <button onClick={() => openModal(banner)} className="p-1.5 bg-white text-gray-700 rounded-lg hover:text-slate-900 shadow-sm">
                                         <Edit2 size={16} />
@@ -294,7 +294,7 @@ const ContentAdmin = () => {
                                         <div className="space-y-2">
                                             {formData.imageUrl && (
                                                 <div className="relative w-full h-32 rounded-lg overflow-hidden border border-gray-200">
-                                                    <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                                                    <img src={getFullImageUrl(formData.imageUrl)} alt="Preview" className="w-full h-full object-cover" />
                                                     <button
                                                         type="button"
                                                         onClick={() => setFormData({ ...formData, imageUrl: '' })}

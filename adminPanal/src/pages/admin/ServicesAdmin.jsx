@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2, X, Search, Check, AlertCircle, Eye, Upload, ChevronLeft, ChevronRight } from 'lucide-react';
-import { adminService, uploadService } from '../../services/api';
+import { adminService, uploadService, getFullImageUrl } from '../../services/api';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
 const ServicesAdmin = () => {
@@ -284,7 +284,7 @@ const ServicesAdmin = () => {
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <img
-                                                    src={service.thumbnail || 'https://via.placeholder.com/60'}
+                                                    src={getFullImageUrl(service.thumbnail) || 'https://via.placeholder.com/60'}
                                                     alt={service.name}
                                                     className="w-12 h-12 rounded-lg object-cover bg-gray-100 dark:bg-slate-700"
                                                 />
@@ -535,7 +535,7 @@ const ServicesAdmin = () => {
                                                     <div className="relative group shrink-0">
                                                         {formData.thumbnail.startsWith('http') || formData.thumbnail.includes('/') ? (
                                                             <img
-                                                                src={formData.thumbnail}
+                                                                src={getFullImageUrl(formData.thumbnail)}
                                                                 alt="Thumbnail"
                                                                 className="w-24 h-24 object-cover rounded-lg border border-gray-200 dark:border-slate-600 shadow-sm bg-white dark:bg-slate-700"
                                                                 onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
