@@ -16,6 +16,8 @@ node_modules/
 google-services.json
 key.properties
 appsettings.json
+appsettings.Development.json
+!appsettings.Production.json
 service-account.json
 firebase-adminsdk.json
 
