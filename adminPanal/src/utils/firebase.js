@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, getToken, onMessage, isSupported } from "firebase/messaging";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmOQvH7EJE8KORO_mwqdu9b_sD58fhQu4",
@@ -15,12 +14,30 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
-const messaging = typeof window !== 'undefined' ? getMessaging(app) : null;
+
+// Initialize messaging only if supported (requires HTTPS)
+let messagingInstance = null;
+const getMessagingInstance = async () => {
+    if (messagingInstance) return messagingInstance;
+    try {
+        const supported = await isSupported();
+        if (supported) {
+            messagingInstance = getMessaging(app);
+            return messagingInstance;
+        }
+    } catch (e) {
+        console.warn('Firebase Messaging not supported in this browser/environment:', e.message);
+    }
+    return null;
+};
 
 export const requestNotificationPermission = async () => {
-    if (!messaging) return;
     try {
+        const messaging = await getMessagingInstance();
+        if (!messaging) {
+            console.warn('Push notifications not available (requires HTTPS).');
+            return null;
+        }
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
             const token = await getToken(messaging, {
@@ -30,15 +47,18 @@ export const requestNotificationPermission = async () => {
             return token;
         }
     } catch (error) {
-        console.error('An error occurred while retrieving token:', error);
+        console.warn('Notifications not available:', error.message);
     }
+    return null;
 };
 
 export const onMessageListener = () =>
     new Promise((resolve) => {
-        if (!messaging) return;
-        onMessage(messaging, (payload) => {
-            resolve(payload);
+        getMessagingInstance().then(messaging => {
+            if (!messaging) return;
+            onMessage(messaging, (payload) => {
+                resolve(payload);
+            });
         });
     });
 
