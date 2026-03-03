@@ -9,3 +9,18 @@ node_modules/
 .env
 .env.local
 *.log
+
+# Secrets and Credentials
+*.jks
+*.keystore
+google-services.json
+key.properties
+appsettings.json
+service-account.json
+firebase-adminsdk.json
+
+# Build directories
+bin/
+obj/
+dist/
+build/
