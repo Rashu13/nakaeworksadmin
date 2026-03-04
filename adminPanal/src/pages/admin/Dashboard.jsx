@@ -44,10 +44,24 @@ const AdminDashboard = () => {
         recentBookings: []
     });
     const [loading, setLoading] = useState(true);
+    const [sendingNotif, setSendingNotif] = useState(false);
 
     useEffect(() => {
         fetchStats();
     }, []);
+
+    const handleTestNotification = async () => {
+        try {
+            setSendingNotif(true);
+            const response = await adminService.sendTestNotification({});
+            alert(response.message || 'Test notification sent!');
+        } catch (error) {
+            console.error(error);
+            alert(error.message || 'Failed to send test notification');
+        } finally {
+            setSendingNotif(false);
+        }
+    };
 
     const fetchStats = async () => {
         try {
@@ -98,6 +112,13 @@ const AdminDashboard = () => {
                     <p className="text-slate-500 text-sm">Welcome back! Here's an overview of your platform today.</p>
                 </div>
                 <div className="flex items-center gap-2">
+                    <button
+                        onClick={handleTestNotification}
+                        disabled={sendingNotif}
+                        className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+                    >
+                        {sendingNotif ? 'Sending...' : 'Test Notification'}
+                    </button>
                     <button className="px-4 py-2 bg-white border border-slate-200 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors flex items-center gap-2">
                         <Calendar size={16} />
                         Filter Date

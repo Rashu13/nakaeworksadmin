@@ -365,6 +365,10 @@ export const adminService = {
         method: 'PATCH',
         body: JSON.stringify({ status }),
     }),
+    sendTestNotification: (data) => apiCall('/admin/test-notification', {
+        method: 'POST',
+        body: JSON.stringify(data),
+    }),
 };
 
 // Upload Service

@@ -820,4 +820,35 @@ public class AdminController : ControllerBase
 
         return Ok(new { success = true, message = "Review deleted" });
     }
+
+    [HttpPost("test-notification")]
+    public async Task<IActionResult> SendTestNotification([FromBody] TestNotificationDto dto)
+    {
+        if (string.IsNullOrEmpty(dto.FcmToken))
+        {
+            // If no token provided, try to find the current user's token or a sample token
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.FcmToken != null);
+            if (user == null) return BadRequest(new { success = false, message = "No FCM token provided and no users with tokens found" });
+            dto.FcmToken = user.FcmToken!;
+        }
+
+        var success = await _fcmService.SendNotificationAsync(
+            dto.FcmToken, 
+            dto.Title ?? "Test Notification", 
+            dto.Body ?? "This is a test notification from NakaeWorks Admin.",
+            new { type = "test", timestamp = DateTime.UtcNow }
+        );
+
+        if (success)
+            return Ok(new { success = true, message = "Notification sent successfully" });
+        else
+            return BadRequest(new { success = false, message = "Failed to send notification. Check server logs." });
+    }
+}
+
+public class TestNotificationDto
+{
+    public string? FcmToken { get; set; }
+    public string? Title { get; set; }
+    public string? Body { get; set; }
 }

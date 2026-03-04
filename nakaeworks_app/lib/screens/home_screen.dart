@@ -74,6 +74,14 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) return 'GOOD MORNING';
+    if (hour < 17) return 'GOOD AFTERNOON';
+    if (hour < 21) return 'GOOD EVENING';
+    return 'GOOD NIGHT';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'GOOD MORNING',
+                    _getGreeting(),
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
