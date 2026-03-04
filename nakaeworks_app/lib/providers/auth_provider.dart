@@ -28,9 +28,10 @@ class AuthProvider extends ChangeNotifier {
     if (!_isLoggedIn) return;
     try {
       final token = await FirebaseMessaging.instance.getToken();
+      debugPrint('FCM Token retrieved: $token');
       if (token != null) {
         await ApiService.updateFcmToken(token);
-        debugPrint('FCM Token synced: $token');
+        debugPrint('FCM Token synced to backend successfully');
       }
     } catch (e) {
       debugPrint('Error syncing FCM token: $e');

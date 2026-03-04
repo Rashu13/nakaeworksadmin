@@ -92,16 +92,25 @@ class NotificationsProvider extends ChangeNotifier {
   }
 
   void addOrderNotification(String title, String body) {
+    addNotification(title, body, NotifType.order);
+  }
+
+  void addNotification(String title, String body, NotifType type) {
     _notifications.insert(
       0,
       AppNotification(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: title,
         body: body,
-        type: NotifType.order,
+        type: type,
         time: DateTime.now(),
       ),
     );
+    notifyListeners();
+  }
+
+  void clearAll() {
+    _notifications.clear();
     notifyListeners();
   }
 }

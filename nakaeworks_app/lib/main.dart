@@ -16,16 +16,29 @@ import 'screens/favorites_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/checkout_screen.dart';
 import 'utils/constants.dart';
+import 'services/notification_service.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  debugPrint('Handling background message: ${message.messageId}');
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   
+  // Set background handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   // Request notification permissions
-  FirebaseMessaging.instance.requestPermission();
+  FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
   
   runApp(
     MultiProvider(
@@ -164,6 +177,15 @@ class MainShell extends StatefulWidget {
 class MainShellState extends State<MainShell> {
   int _currentIndex = 0;
   String? _exploreCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize notifications
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      NotificationService.initialize(context);
+    });
+  }
 
   void setTab(int index, {String? category}) {
     setState(() {
