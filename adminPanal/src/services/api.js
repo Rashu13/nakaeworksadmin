@@ -421,8 +421,14 @@ export const uploadService = {
             throw new Error(data.message || data.error || 'Upload failed');
         }
 
+        // Handle .NET Backend response wrapper (Success, Data/data) or flat response
+        let result = data;
+        if (data.hasOwnProperty('Success') || data.hasOwnProperty('success')) {
+            result = data.Data || data.data || data;
+        }
+
         // Normalize keys and return to match frontend expectations
-        return normalizeKeys(data);
+        return normalizeKeys(result);
     }
 };
 

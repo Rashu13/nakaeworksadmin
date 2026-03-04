@@ -518,6 +518,7 @@ public class AdminController : ControllerBase
                 x.s.Id,
                 x.s.Name,
                 x.s.Slug,
+                x.s.Description,
                 x.s.Price,
                 x.s.Discount,
                 x.s.Duration,
@@ -703,6 +704,7 @@ public class AdminController : ControllerBase
             Name = dto.Name,
             Slug = slug,
             Icon = dto.Icon,
+            Description = dto.Description,
             Status = true,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
@@ -728,6 +730,7 @@ public class AdminController : ControllerBase
         }
 
         if (dto.Icon != null) category.Icon = dto.Icon;
+        if (dto.Description != null) category.Description = dto.Description;
         if (dto.Status.HasValue) category.Status = dto.Status.Value;
 
         category.UpdatedAt = DateTime.UtcNow;

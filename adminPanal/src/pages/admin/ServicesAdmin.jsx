@@ -290,7 +290,8 @@ const ServicesAdmin = () => {
                                                 />
                                                 <div>
                                                     <p className="font-medium text-gray-900 dark:text-slate-900 dark:text-white">{service.name}</p>
-                                                    <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">{service.provider?.name || 'N/A'}</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1 max-w-xs">{service.description}</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{service.provider?.name || 'N/A'}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -575,15 +576,16 @@ const ServicesAdmin = () => {
 
                                                                 try {
                                                                     setUploading(true);
-                                                                    const { data } = await uploadService.uploadImage(uploadData);
-                                                                    setFormData(prev => ({ ...prev, thumbnail: data.imageUrl }));
+                                                                    const result = await uploadService.uploadImage(uploadData);
+                                                                    // The server returns a flat object or wrapped data depending on version
+                                                                    const imageUrl = result.imageUrl || (result.data && result.data.imageUrl);
+                                                                    setFormData(prev => ({ ...prev, thumbnail: imageUrl }));
                                                                 } catch (err) {
                                                                     console.error(err);
                                                                     setAlertConfig({
                                                                         isOpen: true,
                                                                         title: 'Error',
                                                                         message: err.message || 'Error uploading image',
-                                                                        type: 'danger'
                                                                     });
                                                                 } finally {
                                                                     setUploading(false);

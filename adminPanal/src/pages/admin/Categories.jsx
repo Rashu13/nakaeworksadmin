@@ -315,7 +315,9 @@ const Categories = () => {
                                                         uploadData.append('image', file);
                                                         try {
                                                             setUploading(true);
-                                                            const { imageUrl } = await uploadService.uploadImage(file);
+                                                            const result = await uploadService.uploadImage(file);
+                                                            // Handle both wrapped and unwrapped response formats
+                                                            const imageUrl = result.imageUrl || (result.data && result.data.imageUrl);
                                                             setFormData(prev => ({ ...prev, icon: imageUrl }));
                                                         } catch (err) {
                                                             console.error(err);

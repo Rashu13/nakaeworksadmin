@@ -324,7 +324,8 @@ const ContentAdmin = () => {
                                                             if (!file) return;
                                                             try {
                                                                 setUploading(true);
-                                                                const { imageUrl } = await uploadService.uploadImage(file);
+                                                                const result = await uploadService.uploadImage(file);
+                                                                const imageUrl = result.imageUrl || (result.data && result.data.imageUrl);
                                                                 setFormData(prev => ({ ...prev, imageUrl }));
                                                             } catch (err) {
                                                                 console.error(err);

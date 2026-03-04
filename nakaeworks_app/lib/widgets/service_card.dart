@@ -335,9 +335,21 @@ class ServiceCard extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       color: const Color(AppConstants.primaryDark),
                     ),
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  if (service.description != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      service.description!,
+                      style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: const Color(AppConstants.textGray),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                   const Spacer(),
                   Row(
                     children: [

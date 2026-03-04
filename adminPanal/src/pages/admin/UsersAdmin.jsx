@@ -312,8 +312,9 @@ const UsersAdmin = () => {
                                                 if (!file) return;
                                                 setUploadingImage(true);
                                                 try {
-                                                    const data = await uploadService.uploadImage(file);
-                                                    setFormData(prev => ({ ...prev, avatar: data.imageUrl }));
+                                                    const result = await uploadService.uploadImage(file);
+                                                    const imageUrl = result.imageUrl || (result.data && result.data.imageUrl);
+                                                    setFormData(prev => ({ ...prev, avatar: imageUrl }));
                                                 } catch (err) {
                                                     setError('Failed to upload image');
                                                 } finally {
