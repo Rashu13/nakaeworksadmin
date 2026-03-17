@@ -3,27 +3,22 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        // Check local storage or system preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            return savedTheme === 'dark';
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    });
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
         const root = window.document.documentElement;
-        // Temporarily forcing light mode
         root.classList.remove('dark');
         document.body.classList.remove('dark', 'bg-[#0a0f1c]');
         document.body.classList.add('bg-gray-50');
+        localStorage.setItem('theme', 'light');
     }, []);
 
-    const toggleTheme = () => setIsDarkMode(prev => !prev);
+    const toggleTheme = () => {
+        console.log('Theme toggle disabled temporarily');
+    };
 
     return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+        <ThemeContext.Provider value={{ isDarkMode: false, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
