@@ -14,18 +14,11 @@ export const ThemeProvider = ({ children }) => {
 
     useEffect(() => {
         const root = window.document.documentElement;
-        if (isDarkMode) {
-            root.classList.add('dark');
-            document.body.classList.add('dark', 'bg-[#0a0f1c]');
-            document.body.classList.remove('bg-gray-50');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            root.classList.remove('dark');
-            document.body.classList.remove('dark', 'bg-[#0a0f1c]');
-            document.body.classList.add('bg-gray-50');
-            localStorage.setItem('theme', 'light');
-        }
-    }, [isDarkMode]);
+        // Temporarily forcing light mode
+        root.classList.remove('dark');
+        document.body.classList.remove('dark', 'bg-[#0a0f1c]');
+        document.body.classList.add('bg-gray-50');
+    }, []);
 
     const toggleTheme = () => setIsDarkMode(prev => !prev);
 
