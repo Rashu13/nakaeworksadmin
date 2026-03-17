@@ -430,7 +430,7 @@ const ServiceDetail = () => {
                                         onClick={handleBooking}
                                         className="py-4 bg-black dark:bg-primary-600 text-white font-bold rounded-lg hover:bg-gray-800 dark:hover:bg-primary-700 transition-colors shadow-lg"
                                     >
-                                        Buy Now
+                                        Book Now
                                     </button>
                                 </div>
                             </div>
