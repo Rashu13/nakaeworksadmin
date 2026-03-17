@@ -4,7 +4,7 @@ import { MapPin, Clock, Calendar, CreditCard, Wallet, CheckCircle, Plus, Chevron
 import ConfirmationModal from '../components/ConfirmationModal';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { bookingService, addressService, couponService } from '../services/api';
+import { bookingService, addressService, couponService, BASE_URL } from '../services/api';
 
 const BookingConfirm = () => {
     const location = useLocation();
