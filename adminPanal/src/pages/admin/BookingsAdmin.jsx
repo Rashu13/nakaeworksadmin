@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Eye, Filter, Calendar, DollarSign, User, Briefcase, FileText } from 'lucide-react';
+import { Search, Eye, Filter, Calendar, DollarSign, User, Briefcase, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { bookingService, adminService } from '../../services/api';
 import { format } from 'date-fns';
 import Toast from '../../components/Toast';
@@ -100,6 +100,18 @@ const BookingsAdmin = () => {
         }
     };
 
+    const safeFormat = (dateStr, formatStr) => {
+        try {
+            if (!dateStr) return 'N/A';
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return 'Invalid Date';
+            return format(date, formatStr);
+        } catch (error) {
+            console.error('Date formatting error:', error);
+            return 'Invalid Date';
+        }
+    };
+
     const getStatusColor = (status) => {
         const colors = {
             pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
@@ -108,7 +120,7 @@ const BookingsAdmin = () => {
             cancelled: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
             in_progress: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400'
         };
-        return colors[status?.toLowerCase()] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-700 dark:text-gray-300';
+        return colors[status?.toLowerCase()] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
     };
 
     const filteredBookings = bookings.filter(booking => {
@@ -207,10 +219,10 @@ const BookingsAdmin = () => {
                                         </td>
                                         <td className="px-6 py-4 text-gray-600 dark:text-gray-600 dark:text-gray-400 space-y-1">
                                             <div className="text-sm">
-                                                {format(new Date(booking.dateTime), 'MMM dd, yyyy')}
+                                                {safeFormat(booking.dateTime, 'MMM dd, yyyy')}
                                             </div>
                                             <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 dark:text-gray-400">
-                                                {format(new Date(booking.dateTime), 'hh:mm a')}
+                                                {safeFormat(booking.dateTime, 'hh:mm a')}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
@@ -270,7 +282,7 @@ const BookingsAdmin = () => {
                                 <div className="space-y-2 text-sm">
                                     <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Service:</span> <span className="text-gray-700 dark:text-gray-200">{selectedBooking.service?.name}</span></p>
                                     <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Booking ID:</span> <span className="text-gray-700 dark:text-gray-200">{selectedBooking.bookingNumber}</span></p>
-                                    <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Date:</span> <span className="text-gray-700 dark:text-gray-200">{format(new Date(selectedBooking.dateTime), 'PPpp')}</span></p>
+                                    <p><span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Date:</span> <span className="text-gray-700 dark:text-gray-200">{safeFormat(selectedBooking.dateTime, 'PPpp')}</span></p>
                                     <div className="flex items-center gap-2 mt-2">
                                         <span className="text-gray-500 dark:text-gray-400 dark:text-gray-600 dark:text-gray-400">Status:</span>
                                         <select

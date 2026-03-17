@@ -48,6 +48,12 @@ public class FcmService : IFcmService
 
         var response = await _httpClient.PostAsync("https://fcm.googleapis.com/fcm/send", content);
         
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"FCM Error: {response.StatusCode} - {errorContent}");
+        }
+        
         return response.IsSuccessStatusCode;
     }
 }

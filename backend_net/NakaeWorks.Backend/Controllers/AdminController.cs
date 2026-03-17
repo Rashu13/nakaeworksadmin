@@ -826,10 +826,17 @@ public class AdminController : ControllerBase
     {
         if (string.IsNullOrEmpty(dto.FcmToken))
         {
-            // If no token provided, try to find the current user's token or a sample token
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.FcmToken != null);
-            if (user == null) return BadRequest(new { success = false, message = "No FCM token provided and no users with tokens found" });
+            // If no token provided, try to find a user who has a token
+            var user = await _context.Users
+                .Where(u => u.FcmToken != null && u.FcmToken != "")
+                .OrderByDescending(u => u.UpdatedAt)
+                .FirstOrDefaultAsync();
+
+            if (user == null) 
+                return BadRequest(new { success = false, message = "No users found with an active FCM token. Please log in to the app first." });
+            
             dto.FcmToken = user.FcmToken!;
+            Console.WriteLine($"Sending test notification to user: {user.Name} ({user.Email})");
         }
 
         var success = await _fcmService.SendNotificationAsync(
@@ -840,9 +847,9 @@ public class AdminController : ControllerBase
         );
 
         if (success)
-            return Ok(new { success = true, message = "Notification sent successfully" });
+            return Ok(new { success = true, message = "Notification sent successfully to device!" });
         else
-            return BadRequest(new { success = false, message = "Failed to send notification. Check server logs." });
+            return BadRequest(new { success = false, message = "FCM request failed. Ensure Firebase Server Key is correct in appsettings.json." });
     }
 }
 
